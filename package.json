@@ -18,6 +18,10 @@
     "pelias",
     "teleport"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/spurreiter/geocoder.git"
+  },
   "license": "MIT",
   "author": "spurreiter",
   "type": "module",
@@ -32,6 +36,8 @@
   "module": "./src/index.js",
   "types": "./src/index.d.ts",
   "directories": {
+    "lib": "lib",
+    "example": "examples",
     "test": "test"
   },
   "scripts": {
@@ -68,6 +74,9 @@
     "typescript": "^4.3.2"
   },
   "engines": {
-    "node": ">=14"
+    "node": ">=12"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
