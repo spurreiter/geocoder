@@ -1,6 +1,6 @@
 {
   "name": "@spurreiter/geocoder",
-  "version": "1.0.0-0",
+  "version": "1.0.0",
   "description": "Node deocoding library, google maps, bingmaps, mapquest, mapbox, here, arcgis, here",
   "keywords": [
     "geocoder",
