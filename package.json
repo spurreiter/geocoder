@@ -16,7 +16,9 @@
     "nominatim-api",
     "osm",
     "pelias",
-    "teleport"
+    "pickpoint-api",
+    "teleport",
+    "yandex-api"
   ],
   "repository": {
     "type": "git",
