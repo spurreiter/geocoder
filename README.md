@@ -1,1 +1,146 @@
 # geocoder
+
+This project is derived on [node-geocoder](https://github.com/nchaulet/node-geocoder) with focus on modern code with esm modules.
+
+Features:
+- multiple providers
+- similar results for all providers
+- modern code based on esm modules and native Promises with async/ await
+- Typescript types
+- http(s) agent by default for reusing tcp connections
+- fetch based http adapter with timeout
+- cascade providers and stop on first successful result
+- combine search results from multiple providers
+- configurable circuit breaker which stops calling geocoder e.g. if request limit is exhausted.
+- extensive test-suite with examples for getting started
+
+## supported providers
+
+| Provider | forward | reverse | ip | Notes |
+| -------- | ------- | ------- | -- | ----- |
+| [ArcGisGeocoder](https://developers.arcgis.com/documentation/mapping-apis-and-services/search/) | ✅ | ✅ | ❌ |  |
+| [BingMapsGeocoder](https://docs.microsoft.com/en-us/bingmaps/rest-services/locations) | ✅ | ✅ | ❌ | results are in English only |
+| [GoogleGeocoder](https://developers.google.com/maps/documentation/geocoding/overview) | ✅ | ✅ | ❌ |  |
+| [GeocodioGeocoder](https://www.geocod.io/docs/) | ✅ | ✅ | ❌ | results are in English only; Country must be part of query, otherwise fallback to US; [Only US and major cities in CA supported](https://www.geocod.io/coverage/) |
+| [HereGeocoder](https://developer.here.com/) | ✅ | ✅ | ❌ |  |
+| [IpStackGeocoder](https://ipstack.com/) | ❌ | ❌ | ✅ |  |
+| [LocationIqGeocoder](https://locationiq.com/docs) |  ✅ | ✅ | ❌ |  |
+| [LocalGeoip2Geocoder](https://dev.maxmind.com/geoip/geoip2/geolite2/) | ❌ | ❌ | ✅ | Local geoip2 provider. Output as of [@maxmind/geoip2-node](https://www.npmjs.com/package/@maxmind/geoip2-node) |
+| [MapBoxGeocoder](https://docs.mapbox.com/) | ✅ | ✅ | ❌ |  |
+| [MapQuestGeocoder](https://developer.mapquest.com/documentation/geocoding-api) | ✅ | ✅ | ❌ | open-data and licensed versions are supported |
+| [OpenCageGeocoder](https://opencagedata.com/) | ✅ | ✅ | ❌ |  |
+| [OsmGeocoder](https://nominatim.org/release-docs/develop/) | ✅ | ✅ | ❌ | Searches nominatim.org |
+| [PeliasGeocoder](https://github.com/pelias/documentation/blob/master/README.md) | ✅ | ✅ | ❌ | Local or [Geocode.earth](https://geocode.earth/docs) |
+| [TeleportGeocoder](https://developers.teleport.org/api/resources/) | ✅ | ✅ | ❌ | Searches only by city names, no addresses |
+
+## usage
+
+### forward geocoding
+
+```js
+import { fetchAdapter, OsmGeocoder } from '@spurreiter/geocoder'
+
+const adapter = fetchAdapter()
+const geocoder = new OsmGeocoder(adapter, { language: 'en', limit: 5 })
+
+const results = await geocoder.forward('135 pilkington avenue, birmingham')
+// [
+//   {
+//     formattedAddress: '135, Pilkington Avenue, Maney, Sutton Coldfield, Wylde Green, Birmingham, West Midlands Combined Authority, West Midlands, England, B72 1LH, United Kingdom',
+//     latitude: 52.5487921,
+//     longitude: -1.8164308339635031,
+//     country: 'United Kingdom',
+//     countryCode: 'GB',
+//     state: 'England',
+//     county: 'West Midlands Combined Authority',
+//     city: 'Birmingham',
+//     zipcode: 'B72 1LH',
+//     district: 'West Midlands',
+//     streetName: 'Pilkington Avenue',
+//     streetNumber: '135',
+//     neighbourhood: undefined,
+//     extra: {
+//       id: 90394480,
+//       confidence: 0.411,
+//       bbox: [ -1.816513, 52.5487473, -1.8163464, 52.5488481 ]
+//     }
+//   }
+// ]
+```
+
+### reverse geocoding
+
+```js
+const results = await geocoder.reverse({ lat: 40.714232,lng: -73.9612889 })
+// [
+//   {
+//     formattedAddress: '279, Bedford Avenue, Williamsburg, Brooklyn, Kings County, New York, 11211, United States',
+//     latitude: 40.714205,
+//     longitude: -73.96131519274765,
+//     country: 'United States',
+//     countryCode: 'US',
+//     state: 'New York',
+//     county: undefined,
+//     city: 'New York',
+//     zipcode: '11211',
+//     district: undefined,
+//     streetName: 'Bedford Avenue',
+//     streetNumber: '279',
+//     neighbourhood: undefined,
+//     extra: {
+//       id: 279767984,
+//       confidence: 0,
+//       bbox: [ -73.9613744, 40.7141617, -73.961256, 40.7142482 ]
+//     }
+//   }
+// ]
+```
+
+### cascade
+
+Allows to sequentially ask various geocoders for results. Successful results from the first geocoder are returned.
+
+Works with forward and reverse geocoding.
+
+```js
+import { Cascade, fetchAdapter, HereGeocoder, OsmGeocoder } from '@spurreiter/geocoder'
+
+const language = "es"
+const geocoders = [
+  new HereGeocoder(adapter, { apiKey_ 'your-api-key', language }),
+  new OsmGeocoder(adapter, { language })
+]
+const cascade = new Cascade(geocoders)
+
+const results = await cascade.forward('135 pilkington avenue, birmingham')
+
+// results contains data from 1st geocoder which responds without error.
+```
+
+### combine
+
+Combine results from various geocoders into one result set.
+
+Works with forward and reverse geocoding.
+
+```js
+import { Combine, fetchAdapter, HereGeocoder, OsmGeocoder } from '@spurreiter/geocoder'
+
+const geocoders = [
+  new HereGeocoder(adapter, { apiKey_ 'your-api-key' }),
+  new OsmGeocoder(adapter)
+]
+const combine = new Combine(geocoders)
+
+const results = await combine.forward({ address: '135 pilkington avenue, birmingham', language: 'es' })
+
+// results contains data from all reachable geocoders.
+```
+
+## contributing
+
+If you are missing a provider, which should be part of this project, please consider forking this project and filing a pull-request.
+
+## license
+
+[MIT licensed](./LICENSE)

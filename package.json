@@ -1,0 +1,73 @@
+{
+  "name": "@spurreiter/geocoder",
+  "version": "1.0.0-0",
+  "description": "Node deocoding library, google maps, bingmaps, mapquest, mapbox, here, arcgis, here",
+  "keywords": [
+    "geocoder",
+    "geocoding",
+    "googlemaps",
+    "bingmaps",
+    "mapquest",
+    "mapbox",
+    "arcgis",
+    "here",
+    "ipstack",
+    "geoip2",
+    "nominatim",
+    "osm",
+    "pelias",
+    "teleport"
+  ],
+  "license": "MIT",
+  "author": "spurreiter",
+  "type": "module",
+  "exports": {
+    ".": {
+      "require": "./lib/index.cjs",
+      "import": "./src/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./lib/index.cjs",
+  "module": "./src/index.js",
+  "types": "./src/index.d.ts",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "all": "npm-run-all clean test build lint typings",
+    "clean": "rimraf typings coverage lib",
+    "lint": "eslint --fix \"**/*.js\"",
+    "build": "rollup -c",
+    "test": "c8 mocha",
+    "typings": "tsc src/**/*.d.ts src/*.d.ts src/**/*.js src/*.js --declaration --allowJs --emitDeclarationOnly --outDir typings",
+    "prepublishOnly": "npm run all"
+  },
+  "mocha": {
+    "exit": true,
+    "recursive": true
+  },
+  "dependencies": {
+    "agentkeepalive": "^4.1.4",
+    "got": "^11.8.2"
+  },
+  "devDependencies": {
+    "@types/node": "^15.6.1",
+    "c8": "^7.7.2",
+    "dotenv": "^10.0.0",
+    "eslint": "^7.27.0",
+    "eslint-config-standard": "^16.0.2",
+    "eslint-plugin-import": "^2.23.3",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.3.1",
+    "mocha": "^8.4.0",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.50.3",
+    "sinon": "^10.0.0",
+    "typescript": "^4.3.2"
+  },
+  "engines": {
+    "node": ">=14"
+  }
+}
