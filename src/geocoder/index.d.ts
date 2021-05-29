@@ -12,4 +12,5 @@ export * from "./mapquest.js";
 export * from "./opencage.js";
 export * from "./osm.js";
 export * from "./pelias.js";
+export * from "./pickpoint.js";
 export * from "./teleport.js";

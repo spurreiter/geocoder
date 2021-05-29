@@ -31,6 +31,7 @@ Features:
 | [OpenCageGeocoder](https://opencagedata.com/) | ✅ | ✅ | ❌ |  |
 | [OsmGeocoder](https://nominatim.org/release-docs/develop/) | ✅ | ✅ | ❌ | Searches nominatim.org |
 | [PeliasGeocoder](https://github.com/pelias/documentation/blob/master/README.md) | ✅ | ✅ | ❌ | Local or [Geocode.earth](https://geocode.earth/docs) |
+| [PickpointGeocoder](https://pickpoint.io/api-reference) | ✅ | ✅ | ❌ |  |
 | [TeleportGeocoder](https://developers.teleport.org/api/resources/) | ✅ | ✅ | ❌ | Searches only by city names, no addresses |
 
 ## usage
