@@ -1,6 +1,6 @@
 # geocoder
 
-This project is derived on [node-geocoder](https://github.com/nchaulet/node-geocoder) with focus on modern code with esm modules.
+This project is derived from [node-geocoder](https://github.com/nchaulet/node-geocoder) with focus on modern code with esm modules.
 
 Features:
 - multiple providers
