@@ -1,6 +1,11 @@
 import net from 'net'
 import { URL, URLSearchParams } from 'url'
 
+const wrapError400 = err => {
+  err.status = 400
+  return err
+}
+
 /**
  * @typedef {object} ForwardQuery
  * @property {string} address address being queried
@@ -71,10 +76,10 @@ export class AbstractGeocoder {
     const isIPv6 = net.isIPv6(address)
 
     if (isIPv4 && !this.supportIPv4) {
-      throw new Error(`${this.constructor.name} does not support geocoding IPv4`)
+      throw wrapError400(new Error(`${this.constructor.name} does not support geocoding IPv4`))
     }
     if (isIPv6 && !this.supportIPv6) {
-      throw new Error(`${this.constructor.name} does not support geocoding IPv6`)
+      throw wrapError400(new Error(`${this.constructor.name} does not support geocoding IPv6`))
     }
 
     return this._forward(query, isIPv4 || isIPv6)

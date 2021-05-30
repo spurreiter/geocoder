@@ -10,7 +10,7 @@ export class CircuitBreaker {
   constructor (geocoder, { timeout, excludeStatusCode } = {}) {
     this.geocoder = geocoder
     this.timeout = timeout || 60000
-    this.excludeStatusCode = excludeStatusCode || [400, 404]
+    this.excludeStatusCode = excludeStatusCode || [400, 404, 422]
     this.offlineUntil = 0
     this.name = geocoder.name
   }
@@ -45,7 +45,7 @@ export class CircuitBreaker {
     try {
       return await this.geocoder.forward(query)
     } catch (err) {
-      this._turnOff(err.response?.status)
+      this._turnOff(err.response?.status || err.status)
       throw err
     }
   }

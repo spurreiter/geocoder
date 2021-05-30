@@ -8,7 +8,7 @@ export interface CircuitBreakerOptions {
   timeout?: number;
   /**
    * status codes which shall be excluded from breaking the connection
-   * @default [400, 404]
+   * @default [400, 404, 422]
    */
   excludeStatusCode?: number[];
 }
