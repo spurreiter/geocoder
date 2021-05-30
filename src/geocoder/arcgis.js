@@ -15,8 +15,8 @@ const undef = (s) => s === '' ? undefined : s
 /**
  * see https://developers.arcgis.com/rest/geocode/api-reference/geocoding-reverse-geocode.htm
  * @typedef {object} ArcGisReverseQuery
- * @property {number} lat - latitude
- * @property {number} lng - longitude
+ * @property {number} lat latitude
+ * @property {number} lng longitude
  * @property {number} [limit]
  * @property {boolean} [returnIntersection]
  * @property {string} [locationType]

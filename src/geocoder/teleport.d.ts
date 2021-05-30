@@ -4,8 +4,8 @@
  */
 /**
  * @typedef {object} TeleportReverseQuery
- * @property {number} lat - latitude
- * @property {number} lng - longitude
+ * @property {number} lat latitude
+ * @property {number} lng longitude
  */
 /**
  * with Teleport geocoder only cities can by found but no addresses
@@ -41,11 +41,11 @@ export type TeleportForwardQuery = {
 };
 export type TeleportReverseQuery = {
     /**
-     * - latitude
+     * latitude
      */
     lat: number;
     /**
-     * - longitude
+     * longitude
      */
     lng: number;
 };

@@ -18,7 +18,7 @@ export class CircuitBreaker {
 
   /**
    * forward geocoding
-   * @param query - address string or ip address
+   * @param query address string or ip address
    */
   forward(query: string | ForwardQuery): Promise<GeocoderResult[]>;
 

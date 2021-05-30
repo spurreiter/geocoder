@@ -7,8 +7,8 @@
 /**
  * see https://docs.microsoft.com/en-us/bingmaps/rest-services/locations/find-a-location-by-point
  * @typedef {object} BingMapsReverseQuery
- * @property {number} lat - latitude
- * @property {number} lng - longitude
+ * @property {number} lat latitude
+ * @property {number} lng longitude
  * @property {number} [limit]
  */
 export class BingMapsGeocoder extends AbstractGeocoder {
@@ -62,11 +62,11 @@ export type BingMapsForwardQuery = {
  */
 export type BingMapsReverseQuery = {
     /**
-     * - latitude
+     * latitude
      */
     lat: number;
     /**
-     * - longitude
+     * longitude
      */
     lng: number;
     limit?: number;

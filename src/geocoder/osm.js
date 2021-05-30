@@ -29,7 +29,7 @@ function toBbox (boundingbox) {
 /**
  * @typedef {object} OsmForwardQuery
  * @property {string} address -
- * @property {number} [limit=10] - Maximum number of results to be returned
+ * @property {number} [limit=10] Maximum number of results to be returned
  * @property {string} [language]
  * @property {number} [addressdetails]
  * @property {number} [extratags]
@@ -42,9 +42,9 @@ function toBbox (boundingbox) {
 
 /**
  * @typedef {object} OsmReverseQuery
- * @property {number} lat - latitude
- * @property {number} lng - longitude
- * @property {number} [limit=10] - Maximum number of results to be returned
+ * @property {number} lat latitude
+ * @property {number} lng longitude
+ * @property {number} [limit=10] Maximum number of results to be returned
  * @property {string} [language]
  * @property {number} [addressdetails]
  * @property {number} [extratags]

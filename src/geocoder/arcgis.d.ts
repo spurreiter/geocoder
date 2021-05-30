@@ -9,8 +9,8 @@
 /**
  * see https://developers.arcgis.com/rest/geocode/api-reference/geocoding-reverse-geocode.htm
  * @typedef {object} ArcGisReverseQuery
- * @property {number} lat - latitude
- * @property {number} lng - longitude
+ * @property {number} lat latitude
+ * @property {number} lng longitude
  * @property {number} [limit]
  * @property {boolean} [returnIntersection]
  * @property {string} [locationType]
@@ -66,11 +66,11 @@ export type ArcGisForwardQuery = {
  */
 export type ArcGisReverseQuery = {
     /**
-     * - latitude
+     * latitude
      */
     lat: number;
     /**
-     * - longitude
+     * longitude
      */
     lng: number;
     limit?: number;

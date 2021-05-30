@@ -40,22 +40,22 @@ export type HereForwardQuery = {
     address: string;
     language?: string;
     /**
-     * - Maximum number of results to be returned
+     * Maximum number of results to be returned
      */
     limit?: number;
 };
 export type HereReverseQuery = {
     /**
-     * - latitude
+     * latitude
      */
     lat: number;
     /**
-     * - longitude
+     * longitude
      */
     lng: number;
     language?: string;
     /**
-     * - Maximum number of results to be returned
+     * Maximum number of results to be returned
      */
     limit?: number;
 };

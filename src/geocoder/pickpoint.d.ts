@@ -2,7 +2,7 @@
  * see https://pickpoint.io/api-reference#forward-geocoding
  * @typedef {object} PickpointForwardQuery
  * @property {string} address -
- * @property {number} [limit=10] - Maximum number of results to be returned
+ * @property {number} [limit=10] Maximum number of results to be returned
  * @property {string} [language]
  * @property {string} [country] search by country
  * @property {string} [state] search by states
@@ -14,9 +14,9 @@
 /**
  * see https://pickpoint.io/api-reference#reverse-geocoding
  * @typedef {object} PickpointReverseQuery
- * @property {number} lat - latitude
- * @property {number} lng - longitude
- * @property {number} [limit=10] - Maximum number of results to be returned
+ * @property {number} lat latitude
+ * @property {number} lng longitude
+ * @property {number} [limit=10] Maximum number of results to be returned
  * @property {string} [language]
  * @property {string} [zoom] 0..18
  */
@@ -43,7 +43,7 @@ export type PickpointForwardQuery = {
      */
     address: string;
     /**
-     * - Maximum number of results to be returned
+     * Maximum number of results to be returned
      */
     limit?: number;
     language?: string;
@@ -77,15 +77,15 @@ export type PickpointForwardQuery = {
  */
 export type PickpointReverseQuery = {
     /**
-     * - latitude
+     * latitude
      */
     lat: number;
     /**
-     * - longitude
+     * longitude
      */
     lng: number;
     /**
-     * - Maximum number of results to be returned
+     * Maximum number of results to be returned
      */
     limit?: number;
     language?: string;

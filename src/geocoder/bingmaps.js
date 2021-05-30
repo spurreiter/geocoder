@@ -28,8 +28,8 @@ function toBbox (boundingbox) {
 /**
  * see https://docs.microsoft.com/en-us/bingmaps/rest-services/locations/find-a-location-by-point
  * @typedef {object} BingMapsReverseQuery
- * @property {number} lat - latitude
- * @property {number} lng - longitude
+ * @property {number} lat latitude
+ * @property {number} lng longitude
  * @property {number} [limit]
  */
 

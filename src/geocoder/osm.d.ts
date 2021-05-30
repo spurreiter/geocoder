@@ -1,7 +1,7 @@
 /**
  * @typedef {object} OsmForwardQuery
  * @property {string} address -
- * @property {number} [limit=10] - Maximum number of results to be returned
+ * @property {number} [limit=10] Maximum number of results to be returned
  * @property {string} [language]
  * @property {number} [addressdetails]
  * @property {number} [extratags]
@@ -13,9 +13,9 @@
  */
 /**
  * @typedef {object} OsmReverseQuery
- * @property {number} lat - latitude
- * @property {number} lng - longitude
- * @property {number} [limit=10] - Maximum number of results to be returned
+ * @property {number} lat latitude
+ * @property {number} lng longitude
+ * @property {number} [limit=10] Maximum number of results to be returned
  * @property {string} [language]
  * @property {number} [addressdetails]
  * @property {number} [extratags]
@@ -85,7 +85,7 @@ export type OsmForwardQuery = {
      */
     address: string;
     /**
-     * - Maximum number of results to be returned
+     * Maximum number of results to be returned
      */
     limit?: number;
     language?: string;
@@ -99,15 +99,15 @@ export type OsmForwardQuery = {
 };
 export type OsmReverseQuery = {
     /**
-     * - latitude
+     * latitude
      */
     lat: number;
     /**
-     * - longitude
+     * longitude
      */
     lng: number;
     /**
-     * - Maximum number of results to be returned
+     * Maximum number of results to be returned
      */
     limit?: number;
     language?: string;

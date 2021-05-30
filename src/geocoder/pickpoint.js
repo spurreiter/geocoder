@@ -4,7 +4,7 @@ import { OsmGeocoder } from './osm.js'
  * see https://pickpoint.io/api-reference#forward-geocoding
  * @typedef {object} PickpointForwardQuery
  * @property {string} address -
- * @property {number} [limit=10] - Maximum number of results to be returned
+ * @property {number} [limit=10] Maximum number of results to be returned
  * @property {string} [language]
  * @property {string} [country] search by country
  * @property {string} [state] search by states
@@ -17,9 +17,9 @@ import { OsmGeocoder } from './osm.js'
 /**
  * see https://pickpoint.io/api-reference#reverse-geocoding
  * @typedef {object} PickpointReverseQuery
- * @property {number} lat - latitude
- * @property {number} lng - longitude
- * @property {number} [limit=10] - Maximum number of results to be returned
+ * @property {number} lat latitude
+ * @property {number} lng longitude
+ * @property {number} [limit=10] Maximum number of results to be returned
  * @property {string} [language]
  * @property {string} [zoom] 0..18
  */

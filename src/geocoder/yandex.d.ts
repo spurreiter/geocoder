@@ -9,8 +9,8 @@
  */
 /**
  * @typedef {object} YandexReverseQuery
- * @property {number} lat - latitude
- * @property {number} lng - longitude
+ * @property {number} lat latitude
+ * @property {number} lng longitude
  * @property {string} [language]
  */
 export class YandexGeocoder extends AbstractGeocoder {
@@ -66,11 +66,11 @@ export type YandexForwardQuery = {
 };
 export type YandexReverseQuery = {
     /**
-     * - latitude
+     * latitude
      */
     lat: number;
     /**
-     * - longitude
+     * longitude
      */
     lng: number;
     language?: string;

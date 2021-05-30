@@ -5,15 +5,15 @@ import { HttpError } from '../utils/index.js'
  * @typedef {object} HereForwardQuery
  * @property {string} address
  * @property {string} [language]
- * @property {number} [limit=20] - Maximum number of results to be returned
+ * @property {number} [limit=20] Maximum number of results to be returned
  */
 
 /**
  * @typedef {object} HereReverseQuery
- * @property {number} lat - latitude
- * @property {number} lng - longitude
+ * @property {number} lat latitude
+ * @property {number} lng longitude
  * @property {string} [language]
- * @property {number} [limit=1] - Maximum number of results to be returned
+ * @property {number} [limit=1] Maximum number of results to be returned
  */
 
 function mapParams (params) {

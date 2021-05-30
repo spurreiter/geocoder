@@ -10,8 +10,8 @@
 /**
  * see https://developers.google.com/maps/documentation/geocoding/overview#ReverseGeocoding
  * @typedef {object} GoogleReverseQuery
- * @property {number} lat - latitude
- * @property {number} lng - longitude
+ * @property {number} lat latitude
+ * @property {number} lng longitude
  * @property {string} [language]
  * @property {string} [result_type]
  * @property {string} [location_type]
@@ -64,11 +64,11 @@ export type GoogleForwardQuery = {
  */
 export type GoogleReverseQuery = {
     /**
-     * - latitude
+     * latitude
      */
     lat: number;
     /**
-     * - longitude
+     * longitude
      */
     lng: number;
     language?: string;

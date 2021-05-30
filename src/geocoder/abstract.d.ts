@@ -47,7 +47,7 @@ export class AbstractGeocoder {
     get name(): string;
     /**
      * forward geocoding
-     * @param {string|ForwardQuery} query - address string or ip address
+     * @param {string|ForwardQuery} query address string or ip address
      * @returns {Promise<GeocoderResult[]>}
      */
     forward(query: string | ForwardQuery): Promise<GeocoderResult[]>;
@@ -83,7 +83,7 @@ export class AbstractGeocoder {
     /**
      * forward geocoding
      * @protected
-     * @param {string|ForwardQuery} query - address string or ip address
+     * @param {string|ForwardQuery} query address string or ip address
      * @returns {Promise<GeocoderResult[]>}
      */
     protected _forward(): Promise<GeocoderResult[]>;

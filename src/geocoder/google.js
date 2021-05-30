@@ -38,8 +38,8 @@ const toCamelCase = (str = '') => str.replace(/_(.)/g, (_, m) => m.toUpperCase()
 /**
  * see https://developers.google.com/maps/documentation/geocoding/overview#ReverseGeocoding
  * @typedef {object} GoogleReverseQuery
- * @property {number} lat - latitude
- * @property {number} lng - longitude
+ * @property {number} lat latitude
+ * @property {number} lng longitude
  * @property {string} [language]
  * @property {string} [result_type]
  * @property {string} [location_type]

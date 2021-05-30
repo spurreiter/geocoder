@@ -4,7 +4,7 @@ import { HttpError } from '../utils/index.js'
 /**
  * @typedef {object} MapBoxForwardQuery
  * @property {string} address -
- * @property {number} [limit=5] - Maximum number of results to be returned
+ * @property {number} [limit=5] Maximum number of results to be returned
  * @property {string} [language]
  * @property {boolean} [autocomplete]
  * @property {boolean} [fuzzyMatch]
@@ -16,9 +16,9 @@ import { HttpError } from '../utils/index.js'
 
 /**
  * @typedef {object} MapBoxReverseQuery
- * @property {number} lat - latitude
- * @property {number} lng - longitude
- * @property {number} [limit=5] - Maximum number of results to be returned
+ * @property {number} lat latitude
+ * @property {number} lng longitude
+ * @property {number} [limit=5] Maximum number of results to be returned
  * @property {string} [language]
  * @property {boolean} [routing]
  * @property {string[]} [country]

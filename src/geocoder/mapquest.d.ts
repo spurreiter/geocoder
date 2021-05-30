@@ -1,7 +1,7 @@
 /**
  * @typedef {object} MapQuestForwardQuery
  * @property {string} address -
- * @property {number} [limit=5] - Maximum number of results to be returned
+ * @property {number} [limit=5] Maximum number of results to be returned
  * @property {string} [language]
  * @property {boolean} [autocomplete]
  * @property {boolean} [fuzzyMatch]
@@ -12,9 +12,9 @@
  */
 /**
  * @typedef {object} MapQuestReverseQuery
- * @property {number} lat - latitude
- * @property {number} lng - longitude
- * @property {number} [limit=5] - Maximum number of results to be returned
+ * @property {number} lat latitude
+ * @property {number} lng longitude
+ * @property {number} [limit=5] Maximum number of results to be returned
  * @property {string} [language]
  * @property {boolean} [routing]
  * @property {string[]} [country]
@@ -67,7 +67,7 @@ export type MapQuestForwardQuery = {
      */
     address: string;
     /**
-     * - Maximum number of results to be returned
+     * Maximum number of results to be returned
      */
     limit?: number;
     language?: string;
@@ -80,15 +80,15 @@ export type MapQuestForwardQuery = {
 };
 export type MapQuestReverseQuery = {
     /**
-     * - latitude
+     * latitude
      */
     lat: number;
     /**
-     * - longitude
+     * longitude
      */
     lng: number;
     /**
-     * - Maximum number of results to be returned
+     * Maximum number of results to be returned
      */
     limit?: number;
     language?: string;

@@ -30,8 +30,8 @@ function getEmbeddedPath (parent, path, def) {
 
 /**
  * @typedef {object} TeleportReverseQuery
- * @property {number} lat - latitude
- * @property {number} lng - longitude
+ * @property {number} lat latitude
+ * @property {number} lng longitude
  */
 
 /**

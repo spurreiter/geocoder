@@ -43,7 +43,7 @@ export type OpenCageForwardQuery = {
      */
     address: string;
     /**
-     * - Maximum number of results to be returned
+     * Maximum number of results to be returned
      */
     limit?: number;
     language?: string;
@@ -54,15 +54,15 @@ export type OpenCageForwardQuery = {
 };
 export type OpenCageReverseQuery = {
     /**
-     * - latitude
+     * latitude
      */
     lat: number;
     /**
-     * - longitude
+     * longitude
      */
     lng: number;
     /**
-     * - Maximum number of results to be returned
+     * Maximum number of results to be returned
      */
     limit?: number;
     language?: string;

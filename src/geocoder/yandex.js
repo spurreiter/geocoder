@@ -13,8 +13,8 @@ import { HttpError } from '../utils/index.js'
 
 /**
  * @typedef {object} YandexReverseQuery
- * @property {number} lat - latitude
- * @property {number} lng - longitude
+ * @property {number} lat latitude
+ * @property {number} lng longitude
  * @property {string} [language]
  */
 

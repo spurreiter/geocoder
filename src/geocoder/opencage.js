@@ -4,7 +4,7 @@ import { HttpError, toUpperCase } from '../utils/index.js'
 /**
  * @typedef {object} OpenCageForwardQuery
  * @property {string} address -
- * @property {number} [limit=10] - Maximum number of results to be returned
+ * @property {number} [limit=10] Maximum number of results to be returned
  * @property {string} [language]
  * @property {number} [abbrv]
  * @property {number[]} [bounds]
@@ -14,9 +14,9 @@ import { HttpError, toUpperCase } from '../utils/index.js'
 
 /**
  * @typedef {object} OpenCageReverseQuery
- * @property {number} lat - latitude
- * @property {number} lng - longitude
- * @property {number} [limit=10] - Maximum number of results to be returned
+ * @property {number} lat latitude
+ * @property {number} lng longitude
+ * @property {number} [limit=10] Maximum number of results to be returned
  * @property {string} [language]
  * @property {number} [abbrv]
  * @property {number} [roadinfo]

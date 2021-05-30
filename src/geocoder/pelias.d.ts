@@ -4,8 +4,8 @@
  */
 /**
  * @typedef {object} PeliasReverseQuery
- * @property {number} lat - latitude
- * @property {number} lng - longitude
+ * @property {number} lat latitude
+ * @property {number} lng longitude
  */
 export class PeliasGeocoder extends AbstractGeocoder {
     /**
@@ -13,7 +13,7 @@ export class PeliasGeocoder extends AbstractGeocoder {
      * @see https://github.com/pelias/documentation/blob/master/README.md
      * @param {function} adapter
      * @param {object} options
-     * @param {string} [options.origin='https://api.geocode.earth'] - protocol + hostname for server
+     * @param {string} [options.origin='https://api.geocode.earth'] protocol + hostname for server
      */
     constructor(adapter: Function, options?: {
         origin?: string;
@@ -45,11 +45,11 @@ export type PeliasForwardQuery = {
 };
 export type PeliasReverseQuery = {
     /**
-     * - latitude
+     * latitude
      */
     lat: number;
     /**
-     * - longitude
+     * longitude
      */
     lng: number;
 };

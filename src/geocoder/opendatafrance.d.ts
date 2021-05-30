@@ -7,8 +7,8 @@
 /**
  * see https://geo.api.gouv.fr/adresse
  * @typedef {object} OpendataFranceReverseQuery
- * @property {number} lat - latitude
- * @property {number} lng - longitude
+ * @property {number} lat latitude
+ * @property {number} lng longitude
  * @property {number} [limit=5] Maximum number of results to be returned
  */
 export class OpendataFranceGeocoder extends AbstractGeocoder {
@@ -61,11 +61,11 @@ export type OpendataFranceForwardQuery = {
  */
 export type OpendataFranceReverseQuery = {
     /**
-     * - latitude
+     * latitude
      */
     lat: number;
     /**
-     * - longitude
+     * longitude
      */
     lng: number;
     /**
