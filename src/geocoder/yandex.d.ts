@@ -20,13 +20,16 @@ export class YandexGeocoder extends AbstractGeocoder {
      * @param {function} adapter
      * @param {object} options
      * @param {string} options.apiKey
+     * @param {string} [options.language]
      */
     constructor(adapter: Function, options?: {
         apiKey: string;
+        language?: string;
     });
     params: {
         apikey: string;
         format: string;
+        language?: string;
     };
     get endpoint(): string;
     _formatResult(result: any): {
@@ -49,9 +52,17 @@ export type YandexForwardQuery = {
     address: string;
     language?: string;
     /**
-     * - Maximum number of results to be returned
+     * house, street, metro, district, locality
      */
-    limit?: number;
+    kind?: string;
+    /**
+     * [0,1]
+     */
+    rspn?: number;
+    /**
+     * Longitude and latitude of the center of the search area
+     */
+    ll?: string;
 };
 export type YandexReverseQuery = {
     /**
@@ -63,9 +74,5 @@ export type YandexReverseQuery = {
      */
     lng: number;
     language?: string;
-    /**
-     * - Maximum number of results to be returned
-     */
-    limit?: number;
 };
 import { AbstractGeocoder } from "./abstract.js";
