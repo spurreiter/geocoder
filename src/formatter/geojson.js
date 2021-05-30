@@ -1,8 +1,18 @@
 /**
+ * @see https://github.com/geocoders/geocodejson-spec
  * @see https://datatracker.ietf.org/doc/html/rfc7946
  */
-const featureCollection = (features) => ({
+const featureCollection = (
+  features,
+  { license = null, attribution = null, query = null } = {}
+) => ({
   type: 'FeatureCollection',
+  geocoding: {
+    version: '0.1.0',
+    license,
+    attribution,
+    query
+  },
   features
 })
 
@@ -55,8 +65,11 @@ const feature = ({
   return feature
 }
 
-export function geoJsonFormatter (results) {
+export function geoJsonFormatter (
+  results,
+  opts
+) {
   if (!results) return
-  const features = results.map(feature)
+  const features = results.map(feature, opts)
   return featureCollection(features)
 }

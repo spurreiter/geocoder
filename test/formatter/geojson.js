@@ -8,6 +8,12 @@ describe('geoJsonFormatter', function () {
       geoJsonFormatter(fixtures['135 pilkington avenue, birmingham']),
       {
         type: 'FeatureCollection',
+        geocoding: {
+          version: '0.1.0',
+          license: null,
+          attribution: null,
+          query: null
+        },
         features: [
           {
             type: 'Feature',
@@ -27,7 +33,7 @@ describe('geoJsonFormatter', function () {
                 housenumber: '135',
                 neighbourhood: undefined,
                 id: 90394480,
-                confidence: 0.411,
+                confidence: 0.411
               }
             }
           }
@@ -41,6 +47,12 @@ describe('geoJsonFormatter', function () {
       geoJsonFormatter(fixtures['40.714232,-73.9612889']),
       {
         type: 'FeatureCollection',
+        geocoding: {
+          version: '0.1.0',
+          license: null,
+          attribution: null,
+          query: null
+        },
         features: [
           {
             type: 'Feature',
@@ -62,7 +74,7 @@ describe('geoJsonFormatter', function () {
                 housenumber: '279',
                 neighbourhood: undefined,
                 id: 279767984,
-                confidence: 0,
+                confidence: 0
               }
             }
           }

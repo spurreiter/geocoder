@@ -1,7 +1,16 @@
 import { GeocoderResult } from '../geocoder/abstract';
 
+/**
+ * @see https://github.com/geocoders/geocodejson-spec
+ */
 export interface GeoJsonFeatureCollection {
     type: "FeatureCollection";
+    geocoding: {
+        version: "0.1.0";
+        license?: string;
+        attribution?: string;
+        query?: string;
+    },
     features: GeoJsonFeature[];
 }
 
@@ -35,4 +44,10 @@ export interface GeoJsonFeature {
     },
 }
 
-export function geoJsonFormatter(results: GeocoderResult[]): GeoJsonFeatureCollection;
+interface GeoJsonGeocoding {
+    license?: string;
+    attribution?: string;
+    query?: string;
+}
+
+export function geoJsonFormatter(results: GeocoderResult[], options: GeoJsonGeocoding): GeoJsonFeatureCollection;
