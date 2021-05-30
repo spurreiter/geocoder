@@ -1,1 +1,2 @@
-export * from "./geojson.js";
+export * from "./gpx";
+export * from "./geojson";
