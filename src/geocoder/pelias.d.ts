@@ -53,4 +53,4 @@ export type PeliasReverseQuery = {
      */
     lng: number;
 };
-import { AbstractGeocoder } from "./abstract.js";
+import { AbstractGeocoder } from "./abstract";

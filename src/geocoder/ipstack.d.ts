@@ -22,4 +22,4 @@ export class IpStackGeocoder extends AbstractGeocoder {
         zipcode: any;
     };
 }
-import { AbstractGeocoder } from "./abstract.js";
+import { AbstractGeocoder } from "./abstract";

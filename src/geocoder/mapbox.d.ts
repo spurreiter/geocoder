@@ -93,4 +93,4 @@ export type MapBoxReverseQuery = {
     routing?: boolean;
     country?: string[];
 };
-import { AbstractGeocoder } from "./abstract.js";
+import { AbstractGeocoder } from "./abstract";

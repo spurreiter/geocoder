@@ -78,4 +78,4 @@ export type ArcGisReverseQuery = {
     locationType?: string;
     preferredLabelValues?: string;
 };
-import { AbstractGeocoder } from "./abstract.js";
+import { AbstractGeocoder } from "./abstract";

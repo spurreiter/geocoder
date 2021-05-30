@@ -69,4 +69,4 @@ export type LocationIqReverseQuery = {
      */
     limit?: number;
 };
-import { AbstractGeocoder } from "./abstract.js";
+import { AbstractGeocoder } from "./abstract";

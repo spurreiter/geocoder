@@ -37,4 +37,4 @@ export type LocalGeoip2ForwardQuery = {
     address: string;
     language?: string;
 };
-import { AbstractGeocoder } from "./abstract.js";
+import { AbstractGeocoder } from "./abstract";

@@ -75,4 +75,4 @@ export type GoogleReverseQuery = {
     result_type?: string;
     location_type?: string;
 };
-import { AbstractGeocoder } from "./abstract.js";
+import { AbstractGeocoder } from "./abstract";

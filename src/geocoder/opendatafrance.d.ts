@@ -73,4 +73,4 @@ export type OpendataFranceReverseQuery = {
      */
     limit?: number;
 };
-import { AbstractGeocoder } from "./abstract.js";
+import { AbstractGeocoder } from "./abstract";
