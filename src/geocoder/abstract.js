@@ -1,7 +1,7 @@
 import net from 'net'
 import { URL, URLSearchParams } from 'url'
 
-const wrapError400 = err => {
+const wrapError400 = (err) => {
   err.status = 400
   return err
 }
@@ -64,7 +64,7 @@ export class AbstractGeocoder {
 
   /**
    * forward geocoding
-   * @param {string|ForwardQuery} query - address string or ip address
+   * @param {string|ForwardQuery} query address string or ip address
    * @returns {Promise<GeocoderResult[]>}
    */
   forward (query) {
@@ -76,10 +76,14 @@ export class AbstractGeocoder {
     const isIPv6 = net.isIPv6(address)
 
     if (isIPv4 && !this.supportIPv4) {
-      throw wrapError400(new Error(`${this.constructor.name} does not support geocoding IPv4`))
+      throw wrapError400(
+        new Error(`${this.constructor.name} does not support geocoding IPv4`)
+      )
     }
     if (isIPv6 && !this.supportIPv6) {
-      throw wrapError400(new Error(`${this.constructor.name} does not support geocoding IPv6`))
+      throw wrapError400(
+        new Error(`${this.constructor.name} does not support geocoding IPv6`)
+      )
     }
 
     return this._forward(query, isIPv4 || isIPv6)
@@ -92,7 +96,7 @@ export class AbstractGeocoder {
    */
   reverse (query) {
     if (typeof query === 'string') {
-      const [lat, lng] = query.split(/[ ,]/).map(n => +n)
+      const [lat, lng] = query.split(/[ ,]/).map((n) => +n)
       if (!isNaN(lat) && !isNaN(lng)) {
         query = { lat, lng }
       }
@@ -144,11 +148,13 @@ export class AbstractGeocoder {
   /**
    * forward geocoding
    * @protected
-   * @param {string|ForwardQuery} query - address string or ip address
+   * @param {string|ForwardQuery} query address string or ip address
    * @returns {Promise<GeocoderResult[]>}
    */
   _forward () {
-    throw new Error(`${this.constructor.name} does not support geocoding`)
+    throw wrapError400(
+      new Error(`${this.constructor.name} does not support geocoding`)
+    )
   }
 
   /**
@@ -158,6 +164,8 @@ export class AbstractGeocoder {
    * @returns {Promise<GeocoderResult[]>}
    */
   _reverse () {
-    throw new Error(`${this.constructor.name} does not support reverse geocoding`)
+    throw wrapError400(
+      new Error(`${this.constructor.name} does not support reverse geocoding`)
+    )
   }
 }
