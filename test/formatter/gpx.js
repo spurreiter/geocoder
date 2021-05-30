@@ -24,4 +24,15 @@ describe('gpxFormatter', function () {
 `
     )
   })
+
+  it('shall escape chars', function () {
+    assert.deepStrictEqual(
+      gpxFormatter(fixtures.escape),
+      `<?xml version="1.0" encoding="UTF-8"?>
+<gpx version="1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.topografix.com/GPX/1/0" xsi:schemaLocation="http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd">
+<wpt lat="40.714205" lon="-73.96131519274765"><name>&lt;img src=&quot;alert(&#39;test&#39;)&quot;&gt;&amp; others</name></wpt>
+</gpx>
+`
+    )
+  })
 })

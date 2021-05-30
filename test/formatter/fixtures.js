@@ -44,5 +44,28 @@ export const fixtures = {
         bbox: [-73.9613744, 40.7141617, -73.961256, 40.7142482]
       }
     }
+  ],
+  escape: [
+    {
+      formattedAddress:
+        '<img src="alert(\'test\')">& others',
+      latitude: 40.714205,
+      longitude: -73.96131519274765,
+      country: 'United States',
+      countryCode: 'US',
+      state: 'New York',
+      county: undefined,
+      city: 'New York',
+      zipcode: '11211',
+      district: undefined,
+      streetName: 'Bedford Avenue',
+      streetNumber: '279',
+      neighbourhood: undefined,
+      extra: {
+        id: 279767984,
+        confidence: 0,
+        bbox: [-73.9613744, 40.7141617, -73.961256, 40.7142482]
+      }
+    }
   ]
 }
