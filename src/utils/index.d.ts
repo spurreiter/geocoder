@@ -1,2 +1,3 @@
-export * from "./httperror.js";
-export * from "./toUpperCase.js";
+export * from "./httperror";
+export * from "./isocode";
+export * from "./toUpperCase";

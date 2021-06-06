@@ -1,5 +1,5 @@
 import { AbstractGeocoder } from './abstract.js'
-import { HttpError } from '../utils/index.js'
+import { HttpError, countryCode } from '../utils/index.js'
 
 /**
  * @typedef {object} HereForwardQuery
@@ -116,7 +116,7 @@ export class HereGeocoder extends AbstractGeocoder {
       latitude: position.lat,
       longitude: position.lng,
       country: address.countryName,
-      countryCode: address.countryCode,
+      countryCode: countryCode(address.countryCode),
       state: address.state,
       county: address.county,
       city: address.city,

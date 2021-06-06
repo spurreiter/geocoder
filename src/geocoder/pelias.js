@@ -1,5 +1,5 @@
 import { AbstractGeocoder } from './abstract.js'
-import { HttpError } from '../utils/index.js'
+import { HttpError, countryCode } from '../utils/index.js'
 
 /**
  * @typedef {object} PeliasForwardQuery
@@ -106,7 +106,7 @@ export class PeliasGeocoder extends AbstractGeocoder {
       latitude: geometry.coordinates[1],
       longitude: result.geometry.coordinates[0],
       country: properties.country,
-      countryCode: properties.country_a,
+      countryCode: countryCode(properties.country_a),
       state: properties.region,
       county: properties.country,
       city: properties.locality,

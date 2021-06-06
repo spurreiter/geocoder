@@ -1,5 +1,5 @@
 import { AbstractGeocoder } from './abstract.js'
-import { HttpError } from '../utils/index.js'
+import { HttpError, countryName } from '../utils/index.js'
 
 /**
  * see https://www.geocod.io/docs/#single-address
@@ -127,7 +127,7 @@ export class GeocodioGeocoder extends AbstractGeocoder {
       formattedAddress: formatted_address,
       latitude: location.lat,
       longitude: location.lng,
-      // country: undefined,
+      country: countryName(address.country),
       countryCode: address.country,
       state: address.state,
       county: address.county,

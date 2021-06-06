@@ -1,5 +1,5 @@
 import { AbstractGeocoder } from './abstract.js'
-import { HttpError } from '../utils/index.js'
+import { HttpError, countryCode, countryName } from '../utils/index.js'
 
 const undef = (s) => s === '' ? undefined : s
 
@@ -35,7 +35,12 @@ export class ArcGisGeocoder extends AbstractGeocoder {
   constructor (adapter, options = {}) {
     super(adapter, options)
 
-    const { apiKey, limit: maxLocations, language: langCode, ...params } = options
+    const {
+      apiKey,
+      limit: maxLocations,
+      language: langCode,
+      ...params
+    } = options
 
     if (!apiKey) {
       throw new Error(`You must specify apiKey to use ${this.constructor.name}`)
@@ -66,7 +71,8 @@ export class ArcGisGeocoder extends AbstractGeocoder {
     let params = {
       ...this.params,
       address: query,
-      outFields: 'AddNum,Addr_type,City,Country,LongLabel,Place_addr,PlaceName,Postal,Rank,Region,StName,StPreDir,StType,Type'
+      outFields:
+        'AddNum,Addr_type,City,Country,LongLabel,Place_addr,PlaceName,Postal,Rank,Region,StName,StPreDir,StType,Type'
     }
 
     if (query.address) {
@@ -93,7 +99,7 @@ export class ArcGisGeocoder extends AbstractGeocoder {
     if (!result.candidates) {
       return this.wrapRaw([], result)
     }
-    const results = result.candidates.map(this._formatResult)
+    const results = result.candidates.map(this._formatResult.bind(this, params.langCode))
     return this.wrapRaw(results, result)
   }
 
@@ -102,7 +108,13 @@ export class ArcGisGeocoder extends AbstractGeocoder {
    * @returns {Promise<object>}
    */
   async _reverse (query) {
-    const { lat, lng, language: langCode, limit: maxLocations, ...other } = query
+    const {
+      lat,
+      lng,
+      language: langCode,
+      limit: maxLocations,
+      ...other
+    } = query
     const params = {
       ...this.params,
       ...other,
@@ -125,7 +137,7 @@ export class ArcGisGeocoder extends AbstractGeocoder {
     if (!result?.address) {
       return this.wrapRaw([], result)
     }
-    const results = [result].map(this._formatResultRev)
+    const results = [result].map(this._formatResultRev.bind(this, params.langCode))
     return this.wrapRaw(results, result)
   }
 
@@ -134,7 +146,7 @@ export class ArcGisGeocoder extends AbstractGeocoder {
    * @param {object} result
    * @returns {object}
    */
-  _formatResult (result) {
+  _formatResult (language, result) {
     const {
       // address,
       location = {},
@@ -144,15 +156,22 @@ export class ArcGisGeocoder extends AbstractGeocoder {
     } = result || {}
 
     const {
-      AddNum, Addr_type, City, Country, LongLabel, PlaceName, Postal, Rank, Region, StName, StPreDir, StType, Type
+      AddNum,
+      Addr_type,
+      City,
+      Country,
+      LongLabel,
+      PlaceName,
+      Postal,
+      Rank,
+      Region,
+      StName,
+      StPreDir,
+      StType,
+      Type
     } = attributes
 
-    const {
-      xmin,
-      ymin,
-      xmax,
-      ymax
-    } = extent
+    const { xmin, ymin, xmax, ymax } = extent
 
     const extra = {
       confidence: score / 100,
@@ -167,7 +186,8 @@ export class ArcGisGeocoder extends AbstractGeocoder {
       formattedAddress: undef(LongLabel),
       latitude: location.y,
       longitude: location.x,
-      countryCode: undef(Country),
+      country: countryName(Country),
+      countryCode: countryCode(undef(Country), language),
       state: undef(Region),
       city: undef(City),
       zipcode: undef(Postal),
@@ -184,11 +204,8 @@ export class ArcGisGeocoder extends AbstractGeocoder {
    * @param {object} result
    * @returns {object}
    */
-  _formatResultRev (result) {
-    const {
-      address = {},
-      location = {}
-    } = result || {}
+  _formatResultRev (language, result) {
+    const { address = {}, location = {} } = result || {}
 
     const {
       LongLabel,
@@ -213,11 +230,13 @@ export class ArcGisGeocoder extends AbstractGeocoder {
       formattedAddress: undef(LongLabel),
       latitude: location.y,
       longitude: location.x,
-      countryCode: undef(CountryCode),
+      country: countryName(CountryCode),
+      countryCode: countryCode(undef(CountryCode), language),
       state: undef(Region),
       city: undef(City),
       zipcode: undef(Postal),
-      streetName: Address && AddNum ? Address.replace(AddNum, '').trim() : undef(Address),
+      streetName:
+        Address && AddNum ? Address.replace(AddNum, '').trim() : undef(Address),
       streetNumber: undef(AddNum),
       extra
     }

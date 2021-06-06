@@ -61,7 +61,8 @@
   },
   "dependencies": {
     "agentkeepalive": "^4.1.4",
-    "got": "^11.8.2"
+    "got": "^11.8.2",
+    "i18n-iso-countries": "^6.7.0"
   },
   "devDependencies": {
     "@types/node": "^15.6.1",

@@ -1,5 +1,5 @@
 import { AbstractGeocoder } from './abstract.js'
-import { HttpError } from '../utils/index.js'
+import { HttpError, countryName } from '../utils/index.js'
 
 /**
  * @typedef {object} MapQuestForwardQuery
@@ -132,10 +132,17 @@ export class MapQuestGeocoder extends AbstractGeocoder {
     } = result
 
     const formatted = {
-      formattedAddress: [street, adminArea5, (adminArea3 + ' ' + postalCode).trim(), adminArea1].filter(Boolean).join(', '),
+      formattedAddress: [
+        street,
+        adminArea5,
+        (adminArea3 + ' ' + postalCode).trim(),
+        adminArea1
+      ]
+        .filter(Boolean)
+        .join(', '),
       latitude: latLng.lat,
       longitude: latLng.lng,
-      country: undefined,
+      country: countryName(adminArea1 || undefined),
       countryCode: adminArea1 || undefined,
       state: adminArea3 || undefined,
       county: adminArea4 || undefined,
