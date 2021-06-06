@@ -20,6 +20,10 @@
     "teleport",
     "yandex-api"
   ],
+  "homepage": "https://github.com/spurreiter/geocoder#readme",
+  "bugs": {
+    "url": "https://github.com/spurreiter/geocoder/issues"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/spurreiter/geocoder.git"
