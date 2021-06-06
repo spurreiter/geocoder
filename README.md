@@ -13,11 +13,12 @@ Features:
 - combine search results from multiple providers
 - configurable circuit breaker which stops calling geocoder e.g. if request limit is exhausted.
 - extensive test-suite with examples for getting started
+- GeoJSON, GPX formatters
 
 ## supported providers
 
-| Provider | forward | reverse | ip | Notes |
-| -------- | ------- | ------- | -- | ----- |
+| Provider | forward | reverse |  ip  | Notes |
+| -------- | :-----: | :-----: | :--: | ----- |
 | [ArcGisGeocoder](https://developers.arcgis.com/documentation/mapping-apis-and-services/search/) | ✅ | ✅ | ❌ |  |
 | [BingMapsGeocoder](https://docs.microsoft.com/en-us/bingmaps/rest-services/locations) | ✅ | ✅ | ❌ | results are in English only |
 | [GoogleGeocoder](https://developers.google.com/maps/documentation/geocoding/overview) | ✅ | ✅ | ❌ |  |
@@ -74,7 +75,7 @@ const results = await geocoder.forward('135 pilkington avenue, birmingham')
 ### reverse geocoding
 
 ```js
-const results = await geocoder.reverse({ lat: 40.714232,lng: -73.9612889 })
+const results = await geocoder.reverse({ lat: 40.714232, lng: -73.9612889 })
 // [
 //   {
 //     formattedAddress: '279, Bedford Avenue, Williamsburg, Brooklyn, Kings County, New York, 11211, United States',
@@ -139,6 +140,49 @@ const results = await combine.forward({ address: '135 pilkington avenue, birming
 
 // results contains data from all reachable geocoders.
 ```
+
+## formatters
+
+Formatters allow to format the geocoder result object to various formats like geoJson or gpx.
+
+### geoJsonFormatter
+
+The output of the GeoJSON formatter is according to [RFC-7946](https://datatracker.ietf.org/doc/html/rfc7946) and [geocodejson-spec](https://github.com/geocoders/geocodejson-spec).
+
+```js
+import { geoJsonFormatter } from '@spurreiter/geocoder'
+
+const query = '135 pilkington avenue, birmingham'
+const results = await geocoder.forward(query)
+
+const geoJson = geoJsonFormatter(results, {query})
+// {
+//   type: 'FeatureCollection',
+//   geocoding: {
+//     version: '0.1.0',
+//     license: null,
+//     attribution: null,
+//     query: '135 pilkington avenue, birmingham'
+//   },
+//   features: [{...}, ...]
+// }
+```
+
+### gpxFormatter
+
+```js
+import { gpxFormatter } from '@spurreiter/geocoder'
+
+const query = '135 pilkington avenue, birmingham'
+const results = await geocoder.forward(query)
+
+const gpx = gpxFormatter(results)
+// <?xml version="1.0" encoding="UTF-8"?>
+// <gpx version="1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.topografix.com/GPX/1/0" xsi:schemaLocation="http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd">
+// <wpt lat="52.5487921" lon="-1.8164308339635031"><name>135, Pilkington Avenue, Maney, Sutton Coldfield, Wylde Green, Birmingham, West Midlands Combined Authority, West Midlands, England, B72 1LH, United Kingdom</name></wpt>
+// </gpx>
+```
+
 
 ## contributing
 
