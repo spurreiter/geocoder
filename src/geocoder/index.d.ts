@@ -5,7 +5,7 @@ export * from "./geocodio";
 export * from "./google";
 export * from "./here";
 export * from "./ipstack";
-export * from "./localgeoip2";
+export * from "./geolite2";
 export * from "./locationiq";
 export * from "./mapbox";
 export * from "./mapquest";

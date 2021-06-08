@@ -81,7 +81,7 @@ export const fixtures = {
       }
     ]
   },
-  '2001:8003:713f:2f00:f9d2:16e5:38e4:adc3': {
+  '2001:8003:713f:2f00:f9d2:16e5:38e4:adc3': { // local result
     body: {
       continent: {
         code: 'OC',
@@ -180,6 +180,80 @@ export const fixtures = {
           isInEuropeanUnion: false,
           timeZone: 'Australia/Brisbane',
           network: '2001:8003:7100::/40'
+        }
+      }
+    ]
+  },
+  '2001:8004:713f:2f00:f9d2:16e5:38e4:adc3': { // MaxMind result
+    body: {
+      continent: {
+        code: 'OC',
+        geoname_id: 6255151,
+        names: {
+          'pt-BR': 'Oceania',
+          ru: 'Океания',
+          'zh-CN': '大洋洲',
+          de: 'Ozeanien',
+          en: 'Oceania',
+          es: 'Oceanía',
+          fr: 'Océanie',
+          ja: 'オセアニア'
+        }
+      },
+      country: {
+        iso_code: 'AU',
+        geoname_id: 2077456,
+        names: {
+          ru: 'Австралия',
+          'zh-CN': '澳大利亚',
+          de: 'Australien',
+          en: 'Australia',
+          es: 'Australia',
+          fr: 'Australie',
+          ja: 'オーストラリア',
+          'pt-BR': 'Austrália'
+        }
+      },
+      location: {
+        accuracy_radius: 100,
+        latitude: -33.494,
+        longitude: 143.2104,
+        time_zone: 'Australia/Sydney'
+      },
+      registered_country: {
+        iso_code: 'AU',
+        geoname_id: 2077456,
+        names: {
+          de: 'Australien',
+          en: 'Australia',
+          es: 'Australia',
+          fr: 'Australie',
+          ja: 'オーストラリア',
+          'pt-BR': 'Austrália',
+          ru: 'Австралия',
+          'zh-CN': '澳大利亚'
+        }
+      },
+      traits: {
+        autonomous_system_number: 1221,
+        autonomous_system_organization: 'Telstra Corporation Ltd',
+        ip_address: '2001:8004:713f:2f00:f9d2:16e5:38e4:adc3',
+        network: '2001:8004:6000::/35'
+      }
+    },
+    expResults: [
+      {
+        ip: '2001:8004:713f:2f00:f9d2:16e5:38e4:adc3',
+        latitude: -33.494,
+        longitude: 143.2104,
+        countryCode: 'AU',
+        country: 'Australia',
+        extra: {
+          id: 2077456,
+          accuracyRadius: 100,
+          isInEuropeanUnion: undefined,
+          timeZone: 'Australia/Sydney',
+          network: '2001:8004:6000::/35'
         }
       }
     ]

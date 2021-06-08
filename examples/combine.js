@@ -1,6 +1,6 @@
 import dotenv from 'dotenv'
 import { argv } from './argv.js'
-import { Combine, fetchAdapter, HereGeocoder, OsmGeocoder, LocalGeoip2Geocoder } from '../src/index.js'
+import { Combine, fetchAdapter, HereGeocoder, OsmGeocoder, GeoLite2Geocoder } from '../src/index.js'
 
 dotenv.config()
 
@@ -12,7 +12,7 @@ const adapter = fetchAdapter()
 const geocoders = [
   new HereGeocoder(adapter, { apiKey, language: LANGUAGE, ...other }),
   new OsmGeocoder(adapter, { language: LANGUAGE, ...other }),
-  new LocalGeoip2Geocoder(adapter)
+  new GeoLite2Geocoder(adapter)
 ]
 const combine = new Combine(geocoders)
 

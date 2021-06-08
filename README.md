@@ -26,7 +26,7 @@ Features:
 | [HereGeocoder](https://developer.here.com/) | ✅ | ✅ | ❌ |  |
 | [IpStackGeocoder](https://ipstack.com/) | ❌ | ❌ | ✅ |  |
 | [LocationIqGeocoder](https://locationiq.com/docs) |  ✅ | ✅ | ❌ |  |
-| [LocalGeoip2Geocoder](https://dev.maxmind.com/geoip/geoip2/geolite2/) | ❌ | ❌ | ✅ | Local geoip2 provider. Output as of [@maxmind/geoip2-node](https://www.npmjs.com/package/@maxmind/geoip2-node) |
+| [GeoLite2Geocoder](https://dev.maxmind.com/geoip/geoip2/geolite2/) | ❌ | ❌ | ✅ | Local GeoLite2 provider or MaxMind API. Output as of [@maxmind/geoip2-node](https://www.npmjs.com/package/@maxmind/geoip2-node) |
 | [MapBoxGeocoder](https://docs.mapbox.com/) | ✅ | ✅ | ❌ |  |
 | [MapQuestGeocoder](https://developer.mapquest.com/documentation/geocoding-api) | ✅ | ✅ | ❌ | open-data and licensed versions are supported |
 | [OpenCageGeocoder](https://opencagedata.com/) | ✅ | ✅ | ❌ |  |

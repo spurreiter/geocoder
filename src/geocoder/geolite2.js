@@ -1,39 +1,55 @@
 import { AbstractGeocoder } from './abstract.js'
-import { HttpError } from '../utils/index.js'
+import { HttpError, objToCamelCase } from '../utils/index.js'
 
 function hasResult (result) {
   return result && !!result.location
 }
 
 /**
- * @typedef {object} LocalGeoip2ForwardQuery
+ * @typedef {object} GeoLite2ForwardQuery
  * @property {string} address
  * @property {string} [language=en]
  */
 
 /**
  * run your local maxmind geoip2 server e.g. with @maxmind/geoip2-node npm module
+ * https://dev.maxmind.com/geoip/docs/web-services/requests#geolite2-endpoints
  */
-export class LocalGeoip2Geocoder extends AbstractGeocoder {
+export class GeoLite2Geocoder extends AbstractGeocoder {
   /**
    * available options
    * @param {function} adapter
    * @param {object} options
-   * @param {string} [endpoint=http://localhost:3000/city]
+   * @param {string} [options.endpoint=https://geolite.info/geoip/v2.1/city]
+   * @param {string} [options.accountId] MaxMind account ID
+   * @param {string} [options.apiKey] MaxMind license key
    */
   constructor (adapter, options = {}) {
     super(adapter, options)
 
-    const { endpoint = 'http://localhost:3000/city', ...params } = options
+    const {
+      accountId,
+      apiKey,
+      endpoint,
+      ...params
+    } = options
 
-    this.endpoint = endpoint
+    if (!endpoint && !(apiKey && accountId)) {
+      throw new Error(`You must either specify accountId and apiKey or endpoint to use ${this.constructor.name}`)
+    }
+
+    this.endpoint = endpoint || 'https://geolite.info/geoip/v2.1/city'
     this.params = params
-
     this.supportIPv4 = this.supportIPv6 = true
+
+    if (accountId && apiKey) {
+      const authorization = 'Basic ' + Buffer.from(accountId + ':' + apiKey).toString('base64')
+      this.opts = { headers: { authorization } }
+    }
   }
 
   /**
-   * @param {string|LocalGeoip2ForwardQuery} query
+   * @param {string|GeoLite2ForwardQuery} query
    * @returns {Promise<object>}
    */
   async _forward (query = '') {
@@ -53,7 +69,7 @@ export class LocalGeoip2Geocoder extends AbstractGeocoder {
       _params
     )
 
-    const res = await this.adapter(url)
+    const res = await this.adapter(url, this.opts)
     if (res.status !== 200) {
       throw new HttpError(res)
     }
@@ -73,7 +89,7 @@ export class LocalGeoip2Geocoder extends AbstractGeocoder {
       registeredCountry = {},
       traits = {},
       location = {}
-    } = result
+    } = objToCamelCase(result)
 
     const { latitude, longitude, accuracyRadius, timeZone } = location
     const { isInEuropeanUnion } = registeredCountry
