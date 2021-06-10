@@ -111,7 +111,7 @@ import { Cascade, fetchAdapter, HereGeocoder, OsmGeocoder } from '@spurreiter/ge
 
 const language = "es"
 const geocoders = [
-  new HereGeocoder(adapter, { apiKey_ 'your-api-key', language }),
+  new HereGeocoder(adapter, { apiKey: 'your-api-key', language }),
   new OsmGeocoder(adapter, { language })
 ]
 const cascade = new Cascade(geocoders)
@@ -131,7 +131,7 @@ Works with forward and reverse geocoding.
 import { Combine, fetchAdapter, HereGeocoder, OsmGeocoder } from '@spurreiter/geocoder'
 
 const geocoders = [
-  new HereGeocoder(adapter, { apiKey_ 'your-api-key' }),
+  new HereGeocoder(adapter, { apiKey: 'your-api-key' }),
   new OsmGeocoder(adapter)
 ]
 const combine = new Combine(geocoders)
