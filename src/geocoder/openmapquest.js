@@ -1,8 +1,8 @@
 import { OsmGeocoder } from './osm.js'
 
 /**
- * see https://pickpoint.io/api-reference#forward-geocoding
- * @typedef {object} PickpointForwardQuery
+ * see https://developer.mapquest.com/documentation/open/nominatim-search/search/
+ * @typedef {object} OpenMapQuestForwardQuery
  * @property {string} address -
  * @property {number} [limit=10] Maximum number of results to be returned
  * @property {string} [language]
@@ -15,8 +15,8 @@ import { OsmGeocoder } from './osm.js'
  */
 
 /**
- * see https://pickpoint.io/api-reference#reverse-geocoding
- * @typedef {object} PickpointReverseQuery
+ * see https://developer.mapquest.com/documentation/open/nominatim-search/reverse/
+ * @typedef {object} OpenMapQuestReverseQuery
  * @property {number} lat latitude
  * @property {number} lng longitude
  * @property {number} [limit=10] Maximum number of results to be returned
@@ -24,10 +24,10 @@ import { OsmGeocoder } from './osm.js'
  * @property {string} [zoom] 0..18
  */
 
-export class PickpointGeocoder extends OsmGeocoder {
+export class OpenMapQuestGeocoder extends OsmGeocoder {
   /**
    * available options
-   * @see https://pickpoint.io/api-reference
+   * @see https://developer.mapquest.com/documentation/open/nominatim-search/
    * @param {function} adapter
    * @param {object} options
    * @param {string} options.apiKey
@@ -43,8 +43,8 @@ export class PickpointGeocoder extends OsmGeocoder {
       throw new Error(`You must specify apiKey to use ${this.constructor.name}`)
     }
 
-    this.endpoint = 'https://api.pickpoint.io/v1/forward'
-    this.revEndpoint = 'https://api.pickpoint.io/v1/reverse'
+    this.endpoint = 'http://open.mapquestapi.com/nominatim/v1/search.php'
+    this.revEndpoint = 'http://open.mapquestapi.com/nominatim/v1/reverse.php'
 
     this.params = {
       ...params,

@@ -66,23 +66,27 @@ export class OsmGeocoder extends AbstractGeocoder {
    * @param {number} [options.countrycodes]
    * @param {string} [options.email]
    * @param {number} [options.dedupe]
+   * @param {string} [options.endpoint] custom endpoint
+   * @param {string} [options.revEndpoint] custom reverse endpoint
    */
   constructor (adapter, options = {}) {
     super(adapter, options)
 
+    const {
+      endpoint = 'https://nominatim.openstreetmap.org/search',
+      revEndpoint = 'https://nominatim.openstreetmap.org/reverse',
+      apiKey,
+      ...params
+    } = options
+
+    this.endpoint = endpoint
+    this.revEndpoint = revEndpoint
+
     this.params = {
-      ...options,
+      ...params,
       format: 'json', // force these params
       addressdetails: 1
     }
-  }
-
-  get endpoint () {
-    return 'https://nominatim.openstreetmap.org/search'
-  }
-
-  get revEndpoint () {
-    return 'https://nominatim.openstreetmap.org/reverse'
   }
 
   /**

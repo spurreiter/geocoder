@@ -31,9 +31,10 @@ Features:
 | [MapQuestGeocoder](https://developer.mapquest.com/documentation/geocoding-api) | ✅ | ✅ | ❌ | open-data and licensed versions are supported |
 | [OpenCageGeocoder](https://opencagedata.com/) | ✅ | ✅ | ❌ |  |
 | [OpendataFranceGeocoder](https://geo.api.gouv.fr/adresse) | ✅ | ✅ | ❌ | France only |
+| [OpenMapQuest](https://developer.mapquest.com/documentation/open/nominatim-search/) | ✅ | ✅ | ❌ | Search Results based on OSM |
 | [OsmGeocoder](https://nominatim.org/release-docs/develop/) | ✅ | ✅ | ❌ | Searches nominatim.org |
 | [PeliasGeocoder](https://github.com/pelias/documentation/blob/master/README.md) | ✅ | ✅ | ❌ | Local or [Geocode.earth](https://geocode.earth/docs) |
-| [PickpointGeocoder](https://pickpoint.io/api-reference) | ✅ | ✅ | ❌ |  |
+| [PickpointGeocoder](https://pickpoint.io/api-reference) | ✅ | ✅ | ❌ | Search Results based on OSM |
 | [TeleportGeocoder](https://developers.teleport.org/api/resources/) | ✅ | ✅ | ❌ | Searches only by city names, no addresses |
 | [YandexGeocoder](https://yandex.com/dev/maps/geocoder/) | ✅ | ✅ | ❌ |  |
 
