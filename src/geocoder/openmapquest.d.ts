@@ -1,6 +1,6 @@
 /**
- * see https://pickpoint.io/api-reference#forward-geocoding
- * @typedef {object} PickpointForwardQuery
+ * see https://developer.mapquest.com/documentation/open/nominatim-search/search/
+ * @typedef {object} OpenMapQuestForwardQuery
  * @property {string} address -
  * @property {number} [limit=10] Maximum number of results to be returned
  * @property {string} [language]
@@ -12,18 +12,18 @@
  * @property {string} [postalcode] limit the results to a specified postal code
  */
 /**
- * see https://pickpoint.io/api-reference#reverse-geocoding
- * @typedef {object} PickpointReverseQuery
+ * see https://developer.mapquest.com/documentation/open/nominatim-search/reverse/
+ * @typedef {object} OpenMapQuestReverseQuery
  * @property {number} lat latitude
  * @property {number} lng longitude
  * @property {number} [limit=10] Maximum number of results to be returned
  * @property {string} [language]
  * @property {string} [zoom] 0..18
  */
-export class PickpointGeocoder extends OsmGeocoder {
+export class OpenMapQuestGeocoder extends OsmGeocoder {
     /**
      * available options
-     * @see https://pickpoint.io/api-reference
+     * @see https://developer.mapquest.com/documentation/open/nominatim-search/
      * @param {function} adapter
      * @param {object} options
      * @param {string} options.apiKey
@@ -37,9 +37,9 @@ export class PickpointGeocoder extends OsmGeocoder {
     });
 }
 /**
- * see https://pickpoint.io/api-reference#forward-geocoding
+ * see https://developer.mapquest.com/documentation/open/nominatim-search/search/
  */
-export type PickpointForwardQuery = {
+export type OpenMapQuestForwardQuery = {
     /**
      * -
      */
@@ -75,9 +75,9 @@ export type PickpointForwardQuery = {
     postalcode?: string;
 };
 /**
- * see https://pickpoint.io/api-reference#reverse-geocoding
+ * see https://developer.mapquest.com/documentation/open/nominatim-search/reverse/
  */
-export type PickpointReverseQuery = {
+export type OpenMapQuestReverseQuery = {
     /**
      * latitude
      */

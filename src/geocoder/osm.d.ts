@@ -36,6 +36,8 @@ export class OsmGeocoder extends AbstractGeocoder {
      * @param {number} [options.countrycodes]
      * @param {string} [options.email]
      * @param {number} [options.dedupe]
+     * @param {string} [options.endpoint] custom endpoint
+     * @param {string} [options.revEndpoint] custom reverse endpoint
      */
     constructor(adapter: Function, options?: {
         limit?: number;
@@ -45,7 +47,11 @@ export class OsmGeocoder extends AbstractGeocoder {
         countrycodes?: number;
         email?: string;
         dedupe?: number;
+        endpoint?: string;
+        revEndpoint?: string;
     });
+    endpoint: string;
+    revEndpoint: string;
     params: {
         format: string;
         addressdetails: number;

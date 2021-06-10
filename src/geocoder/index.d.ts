@@ -11,6 +11,7 @@ export * from "./mapbox";
 export * from "./mapquest";
 export * from "./opencage";
 export * from "./opendatafrance";
+export * from "./openmapquest";
 export * from "./osm";
 export * from "./pelias";
 export * from "./pickpoint";
