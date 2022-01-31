@@ -1,6 +1,8 @@
 import { AbstractGeocoder } from './abstract.js'
 import { HttpError, countryName } from '../utils/index.js'
 
+/** @typedef {import('../adapter').fetchAdapterFn} fetchAdapterFn */
+
 /**
  * @typedef {object} MapQuestForwardQuery
  * @property {string} address -
@@ -28,14 +30,15 @@ export class MapQuestGeocoder extends AbstractGeocoder {
   /**
    * available options
    * @see https://developer.mapquest.com/documentation/geocoding-api
-   * @param {function} adapter
+   * @param {fetchAdapterFn} adapter
    * @param {object} options
    * @param {string} options.apiKey
    * @param {number} [options.limit=5]
    * @param {string} [options.language]
    * @param {boolean} [options.licensed] Use licensed data instead of open data see https://developer.mapquest.com/documentation/open/
    */
-  constructor (adapter, options = {}) {
+  constructor (adapter, options = { apiKey: '' }) {
+    // @ts-ignore
     super(adapter, options)
 
     const { apiKey, licensed, limit: maxResults, ...params } = options
@@ -63,7 +66,7 @@ export class MapQuestGeocoder extends AbstractGeocoder {
   async _forward (query) {
     let params = { ...this.params, location: query }
 
-    if (query.address) {
+    if (typeof query !== 'string' && query.address) {
       const { address, limit, ...other } = query
       params = { ...params, ...other, location: address, maxResults: limit }
     }
@@ -75,7 +78,7 @@ export class MapQuestGeocoder extends AbstractGeocoder {
 
     const res = await this.adapter(url)
     if (res.status !== 200) {
-      throw new HttpError(res)
+      throw HttpError(res)
     }
     const result = await res.json()
     if (!Array.isArray(result?.results?.[0]?.locations)) {
@@ -87,7 +90,7 @@ export class MapQuestGeocoder extends AbstractGeocoder {
   }
 
   /**
-   * @param {string|MapQuestReverseQuery} query
+   * @param {MapQuestReverseQuery} query
    * @returns {Promise<object>}
    */
   async _reverse (query) {
@@ -106,7 +109,7 @@ export class MapQuestGeocoder extends AbstractGeocoder {
 
     const res = await this.adapter(url)
     if (res.status !== 200) {
-      throw new HttpError(res)
+      throw HttpError(res)
     }
     const result = await res.json()
     if (!Array.isArray(result?.results?.[0]?.locations)) {

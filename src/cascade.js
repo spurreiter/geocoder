@@ -1,6 +1,16 @@
 import { CircuitBreaker } from './circuitbreaker.js'
 
+/** @typedef {import('./geocoder/abstract').AbstractGeocoder} AbstractGeocoder */
+/** @typedef {import('./types').CascadeOptions} CascadeOptions */
+/** @typedef {import('./types').ForwardQuery} ForwardQuery */
+/** @typedef {import('./types').ReverseQuery} ReverseQuery */
+/** @typedef {import('./types').GeocoderResult} GeocoderResult */
+
 export class Cascade {
+  /**
+   * @param {AbstractGeocoder[]} geocoders
+   * @param {CascadeOptions} options
+   */
   constructor (geocoders, options = {}) {
     const { addProvider = true, ...options1 } = options
     this.coders = geocoders.map(geocoder => new CircuitBreaker(geocoder, options1))
@@ -25,10 +35,18 @@ export class Cascade {
     throw new Error('all geocoders offline')
   }
 
+  /**
+   * @param {ForwardQuery} query
+   * @returns {Promise<GeocoderResult[]>}
+   */
   async forward (query) {
     return this._method(query, 'forward')
   }
 
+  /**
+   * @param {ReverseQuery} query
+   * @returns {Promise<GeocoderResult[]>}
+   */
   async reverse (query) {
     return this._method(query, 'reverse')
   }

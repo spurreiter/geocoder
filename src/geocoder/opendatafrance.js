@@ -1,6 +1,8 @@
 import { AbstractGeocoder } from './abstract.js'
 import { HttpError } from '../utils/index.js'
 
+/** @typedef {import('../adapter').fetchAdapterFn} fetchAdapterFn */
+
 /**
  * see https://geo.api.gouv.fr/adresse
  * @typedef {object} OpendataFranceForwardQuery
@@ -21,14 +23,16 @@ export class OpendataFranceGeocoder extends AbstractGeocoder {
    * available options
    * @see https://api.gouv.fr/les-api/base-adresse-nationale
    * @see https://geo.api.gouv.fr/adresse
-   * @param {function} adapter
-   * @param {object} options
-   * @param {string} options.apiKey
+   * @param {fetchAdapterFn} adapter
+   * @param {object} [options]
    * @param {number} [options.limit]
+   * @param {string} [options.language]
    */
   constructor (adapter, options = {}) {
+    // @ts-ignore
     super(adapter, options)
 
+    // @ts-ignore
     const { apiKey, language, ...params } = options
 
     this.params = params
@@ -49,7 +53,8 @@ export class OpendataFranceGeocoder extends AbstractGeocoder {
   async _forward (query) {
     let params = { ...this.params, q: query }
 
-    if (query.address) {
+    if (typeof query !== 'string' && query.address) {
+      // @ts-ignore
       const { address, language, ...other } = query
       params = { ...params, ...other, q: address }
     }
@@ -61,7 +66,7 @@ export class OpendataFranceGeocoder extends AbstractGeocoder {
 
     const res = await this.adapter(url)
     if (res.status !== 200) {
-      throw new HttpError(res)
+      throw HttpError(res)
     }
     const result = await res.json()
     if (!result?.features) {
@@ -76,6 +81,7 @@ export class OpendataFranceGeocoder extends AbstractGeocoder {
    * @returns {Promise<object>}
    */
   async _reverse (query) {
+    // @ts-ignore
     const { lat, lng: lon, language, ...other } = query
     const params = { ...this.params, ...other, lon, lat }
 
@@ -86,7 +92,7 @@ export class OpendataFranceGeocoder extends AbstractGeocoder {
 
     const res = await this.adapter(url)
     if (res.status !== 200) {
-      throw new HttpError(res)
+      throw HttpError(res)
     }
     const result = await res.json()
     if (!result?.features) {

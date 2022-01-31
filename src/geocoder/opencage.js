@@ -1,6 +1,8 @@
 import { AbstractGeocoder } from './abstract.js'
 import { HttpError, toUpperCase } from '../utils/index.js'
 
+/** @typedef {import('../adapter').fetchAdapterFn} fetchAdapterFn */
+
 /**
  * @typedef {object} OpenCageForwardQuery
  * @property {string} address -
@@ -41,7 +43,7 @@ export class OpenCageGeocoder extends AbstractGeocoder {
   /**
    * available options
    * @see https://opencagedata.com/api#quickstart
-   * @param {function} adapter
+   * @param {fetchAdapterFn} adapter
    * @param {object} options
    * @param {string} options.apiKey
    * @param {number} [options.limit=10]
@@ -49,10 +51,11 @@ export class OpenCageGeocoder extends AbstractGeocoder {
    * @param {number} [options.abbrv]
    * @param {number} [options.roadinfo]
    */
-  constructor (adapter, options = {}) {
+  constructor (adapter, options = { apiKey: '' }) {
+    // @ts-ignore
     super(adapter, options)
 
-    const { apiKey, params } = options
+    const { apiKey, ...params } = options
 
     if (!apiKey) {
       throw new Error(`You must specify apiKey to use ${this.constructor.name}`)
@@ -72,7 +75,7 @@ export class OpenCageGeocoder extends AbstractGeocoder {
   async _forward (query) {
     let params = { ...this.params, q: query }
 
-    if (query.address) {
+    if (typeof query !== 'string' && query.address) {
       const { address, ...other } = query
       params = { ...params, ...other, q: address }
     }
@@ -84,7 +87,7 @@ export class OpenCageGeocoder extends AbstractGeocoder {
 
     const res = await this.adapter(url)
     if (res.status !== 200) {
-      throw new HttpError(res)
+      throw HttpError(res)
     }
     const result = await res.json()
     if (!result?.results?.length) {
@@ -96,7 +99,7 @@ export class OpenCageGeocoder extends AbstractGeocoder {
   }
 
   /**
-   * @param {string|OpenCageReverseQuery} query
+   * @param {OpenCageReverseQuery} query
    * @returns {Promise<object>}
    */
   async _reverse (query) {
@@ -110,7 +113,7 @@ export class OpenCageGeocoder extends AbstractGeocoder {
 
     const res = await this.adapter(url)
     if (res.status !== 200) {
-      throw new HttpError(res)
+      throw HttpError(res)
     }
     const result = await res.json()
     if (!result?.results?.length) {

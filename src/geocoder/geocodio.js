@@ -1,6 +1,8 @@
 import { AbstractGeocoder } from './abstract.js'
 import { HttpError, countryName } from '../utils/index.js'
 
+/** @typedef {import('../adapter').fetchAdapterFn} fetchAdapterFn */
+
 /**
  * see https://www.geocod.io/docs/#single-address
  * @typedef {object} GeocodioForwardQuery
@@ -26,13 +28,14 @@ export class GeocodioGeocoder extends AbstractGeocoder {
   /**
    * available options
    * @see https://www.geocod.io/features/api/
-   * @param {function} adapter
+   * @param {fetchAdapterFn} adapter
    * @param {object} options
    * @param {string} options.apiKey
-   * @param {string} [language]
+   * @param {string} [options.language]
    * @param {number} [options.limit]
    */
-  constructor (adapter, options = {}) {
+  constructor (adapter, options = { apiKey: '' }) {
+    // @ts-ignore
     super(adapter, options)
 
     const { apiKey, language, ...params } = options
@@ -63,7 +66,7 @@ export class GeocodioGeocoder extends AbstractGeocoder {
   async _forward (query) {
     let params = { ...this.params, q: query }
 
-    if (query.address) {
+    if (typeof query !== 'string' && query.address) {
       const { address, language, ...other } = query
       params = { ...params, ...other, q: address }
     }
@@ -76,7 +79,7 @@ export class GeocodioGeocoder extends AbstractGeocoder {
     const res = await this.adapter(url)
     const result = await res.json()
     if (res.status !== 200 && res.status !== 422) {
-      throw new HttpError(res)
+      throw HttpError(res)
     }
     if (!result?.results) {
       return this.wrapRaw([], result)
@@ -86,7 +89,6 @@ export class GeocodioGeocoder extends AbstractGeocoder {
   }
 
   /**
-   * @see
    * @param {GeocodioReverseQuery} query
    * @returns {Promise<object>}
    */
@@ -101,7 +103,7 @@ export class GeocodioGeocoder extends AbstractGeocoder {
 
     const res = await this.adapter(url)
     if (res.status !== 200 && res.status !== 422) {
-      throw new HttpError(res)
+      throw HttpError(res)
     }
     const result = await res.json()
     if (!result?.results) {

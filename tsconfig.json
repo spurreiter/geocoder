@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "checkJs": true,
+    "declaration": true,
+    "declarationDir": "types",
+    "moduleResolution": "node",
+    "noImplicitAny": false,
+    "strict": true,
+    "target": "ES2021"
+  },
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "coverage",
+    "lib",
+    "node_modules",
+    "test"
+  ]
+}

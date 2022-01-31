@@ -1,6 +1,8 @@
 import { AbstractGeocoder } from './abstract.js'
 import { HttpError } from '../utils/index.js'
 
+/** @typedef {import('../adapter').fetchAdapterFn} fetchAdapterFn */
+
 /**
  * @typedef {object} MapBoxForwardQuery
  * @property {string} address -
@@ -28,13 +30,14 @@ export class MapBoxGeocoder extends AbstractGeocoder {
   /**
    * available options
    * @see https://docs.mapbox.com/api/search/geocoding/
-   * @param {function} adapter
+   * @param {fetchAdapterFn} adapter
    * @param {object} options
    * @param {string} options.apiKey
    * @param {number} [options.limit=5]
    * @param {string} [options.language]
    */
-  constructor (adapter, options = {}) {
+  constructor (adapter, options = { apiKey: '' }) {
+    // @ts-ignore
     super(adapter, options)
 
     const { apiKey, ...params } = options
@@ -43,6 +46,7 @@ export class MapBoxGeocoder extends AbstractGeocoder {
       throw new Error(`You must specify apiKey to use ${this.constructor.name}`)
     }
 
+    // @ts-ignore
     params.access_token = apiKey
     this.params = params
   }
@@ -59,20 +63,20 @@ export class MapBoxGeocoder extends AbstractGeocoder {
     let params = this.params
     let searchtext = query
 
-    if (query.address) {
+    if (typeof query !== 'string' && query.address) {
       const { address, ...other } = query
       searchtext = address
       params = { ...params, ...other }
     }
 
     const url = this.createUrl(
-      `${this.endpoint}/${encodeURIComponent(searchtext)}.json`,
+      `${this.endpoint}/${encodeURIComponent(String(searchtext))}.json`,
       params
     )
 
     const res = await this.adapter(url)
     if (res.status !== 200) {
-      throw new HttpError(res)
+      throw HttpError(res)
     }
     const result = await res.json()
     if (!result?.features) {
@@ -83,7 +87,7 @@ export class MapBoxGeocoder extends AbstractGeocoder {
   }
 
   /**
-   * @param {string|MapBoxReverseQuery} query
+   * @param {MapBoxReverseQuery} query
    * @returns {Promise<object>}
    */
   async _reverse (query) {
@@ -97,7 +101,7 @@ export class MapBoxGeocoder extends AbstractGeocoder {
 
     const res = await this.adapter(url)
     if (res.status !== 200) {
-      throw new HttpError(res)
+      throw HttpError(res)
     }
     const result = await res.json()
     if (!result?.features) {

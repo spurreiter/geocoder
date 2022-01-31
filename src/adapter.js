@@ -1,6 +1,11 @@
 import got from 'got'
+// @ts-ignore
 import HttpAgent from 'agentkeepalive'
+import { isNumber } from './utils/index.js'
 const { HttpsAgent } = HttpAgent
+
+/** @typedef {import('./types').AdapterOptions} AdapterOptions */
+/** @typedef {import('./types').fetchAdapterFn} fetchAdapterFn */
 
 const USER_AGENT = 'user-agent'
 
@@ -11,6 +16,10 @@ const logger = (r) => {
 }
 /* eslint-enable */
 
+/**
+ * @param {AdapterOptions} [opts]
+ * @returns {fetchAdapterFn}
+ */
 export function fetchAdapter (opts) {
   const globalOpts = {
     agent: {
@@ -30,6 +39,7 @@ export function fetchAdapter (opts) {
 
   return (url, options = {}) => {
     if (typeof url === 'object') {
+      // @ts-ignore
       const { url: _url, ...other } = url
       url = _url
       options = other
@@ -37,15 +47,32 @@ export function fetchAdapter (opts) {
 
     const headers = { ...globalOpts.headers, ...options.headers }
     const opts = { ...globalOpts, ...options, headers }
+    if (isNumber(opts.timeout)) {
+      opts.timeout = { request: opts.timeout }
+    }
+    if (isNumber(opts.retry)) {
+      opts.retry = { limit: opts.retry }
+    }
+
     // console.log(url, opts)
+    // @ts-ignore
     return got(url, opts)
+      // @ts-ignore
       .then((res) => new Response(res))
       // .then(logger)
   }
 }
 
-class Response {
-  constructor ({ statusCode, statusMessage, redirectUrls, headers, body }) {
+export class Response {
+  /**
+   * @param {object} param0
+   * @param {number} param0.statusCode
+   * @param {string} param0.statusMessage
+   * @param {any[]} [param0.redirectUrls]
+   * @param {object} param0.headers
+   * @param {object} param0.body
+   */
+  constructor ({ statusCode, statusMessage, redirectUrls, headers, body, ...others }) {
     this.status = statusCode
     this.statusText = statusMessage
     this.headers = headers

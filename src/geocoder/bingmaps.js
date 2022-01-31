@@ -1,6 +1,8 @@
 import { AbstractGeocoder } from './abstract.js'
 import { HttpError } from '../utils/index.js'
 
+/** @typedef {import('../adapter').fetchAdapterFn} fetchAdapterFn */
+
 const hasResult = (result) => {
   const { statusCode, resourceSets } = result || {}
   return statusCode === 200 && Array.isArray(resourceSets)
@@ -23,6 +25,7 @@ function toBbox (boundingbox) {
  * @typedef {object} BingMapsForwardQuery
  * @property {string} address
  * @property {number} [limit]
+ * @property {string} [language]
  */
 
 /**
@@ -31,18 +34,21 @@ function toBbox (boundingbox) {
  * @property {number} lat latitude
  * @property {number} lng longitude
  * @property {number} [limit]
+ * @property {string} [language]
  */
 
 export class BingMapsGeocoder extends AbstractGeocoder {
   /**
    * available options
    * @see https://docs.microsoft.com/en-us/bingmaps/rest-services/
-   * @param {function} adapter
+   * @param {fetchAdapterFn} adapter
    * @param {object} options
    * @param {string} options.apiKey
-   * @param {number} [limit]
+   * @param {number} [options.limit]
+   * @param {string} [options.language]
    */
-  constructor (adapter, options = {}) {
+  constructor (adapter, options = { apiKey: '' }) {
+    // @ts-ignore
     super(adapter, options)
 
     const { apiKey, limit: maxResults, language, ...params } = options
@@ -65,19 +71,14 @@ export class BingMapsGeocoder extends AbstractGeocoder {
   }
 
   /**
-   * @param {string|BingMapsForwardQuery} query
+   * @param {BingMapsForwardQuery|string} query
    * @returns {Promise<object>}
    */
   async _forward (query = '') {
     let params = { ...this.params, q: query }
 
-    if (query.address) {
-      const {
-        address: q,
-        limit: maxResults,
-        language,
-        ...other
-      } = query
+    if (typeof query !== 'string' && query.address) {
+      const { address: q, limit: maxResults, language, ...other } = query
       params = { ...params, ...other, q, maxResults }
     }
 
@@ -88,7 +89,7 @@ export class BingMapsGeocoder extends AbstractGeocoder {
 
     const res = await this.adapter(url)
     if (res.status !== 200) {
-      throw new HttpError(res)
+      throw HttpError(res)
     }
     const result = await res.json()
     // console.dir(result, { depth: null })
@@ -100,7 +101,7 @@ export class BingMapsGeocoder extends AbstractGeocoder {
   }
 
   /**
-   * @param {string|BingMapsReverseQuery} query
+   * @param {BingMapsReverseQuery} query
    * @returns {Promise<object>}
    */
   async _reverse (query) {
@@ -118,7 +119,7 @@ export class BingMapsGeocoder extends AbstractGeocoder {
 
     const res = await this.adapter(url)
     if (res.status !== 200) {
-      throw new HttpError(res)
+      throw HttpError(res)
     }
     const result = await res.json()
     // console.dir(result, { depth: null })

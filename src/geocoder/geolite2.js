@@ -1,6 +1,8 @@
 import { AbstractGeocoder } from './abstract.js'
 import { HttpError, objToCamelCase } from '../utils/index.js'
 
+/** @typedef {import('../adapter').fetchAdapterFn} fetchAdapterFn */
+
 function hasResult (result) {
   return result && !!result.location
 }
@@ -18,13 +20,15 @@ function hasResult (result) {
 export class GeoLite2Geocoder extends AbstractGeocoder {
   /**
    * available options
-   * @param {function} adapter
+   * @param {fetchAdapterFn} adapter
    * @param {object} options
-   * @param {string} [options.endpoint=https://geolite.info/geoip/v2.1/city]
+   * @param {string} [options.endpoint='https://geolite.info/geoip/v2.1/city']
    * @param {string} [options.accountId] MaxMind account ID
    * @param {string} [options.apiKey] MaxMind license key
+   * @param {string} [options.language]
    */
   constructor (adapter, options = {}) {
+    // @ts-ignore
     super(adapter, options)
 
     const {
@@ -56,7 +60,7 @@ export class GeoLite2Geocoder extends AbstractGeocoder {
     let params = this.params
     let searchtext = query
 
-    if (query.address) {
+    if (typeof query !== 'string' && query.address) {
       const { address, ...other } = query
       searchtext = address
       params = { ...params, ...other }
@@ -71,7 +75,7 @@ export class GeoLite2Geocoder extends AbstractGeocoder {
 
     const res = await this.adapter(url, this.opts)
     if (res.status !== 200) {
-      throw new HttpError(res)
+      throw HttpError(res)
     }
     const result = await res.json()
     if (!hasResult(result)) {

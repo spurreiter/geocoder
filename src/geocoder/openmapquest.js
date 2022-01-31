@@ -1,5 +1,7 @@
 import { OsmGeocoder } from './osm.js'
 
+/** @typedef {import('../adapter').fetchAdapterFn} fetchAdapterFn */
+
 /**
  * see https://developer.mapquest.com/documentation/open/nominatim-search/search/
  * @typedef {object} OpenMapQuestForwardQuery
@@ -28,13 +30,13 @@ export class OpenMapQuestGeocoder extends OsmGeocoder {
   /**
    * available options
    * @see https://developer.mapquest.com/documentation/open/nominatim-search/
-   * @param {function} adapter
+   * @param {fetchAdapterFn} adapter
    * @param {object} options
-   * @param {string} options.apiKey
+   * @param {string} options.apiKey MapQuest API Key
    * @param {number} [options.limit=10]
    * @param {string} [options.language]
    */
-  constructor (adapter, options = {}) {
+  constructor (adapter, options = { apiKey: '' }) {
     super(adapter, options)
 
     const { apiKey, ...params } = options

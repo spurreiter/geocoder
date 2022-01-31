@@ -1,6 +1,8 @@
 import { AbstractGeocoder } from './abstract.js'
 import { HttpError } from '../utils/index.js'
 
+/** @typedef {import('../adapter').fetchAdapterFn} fetchAdapterFn */
+
 /**
  * @see https://yandex.com/dev/maps/geocoder/doc/desc/concepts/input_params.html
  * @typedef {object} YandexForwardQuery
@@ -22,14 +24,16 @@ export class YandexGeocoder extends AbstractGeocoder {
   /**
    * available options
    * @see https://yandex.com/dev/maps/geocoder/doc/desc/concepts/input_params.html
-   * @param {function} adapter
+   * @param {fetchAdapterFn} adapter
    * @param {object} options
    * @param {string} options.apiKey
    * @param {string} [options.language]
    */
-  constructor (adapter, options = {}) {
+  constructor (adapter, options = { apiKey: '' }) {
+    // @ts-ignore
     super(adapter, options)
 
+    // @ts-ignore
     const { apiKey, limit, ...params } = options
 
     if (!apiKey) {
@@ -54,7 +58,8 @@ export class YandexGeocoder extends AbstractGeocoder {
   async _forward (query) {
     let params = { ...this.params, geocode: query }
 
-    if (query.address) {
+    if (typeof query !== 'string' && query.address) {
+      // @ts-ignore
       const { address, limit, ...other } = query
       params = { ...params, ...other, geocode: address }
     }
@@ -66,7 +71,7 @@ export class YandexGeocoder extends AbstractGeocoder {
 
     const res = await this.adapter(url)
     if (res.status !== 200) {
-      throw new HttpError(res)
+      throw HttpError(res)
     }
     const result = await res.json()
     if (!result?.response?.GeoObjectCollection?.featureMember) {
@@ -81,6 +86,7 @@ export class YandexGeocoder extends AbstractGeocoder {
    * @returns {Promise<object>}
    */
   async _reverse (query) {
+    // @ts-ignore
     const { lat, lng, limit, ...other } = query
     const params = { ...this.params, ...other, geocode: `${lng},${lat}` }
 
@@ -91,7 +97,7 @@ export class YandexGeocoder extends AbstractGeocoder {
 
     const res = await this.adapter(url)
     if (res.status !== 200) {
-      throw new HttpError(res)
+      throw HttpError(res)
     }
     const result = await res.json()
     if (!result?.response?.GeoObjectCollection?.featureMember) {
