@@ -257,5 +257,19 @@ export const fixtures = {
         }
       }
     ]
+  },
+  forward: {
+    ip: '66.249.64.0',
+    latitude: 37.751,
+    longitude: -97.822,
+    countryCode: 'US',
+    country: 'United States',
+    extra: {
+      id: 6252001,
+      accuracyRadius: 1000,
+      isInEuropeanUnion: undefined,
+      timeZone: 'America/Chicago',
+      network: '66.249.64.0/22'
+    }
   }
 }

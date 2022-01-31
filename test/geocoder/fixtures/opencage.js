@@ -455,5 +455,33 @@ export const fixtures = {
         extra: { confidence: 1, confidenceKm: 0.25 }
       }
     ]
+  },
+  forward: {
+    formattedAddress: 'Paris 08 Élysée, Paris, France',
+    latitude: 48.8763,
+    longitude: 2.3183,
+    country: 'France',
+    countryCode: 'FR',
+    state: 'Île-de-France',
+    county: 'Paris',
+    city: 'Paris 08 Élysée',
+    zipcode: undefined,
+    streetName: undefined,
+    streetNumber: undefined,
+    extra: { confidence: 0.7, confidenceKm: 5 }
+  },
+  reverse: {
+    formattedAddress: '279 Bedford Avenue, New York, NY 11211, United States of America',
+    latitude: 40.714205,
+    longitude: -73.9613152,
+    country: 'United States',
+    countryCode: 'US',
+    state: 'New York',
+    county: 'Kings County',
+    city: 'New York',
+    zipcode: '11211',
+    streetName: 'Bedford Avenue',
+    streetNumber: '279',
+    extra: { confidence: 1, confidenceKm: 0.25 }
   }
 }

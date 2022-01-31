@@ -1,7 +1,8 @@
 import assert from 'assert'
 import sinon from 'sinon'
-import { GeoLite2Geocoder } from '../../src/geocoder/index.js'
+import { GeoLite2Geocoder, fetchAdapter } from '../../src/index.js'
 import { fixtures } from './fixtures/geolite2.js'
+import { itWithApiKey } from './helper.js'
 
 describe('GeoLite2Geocoder', function () {
   const options = {
@@ -17,8 +18,8 @@ describe('GeoLite2Geocoder', function () {
     })
 
     it('is an instance of GeoLite2Geocoder', () => {
-      const adapter = new GeoLite2Geocoder(mockedAdapter, options)
-      assert.ok(adapter instanceof GeoLite2Geocoder)
+      const geocoder = new GeoLite2Geocoder(mockedAdapter, options)
+      assert.ok(geocoder instanceof GeoLite2Geocoder)
     })
   })
 
@@ -31,8 +32,8 @@ describe('GeoLite2Geocoder', function () {
         })
       )
 
-      const adapter = new GeoLite2Geocoder(mockedAdapter, options)
-      const results = await adapter.forward('66.249.64.0')
+      const geocoder = new GeoLite2Geocoder(mockedAdapter, options)
+      const results = await geocoder.forward('66.249.64.0')
 
       assert.deepStrictEqual(results, [])
 
@@ -47,9 +48,9 @@ describe('GeoLite2Geocoder', function () {
         })
       )
 
-      const adapter = new GeoLite2Geocoder(mockedAdapter, options)
+      const geocoder = new GeoLite2Geocoder(mockedAdapter, options)
       try {
-        await adapter.forward('66.249.64.0')
+        await geocoder.forward('66.249.64.0')
         assert.ok(false, 'shall not reach here')
       } catch (e) {
         assert.strictEqual(e.status, 502)
@@ -69,8 +70,8 @@ describe('GeoLite2Geocoder', function () {
         })
       )
 
-      const adapter = new GeoLite2Geocoder(mockedAdapter, options)
-      const results = await adapter.forward(query)
+      const geocoder = new GeoLite2Geocoder(mockedAdapter, options)
+      const results = await geocoder.forward(query)
 
       assert.deepStrictEqual(results, expResults)
       sinon.assert.calledOnceWithExactly(mockedAdapter, expUrl, undefined)
@@ -89,8 +90,8 @@ describe('GeoLite2Geocoder', function () {
         })
       )
 
-      const adapter = new GeoLite2Geocoder(mockedAdapter, { accountId: '11111', apiKey: 'apikey' })
-      const results = await adapter.forward({ address: query })
+      const geocoder = new GeoLite2Geocoder(mockedAdapter, { accountId: '11111', apiKey: 'apikey' })
+      const results = await geocoder.forward({ address: query })
 
       assert.deepStrictEqual(results, expResults)
       sinon.assert.calledOnceWithExactly(mockedAdapter, expUrl, { headers: { authorization: 'Basic MTExMTE6YXBpa2V5' } })
@@ -106,12 +107,39 @@ describe('GeoLite2Geocoder', function () {
         })
       )
 
-      const adapter = new GeoLite2Geocoder(mockedAdapter, options)
+      const geocoder = new GeoLite2Geocoder(mockedAdapter, options)
       try {
-        await adapter.reverse({ lat: 40.714232, lon: -73.9612889 })
+        await geocoder.reverse({ lat: 40.714232, lon: -73.9612889 })
         assert.ok(false, 'shall not reach here')
       } catch (e) {
         assert.strictEqual(e.message, 'GeoLite2Geocoder does not support reverse geocoding')
+      }
+    })
+  })
+
+  describe('call api', () => {
+    const { MAXMIND_ACCOUNT_ID: accountId, MAXMIND_APIKEY: apiKey, SHOW_LOG } = process.env
+    let geocoder
+
+    before(function () {
+      geocoder = apiKey && accountId && new GeoLite2Geocoder(fetchAdapter(), { apiKey, accountId })
+    })
+
+    itWithApiKey(apiKey, 'should call forward api', async function () {
+      const query = '66.249.64.0'
+      const results = await geocoder.forward(query)
+      // eslint-disable-next-line no-console
+      if (SHOW_LOG) console.dir(results[0], { depth: null })
+      assert.deepStrictEqual(fixtures.forward, results[0])
+    })
+
+    itWithApiKey(apiKey, 'should not call reverse api', async function () {
+      const query = '40.714232,-73.9612889'
+      try {
+        await geocoder.reverse(query)
+        throw new Error('bad')
+      } catch (err) {
+        assert.strictEqual(err.message, 'GeoLite2Geocoder does not support reverse geocoding')
       }
     })
   })

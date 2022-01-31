@@ -959,5 +959,40 @@ export const fixtures = {
         extra: { plusCode: 'P27Q+MF', confidence: 1 }
       }
     ]
+  },
+  forward: {
+    formattedAddress: '1 Av. des Champs-Élysées, 75008 Paris, France',
+    latitude: 48.86988770000001,
+    longitude: 2.3079341,
+    country: 'France',
+    countryCode: 'FR',
+    state: 'Île-de-France',
+    region: 'Département de Paris',
+    district: undefined,
+    city: 'Paris',
+    zipcode: '75008',
+    streetName: 'Avenue des Champs-Élysées',
+    streetNumber: '1',
+    extra: { confidence: 1 }
+  },
+  reverse: {
+    formattedAddress: '277 Bedford Ave, Brooklyn, NY 11211, USA',
+    latitude: 40.7142205,
+    longitude: -73.9612903,
+    country: 'United States',
+    countryCode: 'US',
+    state: 'New York',
+    region: 'Kings County',
+    district: undefined,
+    city: undefined,
+    zipcode: '11211',
+    streetName: 'Bedford Avenue',
+    streetNumber: '277',
+    extra: {
+      neighborhood: 'Williamsburg',
+      sublocality: 'Brooklyn',
+      sublocalityLevel1: 'Brooklyn',
+      confidence: 1
+    }
   }
 }

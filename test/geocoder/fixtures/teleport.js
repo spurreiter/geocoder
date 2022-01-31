@@ -447,5 +447,37 @@ export const fixtures = {
         }
       }
     ]
+  },
+  forward: {
+    latitude: 48.85341,
+    longitude: 2.3488,
+    city: 'Paris',
+    country: 'France',
+    countryCode: 'FR',
+    state: 'Île-de-France',
+    stateCode: '11',
+    extra: {
+      urbanArea: 'Paris',
+      urbanAreaApiUrl: 'https://api.teleport.org/api/urban_areas/slug:paris/',
+      urbanAreaWebUrl: 'https://teleport.org/cities/paris/',
+      matchingFullName: 'Paris, Île-de-France, France'
+    }
+  },
+  reverse: {
+    latitude: 40.71427,
+    longitude: -74.00597,
+    city: 'New York City',
+    country: 'United States',
+    countryCode: 'US',
+    state: 'New York',
+    stateCode: 'NY',
+    extra: {
+      urbanArea: 'New York',
+      urbanAreaApiUrl: 'https://api.teleport.org/api/urban_areas/slug:new-york/',
+      urbanAreaWebUrl: 'https://teleport.org/cities/new-york/',
+      distanceKm: 3.7754433,
+      confidence: 8.48982268
+    }
   }
+
 }

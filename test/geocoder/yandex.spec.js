@@ -1,7 +1,8 @@
 import assert from 'assert'
 import sinon from 'sinon'
-import { YandexGeocoder } from '../../src/geocoder/index.js'
+import { YandexGeocoder, fetchAdapter } from '../../src/index.js'
 import { fixtures } from './fixtures/yandex.js'
+import { itWithApiKey } from './helper.js'
 
 describe('YandexGeocoder', function () {
   const options = { apiKey: 'apiKey' }
@@ -21,23 +22,23 @@ describe('YandexGeocoder', function () {
     })
 
     it('is an instance of YandexGeocoder', () => {
-      const adapter = new YandexGeocoder(mockedAdapter, options)
-      assert.ok(adapter instanceof YandexGeocoder)
+      const geocoder = new YandexGeocoder(mockedAdapter, options)
+      assert.ok(geocoder instanceof YandexGeocoder)
     })
   })
 
   describe('forward', () => {
     it('should not accept IPv4', () => {
-      const adapter = new YandexGeocoder(mockedAdapter, options)
+      const geocoder = new YandexGeocoder(mockedAdapter, options)
       assert.throws(() => {
-        adapter.forward('127.0.0.1')
+        geocoder.forward('127.0.0.1')
       }, /YandexGeocoder does not support geocoding IPv4/)
     })
 
     it('should not accept IPv6', () => {
-      const adapter = new YandexGeocoder(mockedAdapter, options)
+      const geocoder = new YandexGeocoder(mockedAdapter, options)
       assert.throws(() => {
-        adapter.forward('2001:0db8:0000:85a3:0000:0000:ac1f:8001')
+        geocoder.forward('2001:0db8:0000:85a3:0000:0000:ac1f:8001')
       }, /YandexGeocoder does not support geocoding IPv6/)
     })
 
@@ -49,8 +50,8 @@ describe('YandexGeocoder', function () {
         })
       )
 
-      const adapter = new YandexGeocoder(mockedAdapter, options)
-      const results = await adapter.forward('1 champs élysée Paris')
+      const geocoder = new YandexGeocoder(mockedAdapter, options)
+      const results = await geocoder.forward('1 champs élysée Paris')
 
       assert.deepStrictEqual(results, [])
 
@@ -65,8 +66,8 @@ describe('YandexGeocoder', function () {
         })
       )
 
-      const adapter = new YandexGeocoder(mockedAdapter, { ...options, language: 'en-ru' })
-      const results = await adapter.forward('1 champs élysée Paris')
+      const geocoder = new YandexGeocoder(mockedAdapter, { ...options, language: 'en-ru' })
+      const results = await geocoder.forward('1 champs élysée Paris')
 
       assert.deepStrictEqual(results, [])
 
@@ -81,9 +82,9 @@ describe('YandexGeocoder', function () {
         })
       )
 
-      const adapter = new YandexGeocoder(mockedAdapter, options)
+      const geocoder = new YandexGeocoder(mockedAdapter, options)
       try {
-        await adapter.forward('1 champs élysée Paris')
+        await geocoder.forward('1 champs élysée Paris')
         assert.ok(false, 'shall not reach here')
       } catch (e) {
         assert.strictEqual(e.status, 502)
@@ -102,8 +103,8 @@ describe('YandexGeocoder', function () {
         })
       )
 
-      const adapter = new YandexGeocoder(mockedAdapter, options)
-      const results = await adapter.forward(query)
+      const geocoder = new YandexGeocoder(mockedAdapter, options)
+      const results = await geocoder.forward(query)
 
       assert.deepStrictEqual(results, expResults)
       sinon.assert.calledOnceWithExactly(mockedAdapter, expUrl)
@@ -121,8 +122,8 @@ describe('YandexGeocoder', function () {
         })
       )
 
-      const adapter = new YandexGeocoder(mockedAdapter, options)
-      const results = await adapter.forward({ address: query })
+      const geocoder = new YandexGeocoder(mockedAdapter, options)
+      const results = await geocoder.forward({ address: query })
 
       assert.deepStrictEqual(results, expResults)
       sinon.assert.calledOnceWithExactly(mockedAdapter, expUrl)
@@ -138,8 +139,8 @@ describe('YandexGeocoder', function () {
         })
       )
 
-      const adapter = new YandexGeocoder(mockedAdapter, options)
-      const results = await adapter.reverse({ lat: 40.714232, lng: -73.9612889 })
+      const geocoder = new YandexGeocoder(mockedAdapter, options)
+      const results = await geocoder.reverse({ lat: 40.714232, lng: -73.9612889 })
 
       assert.deepStrictEqual(results, [])
       sinon.assert.calledOnceWithExactly(mockedAdapter, 'https://geocode-maps.yandex.ru/1.x?apikey=apiKey&format=json&geocode=-73.9612889%2C40.714232')
@@ -153,9 +154,9 @@ describe('YandexGeocoder', function () {
         })
       )
 
-      const adapter = new YandexGeocoder(mockedAdapter, options)
+      const geocoder = new YandexGeocoder(mockedAdapter, options)
       try {
-        await adapter.reverse({ lat: 40.714232, lon: -73.9612889 })
+        await geocoder.reverse({ lat: 40.714232, lon: -73.9612889 })
         assert.ok(false, 'shall not reach here')
       } catch (e) {
         assert.strictEqual(e.status, 502)
@@ -174,11 +175,36 @@ describe('YandexGeocoder', function () {
         })
       )
 
-      const adapter = new YandexGeocoder(mockedAdapter, options)
-      const results = await adapter.reverse(query)
+      const geocoder = new YandexGeocoder(mockedAdapter, options)
+      const results = await geocoder.reverse(query)
 
       assert.deepStrictEqual(results, expResults)
       sinon.assert.calledOnceWithExactly(mockedAdapter, expUrl)
+    })
+  })
+
+  describe('call api', () => {
+    const { YANDEX_APIKEY: apiKey, SHOW_LOG } = process.env
+    let geocoder
+
+    before(function () {
+      geocoder = apiKey && new YandexGeocoder(fetchAdapter(), { apiKey })
+    })
+
+    itWithApiKey(apiKey, 'should call forward api', async function () {
+      const query = '1 champs élysée Paris'
+      const results = await geocoder.forward(query)
+      // eslint-disable-next-line no-console
+      if (SHOW_LOG) console.dir(results[0], { depth: null })
+      assert.deepStrictEqual(fixtures.forward, results[0])
+    })
+
+    itWithApiKey(apiKey, 'should call reverse api', async function () {
+      const query = '40.714232,-73.9612889'
+      const results = await geocoder.reverse(query)
+      // eslint-disable-next-line no-console
+      if (SHOW_LOG) console.dir(results[0], { depth: null })
+      assert.deepStrictEqual(fixtures.reverse, results[0])
     })
   })
 })

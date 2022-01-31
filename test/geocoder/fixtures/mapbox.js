@@ -945,5 +945,43 @@ export const fixtures = {
         }
       }
     ]
+  },
+  forward: {
+    formattedAddress: '1 Rue Des Champs Élysées, 94250 Gentilly, France',
+    latitude: 48.816295,
+    longitude: 2.33955,
+    country: 'France',
+    countryCode: 'FR',
+    state: 'Paris',
+    city: 'Gentilly',
+    zipcode: '94250',
+    district: undefined,
+    streetName: 'Rue Des Champs Élysées',
+    streetNumber: '1',
+    neighbourhood: 'Plateau',
+    extra: {
+      id: 'address.8413593260702956',
+      category: undefined,
+      bbox: undefined
+    }
+  },
+  reverse: {
+    formattedAddress: '277 Bedford Avenue, Brooklyn, New York 11211, United States',
+    latitude: 40.71426,
+    longitude: -73.9613,
+    country: 'United States',
+    countryCode: 'US',
+    state: 'New York',
+    city: 'New York',
+    zipcode: '11211',
+    district: 'Kings County',
+    streetName: 'Bedford Avenue',
+    streetNumber: '277',
+    neighbourhood: 'Williamsburg',
+    extra: {
+      id: 'address.4999443678706686',
+      category: undefined,
+      bbox: undefined
+    }
   }
 }

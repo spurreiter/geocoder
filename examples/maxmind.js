@@ -4,8 +4,8 @@ import { fetchAdapter, GeoLite2Geocoder } from '../src/index.js'
 
 dotenv.config()
 
-const { FORWARD, LANGUAGE, MAXMIND_ACCOUNT_ID, MAXMIND_APIKEY } = process.env
-const { forward, ...other } = argv({ forward: FORWARD })
+const { FORWARD_IP, LANGUAGE, MAXMIND_ACCOUNT_ID, MAXMIND_APIKEY } = process.env
+const { forward, ...other } = argv({ forward: FORWARD_IP })
 
 const adapter = fetchAdapter()
 const geocoder = new GeoLite2Geocoder(adapter, {

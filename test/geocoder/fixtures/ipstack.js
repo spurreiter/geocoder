@@ -102,5 +102,16 @@ export const fixtures = {
       }
     },
     expResults: []
+  },
+  forward: {
+    ip: '66.249.64.0',
+    latitude: 33.70851135253906,
+    longitude: -116.98120880126953,
+    countryCode: 'US',
+    country: 'United States',
+    regionCode: 'CA',
+    regionName: 'California',
+    city: 'Hemet',
+    zipcode: '92543'
   }
 }

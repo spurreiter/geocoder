@@ -99,27 +99,27 @@ export const fixtures = {
     ]
   },
   forward: {
-    formattedAddress: 'Métro 1, Avenue des Champs-Élysées, Quartier des Champs-Élysées, Paris 8e Arrondissement, Paris, Île-de-France, France métropolitaine, 75008, France',
-    latitude: 48.8665916,
-    longitude: 2.3176863,
+    formattedAddress: 'Avenue des Champs-Élysées, Quartier du Faubourg-du-Roule, Paris 8e Arrondissement, Paris, Île-de-France, France métropolitaine, 75008, France',
+    latitude: 48.8723626,
+    longitude: 2.2994954,
     country: 'France',
     countryCode: 'FR',
     state: 'Île-de-France',
-    county: 'Paris',
-    city: undefined,
+    county: 'France métropolitaine',
+    city: 'Paris',
     zipcode: '75008',
     district: undefined,
     streetName: 'Avenue des Champs-Élysées',
     streetNumber: undefined,
     neighbourhood: undefined,
     extra: {
-      id: 531017858,
-      confidence: 0.511,
-      bbox: [2.3153244, 48.8660612, 2.3194238, 48.8673226]
+      id: 626668696,
+      confidence: 0.51,
+      bbox: [2.2984875, 48.8720589, 2.3004545, 48.8726837]
     }
   },
   reverse: {
-    formattedAddress: '279, Bedford Avenue, Williamsburg, Brooklyn, New York, 11211, United States',
+    formattedAddress: '279, Bedford Avenue, Williamsburg, Brooklyn, Kings County, New York, 11211, United States',
     latitude: 40.714205,
     longitude: -73.96131519274765,
     country: 'United States',

@@ -304,5 +304,33 @@ export const fixtures = {
         streetNumber: '23'
       }
     ]
+  },
+  forward: {
+    formattedAddress: 'Avenue des Champs Elysées 75008 Paris',
+    latitude: 48.871285,
+    longitude: 2.302859,
+    country: 'France',
+    countryCode: 'FR',
+    state: '75, Paris, Île-de-France',
+    city: 'Paris',
+    zipcode: '75008',
+    citycode: '75108',
+    extra: { id: '75108_1733', confidence: 0.565457184750733 },
+    streetName: 'Avenue des Champs Elysées'
+  },
+  reverse: {
+    formattedAddress: '12 Place Saint-Etienne 57000 Metz',
+    latitude: 49.120295,
+    longitude: 6.175231,
+    country: 'France',
+    countryCode: 'FR',
+    state: '57, Moselle, Grand Est',
+    city: 'Metz',
+    zipcode: '57000',
+    citycode: '57463',
+    extra: { id: '57463_5920_00012', confidence: 0.9999997242304688 },
+    streetName: 'Place Saint-Etienne',
+    streetNumber: '12'
   }
+
 }
