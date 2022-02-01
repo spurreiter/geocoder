@@ -1,6 +1,8 @@
 import { AbstractGeocoder } from './abstract.js'
 import { HttpError, toUpperCase } from '../utils/index.js'
 
+/** @typedef {import('../adapter').fetchAdapterFn} fetchAdapterFn */
+
 const ACCEPT_LANGUAGE = 'accept-language'
 
 function mapParams (params) {
@@ -57,7 +59,7 @@ export class OsmGeocoder extends AbstractGeocoder {
   /**
    * available options
    * @see https://nominatim.org/release-docs/develop/api/Search/
-   * @param {function} adapter
+   * @param {fetchAdapterFn} adapter
    * @param {object} options
    * @param {number} [options.limit=10]
    * @param {string} [options.language]
@@ -70,11 +72,13 @@ export class OsmGeocoder extends AbstractGeocoder {
    * @param {string} [options.revEndpoint] custom reverse endpoint
    */
   constructor (adapter, options = {}) {
+    // @ts-ignore
     super(adapter, options)
 
     const {
       endpoint = 'https://nominatim.openstreetmap.org/search',
       revEndpoint = 'https://nominatim.openstreetmap.org/reverse',
+      // @ts-ignore
       apiKey,
       ...params
     } = options
@@ -96,7 +100,7 @@ export class OsmGeocoder extends AbstractGeocoder {
   async _forward (query) {
     let params = { ...this.params, q: query }
 
-    if (query.address) {
+    if (typeof query !== 'string' && query.address) {
       const { address, ...other } = query
       params = { ...params, ...other, q: address }
     }
@@ -106,7 +110,7 @@ export class OsmGeocoder extends AbstractGeocoder {
 
     const res = await this.adapter(url)
     if (res.status !== 200) {
-      throw new HttpError(res)
+      throw HttpError(res)
     }
     const result = await res.json()
     if (!hasResult(result)) {
@@ -117,7 +121,7 @@ export class OsmGeocoder extends AbstractGeocoder {
   }
 
   /**
-   * @param {string|OsmReverseQuery} query
+   * @param {OsmReverseQuery} query
    * @returns {Promise<object>}
    */
   async _reverse (query) {
@@ -128,7 +132,7 @@ export class OsmGeocoder extends AbstractGeocoder {
 
     const res = await this.adapter(url)
     if (res.status !== 200) {
-      throw new HttpError(res)
+      throw HttpError(res)
     }
     const result = await res.json()
     if (!hasResult(result)) {

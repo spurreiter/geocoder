@@ -1,6 +1,8 @@
 import { AbstractGeocoder } from './abstract.js'
 import { HttpError, countryCode } from '../utils/index.js'
 
+/** @typedef {import('../adapter').fetchAdapterFn} fetchAdapterFn */
+
 /**
  * @typedef {object} HereForwardQuery
  * @property {string} address
@@ -28,13 +30,14 @@ export class HereGeocoder extends AbstractGeocoder {
   /**
    * available options
    * @see https://developer.here.com/documentation/geocoding-search-api/dev_guide/index.html
-   * @param {function} adapter
+   * @param {fetchAdapterFn} adapter
    * @param {object} options
    * @param {string} options.apiKey
-   * @param {string} [language]
+   * @param {string} [options.language]
    * @param {number} [options.limit]
    */
-  constructor (adapter, options = {}) {
+  constructor (adapter, options = { apiKey: '' }) {
+    // @ts-ignore
     super(adapter, options)
 
     if (!options.apiKey) {
@@ -60,7 +63,7 @@ export class HereGeocoder extends AbstractGeocoder {
   async _forward (query) {
     let params = { ...this.params, q: query }
 
-    if (query.address) {
+    if (typeof query !== 'string' && query.address) {
       const { address, ...other } = query
       params = { ...params, ...other, q: address }
     }
@@ -72,7 +75,7 @@ export class HereGeocoder extends AbstractGeocoder {
 
     const res = await this.adapter(url)
     if (res.status !== 200) {
-      throw new HttpError(res)
+      throw HttpError(res)
     }
     const result = await res.json()
     if (!result?.items) {
@@ -84,7 +87,7 @@ export class HereGeocoder extends AbstractGeocoder {
 
   /**
    * @see https://developer.here.com/documentation/geocoding-search-api/api-reference-swagger.html
-   * @param {string|HereReverseQuery} query
+   * @param {HereReverseQuery} query
    * @returns {Promise<object>}
    */
   async _reverse (query) {
@@ -98,7 +101,7 @@ export class HereGeocoder extends AbstractGeocoder {
 
     const res = await this.adapter(url)
     if (res.status !== 200) {
-      throw new HttpError(res)
+      throw HttpError(res)
     }
     const result = await res.json()
     if (!result?.items) {

@@ -1,7 +1,8 @@
 import assert from 'assert'
 import sinon from 'sinon'
-import { IpStackGeocoder } from '../../src/geocoder/index.js'
+import { IpStackGeocoder, fetchAdapter } from '../../src/index.js'
 import { fixtures } from './fixtures/ipstack.js'
+import { itWithApiKey } from './helper.js'
 
 describe('IpStackGeocoder', function () {
   const options = { apiKey: 'apiKey' }
@@ -21,8 +22,8 @@ describe('IpStackGeocoder', function () {
     })
 
     it('is an instance of IpStackGeocoder', () => {
-      const adapter = new IpStackGeocoder(mockedAdapter, options)
-      assert.ok(adapter instanceof IpStackGeocoder)
+      const geocoder = new IpStackGeocoder(mockedAdapter, options)
+      assert.ok(geocoder instanceof IpStackGeocoder)
     })
   })
 
@@ -35,8 +36,8 @@ describe('IpStackGeocoder', function () {
         })
       )
 
-      const adapter = new IpStackGeocoder(mockedAdapter, options)
-      const results = await adapter.forward('66.249.64.0')
+      const geocoder = new IpStackGeocoder(mockedAdapter, options)
+      const results = await geocoder.forward('66.249.64.0')
 
       assert.deepStrictEqual(results, [])
 
@@ -51,9 +52,9 @@ describe('IpStackGeocoder', function () {
         })
       )
 
-      const adapter = new IpStackGeocoder(mockedAdapter, options)
+      const geocoder = new IpStackGeocoder(mockedAdapter, options)
       try {
-        await adapter.forward('66.249.64.0')
+        await geocoder.forward('66.249.64.0')
         assert.ok(false, 'shall not reach here')
       } catch (e) {
         assert.strictEqual(e.status, 502)
@@ -73,8 +74,8 @@ describe('IpStackGeocoder', function () {
         })
       )
 
-      const adapter = new IpStackGeocoder(mockedAdapter, options)
-      const results = await adapter.forward(query)
+      const geocoder = new IpStackGeocoder(mockedAdapter, options)
+      const results = await geocoder.forward(query)
 
       assert.deepStrictEqual(results, expResults)
       sinon.assert.calledOnceWithExactly(mockedAdapter, expUrl)
@@ -93,8 +94,8 @@ describe('IpStackGeocoder', function () {
         })
       )
 
-      const adapter = new IpStackGeocoder(mockedAdapter, options)
-      const results = await adapter.forward({ address: query })
+      const geocoder = new IpStackGeocoder(mockedAdapter, options)
+      const results = await geocoder.forward({ address: query })
 
       assert.deepStrictEqual(results, expResults)
       sinon.assert.calledOnceWithExactly(mockedAdapter, expUrl)
@@ -113,8 +114,8 @@ describe('IpStackGeocoder', function () {
         })
       )
 
-      const adapter = new IpStackGeocoder(mockedAdapter, options)
-      const results = await adapter.forward(query)
+      const geocoder = new IpStackGeocoder(mockedAdapter, options)
+      const results = await geocoder.forward(query)
 
       assert.deepStrictEqual(results, expResults)
       sinon.assert.calledOnceWithExactly(mockedAdapter, expUrl)
@@ -130,12 +131,39 @@ describe('IpStackGeocoder', function () {
         })
       )
 
-      const adapter = new IpStackGeocoder(mockedAdapter, options)
+      const geocoder = new IpStackGeocoder(mockedAdapter, options)
       try {
-        await adapter.reverse({ lat: 40.714232, lon: -73.9612889 })
+        await geocoder.reverse({ lat: 40.714232, lon: -73.9612889 })
         assert.ok(false, 'shall not reach here')
       } catch (e) {
         assert.strictEqual(e.message, 'IpStackGeocoder does not support reverse geocoding')
+      }
+    })
+  })
+
+  describe('call api', () => {
+    const { IPSTACK_APIKEY: apiKey, SHOW_LOG } = process.env
+    let geocoder
+
+    before(function () {
+      geocoder = apiKey && new IpStackGeocoder(fetchAdapter(), { apiKey })
+    })
+
+    itWithApiKey(apiKey, 'should call forward api', async function () {
+      const query = '66.249.64.0'
+      const results = await geocoder.forward(query)
+      // eslint-disable-next-line no-console
+      if (SHOW_LOG) console.dir(results[0], { depth: null })
+      assert.deepStrictEqual(fixtures.forward, results[0])
+    })
+
+    itWithApiKey(apiKey, 'should call reverse api', async function () {
+      const query = '40.714232,-73.9612889'
+      try {
+        await geocoder.reverse(query)
+        throw new Error('bad')
+      } catch (err) {
+        assert.strictEqual(err.message, 'IpStackGeocoder does not support reverse geocoding')
       }
     })
   })

@@ -97,5 +97,45 @@ export const fixtures = {
         }
       }
     ]
+  },
+  forward: {
+    formattedAddress: 'Métro 1, Avenue des Champs-Élysées, Quartier des Champs-Élysées, Paris 8e Arrondissement, Paris, Île-de-France, France métropolitaine, 75008, France',
+    latitude: 48.8665916,
+    longitude: 2.3176863,
+    country: 'France',
+    countryCode: 'FR',
+    state: 'Île-de-France',
+    county: 'Paris',
+    city: undefined,
+    zipcode: '75008',
+    district: undefined,
+    streetName: 'Avenue des Champs-Élysées',
+    streetNumber: undefined,
+    neighbourhood: undefined,
+    extra: {
+      id: 531017858,
+      confidence: 0.511,
+      bbox: [2.3153244, 48.8660612, 2.3194238, 48.8673226]
+    }
+  },
+  reverse: {
+    formattedAddress: '279, Bedford Avenue, Williamsburg, Brooklyn, New York, 11211, United States',
+    latitude: 40.714205,
+    longitude: -73.96131519274765,
+    country: 'United States',
+    countryCode: 'US',
+    state: 'New York',
+    county: undefined,
+    city: 'New York',
+    zipcode: '11211',
+    district: undefined,
+    streetName: 'Bedford Avenue',
+    streetNumber: '279',
+    neighbourhood: undefined,
+    extra: {
+      id: 279767984,
+      confidence: 0,
+      bbox: [-73.9613744, 40.7141617, -73.961256, 40.7142482]
+    }
   }
 }

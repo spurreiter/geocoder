@@ -1089,5 +1089,31 @@ export const fixtures = {
         extra: { bbox: [-75.652789, -71.858219, 18.488901, 68.57962] }
       }
     ]
+  },
+  forward: {
+    formattedAddress: 'Франция, Париж, VIII округ Парижа, Елисейские Поля, 5',
+    latitude: 48.866193,
+    longitude: 2.316495,
+    country: 'Франция',
+    countryCode: 'FR',
+    state: 'Иль-де-Франс',
+    county: undefined,
+    city: 'Париж',
+    streetName: 'Елисейские Поля',
+    streetNumber: '5',
+    extra: { bbox: [2.312389, 48.863485, 2.3206, 48.868902] }
+  },
+  reverse: {
+    formattedAddress: 'Соединённые Штаты Америки, штат Нью-Йорк, авеню Бедфорд',
+    latitude: 40.653586,
+    longitude: -73.956114,
+    country: 'Соединённые Штаты Америки',
+    countryCode: 'US',
+    state: 'штат Нью-Йорк',
+    county: undefined,
+    city: 'Нью-Йорк',
+    streetName: 'авеню Бедфорд',
+    streetNumber: undefined,
+    extra: { bbox: [-73.964451, 40.58356, -73.943592, 40.724147] }
   }
 }

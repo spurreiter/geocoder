@@ -6,6 +6,8 @@
 import { AbstractGeocoder } from './abstract.js'
 import { HttpError } from '../utils/index.js'
 
+/** @typedef {import('../adapter').fetchAdapterFn} fetchAdapterFn */
+
 function getEmbeddedPath (parent, path, def) {
   const elements = path.split('/')
   for (const i in elements) {
@@ -41,7 +43,7 @@ export class TeleportGeocoder extends AbstractGeocoder {
   /**
    * available options
    * @see https://developers.teleport.org/api/resources/
-   * @param {function} adapter
+   * @param {fetchAdapterFn} adapter
    * @param {object} options
    */
   constructor (adapter, options = {}) {
@@ -68,7 +70,7 @@ export class TeleportGeocoder extends AbstractGeocoder {
       embed: 'city:search-results/city:item/{city:country,city:admin1_division,city:urban_area}'
     }
 
-    if (query.address) {
+    if (typeof query !== 'string' && query.address) {
       const { address, ...other } = query
       params = { ...params, ...other, search: address }
     }
@@ -77,7 +79,7 @@ export class TeleportGeocoder extends AbstractGeocoder {
 
     const res = await this.adapter(url)
     if (res.status !== 200) {
-      throw new HttpError(res)
+      throw HttpError(res)
     }
     const result = await res.json()
     const searchResults = getEmbeddedPath(result, 'city:search-results')
@@ -91,7 +93,7 @@ export class TeleportGeocoder extends AbstractGeocoder {
   }
 
   /**
-   * @param {string|TeleportReverseQuery} query
+   * @param {TeleportReverseQuery} query
    * @returns {Promise<object>}
    */
   async _reverse (query) {
@@ -109,7 +111,7 @@ export class TeleportGeocoder extends AbstractGeocoder {
 
     const res = await this.adapter(url)
     if (res.status !== 200) {
-      throw new HttpError(res)
+      throw HttpError(res)
     }
     const result = await res.json()
     const searchResults = getEmbeddedPath(result, 'location:nearest-cities')

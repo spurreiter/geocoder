@@ -1,6 +1,8 @@
 import { AbstractGeocoder } from './abstract.js'
 import { HttpError, countryCode, countryName } from '../utils/index.js'
 
+/** @typedef {import('../adapter').fetchAdapterFn} fetchAdapterFn */
+
 const undef = (s) => s === '' ? undefined : s
 
 /**
@@ -10,6 +12,7 @@ const undef = (s) => s === '' ? undefined : s
  * @property {number} [limit]
  * @property {string} [category] see https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer?f=pjson for list of values
  * @property {string} [preferredLabelValues]
+ * @property {string} [language]
  */
 
 /**
@@ -21,18 +24,20 @@ const undef = (s) => s === '' ? undefined : s
  * @property {boolean} [returnIntersection]
  * @property {string} [locationType]
  * @property {string} [preferredLabelValues]
+ * @property {string} [language]
  */
 
 export class ArcGisGeocoder extends AbstractGeocoder {
   /**
    * available options
-   * @see
-   * @param {function} adapter
+   * @param {fetchAdapterFn} adapter
    * @param {object} options
    * @param {string} options.apiKey
-   * @param {number} [limit]
+   * @param {number} [options.limit]
+   * @param {string} [options.language]
    */
-  constructor (adapter, options = {}) {
+  constructor (adapter, options = { apiKey: '' }) {
+    // @ts-ignore
     super(adapter, options)
 
     const {
@@ -75,7 +80,7 @@ export class ArcGisGeocoder extends AbstractGeocoder {
         'AddNum,Addr_type,City,Country,LongLabel,Place_addr,PlaceName,Postal,Rank,Region,StName,StPreDir,StType,Type'
     }
 
-    if (query.address) {
+    if (typeof query !== 'string' && query.address) {
       const {
         address,
         language: langCode,
@@ -92,7 +97,7 @@ export class ArcGisGeocoder extends AbstractGeocoder {
       body: this.createSearch(params)
     })
     if (res.status !== 200) {
-      throw new HttpError(res)
+      throw HttpError(res)
     }
     const result = await res.json()
     // console.dir(result, { depth: null })
@@ -104,7 +109,7 @@ export class ArcGisGeocoder extends AbstractGeocoder {
   }
 
   /**
-   * @param {string|ArcGisReverseQuery} query
+   * @param {ArcGisReverseQuery} query
    * @returns {Promise<object>}
    */
   async _reverse (query) {
@@ -130,7 +135,7 @@ export class ArcGisGeocoder extends AbstractGeocoder {
       body: this.createSearch(params)
     })
     if (res.status !== 200) {
-      throw new HttpError(res)
+      throw HttpError(res)
     }
     const result = await res.json()
     // console.dir(result, { depth: null })
@@ -187,7 +192,7 @@ export class ArcGisGeocoder extends AbstractGeocoder {
       latitude: location.y,
       longitude: location.x,
       country: countryName(Country),
-      countryCode: countryCode(undef(Country), language),
+      countryCode: countryCode(undef(Country)),
       state: undef(Region),
       city: undef(City),
       zipcode: undef(Postal),
@@ -231,7 +236,7 @@ export class ArcGisGeocoder extends AbstractGeocoder {
       latitude: location.y,
       longitude: location.x,
       country: countryName(CountryCode),
-      countryCode: countryCode(undef(CountryCode), language),
+      countryCode: countryCode(undef(CountryCode)),
       state: undef(Region),
       city: undef(City),
       zipcode: undef(Postal),

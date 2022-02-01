@@ -1,6 +1,8 @@
 import { AbstractGeocoder } from './abstract.js'
 import { HttpError } from '../utils/index.js'
 
+/** @typedef {import('../adapter').fetchAdapterFn} fetchAdapterFn */
+
 // status can be "OK", "ZERO_RESULTS", "OVER_QUERY_LIMIT", "REQUEST_DENIED", "INVALID_REQUEST", or "UNKNOWN_ERROR"
 const NO_ERROR = ['OK', 'ZERO_RESULTS']
 
@@ -49,12 +51,13 @@ export class GoogleGeocoder extends AbstractGeocoder {
   /**
    * available options
    * @see https://developers.google.com/maps/documentation/geocoding/overview
-   * @param {function} adapter
+   * @param {fetchAdapterFn} adapter
    * @param {object} options
    * @param {string} options.apiKey
-   * @param {string} [language]
+   * @param {string} [options.language]
    */
-  constructor (adapter, options = {}) {
+  constructor (adapter, options = { apiKey: '' }) {
+    // @ts-ignore
     super(adapter, options)
 
     const { apiKey, ...params } = options
@@ -63,6 +66,7 @@ export class GoogleGeocoder extends AbstractGeocoder {
       throw new Error(`You must specify apiKey to use ${this.constructor.name}`)
     }
 
+    // @ts-ignore
     params.key = apiKey
     this.params = params
   }
@@ -78,7 +82,7 @@ export class GoogleGeocoder extends AbstractGeocoder {
   async _forward (query = '') {
     let params = { ...this.params, address: query }
 
-    if (query.address) {
+    if (typeof query !== 'string' && query.address) {
       const { address, ...other } = query
       params = { ...params, ...other, address }
     }
@@ -90,7 +94,7 @@ export class GoogleGeocoder extends AbstractGeocoder {
 
     const res = await this.adapter(url)
     if (res.status !== 200) {
-      throw new HttpError(res)
+      throw HttpError(res)
     }
     const result = await res.json()
     checkOnError(result)
@@ -103,7 +107,7 @@ export class GoogleGeocoder extends AbstractGeocoder {
   }
 
   /**
-   * @param {string|GoogleReverseQuery} query
+   * @param {GoogleReverseQuery} query
    * @returns {Promise<object>}
    */
   async _reverse (query) {
@@ -121,7 +125,7 @@ export class GoogleGeocoder extends AbstractGeocoder {
 
     const res = await this.adapter(url)
     if (res.status !== 200) {
-      throw new HttpError(res)
+      throw HttpError(res)
     }
     const result = await res.json()
     checkOnError(result)

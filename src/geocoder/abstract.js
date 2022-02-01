@@ -1,3 +1,4 @@
+// @ts-ignore
 import net from 'net'
 import { URL, URLSearchParams } from 'url'
 
@@ -6,44 +7,15 @@ const wrapError400 = (err) => {
   return err
 }
 
-/**
- * @typedef {object} ForwardQuery
- * @property {string} address address being queried
- * @property {string} [language] search results language
- * @property {number} [limit] limit search results
- */
-
-/**
- * @typedef {object} ReverseQuery {
- * @property {number} lat latitude
- * @property {number} lng longitude
- * @property {string} [language] search results language
- * @property {number} [limit] limit search results
- */
-
-/**
- * @typedef {object} GeocoderResult
- * @property {number} latitude latitude of search result
- * @property {number} longitude longitude of search result
- * @property {string} [formattedAddress]
- * @property {string} [country]
- * @property {string} [countryCode] country code as ISO 3166-1 alpha-2 or ISO 3166-1 alpha-3
- * @property {string} [state]
- * @property {string} [region]
- * @property {string} [city]
- * @property {string} [zipcode]
- * @property {string} [streetName]
- * @property {string} [streetNumber]
- * @property {object} [extra]
- * @property {string|number} [extra.id]
- * @property {number} [extra.confidence] confidence [0..1] higher values = higher confidence
- * @property {number[]} [extra.bbox] bounding box as `[minLng, minLat, maxLng, maxLat]`
- */
+/** @typedef {import('../adapter').fetchAdapterFn} fetchAdapterFn */
+/** @typedef {import('../types').ForwardQuery} ForwardQuery */
+/** @typedef {import('../types').ReverseQuery} ReverseQuery */
+/** @typedef {import('../types').GeocoderResult} GeocoderResult */
 
 export class AbstractGeocoder {
   /**
-   * @param {fetchAdapter} adapter
-   * @param {object} [options]
+   * @param {fetchAdapterFn} adapter
+   * @param {object} options
    * @param {boolean} [options.raw] append raw response to results
    */
   constructor (adapter, options = {}) {
@@ -53,6 +25,8 @@ export class AbstractGeocoder {
     this.adapter = adapter
     this.raw = !!options.raw
     this._name = this.constructor.name.replace(/Geocoder$/i, '').toLowerCase()
+    this.supportIPv4 = false
+    this.supportIPv6 = false
   }
 
   /**
@@ -132,11 +106,15 @@ export class AbstractGeocoder {
   }
 
   /**
+   * @typedef {Array} WrappedResults
+   * @property {any} raw
+   */
+  /**
    * wraps raw response on results object
    * @protected
-   * @param {Array} results
+   * @param {any} results
    * @param {object} body
-   * @returns {Array}
+   * @returns {WrappedResults}
    */
   wrapRaw (results = [], body) {
     if (body && this.raw) {
@@ -149,9 +127,10 @@ export class AbstractGeocoder {
    * forward geocoding
    * @protected
    * @param {string|ForwardQuery} query address string or ip address
+   * @param {boolean} [isIP]
    * @returns {Promise<GeocoderResult[]>}
    */
-  _forward () {
+  _forward (query, isIP) {
     throw wrapError400(
       new Error(`${this.constructor.name} does not support geocoding`)
     )
@@ -163,7 +142,7 @@ export class AbstractGeocoder {
    * @param {string|ReverseQuery} query
    * @returns {Promise<GeocoderResult[]>}
    */
-  _reverse () {
+  _reverse (query) {
     throw wrapError400(
       new Error(`${this.constructor.name} does not support reverse geocoding`)
     )

@@ -47,41 +47,40 @@
     "test": "test"
   },
   "scripts": {
-    "all": "npm-run-all clean test build lint typings",
-    "clean": "rimraf typings coverage lib",
-    "lint": "eslint --fix \"**/*.js\"",
+    "all": "npm-run-all clean test build lint types",
+    "clean": "rimraf types coverage lib",
+    "lint": "eslint --fix --ext js .",
     "build": "rollup -c",
     "test": "c8 mocha",
-    "typings": "tsc src/**/*.d.ts src/*.d.ts src/**/*.js src/*.js --declaration --allowJs --emitDeclarationOnly --outDir typings",
-    "prepublishOnly": "npm run all"
+    "types": "rimraf types; tsc --emitDeclarationOnly true --noEmitOnError && cp src/*.d.ts types"
   },
   "mocha": {
     "exit": true,
     "recursive": true
   },
   "dependencies": {
-    "agentkeepalive": "^4.1.4",
-    "got": "^11.8.2",
-    "i18n-iso-countries": "^6.7.0"
+    "agentkeepalive": "^4.2.0",
+    "got": "^11.8.3",
+    "i18n-iso-countries": "^7.2.0"
   },
   "devDependencies": {
-    "@types/node": "^15.6.1",
-    "c8": "^7.7.2",
-    "dotenv": "^10.0.0",
-    "eslint": "^7.27.0",
-    "eslint-config-standard": "^16.0.2",
-    "eslint-plugin-import": "^2.23.3",
+    "@types/node": "^16.11.21",
+    "c8": "^7.11.0",
+    "dotenv": "^15.0.0",
+    "eslint": "^7.32.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.3.1",
-    "mocha": "^8.4.0",
+    "mocha": "^9.2.0",
     "npm-run-all": "^4.1.5",
     "rimraf": "^3.0.2",
-    "rollup": "^2.50.3",
-    "sinon": "^10.0.0",
-    "typescript": "^4.3.2"
+    "rollup": "^2.66.1",
+    "sinon": "^13.0.0",
+    "typescript": "^4.5.5"
   },
   "engines": {
-    "node": ">=12"
+    "node": ">=14"
   },
   "publishConfig": {
     "access": "public"

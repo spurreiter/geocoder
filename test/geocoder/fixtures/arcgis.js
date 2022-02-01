@@ -213,5 +213,47 @@ export const fixtures = {
         }
       }
     ]
+  },
+  forward: {
+    formattedAddress: '1 Arcades des Champs Elysées, 75008, 8e Arrondissement, Paris, Île-de-France, FRA',
+    latitude: 48.87173298693807,
+    longitude: 2.3045290085973704,
+    country: 'France',
+    countryCode: 'FR',
+    state: 'Île-de-France',
+    city: 'Paris',
+    zipcode: '75008',
+    streetName: 'Champs Elysées',
+    streetNumber: '1',
+    extra: {
+      confidence: 0.9617,
+      type: undefined,
+      placeName: undefined,
+      addrType: 'PointAddress',
+      rank: 20,
+      bbox: [
+        2.3035290085973705,
+        48.87073298693807,
+        2.3055290085973703,
+        48.87273298693807
+      ]
+    }
+  },
+  reverse: {
+    formattedAddress: 'Chocolat Michel Cluizel, 279 Bedford Ave, Brooklyn, NY, 11211, USA',
+    latitude: 40.71418600000004,
+    longitude: -73.96128499999998,
+    country: 'United States of America',
+    countryCode: 'US',
+    state: 'New York',
+    city: 'Brooklyn',
+    zipcode: '11211',
+    streetName: 'Bedford Ave',
+    streetNumber: '279',
+    extra: {
+      type: 'Specialty Store',
+      placeName: 'Chocolat Michel Cluizel',
+      addrType: 'POI'
+    }
   }
 }

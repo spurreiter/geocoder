@@ -1,6 +1,8 @@
 import { AbstractGeocoder } from './abstract.js'
 import { HttpError, toUpperCase } from '../utils/index.js'
 
+/** @typedef {import('../adapter').fetchAdapterFn} fetchAdapterFn */
+
 /**
  * @typedef {object} LocationIqForwardQuery
  * @property {string} address
@@ -35,14 +37,15 @@ export class LocationIqGeocoder extends AbstractGeocoder {
   /**
    * available options
    * @see https://locationiq.com/docs
-   * @param {function} adapter
+   * @param {fetchAdapterFn} adapter
    * @param {object} options
    * @param {string} options.apiKey
    * @param {string} [options.language]
    * @param {string} [options.dcRegion=eu] datacenter region [us1, eu1]
    * @param {number} [options.limit]
    */
-  constructor (adapter, options = {}) {
+  constructor (adapter, options = { apiKey: '' }) {
+    // @ts-ignore
     super(adapter, options)
 
     const { dcRegion = 'eu1', apiKey, ...params } = options
@@ -69,7 +72,7 @@ export class LocationIqGeocoder extends AbstractGeocoder {
   async _forward (query) {
     let params = { ...this.params, q: query }
 
-    if (query.address) {
+    if (typeof query !== 'string' && query.address) {
       const { address, ...other } = query
       params = { ...params, ...other, q: address }
     }
@@ -81,7 +84,7 @@ export class LocationIqGeocoder extends AbstractGeocoder {
 
     const res = await this.adapter(url)
     if (res.status !== 200) {
-      throw new HttpError(res)
+      throw HttpError(res)
     }
     const result = await res.json()
     if (!result?.length) {
@@ -106,7 +109,7 @@ export class LocationIqGeocoder extends AbstractGeocoder {
 
     const res = await this.adapter(url)
     if (res.status !== 200) {
-      throw new HttpError(res)
+      throw HttpError(res)
     }
     const result = await res.json()
     if (!result || !result.licence) {

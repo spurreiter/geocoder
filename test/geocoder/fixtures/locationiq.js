@@ -97,5 +97,47 @@ export const fixtures = {
         }
       }
     ]
+  },
+  forward: {
+    formattedAddress: "Hôtel des Champs Élysée, Rue d'Artois, Quartier du Faubourg-du-Roule, 8th Arrondissement of Paris, Paris, Ile-de-France, Metropolitan France, 75008, France",
+    latitude: '48.8723588',
+    longitude: '2.3088888',
+    country: 'France',
+    countryCode: 'FR',
+    state: 'Ile-de-France',
+    region: 'Metropolitan France',
+    county: undefined,
+    city: 'Paris',
+    zipcode: '75008',
+    streetName: "Rue d'Artois",
+    streetNumber: undefined,
+    extra: {
+      id: '44871447',
+      confidence: 0.21100000000000002,
+      type: 'hotel',
+      addrType: 'tourism',
+      bbox: ['2.3088388', '48.8723088', '2.3089388', '48.8724088']
+    }
+  },
+  reverse: {
+    formattedAddress: '279, Bedford Avenue, Williamsburg, New York, Kings County, New York, 11211, USA',
+    latitude: '40.71422',
+    longitude: '-73.961343',
+    country: 'United States of America',
+    countryCode: 'US',
+    state: 'New York',
+    region: undefined,
+    county: 'Kings County',
+    city: 'New York',
+    zipcode: '11211',
+    streetName: 'Bedford Avenue',
+    streetNumber: '279',
+    extra: {
+      id: '331684792753',
+      confidence: 0.225,
+      type: undefined,
+      addrType: undefined,
+      bbox: ['-73.961343', '40.71422', '-73.961343', '40.71422']
+    }
   }
 }

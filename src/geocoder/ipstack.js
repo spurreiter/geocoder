@@ -1,6 +1,8 @@
 import { AbstractGeocoder } from './abstract.js'
 import { HttpError } from '../utils/index.js'
 
+/** @typedef {import('../adapter').fetchAdapterFn} fetchAdapterFn */
+
 function hasResult (result) {
   return result && !!result.type
 }
@@ -9,6 +11,8 @@ export class IpStackGeocoder extends AbstractGeocoder {
   /**
    * available options
    * @see https://ipstack.com/documentation
+   * @param {fetchAdapterFn} adapter
+   * @param {object} options
    */
   constructor (adapter, options = {}) {
     super(adapter, options)
@@ -27,11 +31,14 @@ export class IpStackGeocoder extends AbstractGeocoder {
     return 'http://api.ipstack.com'
   }
 
+  /**
+   * @param {object|string} query
+   */
   async _forward (query = '') {
     let params = this.params
     let searchtext = query
 
-    if (query.address) {
+    if (typeof query !== 'string' && query.address) {
       const { address, ...other } = query
       searchtext = address
       params = { ...params, ...other }
@@ -44,7 +51,7 @@ export class IpStackGeocoder extends AbstractGeocoder {
 
     const res = await this.adapter(url)
     if (res.status !== 200) {
-      throw new HttpError(res)
+      throw HttpError(res)
     }
     const result = await res.json()
     if (!hasResult(result)) {

@@ -429,5 +429,33 @@ export const fixtures = {
         extra: { confidence: 0.88 }
       }
     ]
+  },
+  forward: {
+    formattedAddress: 'Paris, TX 75460',
+    latitude: 33.655162,
+    longitude: -95.605194,
+    country: 'United States of America',
+    countryCode: 'US',
+    state: 'TX',
+    county: 'Lamar County',
+    city: 'Paris',
+    zipcode: '75460',
+    streetName: undefined,
+    streetNumber: undefined,
+    extra: { confidence: 0.23 }
+  },
+  reverse: {
+    formattedAddress: '279 Bedford Ave, Brooklyn, NY 11211',
+    latitude: 40.71422,
+    longitude: -73.961343,
+    country: 'United States of America',
+    countryCode: 'US',
+    state: 'NY',
+    county: 'Kings County',
+    city: 'Brooklyn',
+    zipcode: '11211',
+    streetName: 'Bedford Ave',
+    streetNumber: '279',
+    extra: { confidence: 1 }
   }
 }

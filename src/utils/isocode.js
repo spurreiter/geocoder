@@ -1,3 +1,4 @@
+// @ts-ignore
 import countries from 'i18n-iso-countries'
 
 /**
@@ -15,11 +16,12 @@ const OPTS = { select: 'official' }
  * obtain country name by code
  * @param {string} code
  * @param {string} [language='en']
- * @returns {string}
+ * @returns {string|undefined}
  */
 export const countryName = (code, language = 'en') => {
   if (!code) return
   const lang = language.split('-')[0]
-  const name = countries.getName(code, lang, OPTS)
-  return name || countries.getName(code, 'en', OPTS)
+  // @ts-ignore
+  const name = countries.getName(code, lang, OPTS) || countries.getName(code, 'en', OPTS)
+  return name
 }

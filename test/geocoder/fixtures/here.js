@@ -314,5 +314,44 @@ export const fixtures = {
         }
       }
     ]
+  },
+  forward: {
+    formattedAddress: '1 Port des Champs-Élysées, 75008 Paris, France',
+    latitude: 48.86423,
+    longitude: 2.31433,
+    country: 'France',
+    countryCode: 'FR',
+    state: 'Île-de-France',
+    county: 'Paris',
+    city: 'Paris',
+    zipcode: '75008',
+    district: '8e Arrondissement',
+    streetName: 'Port des Champs-Élysées',
+    streetNumber: '1',
+    building: undefined,
+    extra: {
+      id: 'here:af:streetsection:HDfR1Hhd8jN3aGEv0gfd8C:CggIBCCMnJW_AhABGgEx',
+      confidence: 0.99
+    }
+  },
+  reverse: {
+    formattedAddress: '277 Bedford Ave, Brooklyn, NY 11211-4203, United States',
+    latitude: 40.71423,
+    longitude: -73.96128,
+    country: 'United States',
+    countryCode: 'US',
+    state: 'New York',
+    county: 'Kings',
+    city: 'Brooklyn',
+    zipcode: '11211-4203',
+    district: 'Williamsburg',
+    streetName: 'Bedford Ave',
+    streetNumber: '277',
+    building: undefined,
+    extra: {
+      id: 'here:af:streetsection:9uRZ0Jg.ktnHxV32T4vbCB:CgcIBCCegeYjEAEaAzI3Nw',
+      confidence: 0
+    }
   }
+
 }

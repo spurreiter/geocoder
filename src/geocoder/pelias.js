@@ -1,6 +1,8 @@
 import { AbstractGeocoder } from './abstract.js'
 import { HttpError, countryCode } from '../utils/index.js'
 
+/** @typedef {import('../adapter').fetchAdapterFn} fetchAdapterFn */
+
 /**
  * @typedef {object} PeliasForwardQuery
  * @property {string} address
@@ -16,13 +18,15 @@ export class PeliasGeocoder extends AbstractGeocoder {
   /**
    * available options
    * @see https://github.com/pelias/documentation/blob/master/README.md
-   * @param {function} adapter
+   * @param {fetchAdapterFn} adapter
    * @param {object} options
    * @param {string} [options.origin='https://api.geocode.earth'] protocol + hostname for server
    */
   constructor (adapter, options = {}) {
+    // @ts-ignore
     super(adapter, options)
 
+    // @ts-ignore
     const { origin, apiKey, ...other } = options
     if (!origin && !apiKey) {
       throw new Error(`You must specify apiKey to use ${this.constructor.name}`)
@@ -35,6 +39,7 @@ export class PeliasGeocoder extends AbstractGeocoder {
 
     this.params = other
     if (apiKey) {
+      // @ts-ignore
       this.params.api_key = apiKey
     }
   }
@@ -54,7 +59,7 @@ export class PeliasGeocoder extends AbstractGeocoder {
   async _forward (query) {
     let params = { ...this.params, text: query }
 
-    if (query.address) {
+    if (typeof query !== 'string' && query.address) {
       const { address, ...other } = query
       params = { ...params, ...other, text: address }
     }
@@ -63,7 +68,7 @@ export class PeliasGeocoder extends AbstractGeocoder {
 
     const res = await this.adapter(url)
     if (res.status !== 200) {
-      throw new HttpError(res)
+      throw HttpError(res)
     }
     const result = await res.json()
 
@@ -75,7 +80,7 @@ export class PeliasGeocoder extends AbstractGeocoder {
   }
 
   /**
-   * @param {string|PeliasReverseQuery} query
+   * @param {PeliasReverseQuery} query
    * @returns {Promise<object>}
    */
   async _reverse (query) {
@@ -86,7 +91,7 @@ export class PeliasGeocoder extends AbstractGeocoder {
 
     const res = await this.adapter(url)
     if (res.status !== 200) {
-      throw new HttpError(res)
+      throw HttpError(res)
     }
     const result = await res.json()
     if (!Array.isArray(result?.features)) {
