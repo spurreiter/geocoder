@@ -16,4 +16,5 @@ export * from "./osm.js";
 export * from "./pelias.js";
 export * from "./pickpoint.js";
 export * from "./teleport.js";
+export * from "./tomtom.js";
 export * from "./yandex.js";

@@ -1,5 +1,5 @@
 import { AbstractGeocoder } from './abstract.js'
-import { HttpError, countryCode, countryName } from '../utils/index.js'
+import { HttpError, countryCode, countryName, toFixed } from '../utils/index.js'
 
 /** @typedef {import('../adapter').fetchAdapterFn} fetchAdapterFn */
 
@@ -179,7 +179,7 @@ export class ArcGisGeocoder extends AbstractGeocoder {
     const { xmin, ymin, xmax, ymax } = extent
 
     const extra = {
-      confidence: score / 100,
+      confidence: toFixed(score / 100),
       type: undef(Type),
       placeName: undef(PlaceName),
       addrType: undef(Addr_type),

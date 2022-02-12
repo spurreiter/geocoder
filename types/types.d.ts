@@ -73,9 +73,13 @@ export type GeocoderResult = {
   streetNumber?: string;
   [key: string]: any;
   extra?: {
+    /** provider id */
     id?: string | number;
+    /** Indicates for each result how good the result matches to the original query `[0 .. 1]` */
     confidence?: number;
+    /** bounding box of the result object */
     bbox?: number[];
+    /** any other keys */
     [key: string]: any;
   };
 };

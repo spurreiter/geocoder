@@ -960,7 +960,7 @@ export const fixtures = {
     streetNumber: '1',
     neighbourhood: 'Plateau',
     extra: {
-      id: 'address.8413593260702956',
+      id: 'address.2516391937692428',
       category: undefined,
       bbox: undefined
     }

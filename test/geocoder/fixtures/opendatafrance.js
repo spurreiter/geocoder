@@ -119,7 +119,7 @@ export const fixtures = {
         city: 'Paris',
         zipcode: '75008',
         citycode: '75108',
-        extra: { id: '75108_1733', confidence: 0.565457184750733 },
+        extra: { id: '75108_1733', confidence: 0.5655 },
         streetName: 'Avenue des Champs Elys\\u00e9es'
       },
       {
@@ -132,7 +132,7 @@ export const fixtures = {
         city: 'Paris',
         zipcode: '75008',
         citycode: '75108',
-        extra: { id: '75108_1734_00001', confidence: 0.5492108211143695 },
+        extra: { id: '75108_1734_00001', confidence: 0.5492 },
         streetName: 'Port des Champs Elys\\u00e9es',
         streetNumber: '1'
       },
@@ -146,7 +146,7 @@ export const fixtures = {
         city: 'Paris',
         zipcode: '75008',
         citycode: '75108',
-        extra: { id: '75108_1732_00001', confidence: 0.5049637967914438 },
+        extra: { id: '75108_1732_00001', confidence: 0.505 },
         streetName: 'Arcades des Champs Elys\\u00e9es',
         streetNumber: '1'
       },
@@ -161,7 +161,7 @@ export const fixtures = {
         city: 'Le Touquet-Paris-Plage',
         zipcode: '62520',
         citycode: '62826',
-        extra: { id: '62826_0239', confidence: 0.4399588714733542 },
+        extra: { id: '62826_0239', confidence: 0.44 },
         streetName: 'Allee des Champs Elysees'
       },
       {
@@ -174,7 +174,7 @@ export const fixtures = {
         city: 'Paris',
         zipcode: '75008',
         citycode: '75108',
-        extra: { id: '75108_3190', confidence: 0.40505935064935056 },
+        extra: { id: '75108_3190', confidence: 0.4051 },
         streetName: 'Rue de l\\u2019Elys\\u00e9e'
       }
     ]
@@ -239,7 +239,7 @@ export const fixtures = {
         city: 'Lyon',
         zipcode: '69004',
         citycode: '69384',
-        extra: { id: '69384_0920', confidence: 0.43272491978609623 },
+        extra: { id: '69384_0920', confidence: 0.4327 },
         streetName: 'Avenue de Birmingham'
       },
       {
@@ -252,7 +252,7 @@ export const fixtures = {
         city: 'Lyon',
         zipcode: '69004',
         citycode: '69384',
-        extra: { id: '69384_0920', confidence: 0.43088219251336896 },
+        extra: { id: '69384_0920', confidence: 0.4309 },
         streetName: 'Avenue de Birmingham'
       }
     ]
@@ -299,7 +299,7 @@ export const fixtures = {
         city: 'Prunay-sur-Essonne',
         zipcode: '91720',
         citycode: '91507',
-        extra: { id: '91507_b009_00023', confidence: 0.9999880927779257 },
+        extra: { id: '91507_b009_00023', confidence: 1 },
         streetName: 'Chemin de Pithiviers',
         streetNumber: '23'
       }
@@ -315,7 +315,7 @@ export const fixtures = {
     city: 'Paris',
     zipcode: '75008',
     citycode: '75108',
-    extra: { id: '75108_1733', confidence: 0.565457184750733 },
+    extra: { id: '75108_1733', confidence: 0.5657 },
     streetName: 'Avenue des Champs Elysées'
   },
   reverse: {
@@ -328,7 +328,7 @@ export const fixtures = {
     city: 'Metz',
     zipcode: '57000',
     citycode: '57463',
-    extra: { id: '57463_5920_00012', confidence: 0.9999997242304688 },
+    extra: { id: '57463_5920_00012', confidence: 1 },
     streetName: 'Place Saint-Etienne',
     streetNumber: '12'
   }

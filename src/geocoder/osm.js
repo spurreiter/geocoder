@@ -1,5 +1,5 @@
 import { AbstractGeocoder } from './abstract.js'
-import { HttpError, toUpperCase } from '../utils/index.js'
+import { HttpError, toFixed, toUpperCase } from '../utils/index.js'
 
 /** @typedef {import('../adapter').fetchAdapterFn} fetchAdapterFn */
 
@@ -161,7 +161,7 @@ export class OsmGeocoder extends AbstractGeocoder {
       neighbourhood: address.neighbourhood,
       extra: {
         id: result.osm_id,
-        confidence: result.importance || 0,
+        confidence: toFixed(result.importance || 0),
         bbox: toBbox(result.boundingbox)
       }
     }

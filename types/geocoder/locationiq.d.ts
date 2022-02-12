@@ -39,7 +39,7 @@ export class LocationIqGeocoder extends AbstractGeocoder {
         streetNumber: any;
         extra: {
             id: any;
-            confidence: any;
+            confidence: number;
             type: any;
             addrType: any;
             bbox: any[] | undefined;

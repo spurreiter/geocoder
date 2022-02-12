@@ -443,7 +443,7 @@ export const fixtures = {
           urbanAreaApiUrl: 'https://api.teleport.org/api/urban_areas/slug:new-york/',
           urbanAreaWebUrl: 'https://teleport.org/cities/new-york/',
           distanceKm: 3.7754433,
-          confidence: 8.48982268
+          confidence: 8.4898
         }
       }
     ]
@@ -476,8 +476,7 @@ export const fixtures = {
       urbanAreaApiUrl: 'https://api.teleport.org/api/urban_areas/slug:new-york/',
       urbanAreaWebUrl: 'https://teleport.org/cities/new-york/',
       distanceKm: 3.7754433,
-      confidence: 8.48982268
+      confidence: 8.4898
     }
   }
-
 }

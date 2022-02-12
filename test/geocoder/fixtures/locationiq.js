@@ -113,7 +113,7 @@ export const fixtures = {
     streetNumber: undefined,
     extra: {
       id: '44871447',
-      confidence: 0.21100000000000002,
+      confidence: 0.211,
       type: 'hotel',
       addrType: 'tourism',
       bbox: ['2.3088388', '48.8723088', '2.3089388', '48.8724088']
