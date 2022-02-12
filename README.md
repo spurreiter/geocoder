@@ -1,4 +1,9 @@
-# geocoder
+[![Build Status](https://github.com/spurreiter/geocoder/workflows/CI/badge.svg?branch=main&event=push)](https://github.com/spurreiter/geocoder/actions/workflows/ci.yml?query=branch%3Amain)
+[![npm version](https://badge.fury.io/js/@spurreiter%2Fgeocoder.svg)](https://www.npmjs.com/package/@spurreiter/geocoder)
+[![Downloads per month](https://img.shields.io/npm/dm/@spurreiter/geocoder)](https://www.npmjs.com/package/@spurreiter/geocoder)
+
+
+# geocoder  
 
 This project is derived from [node-geocoder](https://github.com/nchaulet/node-geocoder) with focus on modern code with esm modules.
 
