@@ -71,6 +71,6 @@ describe('fetchAdapter', function () {
     } catch (e) {
       err = e
     }
-    assert.strictEqual(err.message, 'getaddrinfo ENOTFOUND is-there-anybody-out-there')
+    assert.ok(/getaddrinfo (?:EAI_AGAIN|ENOTFOUND) is-there-anybody-out-there/.test(err.message))
   })
 })
