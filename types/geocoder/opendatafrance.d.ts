@@ -43,7 +43,7 @@ export class OpendataFranceGeocoder extends AbstractGeocoder {
         citycode: any;
         extra: {
             id: any;
-            confidence: any;
+            confidence: number;
         };
     };
 }

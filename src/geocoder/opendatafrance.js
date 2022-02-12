@@ -1,5 +1,5 @@
 import { AbstractGeocoder } from './abstract.js'
-import { HttpError } from '../utils/index.js'
+import { HttpError, toFixed } from '../utils/index.js'
 
 /** @typedef {import('../adapter').fetchAdapterFn} fetchAdapterFn */
 
@@ -119,7 +119,7 @@ export class OpendataFranceGeocoder extends AbstractGeocoder {
       citycode: properties.citycode,
       extra: {
         id: properties.id,
-        confidence: properties.score || 0
+        confidence: toFixed(properties.score || 0)
       }
     }
 

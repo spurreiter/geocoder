@@ -533,7 +533,7 @@ export const fixtures = {
         zipcode: '11211',
         streetName: 'Bedford Avenue',
         streetNumber: '275',
-        extra: { confidence: 0.7000000000000001 }
+        extra: { confidence: 0.7 }
       },
       {
         formattedAddress: '281 Bedford Avenue, Brooklyn, NY, USA',
@@ -547,7 +547,7 @@ export const fixtures = {
         zipcode: '11211',
         streetName: 'Bedford Avenue',
         streetNumber: '281',
-        extra: { confidence: 0.7000000000000001 }
+        extra: { confidence: 0.7 }
       },
       {
         formattedAddress: '174 Grand Street, Brooklyn, NY, USA',
@@ -561,7 +561,7 @@ export const fixtures = {
         zipcode: '11211',
         streetName: 'Grand Street',
         streetNumber: '174',
-        extra: { confidence: 0.7000000000000001 }
+        extra: { confidence: 0.7 }
       },
       {
         formattedAddress: '176 Grand Street, Brooklyn, NY, USA',
@@ -575,7 +575,7 @@ export const fixtures = {
         zipcode: '11211',
         streetName: 'Grand Street',
         streetNumber: '176',
-        extra: { confidence: 0.7000000000000001 }
+        extra: { confidence: 0.7 }
       },
       {
         formattedAddress: '172 Grand Street, Brooklyn, NY, USA',
@@ -589,7 +589,7 @@ export const fixtures = {
         zipcode: '11211',
         streetName: 'Grand Street',
         streetNumber: '172',
-        extra: { confidence: 0.7000000000000001 }
+        extra: { confidence: 0.7 }
       },
       {
         formattedAddress: 'Puerh Brooklyn, Brooklyn, NY, USA',
@@ -603,7 +603,7 @@ export const fixtures = {
         zipcode: '11211',
         streetName: 'Grand Street',
         streetNumber: '174',
-        extra: { confidence: 0.7000000000000001 }
+        extra: { confidence: 0.7 }
       },
       {
         formattedAddress: 'Kam Sing, Brooklyn, NY, USA',
@@ -617,7 +617,7 @@ export const fixtures = {
         zipcode: undefined,
         streetName: undefined,
         streetNumber: undefined,
-        extra: { confidence: 0.7000000000000001 }
+        extra: { confidence: 0.7 }
       },
       {
         formattedAddress: '178 Grand Street, Brooklyn, NY, USA',
@@ -631,7 +631,7 @@ export const fixtures = {
         zipcode: '11211',
         streetName: 'Grand Street',
         streetNumber: '178',
-        extra: { confidence: 0.7000000000000001 }
+        extra: { confidence: 0.7 }
       }
     ]
   }

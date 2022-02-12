@@ -36,7 +36,7 @@ export class HereGeocoder extends AbstractGeocoder {
         building: any;
         extra: {
             id: any;
-            confidence: any;
+            confidence: number;
         };
     };
 }

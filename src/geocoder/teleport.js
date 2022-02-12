@@ -4,7 +4,7 @@
  */
 
 import { AbstractGeocoder } from './abstract.js'
-import { HttpError } from '../utils/index.js'
+import { HttpError, toFixed } from '../utils/index.js'
 
 /** @typedef {import('../adapter').fetchAdapterFn} fetchAdapterFn */
 
@@ -137,7 +137,7 @@ export class TeleportGeocoder extends AbstractGeocoder {
     }
     if (result.distance_km) {
       extra.distanceKm = result.distance_km
-      extra.confidence = Math.max(0, 25 - result.distance_km) / 25 * 10
+      extra.confidence = toFixed(Math.max(0, 25 - result.distance_km) / 25 * 10)
     }
     if (result.matching_full_name) {
       extra.matchingFullName = result.matching_full_name

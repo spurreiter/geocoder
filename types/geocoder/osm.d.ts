@@ -78,7 +78,7 @@ export class OsmGeocoder extends AbstractGeocoder {
         neighbourhood: any;
         extra: {
             id: any;
-            confidence: any;
+            confidence: number;
             bbox: number[] | undefined;
         };
     };

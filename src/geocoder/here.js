@@ -1,5 +1,5 @@
 import { AbstractGeocoder } from './abstract.js'
-import { HttpError, countryCode } from '../utils/index.js'
+import { HttpError, countryCode, toFixed } from '../utils/index.js'
 
 /** @typedef {import('../adapter').fetchAdapterFn} fetchAdapterFn */
 
@@ -130,7 +130,7 @@ export class HereGeocoder extends AbstractGeocoder {
       building: address.building,
       extra: {
         id: id,
-        confidence: scoring.queryScore || 0
+        confidence: toFixed(scoring.queryScore || 0)
       }
     }
 

@@ -1,5 +1,5 @@
 import { AbstractGeocoder } from './abstract.js'
-import { HttpError, toUpperCase } from '../utils/index.js'
+import { HttpError, toFixed, toUpperCase } from '../utils/index.js'
 
 /** @typedef {import('../adapter').fetchAdapterFn} fetchAdapterFn */
 
@@ -147,7 +147,7 @@ export class LocationIqGeocoder extends AbstractGeocoder {
       streetNumber: address.house_number,
       extra: {
         id,
-        confidence: importance || 0,
+        confidence: toFixed(importance || 0),
         type,
         addrType,
         bbox: toBbox(boundingbox)

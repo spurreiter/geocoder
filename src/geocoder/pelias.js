@@ -1,5 +1,5 @@
 import { AbstractGeocoder } from './abstract.js'
-import { HttpError, countryCode } from '../utils/index.js'
+import { HttpError, countryCode, toFixed } from '../utils/index.js'
 
 /** @typedef {import('../adapter').fetchAdapterFn} fetchAdapterFn */
 
@@ -104,7 +104,7 @@ export class PeliasGeocoder extends AbstractGeocoder {
 
   _formatResult (result = {}) {
     const { geometry = {}, properties = {} } = result
-    const confidence = properties.confidence < 1 ? properties.confidence - 0.1 : 1
+    const confidence = properties.confidence < 1 ? toFixed(properties.confidence - 0.1) : 1
 
     const formatted = {
       formattedAddress: properties.label,
