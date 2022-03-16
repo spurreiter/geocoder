@@ -59,25 +59,25 @@
     "recursive": true
   },
   "dependencies": {
-    "agentkeepalive": "^4.2.0",
+    "agentkeepalive": "^4.2.1",
     "got": "^11.8.3",
-    "i18n-iso-countries": "^7.2.0"
+    "i18n-iso-countries": "^7.3.0"
   },
   "devDependencies": {
-    "@types/node": "^16.11.21",
+    "@types/node": "^16.11.26",
     "c8": "^7.11.0",
-    "dotenv": "^15.0.0",
+    "dotenv": "^15.0.1",
     "eslint": "^7.32.0",
     "eslint-config-standard": "^16.0.3",
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.3.1",
-    "mocha": "^9.2.0",
+    "mocha": "^9.2.2",
     "npm-run-all": "^4.1.5",
     "rimraf": "^3.0.2",
-    "rollup": "^2.66.1",
-    "sinon": "^13.0.0",
-    "typescript": "^4.5.5"
+    "rollup": "^2.70.1",
+    "sinon": "^13.0.1",
+    "typescript": "^4.6.2"
   },
   "engines": {
     "node": ">=14"
