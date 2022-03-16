@@ -24,6 +24,16 @@ export class PeliasGeocoder extends AbstractGeocoder {
     params: {};
     get endpoint(): string;
     get revEndpoint(): string;
+    /**
+     * @param {string|PeliasForwardQuery} query
+     * @returns {Promise<object>}
+     */
+    _forward(query: string | PeliasForwardQuery): Promise<object>;
+    /**
+     * @param {PeliasReverseQuery} query
+     * @returns {Promise<object>}
+     */
+    _reverse(query: PeliasReverseQuery): Promise<object>;
     _formatResult(result?: {}): {
         formattedAddress: any;
         latitude: any;

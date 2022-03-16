@@ -62,6 +62,16 @@ export class OsmGeocoder extends AbstractGeocoder {
         email?: string | undefined;
         dedupe?: number | undefined;
     };
+    /**
+     * @param {string|OsmForwardQuery} query
+     * @returns {Promise<object>}
+     */
+    _forward(query: string | OsmForwardQuery): Promise<object>;
+    /**
+     * @param {OsmReverseQuery} query
+     * @returns {Promise<object>}
+     */
+    _reverse(query: OsmReverseQuery): Promise<object>;
     _formatResult(result?: {}): {
         formattedAddress: any;
         latitude: number;

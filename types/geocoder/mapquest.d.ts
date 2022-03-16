@@ -44,6 +44,16 @@ export class MapQuestGeocoder extends AbstractGeocoder {
     };
     endpoint: string;
     revEndpoint: string;
+    /**
+     * @param {string|MapQuestForwardQuery} query
+     * @returns {Promise<object>}
+     */
+    _forward(query: string | MapQuestForwardQuery): Promise<object>;
+    /**
+     * @param {MapQuestReverseQuery} query
+     * @returns {Promise<object>}
+     */
+    _reverse(query: MapQuestReverseQuery): Promise<object>;
     _formatResult(result?: {}): {
         formattedAddress: string;
         latitude: any;

@@ -40,6 +40,16 @@ export class MapBoxGeocoder extends AbstractGeocoder {
         language?: string | undefined;
     };
     get endpoint(): string;
+    /**
+     * @param {string|MapBoxForwardQuery} query
+     * @returns {Promise<object>}
+     */
+    _forward(query: string | MapBoxForwardQuery): Promise<object>;
+    /**
+     * @param {MapBoxReverseQuery} query
+     * @returns {Promise<object>}
+     */
+    _reverse(query: MapBoxReverseQuery): Promise<object>;
     _formatResult(result: any): {
         formattedAddress: any;
         latitude: any;

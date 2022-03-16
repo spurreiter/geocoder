@@ -185,7 +185,7 @@ export const fixtures = {
     countryCode: 'US',
     state: 'NY',
     region: 'Kings Co.',
-    city: 'Williamsburg',
+    city: 'Brooklyn',
     zipcode: '11211',
     streetName: '279 Bedford Ave',
     extra: {

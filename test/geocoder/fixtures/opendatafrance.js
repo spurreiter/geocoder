@@ -315,7 +315,7 @@ export const fixtures = {
     city: 'Paris',
     zipcode: '75008',
     citycode: '75108',
-    extra: { id: '75108_1733', confidence: 0.5657 },
+    extra: { id: '75108_1733', confidence: 0.5656 },
     streetName: 'Avenue des Champs Elysées'
   },
   reverse: {

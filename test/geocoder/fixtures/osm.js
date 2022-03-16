@@ -111,7 +111,7 @@ export const fixtures = {
     district: undefined,
     streetName: 'Avenue des Champs-Élysées',
     streetNumber: undefined,
-    neighbourhood: undefined,
+    neighbourhood: 'Paris 8e Arrondissement',
     extra: {
       id: 531017858,
       confidence: 0.511,
@@ -119,7 +119,7 @@ export const fixtures = {
     }
   },
   reverse: {
-    formattedAddress: '279, Bedford Avenue, Williamsburg, Brooklyn, New York, 11211, United States',
+    formattedAddress: '279, Bedford Avenue, Brooklyn, New York, 11211, United States',
     latitude: 40.714205,
     longitude: -73.96131519274765,
     country: 'United States',

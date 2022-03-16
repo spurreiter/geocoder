@@ -33,6 +33,16 @@ export class GoogleGeocoder extends AbstractGeocoder {
         language?: string | undefined;
     };
     get endpoint(): string;
+    /**
+     * @param {string|GoogleForwardQuery} query
+     * @returns {Promise<object>}
+     */
+    _forward(query?: string | GoogleForwardQuery): Promise<object>;
+    /**
+     * @param {GoogleReverseQuery} query
+     * @returns {Promise<object>}
+     */
+    _reverse(query: GoogleReverseQuery): Promise<object>;
     _formatResult(result: any): {
         formattedAddress: any;
         latitude: any;

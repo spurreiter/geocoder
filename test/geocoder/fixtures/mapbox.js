@@ -960,7 +960,7 @@ export const fixtures = {
     streetNumber: '1',
     neighbourhood: 'Plateau',
     extra: {
-      id: 'address.2516391937692428',
+      id: 'address.5063473844963450',
       category: undefined,
       bbox: undefined
     }
@@ -979,7 +979,7 @@ export const fixtures = {
     streetNumber: '277',
     neighbourhood: 'Williamsburg',
     extra: {
-      id: 'address.4999443678706686',
+      id: 'address.6020404286347652',
       category: undefined,
       bbox: undefined
     }

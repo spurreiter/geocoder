@@ -41,6 +41,16 @@ export class ArcGisGeocoder extends AbstractGeocoder {
     get endpoint(): string;
     get revEndpoint(): string;
     /**
+     * @param {string|ArcGisForwardQuery} query
+     * @returns {Promise<object>}
+     */
+    _forward(query?: string | ArcGisForwardQuery): Promise<object>;
+    /**
+     * @param {ArcGisReverseQuery} query
+     * @returns {Promise<object>}
+     */
+    _reverse(query: ArcGisReverseQuery): Promise<object>;
+    /**
      * format forward geocoding results
      * @param {object} result
      * @returns {object}

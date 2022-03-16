@@ -24,6 +24,16 @@ export class LocationIqGeocoder extends AbstractGeocoder {
     };
     endpoint: string;
     revEndpoint: string;
+    /**
+     * @param {string|LocationIqForwardQuery} query
+     * @returns {Promise<object>}
+     */
+    _forward(query: string | LocationIqForwardQuery): Promise<object>;
+    /**
+     * @param {LocationIqReverseQuery} query
+     * @returns {Promise<object>}
+     */
+    _reverse(query: LocationIqReverseQuery): Promise<object>;
     _formatResult(result: any): {
         formattedAddress: any;
         latitude: any;

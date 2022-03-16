@@ -32,6 +32,11 @@ export class GeoLite2Geocoder extends AbstractGeocoder {
             authorization: string;
         };
     } | undefined;
+    /**
+     * @param {string|GeoLite2ForwardQuery} query
+     * @returns {Promise<object>}
+     */
+    _forward(query?: string | GeoLite2ForwardQuery): Promise<object>;
     _formatResult(language: any, result?: {}): {
         ip: any;
         latitude: any;

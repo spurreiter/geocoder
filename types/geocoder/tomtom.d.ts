@@ -43,6 +43,16 @@ export class TomTomGeocoder extends AbstractGeocoder {
     get endpoint(): string;
     get revEndpoint(): string;
     /**
+     * @param {string|TomTomForwardQuery} query
+     * @returns {Promise<object>}
+     */
+    _forward(query?: string | TomTomForwardQuery): Promise<object>;
+    /**
+     * @param {TomTomReverseQuery} query
+     * @returns {Promise<object>}
+     */
+    _reverse(query: TomTomReverseQuery): Promise<object>;
+    /**
      * format forward geocoding results
      * @param {object} result
      * @returns {object}

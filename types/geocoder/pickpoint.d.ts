@@ -36,6 +36,13 @@ export class PickpointGeocoder extends OsmGeocoder {
         limit?: number | undefined;
         language?: string | undefined;
     });
+    params: {
+        key: string;
+        format: string;
+        addressdetails: number;
+        limit?: number | undefined;
+        language?: string | undefined;
+    };
 }
 export type fetchAdapterFn = import('../adapter').fetchAdapterFn;
 /**

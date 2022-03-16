@@ -39,6 +39,17 @@ export class GeocodioGeocoder extends AbstractGeocoder {
     };
     get endpoint(): string;
     get revEndpoint(): string;
+    /**
+     * @see https://www.geocod.io/docs/#single-address
+     * @param {string|GeocodioForwardQuery} query
+     * @returns {Promise<object>}
+     */
+    _forward(query: string | GeocodioForwardQuery): Promise<object>;
+    /**
+     * @param {GeocodioReverseQuery} query
+     * @returns {Promise<object>}
+     */
+    _reverse(query: GeocodioReverseQuery): Promise<object>;
     _formatResult(result: any): {
         formattedAddress: any;
         latitude: any;

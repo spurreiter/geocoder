@@ -20,6 +20,18 @@ export class HereGeocoder extends AbstractGeocoder {
     };
     get endpoint(): string;
     get revEndpoint(): string;
+    /**
+     * @see https://developer.here.com/documentation/geocoding-search-api/api-reference-swagger.html
+     * @param {string|HereForwardQuery} query
+     * @returns {Promise<object>}
+     */
+    _forward(query: string | HereForwardQuery): Promise<object>;
+    /**
+     * @see https://developer.here.com/documentation/geocoding-search-api/api-reference-swagger.html
+     * @param {HereReverseQuery} query
+     * @returns {Promise<object>}
+     */
+    _reverse(query: HereReverseQuery): Promise<object>;
     _formatResult(result: any): {
         formattedAddress: any;
         latitude: any;

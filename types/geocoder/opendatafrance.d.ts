@@ -31,6 +31,16 @@ export class OpendataFranceGeocoder extends AbstractGeocoder {
     };
     get endpoint(): string;
     get revEndpoint(): string;
+    /**
+     * @param {string|OpendataFranceForwardQuery} query
+     * @returns {Promise<object>}
+     */
+    _forward(query: string | OpendataFranceForwardQuery): Promise<object>;
+    /**
+     * @param {OpendataFranceReverseQuery} query
+     * @returns {Promise<object>}
+     */
+    _reverse(query: OpendataFranceReverseQuery): Promise<object>;
     _formatResult(result: any): {
         formattedAddress: any;
         latitude: any;

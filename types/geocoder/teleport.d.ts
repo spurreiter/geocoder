@@ -21,6 +21,16 @@ export class TeleportGeocoder extends AbstractGeocoder {
     params: any;
     get endpoint(): string;
     get revEndpoint(): string;
+    /**
+     * @param {string|TeleportForwardQuery} query
+     * @returns {Promise<object>}
+     */
+    _forward(query: string | TeleportForwardQuery): Promise<object>;
+    /**
+     * @param {TeleportReverseQuery} query
+     * @returns {Promise<object>}
+     */
+    _reverse(query: TeleportReverseQuery): Promise<object>;
     _formatResult(cityRelationName: any, result: any): {
         latitude: any;
         longitude: any;

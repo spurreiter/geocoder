@@ -33,6 +33,16 @@ export class YandexGeocoder extends AbstractGeocoder {
         language?: string | undefined;
     };
     get endpoint(): string;
+    /**
+     * @param {string|YandexForwardQuery} query
+     * @returns {Promise<object>}
+     */
+    _forward(query: string | YandexForwardQuery): Promise<object>;
+    /**
+     * @param {YandexReverseQuery} query
+     * @returns {Promise<object>}
+     */
+    _reverse(query: YandexReverseQuery): Promise<object>;
     _formatResult(result: any): {
         formattedAddress: any;
         latitude: any;

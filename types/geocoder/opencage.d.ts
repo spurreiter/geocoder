@@ -25,6 +25,16 @@ export class OpenCageGeocoder extends AbstractGeocoder {
         key: string;
     };
     get endpoint(): string;
+    /**
+     * @param {string|OpenCageForwardQuery} query
+     * @returns {Promise<object>}
+     */
+    _forward(query: string | OpenCageForwardQuery): Promise<object>;
+    /**
+     * @param {OpenCageReverseQuery} query
+     * @returns {Promise<object>}
+     */
+    _reverse(query: OpenCageReverseQuery): Promise<object>;
     _formatResult(result: any): {
         formattedAddress: any;
         latitude: any;

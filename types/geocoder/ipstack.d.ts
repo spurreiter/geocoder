@@ -8,6 +8,10 @@ export class IpStackGeocoder extends AbstractGeocoder {
     constructor(adapter: fetchAdapterFn, options?: object);
     params: any;
     get endpoint(): string;
+    /**
+     * @param {object|string} query
+     */
+    _forward(query?: object | string): Promise<any[]>;
     _formatResult(result?: {}): {
         ip: any;
         latitude: any;

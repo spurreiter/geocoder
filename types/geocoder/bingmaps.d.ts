@@ -36,6 +36,16 @@ export class BingMapsGeocoder extends AbstractGeocoder {
     };
     get endpoint(): string;
     /**
+     * @param {BingMapsForwardQuery|string} query
+     * @returns {Promise<object>}
+     */
+    _forward(query?: BingMapsForwardQuery | string): Promise<object>;
+    /**
+     * @param {BingMapsReverseQuery} query
+     * @returns {Promise<object>}
+     */
+    _reverse(query: BingMapsReverseQuery): Promise<object>;
+    /**
      * @see https://docs.microsoft.com/en-us/bingmaps/rest-services/locations/location-data
      */
     _formatResult(result: any): {
