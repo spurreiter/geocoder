@@ -442,7 +442,7 @@ export const fixtures = {
     zipcode: '75460',
     streetName: undefined,
     streetNumber: undefined,
-    extra: { confidence: 0.23 }
+    extra: { confidence: 0.4 }
   },
   reverse: {
     formattedAddress: '279 Bedford Ave, Brooklyn, NY 11211',

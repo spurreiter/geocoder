@@ -175,7 +175,7 @@ export class TomTomGeocoder extends AbstractGeocoder {
       id,
       confidence: toFixed(score / 10),
       placeName: localName,
-      type: type,
+      type,
       bbox: [xmin, ymin, xmax, ymax]
     }
 

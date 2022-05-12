@@ -180,15 +180,15 @@ export class GoogleGeocoder extends AbstractGeocoder {
       formattedAddress: formatted_address,
       latitude: geometry?.location?.lat,
       longitude: geometry?.location?.lng,
-      country: country,
-      countryCode: countryCode,
+      country,
+      countryCode,
       state: administrativeAreaLevel1,
       region: administrativeAreaLevel2,
       district: administrativeAreaLevel3,
       city: locality || postalTown,
       zipcode: postalCode,
       streetName: route,
-      streetNumber: streetNumber,
+      streetNumber,
       extra
     }
 

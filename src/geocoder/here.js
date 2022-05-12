@@ -129,7 +129,7 @@ export class HereGeocoder extends AbstractGeocoder {
       streetNumber: address.houseNumber,
       building: address.building,
       extra: {
-        id: id,
+        id,
         confidence: toFixed(scoring.queryScore || 0)
       }
     }

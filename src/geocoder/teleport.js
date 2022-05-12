@@ -151,7 +151,7 @@ export class TeleportGeocoder extends AbstractGeocoder {
       countryCode: country.iso_alpha2,
       state: admin1.name,
       stateCode: admin1.geonames_admin1_code,
-      extra: extra
+      extra
     }
   }
 }

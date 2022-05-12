@@ -35,7 +35,7 @@ describe('fetchAdapter', function () {
   })
 
   it('shall fetch with options', async function () {
-    const res = await fetchAdapter()({ url: url, method: 'POST' })
+    const res = await fetchAdapter()({ url, method: 'POST' })
     assert.strictEqual(res.status, 200)
     const obj = await res.json()
     assert.deepStrictEqual(obj, {
