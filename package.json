@@ -40,7 +40,7 @@
   },
   "main": "./lib/index.cjs",
   "module": "./src/index.js",
-  "types": "./src/index.d.ts",
+  "types": "./types",
   "directories": {
     "lib": "lib",
     "example": "examples",
