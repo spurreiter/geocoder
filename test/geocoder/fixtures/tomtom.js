@@ -184,7 +184,7 @@ export const fixtures = {
     streetName: 'Avenue des Champs-Élysées & Galerie Élysée 26',
     streetNumber: undefined,
     extra: {
-      id: 'FR/XSTR/p0/1526536',
+      id: 'FR/XSTR/p1/54993',
       confidence: 0.495,
       placeName: 'Paris',
       type: 'Cross Street',
