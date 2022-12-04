@@ -100,8 +100,8 @@ export const fixtures = {
   },
   forward: {
     formattedAddress: 'Métro 1, Avenue des Champs-Élysées, Quartier du Faubourg-du-Roule, Paris 8e Arrondissement, Paris, Île-de-France, France métropolitaine, 75008, France',
-    latitude: 48.8725402,
-    longitude: 2.2988364,
+    latitude: 48.8677231,
+    longitude: 2.3140959,
     country: 'France',
     countryCode: 'FR',
     state: 'Île-de-France',
@@ -114,12 +114,12 @@ export const fixtures = {
     neighbourhood: undefined,
     extra: {
       confidence: 0.5101,
-      id: 531016422,
+      id: 531017871,
       bbox: [
-        2.2960309,
-        48.871941,
-        2.3008011,
-        48.8742293
+        2.3097952,
+        48.8673226,
+        2.3153244,
+        48.869063
       ]
     }
   },
