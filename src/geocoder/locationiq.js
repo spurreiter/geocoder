@@ -1,7 +1,7 @@
 import { AbstractGeocoder } from './abstract.js'
 import { HttpError, toFixed, toUpperCase } from '../utils/index.js'
 
-/** @typedef {import('../adapter').fetchAdapterFn} fetchAdapterFn */
+/** @typedef {import('../adapter.js').fetchAdapterFn} fetchAdapterFn */
 
 /**
  * @typedef {object} LocationIqForwardQuery

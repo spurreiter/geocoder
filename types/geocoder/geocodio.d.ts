@@ -1,4 +1,4 @@
-/** @typedef {import('../adapter').fetchAdapterFn} fetchAdapterFn */
+/** @typedef {import('../adapter.js').fetchAdapterFn} fetchAdapterFn */
 /**
  * see https://www.geocod.io/docs/#single-address
  * @typedef {object} GeocodioForwardQuery
@@ -67,7 +67,7 @@ export class GeocodioGeocoder extends AbstractGeocoder {
         };
     };
 }
-export type fetchAdapterFn = import('../adapter').fetchAdapterFn;
+export type fetchAdapterFn = import('../adapter.js').fetchAdapterFn;
 /**
  * see https://www.geocod.io/docs/#single-address
  */

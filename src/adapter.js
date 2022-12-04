@@ -1,5 +1,6 @@
+// @ts-expect-error
 import got from 'got'
-// @ts-ignore
+// @ts-expect-error
 import HttpAgent from 'agentkeepalive'
 import { isNumber } from './utils/index.js'
 const { HttpsAgent } = HttpAgent

@@ -65,7 +65,7 @@ export class TomTomGeocoder extends AbstractGeocoder {
      */
     _formatResultRev(result: object): object;
 }
-export type fetchAdapterFn = import('../adapter').fetchAdapterFn;
+export type fetchAdapterFn = import('../adapter.js').fetchAdapterFn;
 /**
  * see https://developer.tomtom.com/search-api/documentation/geocoding-service/geocode
  */

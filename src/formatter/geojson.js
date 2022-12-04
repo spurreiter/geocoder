@@ -14,6 +14,7 @@
  */
 const featureCollection = (
   features,
+  // @ts-expect-error
   { license, attribution, query } = {}
 ) => ({
   type: 'FeatureCollection',

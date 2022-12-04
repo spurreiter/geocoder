@@ -5,7 +5,7 @@
     "checkJs": true,
     "declaration": true,
     "declarationDir": "types",
-    "moduleResolution": "node",
+    // "moduleResolution": "node",
     "noImplicitAny": false,
     "strict": true,
     "target": "ES2021"

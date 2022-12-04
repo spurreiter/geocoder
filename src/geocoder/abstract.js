@@ -7,7 +7,7 @@ const wrapError400 = (err) => {
   return err
 }
 
-/** @typedef {import('../adapter').fetchAdapterFn} fetchAdapterFn */
+/** @typedef {import('../adapter.js').fetchAdapterFn} fetchAdapterFn */
 /** @typedef {import('../types').ForwardQuery} ForwardQuery */
 /** @typedef {import('../types').ReverseQuery} ReverseQuery */
 /** @typedef {import('../types').GeocoderResult} GeocoderResult */

@@ -173,7 +173,7 @@ describe('TeleportGeocoder', function () {
       const results = await geocoder.forward(query)
       // eslint-disable-next-line no-console
       if (SHOW_LOG) console.dir(results[0], { depth: null })
-      assert.deepStrictEqual(fixtures.forward, results[0])
+      assert.deepStrictEqual(results[0], fixtures.forward)
     })
 
     it('should call reverse api', async function () {
@@ -181,7 +181,7 @@ describe('TeleportGeocoder', function () {
       const results = await geocoder.reverse(query)
       // eslint-disable-next-line no-console
       if (SHOW_LOG) console.dir(results[0], { depth: null })
-      assert.deepStrictEqual(fixtures.reverse, results[0])
+      assert.deepStrictEqual(results[0], fixtures.reverse)
     })
   })
 })

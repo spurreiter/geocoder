@@ -171,9 +171,9 @@ export const fixtures = {
     ]
   },
   forward: {
-    formattedAddress: 'Avenue des Champs-Élysées & Galerie Élysée 26, 75008 Paris',
-    latitude: 48.86943,
-    longitude: 2.30896,
+    formattedAddress: '1 Arcades des Champs-Élysées, 75008 Paris',
+    latitude: 48.87173,
+    longitude: 2.30453,
     country: 'France',
     countryCode: 'FR',
     state: 'Île-de-France',
@@ -181,14 +181,19 @@ export const fixtures = {
     district: '8ème Arrondissement',
     city: 'Paris',
     zipcode: '75008',
-    streetName: 'Avenue des Champs-Élysées & Galerie Élysée 26',
-    streetNumber: undefined,
+    streetName: 'Arcades des Champs-Élysées',
+    streetNumber: '1',
     extra: {
-      id: 'FR/XSTR/p1/54993',
-      confidence: 0.495,
+      confidence: 0.744,
+      id: 'FR/PAD/p1/2120589',
       placeName: 'Paris',
-      type: 'Cross Street',
-      bbox: [2.30759, 48.86853, 2.31033, 48.87033]
+      type: 'Point Address',
+      bbox: [
+        2.30316,
+        48.87083,
+        2.3059,
+        48.87263
+      ]
     }
   },
   reverse: {

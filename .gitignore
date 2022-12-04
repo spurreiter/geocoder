@@ -106,3 +106,5 @@ dist
 coverage
 lib
 
+pnpm-lock.yaml
+package-lock.json

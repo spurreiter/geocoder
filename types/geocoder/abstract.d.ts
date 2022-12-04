@@ -1,4 +1,4 @@
-/** @typedef {import('../adapter').fetchAdapterFn} fetchAdapterFn */
+/** @typedef {import('../adapter.js').fetchAdapterFn} fetchAdapterFn */
 /** @typedef {import('../types').ForwardQuery} ForwardQuery */
 /** @typedef {import('../types').ReverseQuery} ReverseQuery */
 /** @typedef {import('../types').GeocoderResult} GeocoderResult */
@@ -75,7 +75,7 @@ export class AbstractGeocoder {
      */
     protected _reverse(query: string | ReverseQuery): Promise<GeocoderResult[]>;
 }
-export type fetchAdapterFn = import('../adapter').fetchAdapterFn;
+export type fetchAdapterFn = import('../adapter.js').fetchAdapterFn;
 export type ForwardQuery = import('../types').ForwardQuery;
 export type ReverseQuery = import('../types').ReverseQuery;
 export type GeocoderResult = import('../types').GeocoderResult;

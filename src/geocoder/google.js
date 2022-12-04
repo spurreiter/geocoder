@@ -1,7 +1,7 @@
 import { AbstractGeocoder } from './abstract.js'
 import { HttpError } from '../utils/index.js'
 
-/** @typedef {import('../adapter').fetchAdapterFn} fetchAdapterFn */
+/** @typedef {import('../adapter.js').fetchAdapterFn} fetchAdapterFn */
 
 // status can be "OK", "ZERO_RESULTS", "OVER_QUERY_LIMIT", "REQUEST_DENIED", "INVALID_REQUEST", or "UNKNOWN_ERROR"
 const NO_ERROR = ['OK', 'ZERO_RESULTS']

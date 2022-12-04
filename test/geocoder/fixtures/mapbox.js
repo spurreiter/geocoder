@@ -947,7 +947,7 @@ export const fixtures = {
     ]
   },
   forward: {
-    formattedAddress: '1 Rue Des Champs Élysées, 94250 Gentilly, France',
+    formattedAddress: '1 Rue Des Champs-Élysées, 94250 Gentilly, France',
     latitude: 48.816295,
     longitude: 2.33955,
     country: 'France',
@@ -956,11 +956,11 @@ export const fixtures = {
     city: 'Gentilly',
     zipcode: '94250',
     district: undefined,
-    streetName: 'Rue Des Champs Élysées',
+    streetName: 'Rue Des Champs-Élysées',
     streetNumber: '1',
     neighbourhood: 'Plateau',
     extra: {
-      id: 'address.4146536091534584',
+      id: 'address.7806810436580594',
       category: undefined,
       bbox: undefined
     }
@@ -979,7 +979,7 @@ export const fixtures = {
     streetNumber: '277',
     neighbourhood: 'Williamsburg',
     extra: {
-      id: 'address.5261011985504878',
+      id: 'address.1746218927668200',
       category: undefined,
       bbox: undefined
     }

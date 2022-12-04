@@ -59,7 +59,7 @@ export class GoogleGeocoder extends AbstractGeocoder {
         extra: any;
     };
 }
-export type fetchAdapterFn = import('../adapter').fetchAdapterFn;
+export type fetchAdapterFn = import('../adapter.js').fetchAdapterFn;
 /**
  * see https://developers.google.com/maps/documentation/geocoding/overview#GeocodingRequests
  */

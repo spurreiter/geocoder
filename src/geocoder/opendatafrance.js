@@ -1,7 +1,7 @@
 import { AbstractGeocoder } from './abstract.js'
 import { HttpError, toFixed } from '../utils/index.js'
 
-/** @typedef {import('../adapter').fetchAdapterFn} fetchAdapterFn */
+/** @typedef {import('../adapter.js').fetchAdapterFn} fetchAdapterFn */
 
 /**
  * see https://geo.api.gouv.fr/adresse

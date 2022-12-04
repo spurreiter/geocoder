@@ -1,7 +1,7 @@
 import { AbstractGeocoder } from './abstract.js'
 import { HttpError, countryCode as countryCodeF, toFixed } from '../utils/index.js'
 
-/** @typedef {import('../adapter').fetchAdapterFn} fetchAdapterFn */
+/** @typedef {import('../adapter.js').fetchAdapterFn} fetchAdapterFn */
 
 const undef = (s) => s === '' ? undefined : s
 

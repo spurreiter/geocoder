@@ -130,7 +130,7 @@ describe('GeoLite2Geocoder', function () {
       const results = await geocoder.forward(query)
       // eslint-disable-next-line no-console
       if (SHOW_LOG) console.dir(results[0], { depth: null })
-      assert.deepStrictEqual(fixtures.forward, results[0])
+      assert.deepStrictEqual(results[0], fixtures.forward)
     })
 
     itWithApiKey(apiKey, 'should not call reverse api', async function () {

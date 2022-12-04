@@ -1,4 +1,4 @@
-/** @typedef {import('../adapter').fetchAdapterFn} fetchAdapterFn */
+/** @typedef {import('../adapter.js').fetchAdapterFn} fetchAdapterFn */
 /**
  * see https://pickpoint.io/api-reference#forward-geocoding
  * @typedef {object} PickpointForwardQuery
@@ -44,7 +44,7 @@ export class PickpointGeocoder extends OsmGeocoder {
         language?: string | undefined;
     };
 }
-export type fetchAdapterFn = import('../adapter').fetchAdapterFn;
+export type fetchAdapterFn = import('../adapter.js').fetchAdapterFn;
 /**
  * see https://pickpoint.io/api-reference#forward-geocoding
  */

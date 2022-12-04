@@ -1,4 +1,4 @@
-/** @typedef {import('../adapter').fetchAdapterFn} fetchAdapterFn */
+/** @typedef {import('../adapter.js').fetchAdapterFn} fetchAdapterFn */
 /**
  * @typedef {object} MapQuestForwardQuery
  * @property {string} address -
@@ -72,7 +72,7 @@ export class MapQuestGeocoder extends AbstractGeocoder {
         };
     };
 }
-export type fetchAdapterFn = import('../adapter').fetchAdapterFn;
+export type fetchAdapterFn = import('../adapter.js').fetchAdapterFn;
 export type MapQuestForwardQuery = {
     /**
      * -

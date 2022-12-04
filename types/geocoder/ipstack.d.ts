@@ -24,5 +24,5 @@ export class IpStackGeocoder extends AbstractGeocoder {
         zipcode: any;
     };
 }
-export type fetchAdapterFn = import('../adapter').fetchAdapterFn;
+export type fetchAdapterFn = import('../adapter.js').fetchAdapterFn;
 import { AbstractGeocoder } from "./abstract.js";

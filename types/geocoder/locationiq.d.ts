@@ -56,7 +56,7 @@ export class LocationIqGeocoder extends AbstractGeocoder {
         };
     };
 }
-export type fetchAdapterFn = import('../adapter').fetchAdapterFn;
+export type fetchAdapterFn = import('../adapter.js').fetchAdapterFn;
 export type LocationIqForwardQuery = {
     address: string;
     language?: string | undefined;

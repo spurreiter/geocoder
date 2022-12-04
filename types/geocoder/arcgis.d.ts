@@ -63,7 +63,7 @@ export class ArcGisGeocoder extends AbstractGeocoder {
      */
     _formatResultRev(language: any, result: object): object;
 }
-export type fetchAdapterFn = import('../adapter').fetchAdapterFn;
+export type fetchAdapterFn = import('../adapter.js').fetchAdapterFn;
 /**
  * see https://developers.arcgis.com/rest/geocode/api-reference/geocoding-find-address-candidates.htm
  */

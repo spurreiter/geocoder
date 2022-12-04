@@ -1,4 +1,4 @@
-/** @typedef {import('../adapter').fetchAdapterFn} fetchAdapterFn */
+/** @typedef {import('../adapter.js').fetchAdapterFn} fetchAdapterFn */
 /**
  * see https://geo.api.gouv.fr/adresse
  * @typedef {object} OpendataFranceForwardQuery
@@ -57,7 +57,7 @@ export class OpendataFranceGeocoder extends AbstractGeocoder {
         };
     };
 }
-export type fetchAdapterFn = import('../adapter').fetchAdapterFn;
+export type fetchAdapterFn = import('../adapter.js').fetchAdapterFn;
 /**
  * see https://geo.api.gouv.fr/adresse
  */

@@ -6,7 +6,7 @@
 import { AbstractGeocoder } from './abstract.js'
 import { HttpError, toFixed } from '../utils/index.js'
 
-/** @typedef {import('../adapter').fetchAdapterFn} fetchAdapterFn */
+/** @typedef {import('../adapter.js').fetchAdapterFn} fetchAdapterFn */
 
 function getEmbeddedPath (parent, path, def) {
   const elements = path.split('/')

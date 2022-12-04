@@ -1,4 +1,4 @@
-/** @typedef {import('../adapter').fetchAdapterFn} fetchAdapterFn */
+/** @typedef {import('../adapter.js').fetchAdapterFn} fetchAdapterFn */
 /**
  * see https://developer.mapquest.com/documentation/open/nominatim-search/search/
  * @typedef {object} OpenMapQuestForwardQuery
@@ -44,7 +44,7 @@ export class OpenMapQuestGeocoder extends OsmGeocoder {
         language?: string | undefined;
     };
 }
-export type fetchAdapterFn = import('../adapter').fetchAdapterFn;
+export type fetchAdapterFn = import('../adapter.js').fetchAdapterFn;
 /**
  * see https://developer.mapquest.com/documentation/open/nominatim-search/search/
  */

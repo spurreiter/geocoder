@@ -46,7 +46,7 @@ export class TeleportGeocoder extends AbstractGeocoder {
         };
     };
 }
-export type fetchAdapterFn = import('../adapter').fetchAdapterFn;
+export type fetchAdapterFn = import('../adapter.js').fetchAdapterFn;
 export type TeleportForwardQuery = {
     address: string;
 };

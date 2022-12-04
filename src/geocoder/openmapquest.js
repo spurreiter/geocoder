@@ -1,6 +1,6 @@
 import { OsmGeocoder } from './osm.js'
 
-/** @typedef {import('../adapter').fetchAdapterFn} fetchAdapterFn */
+/** @typedef {import('../adapter.js').fetchAdapterFn} fetchAdapterFn */
 
 /**
  * see https://developer.mapquest.com/documentation/open/nominatim-search/search/

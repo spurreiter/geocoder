@@ -99,24 +99,29 @@ export const fixtures = {
     ]
   },
   forward: {
-    formattedAddress: "Hôtel des Champs Élysée, Rue d'Artois, Quartier du Faubourg-du-Roule, 8th Arrondissement of Paris, Paris, Ile-de-France, Metropolitan France, 75008, France",
-    latitude: '48.8723588',
-    longitude: '2.3088888',
+    formattedAddress: 'Paris 08 Elysee, Paris, France',
+    latitude: '48.8763',
+    longitude: '2.3183',
+    region: undefined,
+    state: 'Paris',
     country: 'France',
     countryCode: 'FR',
-    state: 'Ile-de-France',
-    region: 'Metropolitan France',
     county: undefined,
-    city: 'Paris',
-    zipcode: '75008',
-    streetName: "Rue d'Artois",
+    city: 'Paris 08 Elysee',
+    zipcode: undefined,
+    streetName: undefined,
     streetNumber: undefined,
     extra: {
-      id: '44871447',
-      confidence: 0.211,
-      type: 'hotel',
-      addrType: 'tourism',
-      bbox: ['2.3088388', '48.8723088', '2.3089388', '48.8724088']
+      confidence: 0.15,
+      id: '331177587960',
+      type: undefined,
+      addrType: undefined,
+      bbox: [
+        '2.3183',
+        '48.8763',
+        '2.3183',
+        '48.8763'
+      ]
     }
   },
   reverse: {

@@ -215,9 +215,9 @@ export const fixtures = {
     ]
   },
   forward: {
-    formattedAddress: '1 Port des Champs Elysées, 75008, 8e Arrondissement, Paris, Île-de-France, FRA',
-    latitude: 48.8641930040271,
-    longitude: 2.3143390204358525,
+    formattedAddress: '1 Arcades des Champs Elysées, 75008, 8e Arrondissement, Paris, Île-de-France, FRA',
+    latitude: 48.87173298693807,
+    longitude: 2.3045290085973704,
     country: 'France',
     countryCode: 'FR',
     state: 'Île-de-France',
@@ -232,10 +232,10 @@ export const fixtures = {
       addrType: 'PointAddress',
       rank: 20,
       bbox: [
-        2.3133390204358526,
-        48.8631930040271,
-        2.3153390204358524,
-        48.8651930040271
+        2.3035290085973705,
+        48.87073298693807,
+        2.3055290085973703,
+        48.87273298693807
       ]
     }
   },

@@ -157,23 +157,23 @@ export const fixtures = {
     ]
   },
   forward: {
-    formattedAddress: '1 Port des Champs-Élysées, 75008 Paris, France',
-    latitude: 48.8642334,
-    longitude: 2.3153574,
+    formattedAddress: "1 Rue de l'élysée, 75008 Paris, France",
+    latitude: 48.868553,
+    longitude: 2.316168,
     country: 'France',
     countryCode: 'FR',
     state: 'Île-de-France',
     region: 'Paris',
     city: 'Paris',
     zipcode: '75008',
-    streetName: '1 Port des Champs-Élysées',
+    streetName: "1 Rue de l'élysée",
     extra: {
-      confidence: 1,
+      confidence: 0.3,
       bbox: [
-        2.307528977635416,
-        48.86037068242933,
-        2.3231858223645836,
-        48.86809611757068
+        2.308338901946089,
+        48.86469028242932,
+        2.3239970980539106,
+        48.872415717570675
       ]
     }
   },

@@ -52,7 +52,7 @@ export class HereGeocoder extends AbstractGeocoder {
         };
     };
 }
-export type fetchAdapterFn = import('../adapter').fetchAdapterFn;
+export type fetchAdapterFn = import('../adapter.js').fetchAdapterFn;
 export type HereForwardQuery = {
     address: string;
     language?: string | undefined;

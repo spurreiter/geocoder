@@ -1,4 +1,4 @@
-/** @typedef {import('../adapter').fetchAdapterFn} fetchAdapterFn */
+/** @typedef {import('../adapter.js').fetchAdapterFn} fetchAdapterFn */
 /**
  * @see https://yandex.com/dev/maps/geocoder/doc/desc/concepts/input_params.html
  * @typedef {object} YandexForwardQuery
@@ -59,7 +59,7 @@ export class YandexGeocoder extends AbstractGeocoder {
         };
     };
 }
-export type fetchAdapterFn = import('../adapter').fetchAdapterFn;
+export type fetchAdapterFn = import('../adapter.js').fetchAdapterFn;
 export type YandexForwardQuery = {
     address: string;
     language?: string | undefined;

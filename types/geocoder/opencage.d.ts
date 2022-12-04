@@ -53,7 +53,7 @@ export class OpenCageGeocoder extends AbstractGeocoder {
         };
     };
 }
-export type fetchAdapterFn = import('../adapter').fetchAdapterFn;
+export type fetchAdapterFn = import('../adapter.js').fetchAdapterFn;
 export type OpenCageForwardQuery = {
     /**
      * -
