@@ -3,13 +3,15 @@ export const fixtures = {
     query: '135 pilkington avenue, birmingham',
     body: {
       place_id: 109897188,
-      licence: 'Data © OpenStreetMap contributors, ODbL 1.0. https://osm.org/copyright',
+      licence:
+        'Data © OpenStreetMap contributors, ODbL 1.0. https://osm.org/copyright',
       osm_type: 'way',
       osm_id: 90394480,
       boundingbox: ['52.5487473', '52.5488481', '-1.816513', '-1.8163464'],
       lat: '52.5487921',
       lon: '-1.8164308339635031',
-      display_name: '135, Pilkington Avenue, Maney, Sutton Coldfield, Wylde Green, Birmingham, West Midlands Combined Authority, West Midlands, England, B72 1LH, United Kingdom',
+      display_name:
+        '135, Pilkington Avenue, Maney, Sutton Coldfield, Wylde Green, Birmingham, West Midlands Combined Authority, West Midlands, England, B72 1LH, United Kingdom',
       class: 'building',
       type: 'residential',
       importance: 0.411,
@@ -30,7 +32,8 @@ export const fixtures = {
     },
     expResults: [
       {
-        formattedAddress: '135, Pilkington Avenue, Maney, Sutton Coldfield, Wylde Green, Birmingham, West Midlands Combined Authority, West Midlands, England, B72 1LH, United Kingdom',
+        formattedAddress:
+          '135, Pilkington Avenue, Maney, Sutton Coldfield, Wylde Green, Birmingham, West Midlands Combined Authority, West Midlands, England, B72 1LH, United Kingdom',
         latitude: 52.5487921,
         longitude: -1.8164308339635031,
         country: 'United Kingdom',
@@ -55,12 +58,14 @@ export const fixtures = {
     query: { lat: 40.714232, lng: -73.9612889 },
     body: {
       place_id: 158331564,
-      licence: 'Data © OpenStreetMap contributors, ODbL 1.0. https://osm.org/copyright',
+      licence:
+        'Data © OpenStreetMap contributors, ODbL 1.0. https://osm.org/copyright',
       osm_type: 'way',
       osm_id: 279767984,
       lat: '40.714205',
       lon: '-73.96131519274765',
-      display_name: '279, Bedford Avenue, Williamsburg, Brooklyn, Kings County, New York, 11211, United States',
+      display_name:
+        '279, Bedford Avenue, Williamsburg, Brooklyn, Kings County, New York, 11211, United States',
       address: {
         house_number: '279',
         road: 'Bedford Avenue',
@@ -77,7 +82,8 @@ export const fixtures = {
     },
     expResults: [
       {
-        formattedAddress: '279, Bedford Avenue, Williamsburg, Brooklyn, Kings County, New York, 11211, United States',
+        formattedAddress:
+          '279, Bedford Avenue, Williamsburg, Brooklyn, Kings County, New York, 11211, United States',
         latitude: 40.714205,
         longitude: -73.96131519274765,
         country: 'United States',
@@ -99,9 +105,10 @@ export const fixtures = {
     ]
   },
   forward: {
-    formattedAddress: 'Métro 1, Avenue des Champs-Élysées, Quartier du Faubourg-du-Roule, Paris 8e Arrondissement, Paris, Île-de-France, France métropolitaine, 75008, France',
-    latitude: 48.8677231,
-    longitude: 2.3140959,
+    formattedAddress:
+      'Avenue des Champs-Élysées, Quartier des Champs-Élysées, Paris 8e Arrondissement, Paris, Île-de-France, France métropolitaine, 75008, France',
+    latitude: 48.8683219,
+    longitude: 2.3121977,
     country: 'France',
     countryCode: 'FR',
     state: 'Île-de-France',
@@ -113,20 +120,16 @@ export const fixtures = {
     streetNumber: undefined,
     neighbourhood: undefined,
     extra: {
-      confidence: 0.5101,
-      id: 531017871,
-      bbox: [
-        2.3097952,
-        48.8673226,
-        2.3153244,
-        48.869063
-      ]
+      id: 4294035,
+      confidence: 0.1,
+      bbox: [2.310341, 48.8677584, 2.3139659, 48.8689063]
     }
   },
   reverse: {
-    formattedAddress: '279, Bedford Avenue, Williamsburg, Brooklyn, Kings County, City of New York, New York, 11211, United States',
-    latitude: 40.714205,
-    longitude: -73.96131519274765,
+    formattedAddress:
+      '277, Bedford Avenue, Williamsburg, Brooklyn, Kings County, City of New York, New York, 11211, United States',
+    latitude: 40.714254499999996,
+    longitude: -73.96130170969231,
     country: 'United States',
     countryCode: 'US',
     state: 'New York',
@@ -135,12 +138,12 @@ export const fixtures = {
     zipcode: '11211',
     district: undefined,
     streetName: 'Bedford Avenue',
-    streetNumber: '279',
+    streetNumber: '277',
     neighbourhood: undefined,
     extra: {
-      id: 279767984,
+      id: 1165287931,
       confidence: 0,
-      bbox: [-73.9613744, 40.7141617, -73.961256, 40.7142482]
+      bbox: [-73.9613388, 40.7142283, -73.9612646, 40.7142807]
     }
   }
 }
