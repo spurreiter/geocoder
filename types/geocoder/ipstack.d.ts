@@ -25,4 +25,4 @@ export class IpStackGeocoder extends AbstractGeocoder {
     };
 }
 export type fetchAdapterFn = import('../adapter.js').fetchAdapterFn;
-import { AbstractGeocoder } from "./abstract.js";
+import { AbstractGeocoder } from './abstract.js';

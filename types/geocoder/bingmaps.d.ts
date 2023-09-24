@@ -89,4 +89,4 @@ export type BingMapsReverseQuery = {
     limit?: number | undefined;
     language?: string | undefined;
 };
-import { AbstractGeocoder } from "./abstract.js";
+import { AbstractGeocoder } from './abstract.js';

@@ -76,4 +76,4 @@ export type HereReverseQuery = {
      */
     limit?: number | undefined;
 };
-import { AbstractGeocoder } from "./abstract.js";
+import { AbstractGeocoder } from './abstract.js';

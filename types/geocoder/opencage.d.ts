@@ -86,4 +86,4 @@ export type OpenCageReverseQuery = {
     abbrv?: number | undefined;
     roadinfo?: number | undefined;
 };
-import { AbstractGeocoder } from "./abstract.js";
+import { AbstractGeocoder } from './abstract.js';

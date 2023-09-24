@@ -89,4 +89,4 @@ export type GoogleReverseQuery = {
     result_type?: string | undefined;
     location_type?: string | undefined;
 };
-import { AbstractGeocoder } from "./abstract.js";
+import { AbstractGeocoder } from './abstract.js';

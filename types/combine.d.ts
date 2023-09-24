@@ -31,4 +31,4 @@ export type CombineOptions = import('./types').CombineOptions;
 export type ForwardQuery = import('./types').ForwardQuery;
 export type ReverseQuery = import('./types').ReverseQuery;
 export type GeocoderResult = import('./types').GeocoderResult;
-import { CircuitBreaker } from "./circuitbreaker.js";
+import { CircuitBreaker } from './circuitbreaker.js';

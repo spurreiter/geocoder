@@ -105,4 +105,4 @@ export type OpenMapQuestReverseQuery = {
      */
     zoom?: string | undefined;
 };
-import { OsmGeocoder } from "./osm.js";
+import { OsmGeocoder } from './osm.js';

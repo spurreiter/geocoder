@@ -57,4 +57,4 @@ export type GeoLite2ForwardQuery = {
     address: string;
     language?: string | undefined;
 };
-import { AbstractGeocoder } from "./abstract.js";
+import { AbstractGeocoder } from './abstract.js';

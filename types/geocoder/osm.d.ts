@@ -132,4 +132,4 @@ export type OsmReverseQuery = {
     zoom?: number | undefined;
     email?: string | undefined;
 };
-import { AbstractGeocoder } from "./abstract.js";
+import { AbstractGeocoder } from './abstract.js';

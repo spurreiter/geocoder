@@ -28,4 +28,4 @@ export type CascadeOptions = import('./types').CascadeOptions;
 export type ForwardQuery = import('./types').ForwardQuery;
 export type ReverseQuery = import('./types').ReverseQuery;
 export type GeocoderResult = import('./types').GeocoderResult;
-import { CircuitBreaker } from "./circuitbreaker.js";
+import { CircuitBreaker } from './circuitbreaker.js';

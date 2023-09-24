@@ -87,4 +87,4 @@ export type YandexReverseQuery = {
     lng: number;
     language?: string | undefined;
 };
-import { AbstractGeocoder } from "./abstract.js";
+import { AbstractGeocoder } from './abstract.js';
