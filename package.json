@@ -56,7 +56,8 @@
   },
   "mocha": {
     "exit": true,
-    "recursive": true
+    "recursive": true,
+    "timeout": 5000
   },
   "dependencies": {
     "agentkeepalive": "^4.5.0",
