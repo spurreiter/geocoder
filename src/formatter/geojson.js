@@ -1,4 +1,3 @@
-
 /** @typedef {import('../types').GeocoderResult} GeocoderResult */
 /** @typedef {import('../types').GeoJsonFeature} GeoJsonFeature */
 /** @typedef {import('../types').GeoJsonFeatureCollection} GeoJsonFeatureCollection */

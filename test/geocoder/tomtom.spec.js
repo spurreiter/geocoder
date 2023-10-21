@@ -4,11 +4,15 @@ import { TomTomGeocoder, fetchAdapter } from '../../src/index.js'
 import { fixtures } from './fixtures/tomtom.js'
 import { itWithApiKey } from './helper.js'
 
-const { SHOW_LOG } = process.env
+import { updateFixture, writeFixtures } from './fixtures/support.js'
 
 describe('TomTomGeocoder', function () {
   const options = { apiKey: 'apiKey' }
   const mockedAdapter = sinon.stub()
+
+  after(() => {
+    writeFixtures('tomtom.js', fixtures)
+  })
 
   describe('constructor', () => {
     it('an adapter must be set', () => {
@@ -93,8 +97,6 @@ describe('TomTomGeocoder', function () {
       const geocoder = new TomTomGeocoder(mockedAdapter, options)
       const results = await geocoder.forward(query)
 
-      // eslint-disable-next-line no-console
-      if (SHOW_LOG) console.dir(results, { depth: null })
       assert.deepStrictEqual(results, expResults)
 
       sinon.assert.calledOnceWithExactly(mockedAdapter, expUrl)
@@ -115,8 +117,6 @@ describe('TomTomGeocoder', function () {
       const geocoder = new TomTomGeocoder(mockedAdapter, options)
       const results = await geocoder.forward({ address: query })
 
-      // eslint-disable-next-line no-console
-      if (SHOW_LOG) console.dir(results, { depth: null })
       assert.deepStrictEqual(results, expResults)
 
       sinon.assert.calledOnceWithExactly(mockedAdapter, expUrl)
@@ -171,8 +171,6 @@ describe('TomTomGeocoder', function () {
 
       const geocoder = new TomTomGeocoder(mockedAdapter, options)
       const results = await geocoder.reverse(query)
-      // eslint-disable-next-line no-console
-      if (SHOW_LOG) console.dir(results, { depth: null })
       assert.deepStrictEqual(results, expResults)
 
       sinon.assert.calledOnceWithExactly(mockedAdapter, expUrl)
@@ -191,7 +189,7 @@ describe('TomTomGeocoder', function () {
       const query = '1 champs élysée Paris'
       const results = await geocoder.forward(query)
       // eslint-disable-next-line no-console
-      if (SHOW_LOG) console.dir(results[0], { depth: null })
+      updateFixture(fixtures, 'forward', results[0])
       assert.deepStrictEqual(results[0], fixtures.forward)
     })
 
@@ -199,7 +197,7 @@ describe('TomTomGeocoder', function () {
       const query = '40.714232,-73.9612889'
       const results = await geocoder.reverse(query)
       // eslint-disable-next-line no-console
-      if (SHOW_LOG) console.dir(results[0], { depth: null })
+      updateFixture(fixtures, 'reverse', results[0])
       assert.deepStrictEqual(results[0], fixtures.reverse)
     })
   })

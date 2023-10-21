@@ -3,10 +3,15 @@ import sinon from 'sinon'
 import { IpStackGeocoder, fetchAdapter } from '../../src/index.js'
 import { fixtures } from './fixtures/ipstack.js'
 import { itWithApiKey } from './helper.js'
+import { updateFixture, writeFixtures } from './fixtures/support.js'
 
 describe('IpStackGeocoder', function () {
   const options = { apiKey: 'apiKey' }
   const mockedAdapter = sinon.stub()
+
+  after(() => {
+    writeFixtures('ipstack.js', fixtures)
+  })
 
   describe('constructor', () => {
     it('an adapter must be set', () => {
@@ -142,7 +147,7 @@ describe('IpStackGeocoder', function () {
   })
 
   describe('call api', () => {
-    const { IPSTACK_APIKEY: apiKey, SHOW_LOG } = process.env
+    const { IPSTACK_APIKEY: apiKey } = process.env
     let geocoder
 
     before(function () {
@@ -153,7 +158,7 @@ describe('IpStackGeocoder', function () {
       const query = '66.249.64.0'
       const results = await geocoder.forward(query)
       // eslint-disable-next-line no-console
-      if (SHOW_LOG) console.dir(results[0], { depth: null })
+      updateFixture(fixtures, 'forward', results[0])
       assert.deepStrictEqual(results[0], fixtures.forward)
     })
 

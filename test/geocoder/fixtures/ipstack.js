@@ -1,4 +1,4 @@
-export const fixtures = {
+const m = {
   '66.249.64.0': {
     query: '66.249.64.0',
     body: {
@@ -17,8 +17,12 @@ export const fixtures = {
       location: {
         geoname_id: 5372205,
         capital: 'Washington D.C.',
-        languages: [{ code: 'en', name: 'English', native: 'English' }],
-        country_flag: 'http://assets.ipstack.com/flags/us.svg',
+        languages: [{
+          code: 'en',
+          name: 'English',
+          native: 'English'
+        }],
+        country_flag: 'http:\u002F\u002Fassets.ipstack.com\u002Fflags\u002Fus.svg',
         country_flag_emoji: '🇺🇸',
         country_flag_emoji_unicode: 'U+1F1FA U+1F1F8',
         calling_code: '1',
@@ -55,8 +59,12 @@ export const fixtures = {
       location: {
         geoname_id: 2174003,
         capital: 'Canberra',
-        languages: [{ code: 'en', name: 'English', native: 'English' }],
-        country_flag: 'http://assets.ipstack.com/flags/au.svg',
+        languages: [{
+          code: 'en',
+          name: 'English',
+          native: 'English'
+        }],
+        country_flag: 'http:\u002F\u002Fassets.ipstack.com\u002Fflags\u002Fau.svg',
         country_flag_emoji: '🇦🇺',
         country_flag_emoji_unicode: 'U+1F1E6 U+1F1FA',
         calling_code: '61',
@@ -115,3 +123,6 @@ export const fixtures = {
     zipcode: '92543'
   }
 }
+export default m
+
+export const fixtures = m

@@ -1,4 +1,3 @@
-
 /**
  * @param {any} obj
  * @returns {boolean}

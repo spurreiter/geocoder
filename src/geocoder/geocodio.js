@@ -51,11 +51,11 @@ export class GeocodioGeocoder extends AbstractGeocoder {
   }
 
   get endpoint () {
-    return 'https://api.geocod.io/v1.6/geocode'
+    return 'https://api.geocod.io/v1.7/geocode'
   }
 
   get revEndpoint () {
-    return 'https://api.geocod.io/v1.6/reverse'
+    return 'https://api.geocod.io/v1.7/reverse'
   }
 
   /**

@@ -3,10 +3,15 @@ import sinon from 'sinon'
 import { PickpointGeocoder, fetchAdapter } from '../../src/index.js'
 import { fixtures } from './fixtures/pickpoint.js'
 import { itWithApiKey } from './helper.js'
+import { updateFixture, writeFixtures } from './fixtures/support.js'
 
 describe('PickpointGeocoder', function () {
   const options = { apiKey: 'apiKey' }
   const mockedAdapter = sinon.stub()
+
+  after(() => {
+    writeFixtures('pickpoint.js', fixtures)
+  })
 
   describe('constructor', () => {
     it('an adapter must be set', () => {
@@ -184,7 +189,7 @@ describe('PickpointGeocoder', function () {
   })
 
   describe('call api', () => {
-    const { PICKPOINT_APIKEY: apiKey, SHOW_LOG } = process.env
+    const { PICKPOINT_APIKEY: apiKey } = process.env
     let geocoder
 
     before(function () {
@@ -195,7 +200,7 @@ describe('PickpointGeocoder', function () {
       const query = 'avenue des champs élysées Paris'
       const results = await geocoder.forward(query)
       // eslint-disable-next-line no-console
-      if (SHOW_LOG) console.dir(results[0], { depth: null })
+      updateFixture(fixtures, 'forward', results[0])
       assert.deepStrictEqual(results[0], fixtures.forward)
     })
 
@@ -203,7 +208,7 @@ describe('PickpointGeocoder', function () {
       const query = '40.714232,-73.9612889'
       const results = await geocoder.reverse(query)
       // eslint-disable-next-line no-console
-      if (SHOW_LOG) console.dir(results[0], { depth: null })
+      updateFixture(fixtures, 'reverse', results[0])
       assert.deepStrictEqual(results[0], fixtures.reverse)
     })
   })

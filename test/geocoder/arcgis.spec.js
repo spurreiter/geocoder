@@ -3,10 +3,15 @@ import sinon from 'sinon'
 import { ArcGisGeocoder, fetchAdapter } from '../../src/index.js'
 import { fixtures } from './fixtures/arcgis.js'
 import { itWithApiKey } from './helper.js'
+import { updateFixture, writeFixtures } from './fixtures/support.js'
 
 describe('ArcGisGeocoder', function () {
   const options = { apiKey: 'apiKey' }
   const mockedAdapter = sinon.stub()
+
+  after(() => {
+    writeFixtures('arcgis.js', fixtures)
+  })
 
   describe('constructor', () => {
     it('an adapter must be set', () => {
@@ -99,7 +104,6 @@ describe('ArcGisGeocoder', function () {
       const geocoder = new ArcGisGeocoder(mockedAdapter, options)
       const results = await geocoder.forward(query)
 
-      // console.dir(results, {depth:null})
       assert.deepStrictEqual(results, expResults)
 
       sinon.assert.calledOnce(mockedAdapter)
@@ -119,7 +123,6 @@ describe('ArcGisGeocoder', function () {
       const geocoder = new ArcGisGeocoder(mockedAdapter, options)
       const results = await geocoder.forward({ address: query })
 
-      // console.dir(results, {depth:null})
       assert.deepStrictEqual(results, expResults)
 
       sinon.assert.calledOnce(mockedAdapter)
@@ -189,7 +192,7 @@ describe('ArcGisGeocoder', function () {
   })
 
   describe('call api', () => {
-    const { ARCGIS_APIKEY: apiKey, SHOW_LOG } = process.env
+    const { ARCGIS_APIKEY: apiKey } = process.env
     let geocoder
 
     before(function () {
@@ -200,7 +203,7 @@ describe('ArcGisGeocoder', function () {
       const query = '1 champs élysée Paris'
       const results = await geocoder.forward(query)
       // eslint-disable-next-line no-console
-      if (SHOW_LOG) console.dir(results[0], { depth: null })
+      updateFixture(fixtures, 'forward', results[0])
       assert.deepStrictEqual(results[0], fixtures.forward)
     })
 
@@ -208,7 +211,7 @@ describe('ArcGisGeocoder', function () {
       const query = '40.714232,-73.9612889'
       const results = await geocoder.reverse(query)
       // eslint-disable-next-line no-console
-      if (SHOW_LOG) console.dir(results[0], { depth: null })
+      updateFixture(fixtures, 'reverse', results[0])
       assert.deepStrictEqual(results[0], fixtures.reverse)
     })
   })

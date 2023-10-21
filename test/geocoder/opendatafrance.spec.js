@@ -2,10 +2,15 @@ import assert from 'assert'
 import sinon from 'sinon'
 import { OpendataFranceGeocoder, fetchAdapter } from '../../src/index.js'
 import { fixtures } from './fixtures/opendatafrance.js'
+import { updateFixture, writeFixtures } from './fixtures/support.js'
 
 describe('OpendataFranceGeocoder', function () {
   const options = { apiKey: 'apiKey' }
   const mockedAdapter = sinon.stub()
+
+  after(() => {
+    writeFixtures('opendatafrance.js', fixtures)
+  })
 
   describe('constructor', () => {
     it('an adapter must be set', () => {
@@ -170,7 +175,6 @@ describe('OpendataFranceGeocoder', function () {
   })
 
   describe('call api', () => {
-    const { SHOW_LOG } = process.env
     let geocoder
 
     before(function () {
@@ -181,7 +185,7 @@ describe('OpendataFranceGeocoder', function () {
       const query = '1 champs élysée Paris'
       const results = await geocoder.forward(query)
       // eslint-disable-next-line no-console
-      if (SHOW_LOG) console.dir(results[0], { depth: null })
+      updateFixture(fixtures, 'forward', results[0])
       assert.deepStrictEqual(results[0], fixtures.forward)
     })
 
@@ -189,7 +193,7 @@ describe('OpendataFranceGeocoder', function () {
       const query = '49.12027,6.17559'
       const results = await geocoder.reverse(query)
       // eslint-disable-next-line no-console
-      if (SHOW_LOG) console.dir(results[0], { depth: null })
+      updateFixture(fixtures, 'reverse', results[0])
       assert.deepStrictEqual(results[0], fixtures.reverse)
     })
   })

@@ -1,4 +1,3 @@
-
 /**
  * @param {string} str
  * @returns {string}
