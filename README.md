@@ -1,11 +1,12 @@
-[![Build Status](https://github.com/spurreiter/geocoder/workflows/CI/badge.svg?branch=main&event=push)](https://github.com/spurreiter/geocoder/actions/workflows/ci.yml?query=branch%3Amain)
+[![CI](https://github.com/spurreiter/geocoder/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/spurreiter/geocoder/actions/workflows/ci.yml)
 [![npm version](https://badge.fury.io/js/@spurreiter%2Fgeocoder.svg)](https://www.npmjs.com/package/@spurreiter/geocoder)
 [![Downloads per month](https://img.shields.io/npm/dm/@spurreiter/geocoder)](https://www.npmjs.com/package/@spurreiter/geocoder)
 
-
 # geocoder  
 
-This project is derived from [node-geocoder](https://github.com/nchaulet/node-geocoder) with focus on modern code with esm modules.
+This project is derived from
+[node-geocoder](https://github.com/nchaulet/node-geocoder) with focus on modern
+code with esm modules.
 
 Features:
 - multiple providers
@@ -16,32 +17,33 @@ Features:
 - fetch based http adapter with timeout
 - cascade providers and stop on first successful result
 - combine search results from multiple providers
-- configurable circuit breaker which stops calling geocoder e.g. if request limit is exhausted.
+- configurable circuit breaker which stops calling geocoder e.g. if request
+  limit is exhausted.
 - extensive test-suite with examples for getting started
 - GeoJSON, GPX formatters
 
 ## supported providers
 
-| Provider | forward | reverse |  ip  | Notes |
-| -------- | :-----: | :-----: | :--: | ----- |
-| [ArcGisGeocoder](https://developers.arcgis.com/documentation/mapping-apis-and-services/search/) | ✅ | ✅ | ❌ |  |
-| [BingMapsGeocoder](https://docs.microsoft.com/en-us/bingmaps/rest-services/locations) | ✅ | ✅ | ❌ | results are in English only |
-| [GoogleGeocoder](https://developers.google.com/maps/documentation/geocoding/overview) | ✅ | ✅ | ❌ |  |
-| [GeocodioGeocoder](https://www.geocod.io/docs/) | ✅ | ✅ | ❌ | results are in English only; Country must be part of query, otherwise fallback to US; [Only US and major cities in CA supported](https://www.geocod.io/coverage/) |
-| [HereGeocoder](https://developer.here.com/) | ✅ | ✅ | ❌ |  |
-| [IpStackGeocoder](https://ipstack.com/) | ❌ | ❌ | ✅ |  |
-| [LocationIqGeocoder](https://locationiq.com/docs) |  ✅ | ✅ | ❌ |  |
-| [GeoLite2Geocoder](https://dev.maxmind.com/geoip/geoip2/geolite2/) | ❌ | ❌ | ✅ | Local GeoLite2 provider or MaxMind API. Output as of [@maxmind/geoip2-node](https://www.npmjs.com/package/@maxmind/geoip2-node) |
-| [MapBoxGeocoder](https://docs.mapbox.com/) | ✅ | ✅ | ❌ |  |
-| [MapQuestGeocoder](https://developer.mapquest.com/documentation/geocoding-api) | ✅ | ✅ | ❌ | open-data and licensed versions are supported |
-| [OpenCageGeocoder](https://opencagedata.com/) | ✅ | ✅ | ❌ |  |
-| [OpendataFranceGeocoder](https://geo.api.gouv.fr/adresse) | ✅ | ✅ | ❌ | France only |
-| [OpenMapQuest](https://developer.mapquest.com/documentation/open/nominatim-search/) | ✅ | ✅ | ❌ | Search Results based on OSM |
-| [OsmGeocoder](https://nominatim.org/release-docs/develop/) | ✅ | ✅ | ❌ | Searches nominatim.org |
-| [PeliasGeocoder](https://github.com/pelias/documentation/blob/master/README.md) | ✅ | ✅ | ❌ | Local or [Geocode.earth](https://geocode.earth/docs) |
-| [PickpointGeocoder](https://pickpoint.io/api-reference) | ✅ | ✅ | ❌ | Search Results based on OSM |
-| [TomTomGeocoder](https://developer.tomtom.com/) | ✅ | ✅ | ❌ |  |
-| [YandexGeocoder](https://yandex.com/dev/maps/geocoder/) | ✅ | ✅ | ❌ |  |
+| Provider                                                                                        | forward | reverse | ip | Notes                                                                                                                                                             |
+| ----------------------------------------------------------------------------------------------- | :-----: | :-----: | :: | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [ArcGisGeocoder](https://developers.arcgis.com/documentation/mapping-apis-and-services/search/) |   ✅    |    ✅    | ❌  |                                                                                                                                                                   |
+| [BingMapsGeocoder](https://docs.microsoft.com/en-us/bingmaps/rest-services/locations)           |   ✅    |    ✅    | ❌  | results are in English only                                                                                                                                       |
+| [GoogleGeocoder](https://developers.google.com/maps/documentation/geocoding/overview)           |   ✅    |    ✅    | ❌  |                                                                                                                                                                   |
+| [GeocodioGeocoder](https://www.geocod.io/docs/)                                                 |   ✅    |    ✅    | ❌  | results are in English only; Country must be part of query, otherwise fallback to US; [Only US and major cities in CA supported](https://www.geocod.io/coverage/) |
+| [HereGeocoder](https://developer.here.com/)                                                     |   ✅    |    ✅    | ❌  |                                                                                                                                                                   |
+| [IpStackGeocoder](https://ipstack.com/)                                                         |   ❌    |    ❌    | ✅  |                                                                                                                                                                   |
+| [LocationIqGeocoder](https://locationiq.com/docs)                                               |   ✅    |    ✅    | ❌  |                                                                                                                                                                   |
+| [GeoLite2Geocoder](https://dev.maxmind.com/geoip/geoip2/geolite2/)                              |   ❌    |    ❌    | ✅  | Local GeoLite2 provider or MaxMind API. Output as of [@maxmind/geoip2-node](https://www.npmjs.com/package/@maxmind/geoip2-node)                                   |
+| [MapBoxGeocoder](https://docs.mapbox.com/)                                                      |   ✅    |    ✅    | ❌  |                                                                                                                                                                   |
+| [MapQuestGeocoder](https://developer.mapquest.com/documentation/geocoding-api)                  |   ✅    |    ✅    | ❌  | open-data and licensed versions are supported                                                                                                                     |
+| [OpenCageGeocoder](https://opencagedata.com/)                                                   |   ✅    |    ✅    | ❌  |                                                                                                                                                                   |
+| [OpendataFranceGeocoder](https://geo.api.gouv.fr/adresse)                                       |   ✅    |    ✅    | ❌  | France only                                                                                                                                                       |
+| [OpenMapQuest](https://developer.mapquest.com/documentation/open/nominatim-search/)             |   ✅    |    ✅    | ❌  | Search Results based on OSM                                                                                                                                       |
+| [OsmGeocoder](https://nominatim.org/release-docs/develop/)                                      |   ✅    |    ✅    | ❌  | Searches nominatim.org                                                                                                                                            |
+| [PeliasGeocoder](https://github.com/pelias/documentation/blob/master/README.md)                 |   ✅    |    ✅    | ❌  | Local or [Geocode.earth](https://geocode.earth/docs)                                                                                                              |
+| [PickpointGeocoder](https://pickpoint.io/api-reference)                                         |   ✅    |    ✅    | ❌  | Search Results based on OSM                                                                                                                                       |
+| [TomTomGeocoder](https://developer.tomtom.com/)                                                 |   ✅    |    ✅    | ❌  |                                                                                                                                                                   |
+| [YandexGeocoder](https://yandex.com/dev/maps/geocoder/)                                         |   ✅    |    ✅    | ❌  |                                                                                                                                                                   |
 
 ## usage
 
@@ -51,7 +53,8 @@ Features:
 import { fetchAdapter, OsmGeocoder } from '@spurreiter/geocoder'
 
 const adapter = fetchAdapter()
-const geocoder = new OsmGeocoder(adapter, { language: 'en', limit: 5, referer: 'https://mysite' })
+const geocoder = new OsmGeocoder(adapter, 
+  { language: 'en', limit: 5, referer: 'https://mysite' })
 
 const results = await geocoder.forward('135 pilkington avenue, birmingham')
 // [
@@ -108,7 +111,8 @@ const results = await geocoder.reverse({ lat: 40.714232, lng: -73.9612889 })
 
 ### cascade
 
-Allows to sequentially ask various geocoders for results. Successful results from the first geocoder are returned.
+Allows to sequentially ask various geocoders for results. Successful results
+from the first geocoder are returned.
 
 Works with forward and reverse geocoding.
 
@@ -142,18 +146,22 @@ const geocoders = [
 ]
 const combine = new Combine(geocoders)
 
-const results = await combine.forward({ address: '135 pilkington avenue, birmingham', language: 'es' })
+const results = await combine.forward(
+    { address: '135 pilkington avenue, birmingham', language: 'es' })
 
 // results contains data from all reachable geocoders.
 ```
 
 ## formatters
 
-Formatters allow to format the geocoder result object to various formats like geoJson or gpx.
+Formatters allow to format the geocoder result object to various formats like
+geoJson or gpx.
 
 ### geoJsonFormatter
 
-The output of the GeoJSON formatter is according to [RFC-7946](https://datatracker.ietf.org/doc/html/rfc7946) and [geocodejson-spec](https://github.com/geocoders/geocodejson-spec).
+The output of the GeoJSON formatter is according to
+[RFC-7946](https://datatracker.ietf.org/doc/html/rfc7946) and
+[geocodejson-spec](https://github.com/geocoders/geocodejson-spec).
 
 ```js
 import { geoJsonFormatter } from '@spurreiter/geocoder'
@@ -189,10 +197,10 @@ const gpx = gpxFormatter(results)
 // </gpx>
 ```
 
-
 ## contributing
 
-If you are missing a provider, which should be part of this project, please consider forking this project and filing a pull-request.
+If you are missing a provider, which should be part of this project, please
+consider forking this project and filing a pull-request.
 
 ## license
 
