@@ -2,6 +2,7 @@ import assert from 'assert'
 import sinon from 'sinon'
 import { OsmGeocoder, fetchAdapter } from '../../src/index.js'
 import { fixtures } from './fixtures/osm.js'
+import { itWithApiKey } from './helper.js'
 import { updateFixture, writeFixtures } from './fixtures/support.js'
 
 const referer = 'https://github.com/spurreiter/geocoder'
@@ -201,13 +202,15 @@ describe('OsmGeocoder', function () {
   })
 
   describe('call api', () => {
+    // set apiKey to random value; required to run tests on github
+    const { OSM_TEST: apiKey } = process.env
     let geocoder
 
     before(function () {
       geocoder = new OsmGeocoder(fetchAdapter(), { referer })
     })
 
-    it('should call forward api', async function () {
+    itWithApiKey(apiKey, 'should call forward api', async function () {
       const query = 'Paris Avenue des Champs Elysees 1'
       const results = await geocoder.forward(query)
       // eslint-disable-next-line no-console
@@ -215,7 +218,7 @@ describe('OsmGeocoder', function () {
       assert.deepStrictEqual(results[0], fixtures.forward)
     })
 
-    it('should call reverse api', async function () {
+    itWithApiKey(apiKey, 'should call reverse api', async function () {
       const query = '40.714232,-73.9612889'
       const results = await geocoder.reverse(query)
       // eslint-disable-next-line no-console

@@ -1,6 +1,6 @@
 {
   "name": "@spurreiter/geocoder",
-  "version": "1.5.5",
+  "version": "2.0.0-0",
   "description": "Node geocoding library, google maps, bing maps, mapquest, mapbox, here maps, arcgis, nominatim, ...",
   "keywords": [
     "geocoder",
@@ -17,7 +17,6 @@
     "osm",
     "pelias",
     "pickpoint-api",
-    "teleport",
     "yandex-api"
   ],
   "homepage": "https://github.com/spurreiter/geocoder#readme",
