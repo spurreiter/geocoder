@@ -50,9 +50,9 @@
     "all": "npm-run-all clean test build lint types",
     "clean": "rimraf types coverage lib",
     "lint": "eslint --fix --ext js .",
-    "build": "rollup -c",
+    "build": "./scripts/version.cjs && rollup -c",
     "test": "c8 mocha",
-    "types": "rimraf types; tsc --emitDeclarationOnly true --noEmitOnError && cp src/*.d.ts types"
+    "types": "rimraf types; tsc && cp src/*.d.ts types"
   },
   "mocha": {
     "exit": true,
@@ -61,25 +61,25 @@
   },
   "dependencies": {
     "agentkeepalive": "^4.5.0",
-    "got": "^13.0.0",
-    "i18n-iso-countries": "^7.7.0"
+    "got": "^14.4.1",
+    "i18n-iso-countries": "^7.11.2"
   },
   "devDependencies": {
-    "@types/node": "^20.8.7",
-    "c8": "^8.0.1",
-    "dotenv": "^16.3.1",
-    "eslint": "^8.52.0",
+    "@types/node": "^20.14.10",
+    "c8": "^9.1.0",
+    "dotenv": "^16.4.5",
+    "eslint": "^8.57.0",
     "eslint-config-standard": "^17.1.0",
-    "eslint-plugin-import": "^2.28.1",
-    "eslint-plugin-n": "^16.2.0",
-    "eslint-plugin-promise": "^6.1.1",
-    "mocha": "^10.2.0",
-    "npm-run-all2": "^6.1.1",
-    "rimraf": "^5.0.5",
-    "rollup": "^4.1.4",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-n": "^16.6.2",
+    "eslint-plugin-promise": "^6.4.0",
+    "mocha": "^10.6.0",
+    "npm-run-all2": "^6.2.2",
+    "rimraf": "^5.0.9",
+    "rollup": "^4.18.1",
     "serialize-to-module": "^1.1.0",
-    "sinon": "^17.0.0",
-    "typescript": "^5.2.2"
+    "sinon": "^17.0.2",
+    "typescript": "^5.5.3"
   },
   "engines": {
     "node": ">=14"

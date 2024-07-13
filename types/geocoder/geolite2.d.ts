@@ -52,7 +52,7 @@ export class GeoLite2Geocoder extends AbstractGeocoder {
         };
     };
 }
-export type fetchAdapterFn = import('../adapter.js').fetchAdapterFn;
+export type fetchAdapterFn = import("../adapter.js").fetchAdapterFn;
 export type GeoLite2ForwardQuery = {
     address: string;
     language?: string | undefined;

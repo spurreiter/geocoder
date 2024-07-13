@@ -29,6 +29,7 @@ export class OsmGeocoder extends AbstractGeocoder {
      * @see https://nominatim.org/release-docs/develop/api/Search/
      * @param {fetchAdapterFn} adapter
      * @param {object} options
+     * @param {string} [options.referer] referer header
      * @param {number} [options.limit=10]
      * @param {string} [options.language]
      * @param {number} [options.addressdetails]
@@ -38,8 +39,10 @@ export class OsmGeocoder extends AbstractGeocoder {
      * @param {number} [options.dedupe]
      * @param {string} [options.endpoint] custom endpoint
      * @param {string} [options.revEndpoint] custom reverse endpoint
+     * @param {boolean} [options.needsReferer]
      */
-    constructor(adapter: fetchAdapterFn, options?: {
+    constructor(adapter: fetchAdapterFn, options: {
+        referer?: string | undefined;
         limit?: number | undefined;
         language?: string | undefined;
         addressdetails?: number | undefined;
@@ -49,9 +52,15 @@ export class OsmGeocoder extends AbstractGeocoder {
         dedupe?: number | undefined;
         endpoint?: string | undefined;
         revEndpoint?: string | undefined;
+        needsReferer?: boolean | undefined;
     });
     endpoint: string;
     revEndpoint: string;
+    fetchopts: {
+        headers: {
+            referer: string;
+        };
+    } | undefined;
     params: {
         format: string;
         addressdetails: number;
@@ -93,12 +102,18 @@ export class OsmGeocoder extends AbstractGeocoder {
         };
     };
 }
-export type fetchAdapterFn = import('../adapter.js').fetchAdapterFn;
+export type fetchAdapterFn = import("../adapter.js").fetchAdapterFn;
 export type OsmForwardQuery = {
     /**
      * -
      */
+    /**
+     * -
+     */
     address: string;
+    /**
+     * Maximum number of results to be returned
+     */
     /**
      * Maximum number of results to be returned
      */
@@ -116,11 +131,20 @@ export type OsmReverseQuery = {
     /**
      * latitude
      */
+    /**
+     * latitude
+     */
     lat: number;
     /**
      * longitude
      */
+    /**
+     * longitude
+     */
     lng: number;
+    /**
+     * Maximum number of results to be returned
+     */
     /**
      * Maximum number of results to be returned
      */

@@ -26,9 +26,9 @@ export class Combine {
      */
     reverse(query: ReverseQuery): Promise<GeocoderResult[]>;
 }
-export type AbstractGeocoder = import('./geocoder/abstract').AbstractGeocoder;
-export type CombineOptions = import('./types').CombineOptions;
-export type ForwardQuery = import('./types').ForwardQuery;
-export type ReverseQuery = import('./types').ReverseQuery;
-export type GeocoderResult = import('./types').GeocoderResult;
+export type AbstractGeocoder = import("./geocoder/abstract").AbstractGeocoder;
+export type CombineOptions = import("./types").CombineOptions;
+export type ForwardQuery = import("./types").ForwardQuery;
+export type ReverseQuery = import("./types").ReverseQuery;
+export type GeocoderResult = import("./types").GeocoderResult;
 import { CircuitBreaker } from './circuitbreaker.js';

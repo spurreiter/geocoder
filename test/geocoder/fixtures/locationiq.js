@@ -93,28 +93,28 @@ const m = {
     }]
   },
   forward: {
-    formattedAddress: "1, Rue Des Champs, Ézanville, Écouen, Val-d'Oise, 95460, France",
-    latitude: '49.032287',
-    longitude: '2.367155',
+    formattedAddress: 'Métro 1, Promenade des Champs-Élysées, Quartier des Champs-Élysées, 8th Arrondissement of Paris, Paris, Ile-de-France, Metropolitan France, 75008, France',
+    latitude: '48.8676736',
+    longitude: '2.3136172',
     country: 'France',
     countryCode: 'FR',
-    state: "Val-d'Oise",
-    region: undefined,
-    county: 'Écouen',
-    city: 'Ézanville',
-    zipcode: '95460',
-    streetName: 'Rue Des Champs',
-    streetNumber: '1',
+    state: 'Ile-de-France',
+    region: 'Metropolitan France',
+    county: undefined,
+    city: 'Paris',
+    zipcode: '75008',
+    streetName: 'Promenade des Champs-Élysées',
+    streetNumber: undefined,
     extra: {
-      id: '333255683840',
-      confidence: 0.25,
-      type: undefined,
-      addrType: undefined,
-      bbox: ['2.367155', '49.032287', '2.367155', '49.032287']
+      id: '238037360',
+      confidence: 0.41,
+      type: 'subway',
+      addrType: 'railway',
+      bbox: ['2.3097952', '48.8672731', '2.3148457', '48.869063']
     }
   },
   reverse: {
-    formattedAddress: '277, Bedford Avenue, Williamsburg, New York, Kings County, New York, 11211, USA',
+    formattedAddress: '277, Bedford Avenue, Williamsburg, Brooklyn, New York, Kings County, New York, 11211, USA',
     latitude: '40.714255',
     longitude: '-73.961302',
     country: 'United States of America',
@@ -127,7 +127,7 @@ const m = {
     streetName: 'Bedford Avenue',
     streetNumber: '277',
     extra: {
-      id: '331566812314',
+      id: '332391496564',
       confidence: 0.225,
       type: undefined,
       addrType: undefined,

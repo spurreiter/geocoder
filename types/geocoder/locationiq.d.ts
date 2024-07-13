@@ -56,10 +56,13 @@ export class LocationIqGeocoder extends AbstractGeocoder {
         };
     };
 }
-export type fetchAdapterFn = import('../adapter.js').fetchAdapterFn;
+export type fetchAdapterFn = import("../adapter.js").fetchAdapterFn;
 export type LocationIqForwardQuery = {
     address: string;
     language?: string | undefined;
+    /**
+     * Maximum number of results to be returned
+     */
     /**
      * Maximum number of results to be returned
      */
@@ -69,12 +72,21 @@ export type LocationIqReverseQuery = {
     /**
      * latitude
      */
+    /**
+     * latitude
+     */
     lat: number;
+    /**
+     * longitude
+     */
     /**
      * longitude
      */
     lng: number;
     language?: string | undefined;
+    /**
+     * Maximum number of results to be returned
+     */
     /**
      * Maximum number of results to be returned
      */

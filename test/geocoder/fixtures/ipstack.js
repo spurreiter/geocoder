@@ -119,7 +119,7 @@ const m = {
     country: 'United States',
     regionCode: 'CA',
     regionName: 'California',
-    city: 'Hemet',
+    city: 'Menifee',
     zipcode: '92543'
   }
 }

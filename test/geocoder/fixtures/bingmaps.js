@@ -126,19 +126,19 @@ const m = {
     }]
   },
   forward: {
-    formattedAddress: '1 Port des Champs-Élysées, 75008 Paris, France',
-    latitude: 48.8642334,
-    longitude: 2.3153574,
+    formattedAddress: '1 Avenue des Champs-Élysées, 75008 Paris, France',
+    latitude: 48.8666195,
+    longitude: 2.3170832,
     country: 'France',
     countryCode: 'FR',
     state: 'Île-de-France',
-    region: 'Paris',
+    region: 'Ville de Paris',
     city: 'Paris',
     zipcode: '75008',
-    streetName: '1 Port des Champs-Élysées',
+    streetName: '1 Avenue des Champs-Élysées',
     extra: {
       confidence: 1,
-      bbox: [2.307528977635416, 48.86037068242933, 2.3231858223645836, 48.86809611757068]
+      bbox: [2.3092544044119108, 48.86275678242932, 2.324911995588089, 48.870482217570675]
     }
   },
   reverse: {

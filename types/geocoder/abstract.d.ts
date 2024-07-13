@@ -58,7 +58,7 @@ export class AbstractGeocoder {
      * @param {object} body
      * @returns {WrappedResults}
      */
-    protected wrapRaw(results: any, body: object): any[];
+    protected wrapRaw(results: any | undefined, body: object): any[];
     /**
      * forward geocoding
      * @protected
@@ -75,7 +75,7 @@ export class AbstractGeocoder {
      */
     protected _reverse(query: string | ReverseQuery): Promise<GeocoderResult[]>;
 }
-export type fetchAdapterFn = import('../adapter.js').fetchAdapterFn;
-export type ForwardQuery = import('../types').ForwardQuery;
-export type ReverseQuery = import('../types').ReverseQuery;
-export type GeocoderResult = import('../types').GeocoderResult;
+export type fetchAdapterFn = import("../adapter.js").fetchAdapterFn;
+export type ForwardQuery = import("../types").ForwardQuery;
+export type ReverseQuery = import("../types").ReverseQuery;
+export type GeocoderResult = import("../types").GeocoderResult;

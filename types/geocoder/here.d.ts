@@ -37,7 +37,7 @@ export class HereGeocoder extends AbstractGeocoder {
         latitude: any;
         longitude: any;
         country: any;
-        countryCode: string;
+        countryCode: string | undefined;
         state: any;
         county: any;
         city: any;
@@ -52,10 +52,13 @@ export class HereGeocoder extends AbstractGeocoder {
         };
     };
 }
-export type fetchAdapterFn = import('../adapter.js').fetchAdapterFn;
+export type fetchAdapterFn = import("../adapter.js").fetchAdapterFn;
 export type HereForwardQuery = {
     address: string;
     language?: string | undefined;
+    /**
+     * Maximum number of results to be returned
+     */
     /**
      * Maximum number of results to be returned
      */
@@ -65,12 +68,21 @@ export type HereReverseQuery = {
     /**
      * latitude
      */
+    /**
+     * latitude
+     */
     lat: number;
+    /**
+     * longitude
+     */
     /**
      * longitude
      */
     lng: number;
     language?: string | undefined;
+    /**
+     * Maximum number of results to be returned
+     */
     /**
      * Maximum number of results to be returned
      */
