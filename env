@@ -5,6 +5,10 @@ FORWARD=135 pilkington avenue, birmingham
 REVERSE=40.714232,-73.9612889
 FORWARD_IP=66.249.64.0
 
+# testing services without api key
+OPENDATAFRANCE_TEST=true
+OSM_TEST=true
+
 # Add your API keys here to run the examples
 
 ARCGIS_APIKEY=
