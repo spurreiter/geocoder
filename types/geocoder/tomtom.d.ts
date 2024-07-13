@@ -65,13 +65,16 @@ export class TomTomGeocoder extends AbstractGeocoder {
      */
     _formatResultRev(result: object): object;
 }
-export type fetchAdapterFn = import('../adapter.js').fetchAdapterFn;
+export type fetchAdapterFn = import("../adapter.js").fetchAdapterFn;
 /**
  * see https://developer.tomtom.com/search-api/documentation/geocoding-service/geocode
  */
 export type TomTomForwardQuery = {
     address: string;
     limit?: number | undefined;
+    /**
+     * see for list of values
+     */
     /**
      * see for list of values
      */
@@ -86,7 +89,13 @@ export type TomTomReverseQuery = {
     /**
      * latitude
      */
+    /**
+     * latitude
+     */
     lat: number;
+    /**
+     * longitude
+     */
     /**
      * longitude
      */

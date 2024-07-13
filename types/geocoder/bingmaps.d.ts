@@ -65,7 +65,7 @@ export class BingMapsGeocoder extends AbstractGeocoder {
         };
     };
 }
-export type fetchAdapterFn = import('../adapter.js').fetchAdapterFn;
+export type fetchAdapterFn = import("../adapter.js").fetchAdapterFn;
 /**
  * see https://docs.microsoft.com/en-us/bingmaps/rest-services/locations/find-a-location-by-address
  */
@@ -81,7 +81,13 @@ export type BingMapsReverseQuery = {
     /**
      * latitude
      */
+    /**
+     * latitude
+     */
     lat: number;
+    /**
+     * longitude
+     */
     /**
      * longitude
      */

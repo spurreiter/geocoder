@@ -31,7 +31,7 @@ export class PickpointGeocoder extends OsmGeocoder {
      * @param {number} [options.limit=10]
      * @param {string} [options.language]
      */
-    constructor(adapter: fetchAdapterFn, options?: {
+    constructor(adapter: fetchAdapterFn, options: {
         apiKey: string;
         limit?: number | undefined;
         language?: string | undefined;
@@ -44,7 +44,7 @@ export class PickpointGeocoder extends OsmGeocoder {
         language?: string | undefined;
     };
 }
-export type fetchAdapterFn = import('../adapter.js').fetchAdapterFn;
+export type fetchAdapterFn = import("../adapter.js").fetchAdapterFn;
 /**
  * see https://pickpoint.io/api-reference#forward-geocoding
  */
@@ -52,7 +52,13 @@ export type PickpointForwardQuery = {
     /**
      * -
      */
+    /**
+     * -
+     */
     address: string;
+    /**
+     * Maximum number of results to be returned
+     */
     /**
      * Maximum number of results to be returned
      */
@@ -61,7 +67,13 @@ export type PickpointForwardQuery = {
     /**
      * search by country
      */
+    /**
+     * search by country
+     */
     country?: string | undefined;
+    /**
+     * search by states
+     */
     /**
      * search by states
      */
@@ -69,7 +81,13 @@ export type PickpointForwardQuery = {
     /**
      * search by districts / provinces
      */
+    /**
+     * search by districts / provinces
+     */
     county?: string | undefined;
+    /**
+     * search by names of cities
+     */
     /**
      * search by names of cities
      */
@@ -77,7 +95,13 @@ export type PickpointForwardQuery = {
     /**
      * search by names of streets. Should be specified in the following format `<house_number> <street_name>`
      */
+    /**
+     * search by names of streets. Should be specified in the following format `<house_number> <street_name>`
+     */
     street?: string | undefined;
+    /**
+     * limit the results to a specified postal code
+     */
     /**
      * limit the results to a specified postal code
      */
@@ -90,7 +114,13 @@ export type PickpointReverseQuery = {
     /**
      * latitude
      */
+    /**
+     * latitude
+     */
     lat: number;
+    /**
+     * longitude
+     */
     /**
      * longitude
      */
@@ -98,8 +128,14 @@ export type PickpointReverseQuery = {
     /**
      * Maximum number of results to be returned
      */
+    /**
+     * Maximum number of results to be returned
+     */
     limit?: number | undefined;
     language?: string | undefined;
+    /**
+     * 0..18
+     */
     /**
      * 0..18
      */

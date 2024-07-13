@@ -2,10 +2,13 @@ import assert from 'assert'
 import sinon from 'sinon'
 import { OsmGeocoder, fetchAdapter } from '../../src/index.js'
 import { fixtures } from './fixtures/osm.js'
+import { itWithApiKey } from './helper.js'
 import { updateFixture, writeFixtures } from './fixtures/support.js'
 
+const referer = 'https://github.com/spurreiter/geocoder'
+
 describe('OsmGeocoder', function () {
-  const options = {}
+  const options = { referer }
   const mockedAdapter = sinon.stub()
 
   after(() => {
@@ -53,7 +56,11 @@ describe('OsmGeocoder', function () {
 
       assert.deepStrictEqual(results, [])
 
-      sinon.assert.calledOnceWithExactly(mockedAdapter, 'https://nominatim.openstreetmap.org/search?format=json&addressdetails=1&q=1+champs+%C3%A9lys%C3%A9e+Paris')
+      sinon.assert.calledOnceWithExactly(
+        mockedAdapter,
+        'https://nominatim.openstreetmap.org/search?format=json&addressdetails=1&q=1+champs+%C3%A9lys%C3%A9e+Paris',
+        { headers: { referer } }
+      )
     })
 
     it('should call api in different language', async function () {
@@ -69,7 +76,11 @@ describe('OsmGeocoder', function () {
 
       assert.deepStrictEqual(results, [])
 
-      sinon.assert.calledOnceWithExactly(mockedAdapter, 'https://nominatim.openstreetmap.org/search?format=json&addressdetails=1&q=1+champs+%C3%A9lys%C3%A9e+Paris&accept-language=de')
+      sinon.assert.calledOnceWithExactly(
+        mockedAdapter,
+        'https://nominatim.openstreetmap.org/search?format=json&addressdetails=1&q=1+champs+%C3%A9lys%C3%A9e+Paris&accept-language=de',
+        { headers: { referer } }
+      )
     })
 
     it('should throw on error', async function () {
@@ -105,7 +116,9 @@ describe('OsmGeocoder', function () {
       const results = await geocoder.forward(query)
 
       assert.deepStrictEqual(results, expResults)
-      sinon.assert.calledOnceWithExactly(mockedAdapter, expUrl)
+      sinon.assert.calledOnceWithExactly(mockedAdapter, expUrl, {
+        headers: { referer: options.referer }
+      })
     })
 
     it('should return address when object', async function () {
@@ -124,7 +137,9 @@ describe('OsmGeocoder', function () {
       const results = await geocoder.forward({ address: query })
 
       assert.deepStrictEqual(results, expResults)
-      sinon.assert.calledOnceWithExactly(mockedAdapter, expUrl)
+      sinon.assert.calledOnceWithExactly(mockedAdapter, expUrl, {
+        headers: { referer: options.referer }
+      })
     })
   })
 
@@ -141,7 +156,11 @@ describe('OsmGeocoder', function () {
       const results = await geocoder.reverse({ lat: 40.714232, lng: -73.9612889 })
 
       assert.deepStrictEqual(results, [])
-      sinon.assert.calledOnceWithExactly(mockedAdapter, 'https://nominatim.openstreetmap.org/reverse?format=json&addressdetails=1&lat=40.714232&lon=-73.9612889')
+      sinon.assert.calledOnceWithExactly(
+        mockedAdapter,
+        'https://nominatim.openstreetmap.org/reverse?format=json&addressdetails=1&lat=40.714232&lon=-73.9612889',
+        { headers: { referer } }
+      )
     })
 
     it('should throw on error', async function () {
@@ -176,18 +195,22 @@ describe('OsmGeocoder', function () {
       const results = await geocoder.reverse(query)
 
       assert.deepStrictEqual(results, expResults)
-      sinon.assert.calledOnceWithExactly(mockedAdapter, expUrl)
+      sinon.assert.calledOnceWithExactly(mockedAdapter, expUrl, {
+        headers: { referer: options.referer }
+      })
     })
   })
 
   describe('call api', () => {
+    // set apiKey to random value; required to run tests on github
+    const { OSM_TEST: apiKey } = process.env
     let geocoder
 
     before(function () {
-      geocoder = new OsmGeocoder(fetchAdapter(), { })
+      geocoder = new OsmGeocoder(fetchAdapter(), { referer })
     })
 
-    it('should call forward api', async function () {
+    itWithApiKey(apiKey, 'should call forward api', async function () {
       const query = 'Paris Avenue des Champs Elysees 1'
       const results = await geocoder.forward(query)
       // eslint-disable-next-line no-console
@@ -195,7 +218,7 @@ describe('OsmGeocoder', function () {
       assert.deepStrictEqual(results[0], fixtures.forward)
     })
 
-    it('should call reverse api', async function () {
+    itWithApiKey(apiKey, 'should call reverse api', async function () {
       const query = '40.714232,-73.9612889'
       const results = await geocoder.reverse(query)
       // eslint-disable-next-line no-console

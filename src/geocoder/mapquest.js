@@ -41,7 +41,7 @@ export class MapQuestGeocoder extends AbstractGeocoder {
     // @ts-ignore
     super(adapter, options)
 
-    const { apiKey, licensed, limit: maxResults, ...params } = options
+    const { apiKey, licensed = true, limit: maxResults, ...params } = options
 
     if (!apiKey) {
       throw new Error(`You must specify apiKey to use ${this.constructor.name}`)

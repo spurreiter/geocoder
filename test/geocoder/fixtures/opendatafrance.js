@@ -342,7 +342,7 @@ const m = {
     citycode: '75108',
     extra: {
       id: '75108_1733',
-      confidence: 0.5656
+      confidence: 0.5658
     },
     streetName: 'Avenue des Champs Elysées'
   },

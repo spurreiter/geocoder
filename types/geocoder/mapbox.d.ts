@@ -70,12 +70,18 @@ export class MapBoxGeocoder extends AbstractGeocoder {
         };
     };
 }
-export type fetchAdapterFn = import('../adapter.js').fetchAdapterFn;
+export type fetchAdapterFn = import("../adapter.js").fetchAdapterFn;
 export type MapBoxForwardQuery = {
     /**
      * -
      */
+    /**
+     * -
+     */
     address: string;
+    /**
+     * Maximum number of results to be returned
+     */
     /**
      * Maximum number of results to be returned
      */
@@ -92,11 +98,20 @@ export type MapBoxReverseQuery = {
     /**
      * latitude
      */
+    /**
+     * latitude
+     */
     lat: number;
     /**
      * longitude
      */
+    /**
+     * longitude
+     */
     lng: number;
+    /**
+     * Maximum number of results to be returned
+     */
     /**
      * Maximum number of results to be returned
      */

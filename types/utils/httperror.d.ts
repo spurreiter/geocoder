@@ -5,5 +5,5 @@
  * @returns {HttpErrorType}
  */
 export function HttpError(response: Response): HttpErrorType;
-export type Response = import('../adapter').Response;
-export type HttpErrorType = import('../types').HttpError;
+export type Response = import("../adapter").Response;
+export type HttpErrorType = import("../types").HttpError;

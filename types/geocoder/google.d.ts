@@ -59,11 +59,14 @@ export class GoogleGeocoder extends AbstractGeocoder {
         extra: any;
     };
 }
-export type fetchAdapterFn = import('../adapter.js').fetchAdapterFn;
+export type fetchAdapterFn = import("../adapter.js").fetchAdapterFn;
 /**
  * see https://developers.google.com/maps/documentation/geocoding/overview#GeocodingRequests
  */
 export type GoogleForwardQuery = {
+    /**
+     * -
+     */
     /**
      * -
      */
@@ -80,7 +83,13 @@ export type GoogleReverseQuery = {
     /**
      * latitude
      */
+    /**
+     * latitude
+     */
     lat: number;
+    /**
+     * longitude
+     */
     /**
      * longitude
      */

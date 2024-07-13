@@ -4,7 +4,7 @@ import countries from 'i18n-iso-countries'
 /**
  * convert alpha3 to alpha2 country code
  * @param {string} code
- * @returns {string}
+ * @returns {string|undefined}
  */
 export const countryCode = (code) => (code && code.length === 3)
   ? countries.alpha3ToAlpha2(code)

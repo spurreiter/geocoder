@@ -39,7 +39,7 @@ export class PeliasGeocoder extends AbstractGeocoder {
         latitude: any;
         longitude: any;
         country: any;
-        countryCode: string;
+        countryCode: string | undefined;
         state: any;
         county: any;
         city: any;
@@ -51,7 +51,7 @@ export class PeliasGeocoder extends AbstractGeocoder {
         };
     };
 }
-export type fetchAdapterFn = import('../adapter.js').fetchAdapterFn;
+export type fetchAdapterFn = import("../adapter.js").fetchAdapterFn;
 export type PeliasForwardQuery = {
     address: string;
 };
@@ -59,7 +59,13 @@ export type PeliasReverseQuery = {
     /**
      * latitude
      */
+    /**
+     * latitude
+     */
     lat: number;
+    /**
+     * longitude
+     */
     /**
      * longitude
      */

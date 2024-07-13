@@ -59,10 +59,13 @@ export class YandexGeocoder extends AbstractGeocoder {
         };
     };
 }
-export type fetchAdapterFn = import('../adapter.js').fetchAdapterFn;
+export type fetchAdapterFn = import("../adapter.js").fetchAdapterFn;
 export type YandexForwardQuery = {
     address: string;
     language?: string | undefined;
+    /**
+     * house, street, metro, district, locality
+     */
     /**
      * house, street, metro, district, locality
      */
@@ -70,7 +73,13 @@ export type YandexForwardQuery = {
     /**
      * [0,1]
      */
+    /**
+     * [0,1]
+     */
     rspn?: number | undefined;
+    /**
+     * Longitude and latitude of the center of the search area
+     */
     /**
      * Longitude and latitude of the center of the search area
      */
@@ -80,7 +89,13 @@ export type YandexReverseQuery = {
     /**
      * latitude
      */
+    /**
+     * latitude
+     */
     lat: number;
+    /**
+     * longitude
+     */
     /**
      * longitude
      */

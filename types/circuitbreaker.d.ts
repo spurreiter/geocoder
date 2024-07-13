@@ -28,9 +28,9 @@ export class CircuitBreaker {
      */
     reverse(query: ReverseQuery): Promise<GeocoderResult[]>;
 }
-export type AbstractGeocoder = import('./geocoder/abstract').AbstractGeocoder;
-export type CircuitBreakerError = import('./types').CircuitBreakerError;
-export type CircuitBreakerOptions = import('./types').CircuitBreakerOptions;
-export type ForwardQuery = import('./types').ForwardQuery;
-export type ReverseQuery = import('./types').ReverseQuery;
-export type GeocoderResult = import('./types').GeocoderResult;
+export type AbstractGeocoder = import("./geocoder/abstract").AbstractGeocoder;
+export type CircuitBreakerError = import("./types").CircuitBreakerError;
+export type CircuitBreakerOptions = import("./types").CircuitBreakerOptions;
+export type ForwardQuery = import("./types").ForwardQuery;
+export type ReverseQuery = import("./types").ReverseQuery;
+export type GeocoderResult = import("./types").GeocoderResult;

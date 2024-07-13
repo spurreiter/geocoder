@@ -22,7 +22,7 @@ describe('PickpointGeocoder', function () {
 
     it('needs an apiKey', () => {
       assert.throws(() => {
-        new PickpointGeocoder(mockedAdapter)
+        new PickpointGeocoder(mockedAdapter, { referer: 'http://localhost' })
       }, /You must specify apiKey to use PickpointGeocoder/)
     })
 
@@ -60,7 +60,11 @@ describe('PickpointGeocoder', function () {
 
       assert.deepStrictEqual(results, [])
 
-      sinon.assert.calledOnceWithExactly(mockedAdapter, 'https://api.pickpoint.io/v1/forward?key=apiKey&format=json&addressdetails=1&q=1+champs+%C3%A9lys%C3%A9e+Paris')
+      sinon.assert.calledOnceWithExactly(
+        mockedAdapter,
+        'https://api.pickpoint.io/v1/forward?key=apiKey&format=json&addressdetails=1&q=1+champs+%C3%A9lys%C3%A9e+Paris',
+        undefined
+      )
     })
 
     it('should call api in different language', async function () {
@@ -71,21 +75,26 @@ describe('PickpointGeocoder', function () {
         })
       )
 
-      const geocoder = new PickpointGeocoder(mockedAdapter, { ...options, language: 'de' })
+      const geocoder = new PickpointGeocoder(mockedAdapter, {
+        ...options,
+        language: 'de'
+      })
       const results = await geocoder.forward('1 champs élysée Paris')
 
       assert.deepStrictEqual(results, [])
 
-      sinon.assert.calledOnceWithExactly(mockedAdapter, 'https://api.pickpoint.io/v1/forward?key=apiKey&format=json&addressdetails=1&q=1+champs+%C3%A9lys%C3%A9e+Paris&accept-language=de')
+      sinon.assert.calledOnceWithExactly(
+        mockedAdapter,
+        'https://api.pickpoint.io/v1/forward?key=apiKey&format=json&addressdetails=1&q=1+champs+%C3%A9lys%C3%A9e+Paris&accept-language=de',
+        undefined
+      )
     })
 
     it('should throw on error', async function () {
-      const mockedAdapter = sinon.stub().returns(
-        ({
-          status: 502,
-          json: () => Promise.resolve({})
-        })
-      )
+      const mockedAdapter = sinon.stub().returns({
+        status: 502,
+        json: () => Promise.resolve({})
+      })
 
       const geocoder = new PickpointGeocoder(mockedAdapter, options)
       try {
@@ -99,7 +108,8 @@ describe('PickpointGeocoder', function () {
     it('should return address', async function () {
       const query = '135 pilkington avenue, birmingham'
       const { body, expResults } = fixtures[query]
-      const expUrl = 'https://api.pickpoint.io/v1/forward?key=apiKey&format=json&addressdetails=1&q=135+pilkington+avenue%2C+birmingham'
+      const expUrl =
+        'https://api.pickpoint.io/v1/forward?key=apiKey&format=json&addressdetails=1&q=135+pilkington+avenue%2C+birmingham'
 
       const mockedAdapter = sinon.stub().returns(
         Promise.resolve({
@@ -112,13 +122,14 @@ describe('PickpointGeocoder', function () {
       const results = await geocoder.forward(query)
 
       assert.deepStrictEqual(results, expResults)
-      sinon.assert.calledOnceWithExactly(mockedAdapter, expUrl)
+      sinon.assert.calledOnceWithExactly(mockedAdapter, expUrl, undefined)
     })
 
     it('should return address when object', async function () {
       const query = '135 pilkington avenue, birmingham'
       const { body, expResults } = fixtures[query]
-      const expUrl = 'https://api.pickpoint.io/v1/forward?key=apiKey&format=json&addressdetails=1&q=135+pilkington+avenue%2C+birmingham'
+      const expUrl =
+        'https://api.pickpoint.io/v1/forward?key=apiKey&format=json&addressdetails=1&q=135+pilkington+avenue%2C+birmingham'
 
       const mockedAdapter = sinon.stub().returns(
         Promise.resolve({
@@ -131,7 +142,7 @@ describe('PickpointGeocoder', function () {
       const results = await geocoder.forward({ address: query })
 
       assert.deepStrictEqual(results, expResults)
-      sinon.assert.calledOnceWithExactly(mockedAdapter, expUrl)
+      sinon.assert.calledOnceWithExactly(mockedAdapter, expUrl, undefined)
     })
   })
 
@@ -145,19 +156,24 @@ describe('PickpointGeocoder', function () {
       )
 
       const geocoder = new PickpointGeocoder(mockedAdapter, options)
-      const results = await geocoder.reverse({ lat: 40.714232, lng: -73.9612889 })
+      const results = await geocoder.reverse({
+        lat: 40.714232,
+        lng: -73.9612889
+      })
 
       assert.deepStrictEqual(results, [])
-      sinon.assert.calledOnceWithExactly(mockedAdapter, 'https://api.pickpoint.io/v1/reverse?key=apiKey&format=json&addressdetails=1&lat=40.714232&lon=-73.9612889')
+      sinon.assert.calledOnceWithExactly(
+        mockedAdapter,
+        'https://api.pickpoint.io/v1/reverse?key=apiKey&format=json&addressdetails=1&lat=40.714232&lon=-73.9612889',
+        undefined
+      )
     })
 
     it('should throw on error', async function () {
-      const mockedAdapter = sinon.stub().returns(
-        ({
-          status: 502,
-          json: () => Promise.resolve({})
-        })
-      )
+      const mockedAdapter = sinon.stub().returns({
+        status: 502,
+        json: () => Promise.resolve({})
+      })
 
       const geocoder = new PickpointGeocoder(mockedAdapter, options)
       try {
@@ -171,7 +187,8 @@ describe('PickpointGeocoder', function () {
     it('should return address', async function () {
       const query = '40.714232,-73.9612889'
       const { body, expResults } = fixtures[query]
-      const expUrl = 'https://api.pickpoint.io/v1/reverse?key=apiKey&format=json&addressdetails=1&lat=40.714232&lon=-73.9612889'
+      const expUrl =
+        'https://api.pickpoint.io/v1/reverse?key=apiKey&format=json&addressdetails=1&lat=40.714232&lon=-73.9612889'
 
       const mockedAdapter = sinon.stub().returns(
         Promise.resolve({
@@ -184,7 +201,7 @@ describe('PickpointGeocoder', function () {
       const results = await geocoder.reverse(query)
 
       assert.deepStrictEqual(results, expResults)
-      sinon.assert.calledOnceWithExactly(mockedAdapter, expUrl)
+      sinon.assert.calledOnceWithExactly(mockedAdapter, expUrl, undefined)
     })
   })
 

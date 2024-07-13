@@ -60,7 +60,7 @@ describe('MapQuestGeocoder', function () {
 
       assert.deepStrictEqual(results, [])
 
-      sinon.assert.calledOnceWithExactly(mockedAdapter, 'http://open.mapquestapi.com/geocoding/v1/address?key=apiKey&location=1+champs+%C3%A9lys%C3%A9e+Paris')
+      sinon.assert.calledOnceWithExactly(mockedAdapter, 'http://www.mapquestapi.com/geocoding/v1/address?key=apiKey&location=1+champs+%C3%A9lys%C3%A9e+Paris')
     })
 
     it('should throw on error', async function () {
@@ -84,7 +84,7 @@ describe('MapQuestGeocoder', function () {
       const query = '135 pilkington avenue, birmingham'
       const { body, expResults } = fixtures[query]
 
-      const expUrl = 'http://open.mapquestapi.com/geocoding/v1/address?key=apiKey&location=135+pilkington+avenue%2C+birmingham'
+      const expUrl = 'http://www.mapquestapi.com/geocoding/v1/address?key=apiKey&location=135+pilkington+avenue%2C+birmingham'
 
       const mockedAdapter = sinon.stub().returns(
         Promise.resolve({
@@ -106,7 +106,7 @@ describe('MapQuestGeocoder', function () {
       const query = '135 pilkington avenue, birmingham'
       const { body, expResults } = fixtures[query]
 
-      const expUrl = 'http://open.mapquestapi.com/geocoding/v1/address?key=apiKey&location=135+pilkington+avenue%2C+birmingham'
+      const expUrl = 'http://www.mapquestapi.com/geocoding/v1/address?key=apiKey&location=135+pilkington+avenue%2C+birmingham'
 
       const mockedAdapter = sinon.stub().returns(
         Promise.resolve({
@@ -144,7 +144,7 @@ describe('MapQuestGeocoder', function () {
 
       assert.deepStrictEqual(results, [])
 
-      sinon.assert.calledOnceWithExactly(mockedAdapter, 'http://open.mapquestapi.com/geocoding/v1/reverse?key=apiKey&location=40.714232%2C-73.9612889')
+      sinon.assert.calledOnceWithExactly(mockedAdapter, 'http://www.mapquestapi.com/geocoding/v1/reverse?key=apiKey&location=40.714232%2C-73.9612889')
     })
 
     it('should throw on error', async function () {
@@ -167,7 +167,7 @@ describe('MapQuestGeocoder', function () {
     it('should return address', async function () {
       const query = '40.714232,-73.9612889'
       const { body, expResults } = fixtures[query]
-      const expUrl = 'http://open.mapquestapi.com/geocoding/v1/reverse?key=apiKey&location=40.714232%2C-73.9612889'
+      const expUrl = 'http://www.mapquestapi.com/geocoding/v1/reverse?key=apiKey&location=40.714232%2C-73.9612889'
 
       const mockedAdapter = sinon.stub().returns(
         Promise.resolve({

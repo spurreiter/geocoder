@@ -36,13 +36,12 @@ export class PickpointGeocoder extends OsmGeocoder {
    * @param {number} [options.limit=10]
    * @param {string} [options.language]
    */
-  constructor (adapter, options = { apiKey: '' }) {
-    super(adapter, options)
-
-    const { apiKey, ...params } = options
+  constructor (adapter, options) {
+    super(adapter, { ...options, needsReferer: false })
+    const { apiKey, ...params } = options || {}
 
     if (!apiKey) {
-      throw new Error(`You must specify apiKey to use ${this.constructor.name}`)
+      throw new Error('You must specify apiKey to use PickpointGeocoder')
     }
 
     this.endpoint = 'https://api.pickpoint.io/v1/forward'

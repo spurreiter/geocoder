@@ -57,12 +57,15 @@ export class OpendataFranceGeocoder extends AbstractGeocoder {
         };
     };
 }
-export type fetchAdapterFn = import('../adapter.js').fetchAdapterFn;
+export type fetchAdapterFn = import("../adapter.js").fetchAdapterFn;
 /**
  * see https://geo.api.gouv.fr/adresse
  */
 export type OpendataFranceForwardQuery = {
     address: string;
+    /**
+     * Maximum number of results to be returned
+     */
     /**
      * Maximum number of results to be returned
      */
@@ -75,11 +78,20 @@ export type OpendataFranceReverseQuery = {
     /**
      * latitude
      */
+    /**
+     * latitude
+     */
     lat: number;
     /**
      * longitude
      */
+    /**
+     * longitude
+     */
     lng: number;
+    /**
+     * Maximum number of results to be returned
+     */
     /**
      * Maximum number of results to be returned
      */

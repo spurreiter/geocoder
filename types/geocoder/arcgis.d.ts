@@ -63,13 +63,16 @@ export class ArcGisGeocoder extends AbstractGeocoder {
      */
     _formatResultRev(language: any, result: object): object;
 }
-export type fetchAdapterFn = import('../adapter.js').fetchAdapterFn;
+export type fetchAdapterFn = import("../adapter.js").fetchAdapterFn;
 /**
  * see https://developers.arcgis.com/rest/geocode/api-reference/geocoding-find-address-candidates.htm
  */
 export type ArcGisForwardQuery = {
     address: string;
     limit?: number | undefined;
+    /**
+     * see https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer?f=pjson for list of values
+     */
     /**
      * see https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer?f=pjson for list of values
      */
@@ -84,7 +87,13 @@ export type ArcGisReverseQuery = {
     /**
      * latitude
      */
+    /**
+     * latitude
+     */
     lat: number;
+    /**
+     * longitude
+     */
     /**
      * longitude
      */

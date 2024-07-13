@@ -143,37 +143,37 @@ const m = {
     }]
   },
   forward: {
-    formattedAddress: 'US',
-    latitude: 39.78373,
-    longitude: -100.445882,
-    country: 'United States of America',
-    countryCode: 'US',
-    state: undefined,
-    county: undefined,
-    city: undefined,
-    zipcode: undefined,
-    streetName: undefined,
-    neighbourhood: undefined,
+    formattedAddress: '1 Port des Champs-Élysées, Paris, IDF 75008, FR',
+    latitude: 48.86434,
+    longitude: 2.31432,
+    country: 'France',
+    countryCode: 'FR',
+    state: 'IDF',
+    county: 'Paris',
+    city: 'Paris',
+    zipcode: '75008',
+    streetName: '1 Port des Champs-Élysées',
+    neighbourhood: '8th Arrondissement',
     extra: {
       id: '0',
-      sideOfStreet: 'N'
+      sideOfStreet: 'L'
     }
   },
   reverse: {
-    formattedAddress: '279 Bedford Avenue, New York City, NY 11211, US',
-    latitude: 40.714205,
-    longitude: -73.961315,
+    formattedAddress: '277 Bedford Ave, Brooklyn, NY 11211-4203, US',
+    latitude: 40.71431,
+    longitude: -73.96142,
     country: 'United States of America',
     countryCode: 'US',
     state: 'NY',
-    county: undefined,
-    city: 'New York City',
-    zipcode: '11211',
-    streetName: '279 Bedford Avenue',
-    neighbourhood: undefined,
+    county: 'Kings',
+    city: 'Brooklyn',
+    zipcode: '11211-4203',
+    streetName: '277 Bedford Ave',
+    neighbourhood: 'Williamsburg',
     extra: {
       id: '0',
-      sideOfStreet: 'N'
+      sideOfStreet: 'R'
     }
   }
 }

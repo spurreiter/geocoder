@@ -40,7 +40,6 @@ Features:
 | [OsmGeocoder](https://nominatim.org/release-docs/develop/) | ✅ | ✅ | ❌ | Searches nominatim.org |
 | [PeliasGeocoder](https://github.com/pelias/documentation/blob/master/README.md) | ✅ | ✅ | ❌ | Local or [Geocode.earth](https://geocode.earth/docs) |
 | [PickpointGeocoder](https://pickpoint.io/api-reference) | ✅ | ✅ | ❌ | Search Results based on OSM |
-| [TeleportGeocoder](https://developers.teleport.org/api/resources/) | ✅ | ✅ | ❌ | Searches only by city names, no addresses |
 | [TomTomGeocoder](https://developer.tomtom.com/) | ✅ | ✅ | ❌ |  |
 | [YandexGeocoder](https://yandex.com/dev/maps/geocoder/) | ✅ | ✅ | ❌ |  |
 
@@ -52,7 +51,7 @@ Features:
 import { fetchAdapter, OsmGeocoder } from '@spurreiter/geocoder'
 
 const adapter = fetchAdapter()
-const geocoder = new OsmGeocoder(adapter, { language: 'en', limit: 5 })
+const geocoder = new OsmGeocoder(adapter, { language: 'en', limit: 5, referer: 'https://mysite' })
 
 const results = await geocoder.forward('135 pilkington avenue, birmingham')
 // [
@@ -119,7 +118,7 @@ import { Cascade, fetchAdapter, HereGeocoder, OsmGeocoder } from '@spurreiter/ge
 const language = "es"
 const geocoders = [
   new HereGeocoder(adapter, { apiKey: 'your-api-key', language }),
-  new OsmGeocoder(adapter, { language })
+  new OsmGeocoder(adapter, { language, referer: 'https://mysite' })
 ]
 const cascade = new Cascade(geocoders)
 
@@ -139,7 +138,7 @@ import { Combine, fetchAdapter, HereGeocoder, OsmGeocoder } from '@spurreiter/ge
 
 const geocoders = [
   new HereGeocoder(adapter, { apiKey: 'your-api-key' }),
-  new OsmGeocoder(adapter)
+  new OsmGeocoder(adapter, { referer: 'https://mysite' })
 ]
 const combine = new Combine(geocoders)
 

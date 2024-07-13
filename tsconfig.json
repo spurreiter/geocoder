@@ -5,7 +5,9 @@
     "checkJs": true,
     "declaration": true,
     "declarationDir": "types",
-    // "moduleResolution": "node",
+    "emitDeclarationOnly": true,
+    "moduleResolution": "node",
+    "noEmitOnError": true,
     "noImplicitAny": false,
     "strict": true,
     "target": "ES2021"
@@ -14,9 +16,9 @@
     "src"
   ],
   "exclude": [
-    "coverage",
-    "lib",
-    "node_modules",
-    "test"
+    "./coverage",
+    "./lib",
+    "./node_modules",
+    "./test"
   ]
 }

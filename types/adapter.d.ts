@@ -30,5 +30,5 @@ export class Response {
     json(): Promise<any>;
     formData(): Promise<URLSearchParams>;
 }
-export type AdapterOptions = import('./types').AdapterOptions;
+export type AdapterOptions = import("./types").AdapterOptions;
 export type fetchAdapterFn = typeof import("./types").fetchAdapterFn;

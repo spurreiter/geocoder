@@ -1,8 +1,8 @@
 // @ts-expect-error
 import got from 'got'
-// @ts-expect-error
 import HttpAgent from 'agentkeepalive'
 import { isNumber } from './utils/index.js'
+import { version } from './version.js'
 const { HttpsAgent } = HttpAgent
 
 /** @typedef {import('./types').AdapterOptions} AdapterOptions */
@@ -35,7 +35,7 @@ export function fetchAdapter (opts) {
   }
 
   if (!globalOpts.headers[USER_AGENT]) {
-    globalOpts.headers[USER_AGENT] = 'Mozilla/5.0 (X11; Linux x86_64; rv:88.0) Gecko/20100101 Firefox/88.0'
+    globalOpts.headers[USER_AGENT] = `geocoder/${version}`
   }
 
   return (url, options = {}) => {

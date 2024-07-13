@@ -1053,8 +1053,8 @@ const m = {
   },
   forward: {
     formattedAddress: '1 Av. des Champs-Élysées, 75008 Paris, France',
-    latitude: 48.8694849,
-    longitude: 2.3094449,
+    latitude: 48.8694746,
+    longitude: 2.3094593,
     country: 'France',
     countryCode: 'FR',
     state: 'Île-de-France',

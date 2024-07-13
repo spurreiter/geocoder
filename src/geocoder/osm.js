@@ -14,11 +14,14 @@ function mapParams (params) {
 }
 
 function hasResult (result) {
-  return (Array.isArray(result) && result.length && result[0].osm_type) || (result && result.osm_type)
+  return (
+    (Array.isArray(result) && result.length && result[0].osm_type) ||
+    (result && result.osm_type)
+  )
 }
 
 function mapToNumber (arr) {
-  return Array.isArray(arr) ? arr.map(n => +n) : undefined
+  return Array.isArray(arr) ? arr.map((n) => +n) : undefined
 }
 
 function toBbox (boundingbox) {
@@ -61,6 +64,7 @@ export class OsmGeocoder extends AbstractGeocoder {
    * @see https://nominatim.org/release-docs/develop/api/Search/
    * @param {fetchAdapterFn} adapter
    * @param {object} options
+   * @param {string} [options.referer] referer header
    * @param {number} [options.limit=10]
    * @param {string} [options.language]
    * @param {number} [options.addressdetails]
@@ -70,8 +74,9 @@ export class OsmGeocoder extends AbstractGeocoder {
    * @param {number} [options.dedupe]
    * @param {string} [options.endpoint] custom endpoint
    * @param {string} [options.revEndpoint] custom reverse endpoint
+   * @param {boolean} [options.needsReferer]
    */
-  constructor (adapter, options = {}) {
+  constructor (adapter, options) {
     // @ts-ignore
     super(adapter, options)
 
@@ -80,11 +85,21 @@ export class OsmGeocoder extends AbstractGeocoder {
       revEndpoint = 'https://nominatim.openstreetmap.org/reverse',
       // @ts-ignore
       apiKey,
+      referer,
+      needsReferer = true,
       ...params
-    } = options
+    } = options || {}
+
+    if (needsReferer && !referer) {
+      throw new Error(
+        'Nominatim Usage Policy requires Referer header; ' +
+          'https://operations.osmfoundation.org/policies/nominatim/'
+      )
+    }
 
     this.endpoint = endpoint
     this.revEndpoint = revEndpoint
+    this.fetchopts = referer ? { headers: { referer } } : undefined
 
     this.params = {
       ...params,
@@ -108,7 +123,7 @@ export class OsmGeocoder extends AbstractGeocoder {
     params = mapParams(params)
     const url = this.createUrl(this.endpoint, params)
 
-    const res = await this.adapter(url)
+    const res = await this.adapter(url, this.fetchopts)
     if (res.status !== 200) {
       throw HttpError(res)
     }
@@ -130,7 +145,7 @@ export class OsmGeocoder extends AbstractGeocoder {
 
     const url = this.createUrl(this.revEndpoint, params)
 
-    const res = await this.adapter(url)
+    const res = await this.adapter(url, this.fetchopts)
     if (res.status !== 200) {
       throw HttpError(res)
     }
