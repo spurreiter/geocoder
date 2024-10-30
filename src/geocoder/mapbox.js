@@ -133,7 +133,7 @@ export class MapBoxGeocoder extends AbstractGeocoder {
       extra: {
         id,
         bbox: properties.bbox ?? undefined,
-        confidence: properties.match_code
+        match: properties.match_code
       }
     }
 
