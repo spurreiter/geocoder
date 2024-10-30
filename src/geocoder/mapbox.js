@@ -65,11 +65,11 @@ export class MapBoxGeocoder extends AbstractGeocoder {
 
     if (typeof query !== 'string' && query.address) {
       const { address, ...other } = query
-      searchtext = encodeURIComponent(String(address))
+      searchtext = String(address)
       params = { q: searchtext, ...this.params, ...other }
     }
 
-    params = { q: encodeURIComponent(String(searchtext)), ...this.params }
+    params = { q: String(searchtext), ...this.params }
 
     const url = this.createUrl(`${this.endpoint}/forward`, params)
 
@@ -133,7 +133,7 @@ export class MapBoxGeocoder extends AbstractGeocoder {
       extra: {
         id,
         bbox: properties.bbox ?? undefined,
-        confidence: properties.match_code?.confidence
+        confidence: properties.match_code
       }
     }
 
