@@ -60,7 +60,10 @@ describe('MapBoxGeocoder', function () {
 
       assert.deepStrictEqual(results, [])
 
-      sinon.assert.calledOnceWithExactly(mockedAdapter, 'https://api.mapbox.com/geocoding/v5/mapbox.places/1%20champs%20%C3%A9lys%C3%A9e%20Paris.json?access_token=apiKey')
+      sinon.assert.calledOnceWithExactly(
+        mockedAdapter,
+        'https://api.mapbox.com/search/geocode/v6/forward?q=1%2520champs%2520%25C3%25A9lys%25C3%25A9e%2520Paris&access_token=apiKey'
+      )
     })
 
     it('should throw on error', async function () {
@@ -84,7 +87,8 @@ describe('MapBoxGeocoder', function () {
       const query = '135 pilkington avenue, birmingham'
       const { body, expResults } = fixtures[query]
 
-      const expUrl = 'https://api.mapbox.com/geocoding/v5/mapbox.places/135%20pilkington%20avenue%2C%20birmingham.json?access_token=apiKey'
+      const expUrl =
+        'https://api.mapbox.com/search/geocode/v6/forward?q=135%2520pilkington%2520avenue%252C%2520birmingham&access_token=apiKey'
 
       const mockedAdapter = sinon.stub().returns(
         Promise.resolve({
@@ -105,7 +109,8 @@ describe('MapBoxGeocoder', function () {
     it('should return address when object', async function () {
       const query = '135 pilkington avenue, birmingham'
       const { body, expResults } = fixtures[query]
-      const expUrl = 'https://api.mapbox.com/geocoding/v5/mapbox.places/135%20pilkington%20avenue%2C%20birmingham.json?access_token=apiKey'
+      const expUrl =
+        'https://api.mapbox.com/search/geocode/v6/forward?q=135%252520pilkington%252520avenue%25252C%252520birmingham&access_token=apiKey'
 
       const mockedAdapter = sinon.stub().returns(
         Promise.resolve({
@@ -138,7 +143,10 @@ describe('MapBoxGeocoder', function () {
 
       assert.deepStrictEqual(results, [])
 
-      sinon.assert.calledOnceWithExactly(mockedAdapter, 'https://api.mapbox.com/geocoding/v5/mapbox.places/-73.9612889%2C40.714232.json?access_token=apiKey')
+      sinon.assert.calledOnceWithExactly(
+        mockedAdapter,
+        'https://api.mapbox.com/search/geocode/v6/reverse?longitude=-73.9612889&latitude=40.714232&access_token=apiKey'
+      )
     })
 
     it('should throw on error', async function () {
@@ -161,7 +169,8 @@ describe('MapBoxGeocoder', function () {
     it('should return address', async function () {
       const query = '40.714232,-73.9612889'
       const { body, expResults } = fixtures[query]
-      const expUrl = 'https://api.mapbox.com/geocoding/v5/mapbox.places/-73.9612889%2C40.714232.json?access_token=apiKey'
+      const expUrl =
+        'https://api.mapbox.com/search/geocode/v6/reverse?longitude=-73.9612889&latitude=40.714232&access_token=apiKey'
 
       const mockedAdapter = sinon.stub().returns(
         Promise.resolve({
