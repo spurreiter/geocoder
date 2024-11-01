@@ -1,5 +1,5 @@
 import { AbstractGeocoder } from './abstract.js'
-import { HttpError } from '../utils/index.js'
+import { HttpError, isTrustableMapboxResult } from '../utils/index.js'
 
 /** @typedef {import('../adapter.js').fetchAdapterFn} fetchAdapterFn */
 
@@ -133,7 +133,7 @@ export class MapBoxGeocoder extends AbstractGeocoder {
       extra: {
         id,
         bbox: properties.bbox ?? undefined,
-        match: properties.match_code
+        confidence: properties.match_code ? isTrustableMapboxResult(properties.match_code) : 0
       }
     }
 

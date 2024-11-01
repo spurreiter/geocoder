@@ -283,7 +283,7 @@ const m = {
         extra: {
           id: 'dXJuOm1ieGFkcjoyZTM4NDQzMC02MzY1LTRhYmUtYWFiMi02M2EwMzk5N2QxNWU',
           bbox: undefined,
-          confidence: 'low'
+          confidence: 0
         }
       },
       {
@@ -303,7 +303,7 @@ const m = {
         extra: {
           id: 'dXJuOm1ieGFkci1pdHA6ZXlKeElqb2lNVE0xSUhCcGJHdHBibWQwYjI0Z1lYWmxiblZsTENCaWFYSnRhVzVuYUdGdElpd2liR2x0YVhRaU9pSXpJaXdpYVc1amJIVmtaVjl0WVhSamFGOWtaWFJoYVd3aU9pSjBjblZsSWl3aWJXOWtaU0k2SW1admNuZGhjbVFpTENKMGVYQmxjeUk2SW1OdmRXNTBjbmtzY21WbmFXOXVMSEJ2YzNSamIyUmxMR1JwYzNSeWFXTjBMSEJzWVdObExHeHZZMkZzYVhSNUxHNWxhV2RvWW05eWFHOXZaQ3hoWkdSeVpYTnpJbjA6MQ',
           bbox: undefined,
-          confidence: 'low'
+          confidence: 0
         }
       },
       {
@@ -323,7 +323,7 @@ const m = {
         extra: {
           id: 'dXJuOm1ieGFkci1pdHA6ZXlKeElqb2lNVE0xSUhCcGJHdHBibWQwYjI0Z1lYWmxiblZsTENCaWFYSnRhVzVuYUdGdElpd2liR2x0YVhRaU9pSXpJaXdpYVc1amJIVmtaVjl0WVhSamFGOWtaWFJoYVd3aU9pSjBjblZsSWl3aWJXOWtaU0k2SW1admNuZGhjbVFpTENKMGVYQmxjeUk2SW1OdmRXNTBjbmtzY21WbmFXOXVMSEJ2YzNSamIyUmxMR1JwYzNSeWFXTjBMSEJzWVdObExHeHZZMkZzYVhSNUxHNWxhV2RvWW05eWFHOXZaQ3hoWkdSeVpYTnpJbjA6Mg',
           bbox: undefined,
-          confidence: 'low'
+          confidence: 0
         }
       }
     ]
@@ -765,7 +765,7 @@ const m = {
         extra: {
           id: 'dXJuOm1ieGFkcjo3ODJkZTY1ZS1lZGMxLTRmYTktYjBjOS1kMDg0YjVjM2I0MzI',
           bbox: undefined,
-          confidence: undefined
+          confidence: 0
         }
       },
       {
@@ -784,7 +784,7 @@ const m = {
         extra: {
           id: 'dXJuOm1ieHBsYzpLdnZNN0E',
           bbox: [-73.969934, 40.698039, -73.941931, 40.725249],
-          confidence: undefined
+          confidence: 0
         }
       },
       {
@@ -803,7 +803,7 @@ const m = {
         extra: {
           id: 'postcode.1452927999608038',
           bbox: undefined,
-          confidence: undefined
+          confidence: 0
         }
       },
       {
@@ -822,7 +822,7 @@ const m = {
         extra: {
           id: 'dXJuOm1ieHBsYzpBLzBLN0E',
           bbox: [-74.042412, 40.566162, -73.833365, 40.739446],
-          confidence: undefined
+          confidence: 0
         }
       },
       {
@@ -841,7 +841,7 @@ const m = {
         extra: {
           id: 'dXJuOm1ieHBsYzpEZTVJN0E',
           bbox: [-74.25964, 40.477399, -73.700292, 40.917577],
-          confidence: undefined
+          confidence: 0
         }
       },
       {
@@ -860,7 +860,7 @@ const m = {
         extra: {
           id: 'dXJuOm1ieHBsYzp2T2Jz',
           bbox: [-74.054951, 40.546429, -73.83361, 40.739633],
-          confidence: undefined
+          confidence: 0
         }
       },
       {
@@ -879,7 +879,7 @@ const m = {
         extra: {
           id: 'dXJuOm1ieHBsYzpBYVRz',
           bbox: [-79.763007, 40.462666, -71.781689, 45.0217],
-          confidence: undefined
+          confidence: 0
         }
       },
       {
@@ -898,7 +898,7 @@ const m = {
         extra: {
           id: 'dXJuOm1ieHBsYzpJdXc',
           bbox: [-179.9, 18.829161, -66.902733, 71.420291],
-          confidence: undefined
+          confidence: 0
         }
       }
     ]
@@ -919,7 +919,8 @@ const m = {
     extra: {
       id: 'address.4094307396599160',
       category: undefined,
-      bbox: undefined
+      bbox: undefined,
+      confidence: 0
     }
   },
   reverse: {
@@ -939,7 +940,8 @@ const m = {
     extra: {
       id: 'address.1326994189738106',
       category: undefined,
-      bbox: undefined
+      bbox: undefined,
+      confidence: 0
     }
   }
 }
