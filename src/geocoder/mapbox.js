@@ -1,5 +1,5 @@
 import { AbstractGeocoder } from './abstract.js'
-import { HttpError, isTrustableMapboxResult } from '../utils/index.js'
+import { HttpError } from '../utils/index.js'
 
 /** @typedef {import('../adapter.js').fetchAdapterFn} fetchAdapterFn */
 
@@ -25,6 +25,15 @@ import { HttpError, isTrustableMapboxResult } from '../utils/index.js'
  * @property {boolean} [routing]
  * @property {string[]} [country]
  */
+
+function isTrustableMapboxResult(matchCode) {
+  return Number(
+    matchCode.address_number === 'matched' &&
+      matchCode.street === 'matched' &&
+      matchCode.postcode === 'matched' &&
+      matchCode.country === 'matched'
+  )
+}
 
 export class MapBoxGeocoder extends AbstractGeocoder {
   /**
@@ -133,7 +142,9 @@ export class MapBoxGeocoder extends AbstractGeocoder {
       extra: {
         id,
         bbox: properties.bbox ?? undefined,
-        confidence: properties.match_code ? isTrustableMapboxResult(properties.match_code) : 0
+        confidence: properties.match_code
+          ? isTrustableMapboxResult(properties.match_code)
+          : 0
       }
     }
 
