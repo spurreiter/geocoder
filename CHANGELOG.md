@@ -1,3 +1,7 @@
+# 2.1.1 (2024-11-04)
+
+- docs: fix table (#ee4b0d8)
+
 # 2.1.0 (2024-11-04)
 
 - fix: types (#4310e40)
@@ -102,5 +106,3 @@
 - chore: fix package.json (#597c552)
 - feat: various geocode providers (#3578504)
 - Initial commit (#4fb89ea)
-
-
