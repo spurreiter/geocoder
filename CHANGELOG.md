@@ -1,3 +1,14 @@
+# 2.1.0 (2024-11-04)
+
+- fix: types (#4310e40)
+- feat(mapbox): rework code (#bb9e81c)
+- feat(mapbox): fix formatResult to follow guidelines of other providers + adapt tests to mapbox api v6 (#f3d2d16)
+- feat(mapbox): avoid breaking typing (#ab2cb99)
+- return whole match_code object and avoid encoding address twice (#76bd147)
+- feat(mapbox): update to mapbox api v6 (#04100c2)
+- docs(README): reformat, update CI badge (#aa19b7b)
+- chore: update env template (#396acd2)
+
 # 2.0.0 (2024-07-13)
 
 - chore: use node 20 + 22 for actions (#34d4f7b)
