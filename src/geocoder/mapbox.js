@@ -26,6 +26,15 @@ import { HttpError } from '../utils/index.js'
  * @property {string[]} [country]
  */
 
+function isTrustableMapboxResult(matchCode) {
+  return Number(
+    matchCode.address_number === 'matched' &&
+      matchCode.street === 'matched' &&
+      matchCode.postcode === 'matched' &&
+      matchCode.country === 'matched'
+  )
+}
+
 export class MapBoxGeocoder extends AbstractGeocoder {
   /**
    * available options
@@ -36,7 +45,7 @@ export class MapBoxGeocoder extends AbstractGeocoder {
    * @param {number} [options.limit=5]
    * @param {string} [options.language]
    */
-  constructor (adapter, options = { apiKey: '' }) {
+  constructor(adapter, options = { apiKey: '' }) {
     // @ts-ignore
     super(adapter, options)
 
@@ -51,28 +60,27 @@ export class MapBoxGeocoder extends AbstractGeocoder {
     this.params = params
   }
 
-  get endpoint () {
-    return 'https://api.mapbox.com/geocoding/v5/mapbox.places'
+  get endpoint() {
+    return 'https://api.mapbox.com/search/geocode/v6'
   }
 
   /**
    * @param {string|MapBoxForwardQuery} query
    * @returns {Promise<object>}
    */
-  async _forward (query) {
-    let params = this.params
+  async _forward(query) {
     let searchtext = query
+    let params
 
     if (typeof query !== 'string' && query.address) {
       const { address, ...other } = query
-      searchtext = address
-      params = { ...params, ...other }
+      searchtext = String(address)
+      params = { q: searchtext, ...this.params, ...other }
     }
 
-    const url = this.createUrl(
-      `${this.endpoint}/${encodeURIComponent(String(searchtext))}.json`,
-      params
-    )
+    params = { q: String(searchtext), ...this.params }
+
+    const url = this.createUrl(`${this.endpoint}/forward`, params)
 
     const res = await this.adapter(url)
     if (res.status !== 200) {
@@ -90,14 +98,11 @@ export class MapBoxGeocoder extends AbstractGeocoder {
    * @param {MapBoxReverseQuery} query
    * @returns {Promise<object>}
    */
-  async _reverse (query) {
+  async _reverse(query) {
     const { lat, lng, ...other } = query
-    const params = { ...this.params, ...other }
+    const params = { longitude: lng, latitude: lat, ...other, ...this.params }
 
-    const url = this.createUrl(
-      `${this.endpoint}/${encodeURIComponent(`${lng},${lat}`)}.json`,
-      params
-    )
+    const url = this.createUrl(`${this.endpoint}/reverse`, params)
 
     const res = await this.adapter(url)
     if (res.status !== 200) {
@@ -111,44 +116,35 @@ export class MapBoxGeocoder extends AbstractGeocoder {
     return this.wrapRaw(results, result)
   }
 
-  _formatResult (result) {
-    const context = (result.context || []).reduce((o, item) => {
-      // possible types: country, region, postcode, district, place, locality, neighborhood, address
-      const [type] = item.id.split('.')
-      if (type) {
-        o[type] = item.text
-        if (type === 'country' && item.short_code) {
-          o.countryCode = item.short_code.toUpperCase()
-        }
-      }
-      return o
-    }, {})
-
-    // get main type
-    const [type] = result.id.split('.')
-    if (type) {
-      context[type] = result.text
-    }
-
-    const { properties = {}, address, bbox, id } = result
+  _formatResult(result) {
+    const { properties, id } = result
+    const { context } = properties
 
     const formatted = {
-      formattedAddress: result.place_name,
-      latitude: result.center[1],
-      longitude: result.center[0],
-      country: context.country,
-      countryCode: context.countryCode,
-      state: context.region,
-      city: context.place,
-      zipcode: context.postcode,
-      district: context.district,
-      streetName: type === 'address' ? context.address : undefined,
-      streetNumber: type === 'address' ? address : undefined,
-      neighbourhood: context.neighborhood || context.locality,
+      formattedAddress: properties.full_address,
+      latitude: properties.coordinates.latitude,
+      longitude: properties.coordinates.longitude,
+      country: context.country?.name,
+      countryCode: context.country?.country_code,
+      state: context.region?.name,
+      city: context.place?.name,
+      zipcode: context.postcode?.name,
+      district: context.district?.name,
+      streetName:
+        properties.feature_type === 'address'
+          ? context.address?.street_name
+          : undefined,
+      streetNumber:
+        properties.feature_type === 'address'
+          ? context.address?.address_number
+          : undefined,
+      neighbourhood: context.neighborhood?.name || context.locality?.name,
       extra: {
         id,
-        category: properties.category,
-        bbox
+        bbox: properties.bbox ?? undefined,
+        confidence: properties.match_code
+          ? isTrustableMapboxResult(properties.match_code)
+          : 0
       }
     }
 
