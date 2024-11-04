@@ -81,13 +81,7 @@ export type BingMapsReverseQuery = {
     /**
      * latitude
      */
-    /**
-     * latitude
-     */
     lat: number;
-    /**
-     * longitude
-     */
     /**
      * longitude
      */

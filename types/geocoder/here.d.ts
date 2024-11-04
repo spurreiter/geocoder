@@ -59,15 +59,9 @@ export type HereForwardQuery = {
     /**
      * Maximum number of results to be returned
      */
-    /**
-     * Maximum number of results to be returned
-     */
     limit?: number | undefined;
 };
 export type HereReverseQuery = {
-    /**
-     * latitude
-     */
     /**
      * latitude
      */
@@ -75,14 +69,8 @@ export type HereReverseQuery = {
     /**
      * longitude
      */
-    /**
-     * longitude
-     */
     lng: number;
     language?: string | undefined;
-    /**
-     * Maximum number of results to be returned
-     */
     /**
      * Maximum number of results to be returned
      */

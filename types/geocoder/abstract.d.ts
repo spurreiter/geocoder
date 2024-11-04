@@ -58,7 +58,7 @@ export class AbstractGeocoder {
      * @param {object} body
      * @returns {WrappedResults}
      */
-    protected wrapRaw(results: any | undefined, body: object): any[];
+    protected wrapRaw(results: any, body: object): any[];
     /**
      * forward geocoding
      * @protected

@@ -63,15 +63,9 @@ export type LocationIqForwardQuery = {
     /**
      * Maximum number of results to be returned
      */
-    /**
-     * Maximum number of results to be returned
-     */
     limit?: number | undefined;
 };
 export type LocationIqReverseQuery = {
-    /**
-     * latitude
-     */
     /**
      * latitude
      */
@@ -79,14 +73,8 @@ export type LocationIqReverseQuery = {
     /**
      * longitude
      */
-    /**
-     * longitude
-     */
     lng: number;
     language?: string | undefined;
-    /**
-     * Maximum number of results to be returned
-     */
     /**
      * Maximum number of results to be returned
      */

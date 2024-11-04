@@ -67,9 +67,6 @@ export type GoogleForwardQuery = {
     /**
      * -
      */
-    /**
-     * -
-     */
     address: string;
     language?: string | undefined;
     bounds?: string | undefined;
@@ -83,13 +80,7 @@ export type GoogleReverseQuery = {
     /**
      * latitude
      */
-    /**
-     * latitude
-     */
     lat: number;
-    /**
-     * longitude
-     */
     /**
      * longitude
      */

@@ -76,13 +76,7 @@ export type GeocodioForwardQuery = {
     /**
      * not supported
      */
-    /**
-     * not supported
-     */
     language?: string | undefined;
-    /**
-     * Maximum number of results to be returned
-     */
     /**
      * Maximum number of results to be returned
      */
@@ -99,13 +93,7 @@ export type GeocodioReverseQuery = {
     /**
      * latitude
      */
-    /**
-     * latitude
-     */
     lat: number;
-    /**
-     * longitude
-     */
     /**
      * longitude
      */
@@ -113,13 +101,7 @@ export type GeocodioReverseQuery = {
     /**
      * not supported
      */
-    /**
-     * not supported
-     */
     language?: string | undefined;
-    /**
-     * Maximum number of results to be returned
-     */
     /**
      * Maximum number of results to be returned
      */

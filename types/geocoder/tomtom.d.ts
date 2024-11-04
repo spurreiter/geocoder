@@ -75,9 +75,6 @@ export type TomTomForwardQuery = {
     /**
      * see for list of values
      */
-    /**
-     * see for list of values
-     */
     category?: string | undefined;
     preferredLabelValues?: string | undefined;
     language?: string | undefined;
@@ -89,13 +86,7 @@ export type TomTomReverseQuery = {
     /**
      * latitude
      */
-    /**
-     * latitude
-     */
     lat: number;
-    /**
-     * longitude
-     */
     /**
      * longitude
      */

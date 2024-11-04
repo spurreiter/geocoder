@@ -73,9 +73,6 @@ export type ArcGisForwardQuery = {
     /**
      * see https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer?f=pjson for list of values
      */
-    /**
-     * see https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer?f=pjson for list of values
-     */
     category?: string | undefined;
     preferredLabelValues?: string | undefined;
     language?: string | undefined;
@@ -87,13 +84,7 @@ export type ArcGisReverseQuery = {
     /**
      * latitude
      */
-    /**
-     * latitude
-     */
     lat: number;
-    /**
-     * longitude
-     */
     /**
      * longitude
      */

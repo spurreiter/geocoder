@@ -66,9 +66,6 @@ export type OpendataFranceForwardQuery = {
     /**
      * Maximum number of results to be returned
      */
-    /**
-     * Maximum number of results to be returned
-     */
     limit?: number | undefined;
 };
 /**
@@ -78,20 +75,11 @@ export type OpendataFranceReverseQuery = {
     /**
      * latitude
      */
-    /**
-     * latitude
-     */
     lat: number;
     /**
      * longitude
      */
-    /**
-     * longitude
-     */
     lng: number;
-    /**
-     * Maximum number of results to be returned
-     */
     /**
      * Maximum number of results to be returned
      */

@@ -1,25 +1,3 @@
-/** @typedef {import('../adapter.js').fetchAdapterFn} fetchAdapterFn */
-/**
- * @typedef {object} MapBoxForwardQuery
- * @property {string} address -
- * @property {number} [limit=5] Maximum number of results to be returned
- * @property {string} [language]
- * @property {boolean} [autocomplete]
- * @property {boolean} [fuzzyMatch]
- * @property {boolean} [routing]
- * @property {number[]} [bbox]
- * @property {number[]} [proximity]
- * @property {string[]} [country]
- */
-/**
- * @typedef {object} MapBoxReverseQuery
- * @property {number} lat latitude
- * @property {number} lng longitude
- * @property {number} [limit=5] Maximum number of results to be returned
- * @property {string} [language]
- * @property {boolean} [routing]
- * @property {string[]} [country]
- */
 export class MapBoxGeocoder extends AbstractGeocoder {
     /**
      * available options
@@ -65,8 +43,8 @@ export class MapBoxGeocoder extends AbstractGeocoder {
         neighbourhood: any;
         extra: {
             id: any;
-            category: any;
             bbox: any;
+            confidence: number;
         };
     };
 }
@@ -75,13 +53,7 @@ export type MapBoxForwardQuery = {
     /**
      * -
      */
-    /**
-     * -
-     */
     address: string;
-    /**
-     * Maximum number of results to be returned
-     */
     /**
      * Maximum number of results to be returned
      */
@@ -98,20 +70,11 @@ export type MapBoxReverseQuery = {
     /**
      * latitude
      */
-    /**
-     * latitude
-     */
     lat: number;
     /**
      * longitude
      */
-    /**
-     * longitude
-     */
     lng: number;
-    /**
-     * Maximum number of results to be returned
-     */
     /**
      * Maximum number of results to be returned
      */
