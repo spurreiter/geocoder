@@ -1,3 +1,7 @@
+# 2.2.0 (2025-04-26)
+
+- chore: move to eslint-prettier (#9f6d238)
+
 # 2.1.1 (2024-11-04)
 
 - docs: fix table (#ee4b0d8)
