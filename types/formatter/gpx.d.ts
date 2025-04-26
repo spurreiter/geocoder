@@ -1,2 +1,2 @@
 export function gpxFormatter(results: GeocoderResult[]): string;
-export type GeocoderResult = import("../types").GeocoderResult;
+export type GeocoderResult = import("#types.js").GeocoderResult;

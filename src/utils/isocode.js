@@ -6,9 +6,8 @@ import countries from 'i18n-iso-countries'
  * @param {string} code
  * @returns {string|undefined}
  */
-export const countryCode = (code) => (code && code.length === 3)
-  ? countries.alpha3ToAlpha2(code)
-  : code
+export const countryCode = (code) =>
+  code && code.length === 3 ? countries.alpha3ToAlpha2(code) : code
 
 const OPTS = { select: 'official' }
 
@@ -21,7 +20,8 @@ const OPTS = { select: 'official' }
 export const countryName = (code, language = 'en') => {
   if (!code) return
   const lang = language.split('-')[0]
-  // @ts-ignore
-  const name = countries.getName(code, lang, OPTS) || countries.getName(code, 'en', OPTS)
+  const name =
+    // @ts-ignore
+    countries.getName(code, lang, OPTS) || countries.getName(code, 'en', OPTS)
   return name
 }

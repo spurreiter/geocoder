@@ -28,21 +28,22 @@ export class OpendataFranceGeocoder extends AbstractGeocoder {
    * @param {number} [options.limit]
    * @param {string} [options.language]
    */
-  constructor (adapter, options = {}) {
+  constructor(adapter, options = {}) {
     // @ts-ignore
     super(adapter, options)
 
     // @ts-ignore
+    // eslint-disable-next-line no-unused-vars
     const { apiKey, language, ...params } = options
 
     this.params = params
   }
 
-  get endpoint () {
+  get endpoint() {
     return 'https://api-adresse.data.gouv.fr/search'
   }
 
-  get revEndpoint () {
+  get revEndpoint() {
     return 'https://api-adresse.data.gouv.fr/reverse'
   }
 
@@ -50,19 +51,17 @@ export class OpendataFranceGeocoder extends AbstractGeocoder {
    * @param {string|OpendataFranceForwardQuery} query
    * @returns {Promise<object>}
    */
-  async _forward (query) {
+  async _forward(query) {
     let params = { ...this.params, q: query }
 
     if (typeof query !== 'string' && query.address) {
       // @ts-ignore
+      // eslint-disable-next-line no-unused-vars
       const { address, language, ...other } = query
       params = { ...params, ...other, q: address }
     }
 
-    const url = this.createUrl(
-      this.endpoint,
-      params
-    )
+    const url = this.createUrl(this.endpoint, params)
 
     const res = await this.adapter(url)
     if (res.status !== 200) {
@@ -80,15 +79,13 @@ export class OpendataFranceGeocoder extends AbstractGeocoder {
    * @param {OpendataFranceReverseQuery} query
    * @returns {Promise<object>}
    */
-  async _reverse (query) {
+  async _reverse(query) {
     // @ts-ignore
+    // eslint-disable-next-line no-unused-vars
     const { lat, lng: lon, language, ...other } = query
     const params = { ...this.params, ...other, lon, lat }
 
-    const url = this.createUrl(
-      this.revEndpoint,
-      params
-    )
+    const url = this.createUrl(this.revEndpoint, params)
 
     const res = await this.adapter(url)
     if (res.status !== 200) {
@@ -102,7 +99,7 @@ export class OpendataFranceGeocoder extends AbstractGeocoder {
     return this.wrapRaw(results, result)
   }
 
-  _formatResult (result) {
+  _formatResult(result) {
     const { properties = {}, geometry = {} } = result
     const { coordinates = [] } = geometry
     const [lng, lat] = coordinates

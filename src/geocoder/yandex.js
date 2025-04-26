@@ -29,11 +29,12 @@ export class YandexGeocoder extends AbstractGeocoder {
    * @param {string} options.apiKey
    * @param {string} [options.language]
    */
-  constructor (adapter, options = { apiKey: '' }) {
+  constructor(adapter, options = { apiKey: '' }) {
     // @ts-ignore
     super(adapter, options)
 
-    // @ts-ignore
+    // @ts-expect-error
+    // eslint-disable-next-line no-unused-vars
     const { apiKey, limit, ...params } = options
 
     if (!apiKey) {
@@ -47,7 +48,7 @@ export class YandexGeocoder extends AbstractGeocoder {
     }
   }
 
-  get endpoint () {
+  get endpoint() {
     return 'https://geocode-maps.yandex.ru/1.x'
   }
 
@@ -55,19 +56,17 @@ export class YandexGeocoder extends AbstractGeocoder {
    * @param {string|YandexForwardQuery} query
    * @returns {Promise<object>}
    */
-  async _forward (query) {
+  async _forward(query) {
     let params = { ...this.params, geocode: query }
 
     if (typeof query !== 'string' && query.address) {
       // @ts-ignore
+      // eslint-disable-next-line no-unused-vars
       const { address, limit, ...other } = query
       params = { ...params, ...other, geocode: address }
     }
 
-    const url = this.createUrl(
-      this.endpoint,
-      mapParams(params)
-    )
+    const url = this.createUrl(this.endpoint, mapParams(params))
 
     const res = await this.adapter(url)
     if (res.status !== 200) {
@@ -77,7 +76,9 @@ export class YandexGeocoder extends AbstractGeocoder {
     if (!result?.response?.GeoObjectCollection?.featureMember) {
       return this.wrapRaw([], result)
     }
-    const results = result.response.GeoObjectCollection.featureMember.map(this._formatResult)
+    const results = result.response.GeoObjectCollection.featureMember.map(
+      this._formatResult
+    )
     return this.wrapRaw(results, result)
   }
 
@@ -85,15 +86,13 @@ export class YandexGeocoder extends AbstractGeocoder {
    * @param {YandexReverseQuery} query
    * @returns {Promise<object>}
    */
-  async _reverse (query) {
+  async _reverse(query) {
     // @ts-ignore
+    // eslint-disable-next-line no-unused-vars
     const { lat, lng, limit, ...other } = query
     const params = { ...this.params, ...other, geocode: `${lng},${lat}` }
 
-    const url = this.createUrl(
-      this.endpoint,
-      mapParams(params)
-    )
+    const url = this.createUrl(this.endpoint, mapParams(params))
 
     const res = await this.adapter(url)
     if (res.status !== 200) {
@@ -103,19 +102,17 @@ export class YandexGeocoder extends AbstractGeocoder {
     if (!result?.response?.GeoObjectCollection?.featureMember) {
       return this.wrapRaw([], result)
     }
-    const results = result.response.GeoObjectCollection.featureMember.map(this._formatResult)
+    const results = result.response.GeoObjectCollection.featureMember.map(
+      this._formatResult
+    )
     return this.wrapRaw(results, result)
   }
 
-  _formatResult (result) {
-    const {
-      Point = {},
-      boundedBy = {},
-      metaDataProperty
-    } = result?.GeoObject
+  _formatResult(result) {
+    const { Point = {}, boundedBy = {}, metaDataProperty } = result?.GeoObject
     const obj = metaDataProperty?.GeocoderMetaData
 
-    const [lng, lat] = (Point?.pos || '').split(/ /).map(n => +n)
+    const [lng, lat] = (Point?.pos || '').split(/ /).map((n) => +n)
 
     const formatted = {
       formattedAddress: get(obj, 'AddressLine'),
@@ -137,15 +134,18 @@ export class YandexGeocoder extends AbstractGeocoder {
   }
 }
 
-function mapParams (params) {
+function mapParams(params) {
   const { language, ...other } = params
   if (language) {
-    other.lang = language.split(/[\W]/).map((l = '', i) => i === 0 ? l.toLowerCase() : l.toUpperCase()).join('_')
+    other.lang = language
+      .split(/[\W]/)
+      .map((l = '', i) => (i === 0 ? l.toLowerCase() : l.toUpperCase()))
+      .join('_')
   }
   return other
 }
 
-function get (obj, key) {
+function get(obj, key) {
   const val = obj[key]
   if (val !== undefined) {
     return val
@@ -160,12 +160,13 @@ function get (obj, key) {
   }
 }
 
-function lnglat (pos = '') {
-  return pos.split(/ /).map(n => +n)
+function lnglat(pos = '') {
+  return pos.split(/ /).map((n) => +n)
 }
 
-function toBbox (boundingbox) {
-  if (!boundingbox || !boundingbox.lowerCorner || !boundingbox.upperCorner) return
+function toBbox(boundingbox) {
+  if (!boundingbox || !boundingbox.lowerCorner || !boundingbox.upperCorner)
+    return
   const [xmin, ymin] = lnglat(boundingbox.lowerCorner)
   const [xmax, ymax] = lnglat(boundingbox.upperCorner)
   return [xmin, ymin, xmax, ymax]

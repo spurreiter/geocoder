@@ -1,12 +1,18 @@
 import { AbstractGeocoder } from './abstract.js'
-import { HttpError, countryCode as countryCodeF, toFixed } from '../utils/index.js'
+import {
+  HttpError,
+  countryCode as countryCodeF,
+  toFixed
+} from '../utils/index.js'
 
 /** @typedef {import('../adapter.js').fetchAdapterFn} fetchAdapterFn */
 
-const undef = (s) => s === '' ? undefined : s
+const undef = (s) => (s === '' ? undefined : s)
 
-const toLatLon = str => String(str).split(',')
-  .map(i => isNaN(Number(i)) ? undefined : Number(i))
+const toLatLon = (str) =>
+  String(str)
+    .split(',')
+    .map((i) => (isNaN(Number(i)) ? undefined : Number(i)))
 
 /**
  * see https://developer.tomtom.com/search-api/documentation/geocoding-service/geocode
@@ -40,7 +46,7 @@ export class TomTomGeocoder extends AbstractGeocoder {
    * @param {string} [options.language]
    * @param {number} [options.radius]
    */
-  constructor (adapter, options = { apiKey: '' }) {
+  constructor(adapter, options = { apiKey: '' }) {
     // @ts-ignore
     super(adapter, options)
 
@@ -56,11 +62,11 @@ export class TomTomGeocoder extends AbstractGeocoder {
     }
   }
 
-  get endpoint () {
+  get endpoint() {
     return 'https://api.tomtom.com/search/2/geocode'
   }
 
-  get revEndpoint () {
+  get revEndpoint() {
     return 'https://api.tomtom.com/search/2/reverseGeocode'
   }
 
@@ -68,7 +74,7 @@ export class TomTomGeocoder extends AbstractGeocoder {
    * @param {string|TomTomForwardQuery} query
    * @returns {Promise<object>}
    */
-  async _forward (query = '') {
+  async _forward(query = '') {
     let params = this.params
     let searchtext = query
 
@@ -104,12 +110,8 @@ export class TomTomGeocoder extends AbstractGeocoder {
    * @param {TomTomReverseQuery} query
    * @returns {Promise<object>}
    */
-  async _reverse (query) {
-    const {
-      lat,
-      lng,
-      ...other
-    } = query
+  async _reverse(query) {
+    const { lat, lng, ...other } = query
     const params = {
       ...this.params,
       ...other
@@ -139,7 +141,7 @@ export class TomTomGeocoder extends AbstractGeocoder {
    * @param {object} result
    * @returns {object}
    */
-  _formatResult (result) {
+  _formatResult(result) {
     const {
       id,
       position = {},
@@ -203,11 +205,8 @@ export class TomTomGeocoder extends AbstractGeocoder {
    * @param {object} result
    * @returns {object}
    */
-  _formatResultRev (result) {
-    const {
-      address = {},
-      position = ''
-    } = result || {}
+  _formatResultRev(result) {
+    const { address = {}, position = '' } = result || {}
 
     const {
       // buildingNumber,

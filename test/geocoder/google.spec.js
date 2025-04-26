@@ -60,16 +60,17 @@ describe('GoogleGeocoder', function () {
 
       assert.deepStrictEqual(results, [])
 
-      sinon.assert.calledOnceWithExactly(mockedAdapter, 'https://maps.googleapis.com/maps/api/geocode/json?key=apiKey&address=1+champs+%C3%A9lys%C3%A9e+Paris')
+      sinon.assert.calledOnceWithExactly(
+        mockedAdapter,
+        'https://maps.googleapis.com/maps/api/geocode/json?key=apiKey&address=1+champs+%C3%A9lys%C3%A9e+Paris'
+      )
     })
 
     it('should throw on error', async function () {
-      const mockedAdapter = sinon.stub().returns(
-        ({
-          status: 502,
-          json: () => Promise.resolve({})
-        })
-      )
+      const mockedAdapter = sinon.stub().returns({
+        status: 502,
+        json: () => Promise.resolve({})
+      })
 
       const geocoder = new GoogleGeocoder(mockedAdapter, options)
       try {
@@ -81,15 +82,14 @@ describe('GoogleGeocoder', function () {
     })
 
     it('should fail on results error', async function () {
-      const mockedAdapter = sinon.stub().returns(
-        ({
-          status: 200,
-          json: () => Promise.resolve({
+      const mockedAdapter = sinon.stub().returns({
+        status: 200,
+        json: () =>
+          Promise.resolve({
             error_message: 'sth... happened',
             status: 'OVER_QUERY_LIMIT'
           })
-        })
-      )
+      })
 
       const geocoder = new GoogleGeocoder(mockedAdapter, options)
       try {
@@ -104,7 +104,8 @@ describe('GoogleGeocoder', function () {
       const query = '135 pilkington avenue, birmingham'
       const { body, expResults } = fixtures[query]
 
-      const expUrl = 'https://maps.googleapis.com/maps/api/geocode/json?key=apiKey&address=135+pilkington+avenue%2C+birmingham'
+      const expUrl =
+        'https://maps.googleapis.com/maps/api/geocode/json?key=apiKey&address=135+pilkington+avenue%2C+birmingham'
 
       const mockedAdapter = sinon.stub().returns(
         Promise.resolve({
@@ -126,7 +127,8 @@ describe('GoogleGeocoder', function () {
       const query = '135 pilkington avenue, birmingham'
       const { body, expResults } = fixtures[query]
 
-      const expUrl = 'https://maps.googleapis.com/maps/api/geocode/json?key=apiKey&address=135+pilkington+avenue%2C+birmingham'
+      const expUrl =
+        'https://maps.googleapis.com/maps/api/geocode/json?key=apiKey&address=135+pilkington+avenue%2C+birmingham'
 
       const mockedAdapter = sinon.stub().returns(
         Promise.resolve({
@@ -155,20 +157,24 @@ describe('GoogleGeocoder', function () {
       )
 
       const geocoder = new GoogleGeocoder(mockedAdapter, options)
-      const results = await geocoder.reverse({ lat: 40.714232, lng: -73.9612889 })
+      const results = await geocoder.reverse({
+        lat: 40.714232,
+        lng: -73.9612889
+      })
 
       assert.deepStrictEqual(results, [])
 
-      sinon.assert.calledOnceWithExactly(mockedAdapter, 'https://maps.googleapis.com/maps/api/geocode/json?key=apiKey&latlng=40.714232%2C-73.9612889')
+      sinon.assert.calledOnceWithExactly(
+        mockedAdapter,
+        'https://maps.googleapis.com/maps/api/geocode/json?key=apiKey&latlng=40.714232%2C-73.9612889'
+      )
     })
 
     it('should throw on error', async function () {
-      const mockedAdapter = sinon.stub().returns(
-        ({
-          status: 502,
-          json: () => Promise.resolve({})
-        })
-      )
+      const mockedAdapter = sinon.stub().returns({
+        status: 502,
+        json: () => Promise.resolve({})
+      })
 
       const geocoder = new GoogleGeocoder(mockedAdapter, options)
       try {
@@ -182,7 +188,8 @@ describe('GoogleGeocoder', function () {
     it('should return address', async function () {
       const query = '40.714232,-73.9612889'
       const { body, expResults } = fixtures[query]
-      const expUrl = 'https://maps.googleapis.com/maps/api/geocode/json?key=apiKey&latlng=40.714232%2C-73.9612889'
+      const expUrl =
+        'https://maps.googleapis.com/maps/api/geocode/json?key=apiKey&latlng=40.714232%2C-73.9612889'
 
       const mockedAdapter = sinon.stub().returns(
         Promise.resolve({
@@ -210,7 +217,7 @@ describe('GoogleGeocoder', function () {
     itWithApiKey(apiKey, 'should call forward api', async function () {
       const query = '1 champs élysée Paris'
       const results = await geocoder.forward(query)
-      // eslint-disable-next-line no-console
+
       updateFixture(fixtures, 'forward', results[0])
       assert.deepStrictEqual(results[0], fixtures.forward)
     })
@@ -218,7 +225,7 @@ describe('GoogleGeocoder', function () {
     itWithApiKey(apiKey, 'should call reverse api', async function () {
       const query = '40.714232,-73.9612889'
       const results = await geocoder.reverse(query)
-      // eslint-disable-next-line no-console
+
       updateFixture(fixtures, 'reverse', results[0])
       assert.deepStrictEqual(results[0], fixtures.reverse)
     })

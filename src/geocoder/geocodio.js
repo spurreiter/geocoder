@@ -34,10 +34,11 @@ export class GeocodioGeocoder extends AbstractGeocoder {
    * @param {string} [options.language]
    * @param {number} [options.limit]
    */
-  constructor (adapter, options = { apiKey: '' }) {
+  constructor(adapter, options = { apiKey: '' }) {
     // @ts-ignore
     super(adapter, options)
 
+    // eslint-disable-next-line no-unused-vars
     const { apiKey, language, ...params } = options
 
     if (!apiKey) {
@@ -50,11 +51,11 @@ export class GeocodioGeocoder extends AbstractGeocoder {
     }
   }
 
-  get endpoint () {
+  get endpoint() {
     return 'https://api.geocod.io/v1.7/geocode'
   }
 
-  get revEndpoint () {
+  get revEndpoint() {
     return 'https://api.geocod.io/v1.7/reverse'
   }
 
@@ -63,18 +64,16 @@ export class GeocodioGeocoder extends AbstractGeocoder {
    * @param {string|GeocodioForwardQuery} query
    * @returns {Promise<object>}
    */
-  async _forward (query) {
+  async _forward(query) {
     let params = { ...this.params, q: query }
 
     if (typeof query !== 'string' && query.address) {
+      // eslint-disable-next-line no-unused-vars
       const { address, language, ...other } = query
       params = { ...params, ...other, q: address }
     }
 
-    const url = this.createUrl(
-      this.endpoint,
-      params
-    )
+    const url = this.createUrl(this.endpoint, params)
 
     const res = await this.adapter(url)
     const result = await res.json()
@@ -92,14 +91,12 @@ export class GeocodioGeocoder extends AbstractGeocoder {
    * @param {GeocodioReverseQuery} query
    * @returns {Promise<object>}
    */
-  async _reverse (query) {
+  async _reverse(query) {
+    // eslint-disable-next-line no-unused-vars
     const { lat, lng, language, ...other } = query
     const params = { ...this.params, ...other, q: `${lat},${lng}` }
 
-    const url = this.createUrl(
-      this.revEndpoint,
-      params
-    )
+    const url = this.createUrl(this.revEndpoint, params)
 
     const res = await this.adapter(url)
     if (res.status !== 200 && res.status !== 422) {
@@ -113,7 +110,7 @@ export class GeocodioGeocoder extends AbstractGeocoder {
     return this.wrapRaw(results, result)
   }
 
-  _formatResult (result) {
+  _formatResult(result) {
     const {
       accuracy,
       formatted_address,
@@ -121,9 +118,7 @@ export class GeocodioGeocoder extends AbstractGeocoder {
       address_components: address = {}
     } = result
 
-    const confidence = accuracy < 1
-      ? accuracy - 0.1
-      : 1
+    const confidence = accuracy < 1 ? accuracy - 0.1 : 1
 
     const formatted = {
       formattedAddress: formatted_address,

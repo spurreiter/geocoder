@@ -61,12 +61,10 @@ describe('OpendataFranceGeocoder', function () {
     })
 
     it('should throw on error', async function () {
-      const mockedAdapter = sinon.stub().returns(
-        ({
-          status: 502,
-          json: () => Promise.resolve({})
-        })
-      )
+      const mockedAdapter = sinon.stub().returns({
+        status: 502,
+        json: () => Promise.resolve({})
+      })
 
       const geocoder = new OpendataFranceGeocoder(mockedAdapter, options)
       try {
@@ -128,7 +126,10 @@ describe('OpendataFranceGeocoder', function () {
       )
 
       const geocoder = new OpendataFranceGeocoder(mockedAdapter, options)
-      const results = await geocoder.reverse({ lat: 40.714232, lng: -73.9612889 })
+      const results = await geocoder.reverse({
+        lat: 40.714232,
+        lng: -73.9612889
+      })
 
       assert.deepStrictEqual(results, [])
       sinon.assert.calledOnceWithExactly(
@@ -138,12 +139,10 @@ describe('OpendataFranceGeocoder', function () {
     })
 
     it('should throw on error', async function () {
-      const mockedAdapter = sinon.stub().returns(
-        ({
-          status: 502,
-          json: () => Promise.resolve({})
-        })
-      )
+      const mockedAdapter = sinon.stub().returns({
+        status: 502,
+        json: () => Promise.resolve({})
+      })
 
       const geocoder = new OpendataFranceGeocoder(mockedAdapter, options)
       try {
@@ -187,7 +186,7 @@ describe('OpendataFranceGeocoder', function () {
     itWithApiKey(apiKey, 'should call forward api', async function () {
       const query = '1 champs élysée Paris'
       const results = await geocoder.forward(query)
-      // eslint-disable-next-line no-console
+
       updateFixture(fixtures, 'forward', results[0])
       assert.deepStrictEqual(results[0], fixtures.forward)
     })
@@ -195,7 +194,7 @@ describe('OpendataFranceGeocoder', function () {
     itWithApiKey(apiKey, 'should call reverse api', async function () {
       const query = '49.12027,6.17559'
       const results = await geocoder.reverse(query)
-      // eslint-disable-next-line no-console
+
       updateFixture(fixtures, 'reverse', results[0])
       assert.deepStrictEqual(results[0], fixtures.reverse)
     })

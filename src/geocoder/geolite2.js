@@ -3,7 +3,7 @@ import { HttpError, objToCamelCase } from '../utils/index.js'
 
 /** @typedef {import('../adapter.js').fetchAdapterFn} fetchAdapterFn */
 
-function hasResult (result) {
+function hasResult(result) {
   return result && !!result.location
 }
 
@@ -27,19 +27,16 @@ export class GeoLite2Geocoder extends AbstractGeocoder {
    * @param {string} [options.apiKey] MaxMind license key
    * @param {string} [options.language]
    */
-  constructor (adapter, options = {}) {
+  constructor(adapter, options = {}) {
     // @ts-ignore
     super(adapter, options)
 
-    const {
-      accountId,
-      apiKey,
-      endpoint,
-      ...params
-    } = options
+    const { accountId, apiKey, endpoint, ...params } = options
 
     if (!endpoint && !(apiKey && accountId)) {
-      throw new Error(`You must either specify accountId and apiKey or endpoint to use ${this.constructor.name}`)
+      throw new Error(
+        `You must either specify accountId and apiKey or endpoint to use ${this.constructor.name}`
+      )
     }
 
     this.endpoint = endpoint || 'https://geolite.info/geoip/v2.1/city'
@@ -47,7 +44,8 @@ export class GeoLite2Geocoder extends AbstractGeocoder {
     this.supportIPv4 = this.supportIPv6 = true
 
     if (accountId && apiKey) {
-      const authorization = 'Basic ' + Buffer.from(accountId + ':' + apiKey).toString('base64')
+      const authorization =
+        'Basic ' + Buffer.from(accountId + ':' + apiKey).toString('base64')
       this.opts = { headers: { authorization } }
     }
   }
@@ -56,7 +54,7 @@ export class GeoLite2Geocoder extends AbstractGeocoder {
    * @param {string|GeoLite2ForwardQuery} query
    * @returns {Promise<object>}
    */
-  async _forward (query = '') {
+  async _forward(query = '') {
     let params = this.params
     let searchtext = query
 
@@ -68,10 +66,7 @@ export class GeoLite2Geocoder extends AbstractGeocoder {
 
     const { language, ..._params } = params
 
-    const url = this.createUrl(
-      `${this.endpoint}/${searchtext}`,
-      _params
-    )
+    const url = this.createUrl(`${this.endpoint}/${searchtext}`, _params)
 
     const res = await this.adapter(url, this.opts)
     if (res.status !== 200) {
@@ -87,7 +82,7 @@ export class GeoLite2Geocoder extends AbstractGeocoder {
     return this.wrapRaw(results, result)
   }
 
-  _formatResult (language, result = {}) {
+  _formatResult(language, result = {}) {
     const {
       country = { names: {} },
       registeredCountry = {},

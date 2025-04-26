@@ -14,7 +14,7 @@ const CONFIDENCE_MAP = {
   Low: 0.3
 }
 
-function toBbox (boundingbox) {
+function toBbox(boundingbox) {
   if (!Array.isArray(boundingbox)) return
   const [ymin, xmin, ymax, xmax] = boundingbox
   return [xmin, ymin, xmax, ymax]
@@ -47,10 +47,11 @@ export class BingMapsGeocoder extends AbstractGeocoder {
    * @param {number} [options.limit]
    * @param {string} [options.language]
    */
-  constructor (adapter, options = { apiKey: '' }) {
+  constructor(adapter, options = { apiKey: '' }) {
     // @ts-ignore
     super(adapter, options)
 
+    // eslint-disable-next-line no-unused-vars
     const { apiKey, limit: maxResults, language, ...params } = options
 
     if (!apiKey) {
@@ -66,7 +67,7 @@ export class BingMapsGeocoder extends AbstractGeocoder {
     }
   }
 
-  get endpoint () {
+  get endpoint() {
     return 'http://dev.virtualearth.net/REST/v1/Locations'
   }
 
@@ -74,18 +75,16 @@ export class BingMapsGeocoder extends AbstractGeocoder {
    * @param {BingMapsForwardQuery|string} query
    * @returns {Promise<object>}
    */
-  async _forward (query = '') {
+  async _forward(query = '') {
     let params = { ...this.params, q: query }
 
     if (typeof query !== 'string' && query.address) {
+      // eslint-disable-next-line no-unused-vars
       const { address: q, limit: maxResults, language, ...other } = query
       params = { ...params, ...other, q, maxResults }
     }
 
-    const url = this.createUrl(
-      this.endpoint,
-      params
-    )
+    const url = this.createUrl(this.endpoint, params)
 
     const res = await this.adapter(url)
     if (res.status !== 200) {
@@ -104,7 +103,8 @@ export class BingMapsGeocoder extends AbstractGeocoder {
    * @param {BingMapsReverseQuery} query
    * @returns {Promise<object>}
    */
-  async _reverse (query) {
+  async _reverse(query) {
+    // eslint-disable-next-line no-unused-vars
     const { lat, lng, language, limit: maxResults, ...other } = query
     const params = {
       ...this.params,
@@ -112,10 +112,7 @@ export class BingMapsGeocoder extends AbstractGeocoder {
       maxResults
     }
 
-    const url = this.createUrl(
-      `${this.endpoint}/${lat},${lng}`,
-      params
-    )
+    const url = this.createUrl(`${this.endpoint}/${lat},${lng}`, params)
 
     const res = await this.adapter(url)
     if (res.status !== 200) {
@@ -133,13 +130,8 @@ export class BingMapsGeocoder extends AbstractGeocoder {
   /**
    * @see https://docs.microsoft.com/en-us/bingmaps/rest-services/locations/location-data
    */
-  _formatResult (result) {
-    const {
-      bbox,
-      point = {},
-      address = {},
-      confidence
-    } = result || {}
+  _formatResult(result) {
+    const { bbox, point = {}, address = {}, confidence } = result || {}
 
     const extra = {
       confidence: CONFIDENCE_MAP[confidence] || 0,

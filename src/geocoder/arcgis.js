@@ -3,7 +3,7 @@ import { HttpError, countryCode, countryName, toFixed } from '../utils/index.js'
 
 /** @typedef {import('../adapter.js').fetchAdapterFn} fetchAdapterFn */
 
-const undef = (s) => s === '' ? undefined : s
+const undef = (s) => (s === '' ? undefined : s)
 
 /**
  * see https://developers.arcgis.com/rest/geocode/api-reference/geocoding-find-address-candidates.htm
@@ -36,7 +36,7 @@ export class ArcGisGeocoder extends AbstractGeocoder {
    * @param {number} [options.limit]
    * @param {string} [options.language]
    */
-  constructor (adapter, options = { apiKey: '' }) {
+  constructor(adapter, options = { apiKey: '' }) {
     // @ts-ignore
     super(adapter, options)
 
@@ -60,11 +60,11 @@ export class ArcGisGeocoder extends AbstractGeocoder {
     }
   }
 
-  get endpoint () {
+  get endpoint() {
     return 'https://geocode-api.arcgis.com/arcgis/rest/services/World/GeocodeServer/findAddressCandidates'
   }
 
-  get revEndpoint () {
+  get revEndpoint() {
     return 'https://geocode-api.arcgis.com/arcgis/rest/services/World/GeocodeServer/reverseGeocode'
   }
 
@@ -72,7 +72,7 @@ export class ArcGisGeocoder extends AbstractGeocoder {
    * @param {string|ArcGisForwardQuery} query
    * @returns {Promise<object>}
    */
-  async _forward (query = '') {
+  async _forward(query = '') {
     let params = {
       ...this.params,
       address: query,
@@ -104,7 +104,9 @@ export class ArcGisGeocoder extends AbstractGeocoder {
     if (!result.candidates) {
       return this.wrapRaw([], result)
     }
-    const results = result.candidates.map(this._formatResult.bind(this, params.langCode))
+    const results = result.candidates.map(
+      this._formatResult.bind(this, params.langCode)
+    )
     return this.wrapRaw(results, result)
   }
 
@@ -112,7 +114,7 @@ export class ArcGisGeocoder extends AbstractGeocoder {
    * @param {ArcGisReverseQuery} query
    * @returns {Promise<object>}
    */
-  async _reverse (query) {
+  async _reverse(query) {
     const {
       lat,
       lng,
@@ -142,7 +144,9 @@ export class ArcGisGeocoder extends AbstractGeocoder {
     if (!result?.address) {
       return this.wrapRaw([], result)
     }
-    const results = [result].map(this._formatResultRev.bind(this, params.langCode))
+    const results = [result].map(
+      this._formatResultRev.bind(this, params.langCode)
+    )
     return this.wrapRaw(results, result)
   }
 
@@ -151,7 +155,7 @@ export class ArcGisGeocoder extends AbstractGeocoder {
    * @param {object} result
    * @returns {object}
    */
-  _formatResult (language, result) {
+  _formatResult(language, result) {
     const {
       // address,
       location = {},
@@ -209,7 +213,7 @@ export class ArcGisGeocoder extends AbstractGeocoder {
    * @param {object} result
    * @returns {object}
    */
-  _formatResultRev (language, result) {
+  _formatResultRev(language, result) {
     const { address = {}, location = {} } = result || {}
 
     const {

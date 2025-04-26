@@ -47,8 +47,7 @@ export const fixtures = {
   ],
   escape: [
     {
-      formattedAddress:
-        '<img src="alert(\'test\')">& others',
+      formattedAddress: '<img src="alert(\'test\')">& others',
       latitude: 40.714205,
       longitude: -73.96131519274765,
       country: 'United States',

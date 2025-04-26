@@ -60,7 +60,10 @@ describe('YandexGeocoder', function () {
 
       assert.deepStrictEqual(results, [])
 
-      sinon.assert.calledOnceWithExactly(mockedAdapter, 'https://geocode-maps.yandex.ru/1.x?apikey=apiKey&format=json&geocode=1+champs+%C3%A9lys%C3%A9e+Paris')
+      sinon.assert.calledOnceWithExactly(
+        mockedAdapter,
+        'https://geocode-maps.yandex.ru/1.x?apikey=apiKey&format=json&geocode=1+champs+%C3%A9lys%C3%A9e+Paris'
+      )
     })
 
     it('should call api in different language', async function () {
@@ -71,21 +74,25 @@ describe('YandexGeocoder', function () {
         })
       )
 
-      const geocoder = new YandexGeocoder(mockedAdapter, { ...options, language: 'en-ru' })
+      const geocoder = new YandexGeocoder(mockedAdapter, {
+        ...options,
+        language: 'en-ru'
+      })
       const results = await geocoder.forward('1 champs élysée Paris')
 
       assert.deepStrictEqual(results, [])
 
-      sinon.assert.calledOnceWithExactly(mockedAdapter, 'https://geocode-maps.yandex.ru/1.x?apikey=apiKey&format=json&geocode=1+champs+%C3%A9lys%C3%A9e+Paris&lang=en_RU')
+      sinon.assert.calledOnceWithExactly(
+        mockedAdapter,
+        'https://geocode-maps.yandex.ru/1.x?apikey=apiKey&format=json&geocode=1+champs+%C3%A9lys%C3%A9e+Paris&lang=en_RU'
+      )
     })
 
     it('should throw on error', async function () {
-      const mockedAdapter = sinon.stub().returns(
-        ({
-          status: 502,
-          json: () => Promise.resolve({})
-        })
-      )
+      const mockedAdapter = sinon.stub().returns({
+        status: 502,
+        json: () => Promise.resolve({})
+      })
 
       const geocoder = new YandexGeocoder(mockedAdapter, options)
       try {
@@ -99,7 +106,8 @@ describe('YandexGeocoder', function () {
     it('should return address', async function () {
       const query = '135 pilkington avenue, birmingham, england'
       const { body, expResults } = fixtures[query]
-      const expUrl = 'https://geocode-maps.yandex.ru/1.x?apikey=apiKey&format=json&geocode=135+pilkington+avenue%2C+birmingham%2C+england'
+      const expUrl =
+        'https://geocode-maps.yandex.ru/1.x?apikey=apiKey&format=json&geocode=135+pilkington+avenue%2C+birmingham%2C+england'
 
       const mockedAdapter = sinon.stub().returns(
         Promise.resolve({
@@ -118,7 +126,8 @@ describe('YandexGeocoder', function () {
     it('should return address when object', async function () {
       const query = 'Kabasakal Caddesi, Istanbul, Turkey'
       const { body, expResults } = fixtures[query]
-      const expUrl = 'https://geocode-maps.yandex.ru/1.x?apikey=apiKey&format=json&geocode=Kabasakal+Caddesi%2C+Istanbul%2C+Turkey'
+      const expUrl =
+        'https://geocode-maps.yandex.ru/1.x?apikey=apiKey&format=json&geocode=Kabasakal+Caddesi%2C+Istanbul%2C+Turkey'
 
       const mockedAdapter = sinon.stub().returns(
         Promise.resolve({
@@ -145,19 +154,23 @@ describe('YandexGeocoder', function () {
       )
 
       const geocoder = new YandexGeocoder(mockedAdapter, options)
-      const results = await geocoder.reverse({ lat: 40.714232, lng: -73.9612889 })
+      const results = await geocoder.reverse({
+        lat: 40.714232,
+        lng: -73.9612889
+      })
 
       assert.deepStrictEqual(results, [])
-      sinon.assert.calledOnceWithExactly(mockedAdapter, 'https://geocode-maps.yandex.ru/1.x?apikey=apiKey&format=json&geocode=-73.9612889%2C40.714232')
+      sinon.assert.calledOnceWithExactly(
+        mockedAdapter,
+        'https://geocode-maps.yandex.ru/1.x?apikey=apiKey&format=json&geocode=-73.9612889%2C40.714232'
+      )
     })
 
     it('should throw on error', async function () {
-      const mockedAdapter = sinon.stub().returns(
-        ({
-          status: 502,
-          json: () => Promise.resolve({})
-        })
-      )
+      const mockedAdapter = sinon.stub().returns({
+        status: 502,
+        json: () => Promise.resolve({})
+      })
 
       const geocoder = new YandexGeocoder(mockedAdapter, options)
       try {
@@ -171,7 +184,8 @@ describe('YandexGeocoder', function () {
     it('should return address', async function () {
       const query = '40.714232,-73.9612889'
       const { body, expResults } = fixtures[query]
-      const expUrl = 'https://geocode-maps.yandex.ru/1.x?apikey=apiKey&format=json&geocode=-73.9612889%2C40.714232'
+      const expUrl =
+        'https://geocode-maps.yandex.ru/1.x?apikey=apiKey&format=json&geocode=-73.9612889%2C40.714232'
 
       const mockedAdapter = sinon.stub().returns(
         Promise.resolve({
@@ -199,7 +213,7 @@ describe('YandexGeocoder', function () {
     itWithApiKey(apiKey, 'should call forward api', async function () {
       const query = '1 champs élysée Paris'
       const results = await geocoder.forward(query)
-      // eslint-disable-next-line no-console
+
       updateFixture(fixtures, 'forward', results[0])
       assert.deepStrictEqual(results[0], fixtures.forward)
     })
@@ -207,7 +221,7 @@ describe('YandexGeocoder', function () {
     itWithApiKey(apiKey, 'should call reverse api', async function () {
       const query = '40.714232,-73.9612889'
       const results = await geocoder.reverse(query)
-      // eslint-disable-next-line no-console
+
       updateFixture(fixtures, 'reverse', results[0])
       assert.deepStrictEqual(results[0], fixtures.reverse)
     })

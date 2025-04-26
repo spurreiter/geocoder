@@ -4,7 +4,7 @@ export class CircuitBreaker {
      * @param {CircuitBreakerOptions} param1
      */
     constructor(geocoder: AbstractGeocoder, { timeout, excludeStatusCode }?: CircuitBreakerOptions);
-    geocoder: import("./geocoder/abstract").AbstractGeocoder;
+    geocoder: import("#geocoder/abstract.js").AbstractGeocoder;
     timeout: number;
     excludeStatusCode: number[];
     offlineUntil: number;
@@ -28,9 +28,9 @@ export class CircuitBreaker {
      */
     reverse(query: ReverseQuery): Promise<GeocoderResult[]>;
 }
-export type AbstractGeocoder = import("./geocoder/abstract").AbstractGeocoder;
-export type CircuitBreakerError = import("./types").CircuitBreakerError;
-export type CircuitBreakerOptions = import("./types").CircuitBreakerOptions;
-export type ForwardQuery = import("./types").ForwardQuery;
-export type ReverseQuery = import("./types").ReverseQuery;
-export type GeocoderResult = import("./types").GeocoderResult;
+export type AbstractGeocoder = import("#geocoder/abstract.js").AbstractGeocoder;
+export type CircuitBreakerError = import("#types.js").CircuitBreakerError;
+export type CircuitBreakerOptions = import("#types.js").CircuitBreakerOptions;
+export type ForwardQuery = import("#types.js").ForwardQuery;
+export type ReverseQuery = import("#types.js").ReverseQuery;
+export type GeocoderResult = import("#types.js").GeocoderResult;

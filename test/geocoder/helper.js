@@ -2,7 +2,7 @@ import dotenv from 'dotenv'
 
 dotenv.config()
 
-export function itWithApiKey (apiKey, name, fn, isOnly = false) {
+export function itWithApiKey(apiKey, name, fn, isOnly = false) {
   if (!apiKey) {
     return it.skip(name, fn)
   } else {

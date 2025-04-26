@@ -1,15 +1,15 @@
-/** @typedef {import('./geocoder/abstract').AbstractGeocoder} AbstractGeocoder */
-/** @typedef {import('./types').CircuitBreakerError} CircuitBreakerError */
-/** @typedef {import('./types').CircuitBreakerOptions} CircuitBreakerOptions */
-/** @typedef {import('./types').ForwardQuery} ForwardQuery */
-/** @typedef {import('./types').ReverseQuery} ReverseQuery */
-/** @typedef {import('./types').GeocoderResult} GeocoderResult */
+/** @typedef {import('#geocoder/abstract.js').AbstractGeocoder} AbstractGeocoder */
+/** @typedef {import('#types.js').CircuitBreakerError} CircuitBreakerError */
+/** @typedef {import('#types.js').CircuitBreakerOptions} CircuitBreakerOptions */
+/** @typedef {import('#types.js').ForwardQuery} ForwardQuery */
+/** @typedef {import('#types.js').ReverseQuery} ReverseQuery */
+/** @typedef {import('#types.js').GeocoderResult} GeocoderResult */
 
 /**
  * @param {string} provider
  * @returns {CircuitBreakerError}
  */
-function CircuitBreakerError (provider = '') {
+function CircuitBreakerError(provider = '') {
   /** @type {CircuitBreakerError} */
   // @ts-ignore
   const err = new Error(`${provider} is temporarily offline`)
@@ -24,7 +24,7 @@ export class CircuitBreaker {
    * @param {AbstractGeocoder} geocoder
    * @param {CircuitBreakerOptions} param1
    */
-  constructor (geocoder, { timeout, excludeStatusCode } = {}) {
+  constructor(geocoder, { timeout, excludeStatusCode } = {}) {
     this.geocoder = geocoder
     this.timeout = timeout || 60000
     this.excludeStatusCode = excludeStatusCode || [400, 404, 422]
@@ -35,7 +35,7 @@ export class CircuitBreaker {
   /**
    * @private
    */
-  _checkOffline () {
+  _checkOffline() {
     if (this.offlineUntil > 0) {
       if (this.offlineUntil < Date.now()) {
         this.offlineUntil = 0
@@ -48,7 +48,7 @@ export class CircuitBreaker {
   /**
    * @private
    */
-  _turnOff (status) {
+  _turnOff(status) {
     const exclude = status && this.excludeStatusCode.includes(status)
     if (this.offlineUntil <= 0 && !exclude) {
       this.offlineUntil = Date.now() + this.timeout
@@ -59,7 +59,7 @@ export class CircuitBreaker {
    * @param {ForwardQuery} query
    * @returns {Promise<GeocoderResult[]>}
    */
-  async forward (query) {
+  async forward(query) {
     this._checkOffline()
     try {
       return await this.geocoder.forward(query)
@@ -73,7 +73,7 @@ export class CircuitBreaker {
    * @param {ReverseQuery} query
    * @returns {Promise<GeocoderResult[]>}
    */
-  async reverse (query) {
+  async reverse(query) {
     this._checkOffline()
     try {
       return await this.geocoder.reverse(query)

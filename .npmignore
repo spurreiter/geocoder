@@ -1,9 +1,0 @@
-node_modules
-coverage
-typings
-test
-examples
-.env
-*.log
-*.tgz
-.*

@@ -1,12 +1,10 @@
-// @ts-expect-error
 import got from 'got'
-import HttpAgent from 'agentkeepalive'
+import { HttpAgent, HttpsAgent } from 'agentkeepalive'
 import { isNumber } from './utils/index.js'
 import { version } from './version.js'
-const { HttpsAgent } = HttpAgent
 
-/** @typedef {import('./types').AdapterOptions} AdapterOptions */
-/** @typedef {import('./types').fetchAdapterFn} fetchAdapterFn */
+/** @typedef {import('#types.js').AdapterOptions} AdapterOptions */
+/** @typedef {import('#types.js').fetchAdapterFn} fetchAdapterFn */
 
 const USER_AGENT = 'user-agent'
 
@@ -21,7 +19,7 @@ const logger = (r) => {
  * @param {AdapterOptions} [opts]
  * @returns {fetchAdapterFn}
  */
-export function fetchAdapter (opts) {
+export function fetchAdapter(opts) {
   const globalOpts = {
     agent: {
       http: new HttpAgent(),
@@ -40,7 +38,7 @@ export function fetchAdapter (opts) {
 
   return (url, options = {}) => {
     if (typeof url === 'object') {
-      // @ts-ignore
+      // @ts-expect-error
       const { url: _url, ...other } = url
       url = _url
       options = other
@@ -56,11 +54,11 @@ export function fetchAdapter (opts) {
     }
 
     // console.log(url, opts)
-    // @ts-ignore
-    return got(url, opts)
+    return (
       // @ts-ignore
-      .then((res) => new Response(res))
-      // .then(logger)
+      got(url, opts).then((res) => new Response(res))
+    )
+    // .then(logger)
   }
 }
 
@@ -73,7 +71,14 @@ export class Response {
    * @param {object} param0.headers
    * @param {object} param0.body
    */
-  constructor ({ statusCode, statusMessage, redirectUrls, headers, body, ...others }) {
+  constructor({
+    statusCode,
+    statusMessage,
+    redirectUrls,
+    headers,
+    body,
+    ..._others
+  }) {
     this.status = statusCode
     this.statusText = statusMessage
     this.headers = headers
@@ -82,11 +87,11 @@ export class Response {
     this.type = 'default'
   }
 
-  ok () {
+  ok() {
     return this.status >= 200 && this.status < 300
   }
 
-  text () {
+  text() {
     const text =
       this.body == null
         ? ''
@@ -101,12 +106,12 @@ export class Response {
       : Promise.reject(new TypeError('Unsupported body type'))
   }
 
-  json () {
+  json() {
     return this.text().then(JSON.parse)
     // .then(logger)
   }
 
-  formData () {
+  formData() {
     return this.text().then((body) => new URLSearchParams(body))
   }
 }

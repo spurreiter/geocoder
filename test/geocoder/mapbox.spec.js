@@ -197,7 +197,7 @@ describe('MapBoxGeocoder', function () {
     itWithApiKey(apiKey, 'should call forward api', async function () {
       const query = '1 champs élysée Paris'
       const results = await geocoder.forward(query)
-      // eslint-disable-next-line no-console
+
       updateFixture(fixtures, 'forward', results[0])
       assert.deepStrictEqual(results[0], fixtures.forward)
     })
@@ -205,7 +205,7 @@ describe('MapBoxGeocoder', function () {
     itWithApiKey(apiKey, 'should call reverse api', async function () {
       const query = '40.714232,-73.9612889'
       const results = await geocoder.reverse(query)
-      // eslint-disable-next-line no-console
+
       updateFixture(fixtures, 'reverse', results[0])
       assert.deepStrictEqual(results[0], fixtures.reverse)
     })

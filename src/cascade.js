@@ -1,34 +1,36 @@
 import { CircuitBreaker } from './circuitbreaker.js'
 
-/** @typedef {import('./geocoder/abstract').AbstractGeocoder} AbstractGeocoder */
-/** @typedef {import('./types').CascadeOptions} CascadeOptions */
-/** @typedef {import('./types').ForwardQuery} ForwardQuery */
-/** @typedef {import('./types').ReverseQuery} ReverseQuery */
-/** @typedef {import('./types').GeocoderResult} GeocoderResult */
+/** @typedef {import('#geocoder/abstract.js').AbstractGeocoder} AbstractGeocoder */
+/** @typedef {import('#types.js').CascadeOptions} CascadeOptions */
+/** @typedef {import('#types.js').ForwardQuery} ForwardQuery */
+/** @typedef {import('#types.js').ReverseQuery} ReverseQuery */
+/** @typedef {import('#types.js').GeocoderResult} GeocoderResult */
 
 export class Cascade {
   /**
    * @param {AbstractGeocoder[]} geocoders
-   * @param {CascadeOptions} options
+   * @param {CascadeOptions} [options]
    */
-  constructor (geocoders, options = {}) {
-    const { addProvider = true, ...options1 } = options
-    this.coders = geocoders.map(geocoder => new CircuitBreaker(geocoder, options1))
+  constructor(geocoders, options) {
+    const { addProvider = true, ...optionsCircuitBreaker } = options || {}
+    this.coders = geocoders.map(
+      (geocoder) => new CircuitBreaker(geocoder, optionsCircuitBreaker)
+    )
     this.addProvider = !!addProvider
   }
 
-  async _method (query, method) {
+  async _method(query, method) {
     for (const geocoder of this.coders) {
       try {
         const results = await geocoder[method](query)
         if (results?.length) {
           const provider = geocoder.name
           return this.addProvider
-            ? results.map(result => ({ ...result, provider }))
+            ? results.map((result) => ({ ...result, provider }))
             : results
         }
         return [] // break even on first empty result
-      } catch (err) {
+      } catch (_err) {
         // console.error(err)
       }
     }
@@ -36,18 +38,18 @@ export class Cascade {
   }
 
   /**
-   * @param {ForwardQuery} query
+   * @param {string|ForwardQuery} query
    * @returns {Promise<GeocoderResult[]>}
    */
-  async forward (query) {
+  async forward(query) {
     return this._method(query, 'forward')
   }
 
   /**
-   * @param {ReverseQuery} query
+   * @param {string|ReverseQuery} query
    * @returns {Promise<GeocoderResult[]>}
    */
-  async reverse (query) {
+  async reverse(query) {
     return this._method(query, 'reverse')
   }
 }

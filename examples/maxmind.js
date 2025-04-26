@@ -15,6 +15,7 @@ const geocoder = new GeoLite2Geocoder(adapter, {
   ...other
 })
 
-geocoder.forward(forward)
-  .then(res => console.dir(res, { depth: null }))
+geocoder
+  .forward(forward)
+  .then((res) => console.dir(res, { depth: null }))
   .catch(console.error)

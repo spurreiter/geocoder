@@ -26,7 +26,7 @@ import { HttpError } from '../utils/index.js'
  * @property {string[]} [country]
  */
 
-function isTrustableMapboxResult (matchCode) {
+function isTrustableMapboxResult(matchCode) {
   return Number(
     matchCode.address_number === 'matched' &&
       matchCode.street === 'matched' &&
@@ -45,7 +45,7 @@ export class MapBoxGeocoder extends AbstractGeocoder {
    * @param {number} [options.limit=5]
    * @param {string} [options.language]
    */
-  constructor (adapter, options = { apiKey: '' }) {
+  constructor(adapter, options = { apiKey: '' }) {
     // @ts-ignore
     super(adapter, options)
 
@@ -60,7 +60,7 @@ export class MapBoxGeocoder extends AbstractGeocoder {
     this.params = params
   }
 
-  get endpoint () {
+  get endpoint() {
     return 'https://api.mapbox.com/search/geocode/v6'
   }
 
@@ -68,7 +68,7 @@ export class MapBoxGeocoder extends AbstractGeocoder {
    * @param {string|MapBoxForwardQuery} query
    * @returns {Promise<object>}
    */
-  async _forward (query) {
+  async _forward(query) {
     let searchtext = query
     let params
 
@@ -98,7 +98,7 @@ export class MapBoxGeocoder extends AbstractGeocoder {
    * @param {MapBoxReverseQuery} query
    * @returns {Promise<object>}
    */
-  async _reverse (query) {
+  async _reverse(query) {
     const { lat, lng, ...other } = query
     const params = { longitude: lng, latitude: lat, ...other, ...this.params }
 
@@ -116,7 +116,7 @@ export class MapBoxGeocoder extends AbstractGeocoder {
     return this.wrapRaw(results, result)
   }
 
-  _formatResult (result) {
+  _formatResult(result) {
     const { properties, id } = result
     const { context } = properties
 

@@ -1,8 +1,8 @@
-/** @typedef {import('./geocoder/abstract').AbstractGeocoder} AbstractGeocoder */
-/** @typedef {import('./types').CombineOptions} CombineOptions */
-/** @typedef {import('./types').ForwardQuery} ForwardQuery */
-/** @typedef {import('./types').ReverseQuery} ReverseQuery */
-/** @typedef {import('./types').GeocoderResult} GeocoderResult */
+/** @typedef {import('#geocoder/abstract.js').AbstractGeocoder} AbstractGeocoder */
+/** @typedef {import('#types.js').CombineOptions} CombineOptions */
+/** @typedef {import('#types.js').ForwardQuery} ForwardQuery */
+/** @typedef {import('#types.js').ReverseQuery} ReverseQuery */
+/** @typedef {import('#types.js').GeocoderResult} GeocoderResult */
 export class Combine {
     /**
      * @param {AbstractGeocoder[]} geocoders
@@ -26,9 +26,9 @@ export class Combine {
      */
     reverse(query: ReverseQuery): Promise<GeocoderResult[]>;
 }
-export type AbstractGeocoder = import("./geocoder/abstract").AbstractGeocoder;
-export type CombineOptions = import("./types").CombineOptions;
-export type ForwardQuery = import("./types").ForwardQuery;
-export type ReverseQuery = import("./types").ReverseQuery;
-export type GeocoderResult = import("./types").GeocoderResult;
+export type AbstractGeocoder = import("#geocoder/abstract.js").AbstractGeocoder;
+export type CombineOptions = import("#types.js").CombineOptions;
+export type ForwardQuery = import("#types.js").ForwardQuery;
+export type ReverseQuery = import("#types.js").ReverseQuery;
+export type GeocoderResult = import("#types.js").GeocoderResult;
 import { CircuitBreaker } from './circuitbreaker.js';

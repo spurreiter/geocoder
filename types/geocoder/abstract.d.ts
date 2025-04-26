@@ -1,7 +1,7 @@
 /** @typedef {import('../adapter.js').fetchAdapterFn} fetchAdapterFn */
-/** @typedef {import('../types').ForwardQuery} ForwardQuery */
-/** @typedef {import('../types').ReverseQuery} ReverseQuery */
-/** @typedef {import('../types').GeocoderResult} GeocoderResult */
+/** @typedef {import('#types.js').ForwardQuery} ForwardQuery */
+/** @typedef {import('#types.js').ReverseQuery} ReverseQuery */
+/** @typedef {import('#types.js').GeocoderResult} GeocoderResult */
 export class AbstractGeocoder {
     /**
      * @param {fetchAdapterFn} adapter
@@ -11,7 +11,7 @@ export class AbstractGeocoder {
     constructor(adapter: fetchAdapterFn, options?: {
         raw?: boolean | undefined;
     });
-    adapter: typeof import("../types").fetchAdapterFn;
+    adapter: typeof import("#types.js").fetchAdapterFn;
     raw: boolean;
     _name: string;
     supportIPv4: boolean;
@@ -58,24 +58,24 @@ export class AbstractGeocoder {
      * @param {object} body
      * @returns {WrappedResults}
      */
-    protected wrapRaw(results: any, body: object): any[];
+    protected wrapRaw(results: any | undefined, body: object): any[];
     /**
      * forward geocoding
      * @protected
-     * @param {string|ForwardQuery} query address string or ip address
-     * @param {boolean} [isIP]
+     * @param {string|ForwardQuery} _query address string or ip address
+     * @param {boolean} [_isIP]
      * @returns {Promise<GeocoderResult[]>}
      */
-    protected _forward(query: string | ForwardQuery, isIP?: boolean | undefined): Promise<GeocoderResult[]>;
+    protected _forward(_query: string | ForwardQuery, _isIP?: boolean): Promise<GeocoderResult[]>;
     /**
      * reverse geocoding
      * @protected
-     * @param {string|ReverseQuery} query
+     * @param {string|ReverseQuery} _query
      * @returns {Promise<GeocoderResult[]>}
      */
-    protected _reverse(query: string | ReverseQuery): Promise<GeocoderResult[]>;
+    protected _reverse(_query: string | ReverseQuery): Promise<GeocoderResult[]>;
 }
 export type fetchAdapterFn = import("../adapter.js").fetchAdapterFn;
-export type ForwardQuery = import("../types").ForwardQuery;
-export type ReverseQuery = import("../types").ReverseQuery;
-export type GeocoderResult = import("../types").GeocoderResult;
+export type ForwardQuery = import("#types.js").ForwardQuery;
+export type ReverseQuery = import("#types.js").ReverseQuery;
+export type GeocoderResult = import("#types.js").GeocoderResult;

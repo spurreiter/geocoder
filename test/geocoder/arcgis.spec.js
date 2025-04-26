@@ -65,21 +65,22 @@ describe('ArcGisGeocoder', function () {
 
       assert.deepStrictEqual(results, [])
 
-      sinon.assert.calledOnceWithExactly(mockedAdapter, 'https://geocode-api.arcgis.com/arcgis/rest/services/World/GeocodeServer/findAddressCandidates', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: 'f=json&token=apiKey&address=1+champs+%C3%A9lys%C3%A9e+Paris&outFields=AddNum%2CAddr_type%2CCity%2CCountry%2CLongLabel%2CPlace_addr%2CPlaceName%2CPostal%2CRank%2CRegion%2CStName%2CStPreDir%2CStType%2CType'
-      }
+      sinon.assert.calledOnceWithExactly(
+        mockedAdapter,
+        'https://geocode-api.arcgis.com/arcgis/rest/services/World/GeocodeServer/findAddressCandidates',
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: 'f=json&token=apiKey&address=1+champs+%C3%A9lys%C3%A9e+Paris&outFields=AddNum%2CAddr_type%2CCity%2CCountry%2CLongLabel%2CPlace_addr%2CPlaceName%2CPostal%2CRank%2CRegion%2CStName%2CStPreDir%2CStType%2CType'
+        }
       )
     })
 
     it('should throw on error', async function () {
-      const mockedAdapter = sinon.stub().returns(
-        ({
-          status: 502,
-          json: () => Promise.resolve({})
-        })
-      )
+      const mockedAdapter = sinon.stub().returns({
+        status: 502,
+        json: () => Promise.resolve({})
+      })
 
       const geocoder = new ArcGisGeocoder(mockedAdapter, options)
       try {
@@ -134,34 +135,42 @@ describe('ArcGisGeocoder', function () {
       const mockedAdapter = sinon.stub().returns(
         Promise.resolve({
           status: 200,
-          json: () => Promise.resolve({
-            resourceSets: [{
-              resources: []
-            }],
-            statusCode: 200
-          })
+          json: () =>
+            Promise.resolve({
+              resourceSets: [
+                {
+                  resources: []
+                }
+              ],
+              statusCode: 200
+            })
         })
       )
 
       const geocoder = new ArcGisGeocoder(mockedAdapter, options)
-      const results = await geocoder.reverse({ lat: 40.714232, lng: -73.9612889 })
+      const results = await geocoder.reverse({
+        lat: 40.714232,
+        lng: -73.9612889
+      })
 
       assert.deepStrictEqual(results, [])
 
-      sinon.assert.calledOnceWithExactly(mockedAdapter, 'https://geocode-api.arcgis.com/arcgis/rest/services/World/GeocodeServer/reverseGeocode', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: 'f=json&token=apiKey&location=-73.9612889%2C40.714232'
-      })
+      sinon.assert.calledOnceWithExactly(
+        mockedAdapter,
+        'https://geocode-api.arcgis.com/arcgis/rest/services/World/GeocodeServer/reverseGeocode',
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: 'f=json&token=apiKey&location=-73.9612889%2C40.714232'
+        }
+      )
     })
 
     it('should throw on error', async function () {
-      const mockedAdapter = sinon.stub().returns(
-        ({
-          status: 502,
-          json: () => Promise.resolve({})
-        })
-      )
+      const mockedAdapter = sinon.stub().returns({
+        status: 502,
+        json: () => Promise.resolve({})
+      })
 
       const geocoder = new ArcGisGeocoder(mockedAdapter, options)
       try {
@@ -202,7 +211,7 @@ describe('ArcGisGeocoder', function () {
     itWithApiKey(apiKey, 'should call forward api', async function () {
       const query = '1 champs élysée Paris'
       const results = await geocoder.forward(query)
-      // eslint-disable-next-line no-console
+
       updateFixture(fixtures, 'forward', results[0])
       assert.deepStrictEqual(results[0], fixtures.forward)
     })
@@ -210,7 +219,7 @@ describe('ArcGisGeocoder', function () {
     itWithApiKey(apiKey, 'should call reverse api', async function () {
       const query = '40.714232,-73.9612889'
       const results = await geocoder.reverse(query)
-      // eslint-disable-next-line no-console
+
       updateFixture(fixtures, 'reverse', results[0])
       assert.deepStrictEqual(results[0], fixtures.reverse)
     })

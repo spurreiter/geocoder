@@ -60,7 +60,10 @@ describe('GeocodioGeocoder', function () {
 
       assert.deepStrictEqual(results, [])
 
-      sinon.assert.calledOnceWithExactly(mockedAdapter, 'https://api.geocod.io/v1.7/geocode?api_key=apiKey&q=1+champs+%C3%A9lys%C3%A9e+Paris')
+      sinon.assert.calledOnceWithExactly(
+        mockedAdapter,
+        'https://api.geocod.io/v1.7/geocode?api_key=apiKey&q=1+champs+%C3%A9lys%C3%A9e+Paris'
+      )
     })
 
     it.skip('should call api in different language', async function () {
@@ -71,21 +74,25 @@ describe('GeocodioGeocoder', function () {
         })
       )
 
-      const geocoder = new GeocodioGeocoder(mockedAdapter, { ...options, language: 'de' })
+      const geocoder = new GeocodioGeocoder(mockedAdapter, {
+        ...options,
+        language: 'de'
+      })
       const results = await geocoder.forward('1 champs élysée Paris')
 
       assert.deepStrictEqual(results, [])
 
-      sinon.assert.calledOnceWithExactly(mockedAdapter, 'https://geocode.search.hereapi.com/v1/geocode?apiKey=apiKey&q=1+champs+%C3%A9lys%C3%A9e+Paris&lang=de')
+      sinon.assert.calledOnceWithExactly(
+        mockedAdapter,
+        'https://geocode.search.hereapi.com/v1/geocode?apiKey=apiKey&q=1+champs+%C3%A9lys%C3%A9e+Paris&lang=de'
+      )
     })
 
     it('should throw on error', async function () {
-      const mockedAdapter = sinon.stub().returns(
-        ({
-          status: 502,
-          json: () => Promise.resolve({})
-        })
-      )
+      const mockedAdapter = sinon.stub().returns({
+        status: 502,
+        json: () => Promise.resolve({})
+      })
 
       const geocoder = new GeocodioGeocoder(mockedAdapter, options)
       try {
@@ -99,7 +106,8 @@ describe('GeocodioGeocoder', function () {
     it('should return address', async function () {
       const query = 'Paisley Park, Minneapolis'
       const { body, expResults } = fixtures[query]
-      const expUrl = 'https://api.geocod.io/v1.7/geocode?api_key=apiKey&q=Paisley+Park%2C+Minneapolis'
+      const expUrl =
+        'https://api.geocod.io/v1.7/geocode?api_key=apiKey&q=Paisley+Park%2C+Minneapolis'
 
       const mockedAdapter = sinon.stub().returns(
         Promise.resolve({
@@ -118,7 +126,8 @@ describe('GeocodioGeocoder', function () {
     it('should return address when object', async function () {
       const query = '7801 Audubon Road, Chanhassen, Minnesota 55317'
       const { body, expResults } = fixtures[query]
-      const expUrl = 'https://api.geocod.io/v1.7/geocode?api_key=apiKey&q=7801+Audubon+Road%2C+Chanhassen%2C+Minnesota+55317'
+      const expUrl =
+        'https://api.geocod.io/v1.7/geocode?api_key=apiKey&q=7801+Audubon+Road%2C+Chanhassen%2C+Minnesota+55317'
 
       const mockedAdapter = sinon.stub().returns(
         Promise.resolve({
@@ -145,19 +154,23 @@ describe('GeocodioGeocoder', function () {
       )
 
       const geocoder = new GeocodioGeocoder(mockedAdapter, options)
-      const results = await geocoder.reverse({ lat: 40.714232, lng: -73.9612889 })
+      const results = await geocoder.reverse({
+        lat: 40.714232,
+        lng: -73.9612889
+      })
 
       assert.deepStrictEqual(results, [])
-      sinon.assert.calledOnceWithExactly(mockedAdapter, 'https://api.geocod.io/v1.7/reverse?api_key=apiKey&q=40.714232%2C-73.9612889')
+      sinon.assert.calledOnceWithExactly(
+        mockedAdapter,
+        'https://api.geocod.io/v1.7/reverse?api_key=apiKey&q=40.714232%2C-73.9612889'
+      )
     })
 
     it('should throw on error', async function () {
-      const mockedAdapter = sinon.stub().returns(
-        ({
-          status: 502,
-          json: () => Promise.resolve({})
-        })
-      )
+      const mockedAdapter = sinon.stub().returns({
+        status: 502,
+        json: () => Promise.resolve({})
+      })
 
       const geocoder = new GeocodioGeocoder(mockedAdapter, options)
       try {
@@ -171,7 +184,8 @@ describe('GeocodioGeocoder', function () {
     it('should return address', async function () {
       const query = '40.714232,-73.9612889'
       const { body, expResults } = fixtures[query]
-      const expUrl = 'https://api.geocod.io/v1.7/reverse?api_key=apiKey&q=40.714232%2C-73.9612889'
+      const expUrl =
+        'https://api.geocod.io/v1.7/reverse?api_key=apiKey&q=40.714232%2C-73.9612889'
 
       const mockedAdapter = sinon.stub().returns(
         Promise.resolve({
@@ -199,7 +213,7 @@ describe('GeocodioGeocoder', function () {
     itWithApiKey(apiKey, 'should call forward api', async function () {
       const query = 'Paris, TX 75460'
       const results = await geocoder.forward(query)
-      // eslint-disable-next-line no-console
+
       updateFixture(fixtures, 'forward', results[0])
       assert.deepStrictEqual(results[0], fixtures.forward)
     })
@@ -207,7 +221,7 @@ describe('GeocodioGeocoder', function () {
     itWithApiKey(apiKey, 'should call reverse api', async function () {
       const query = '40.714232,-73.9612889'
       const results = await geocoder.reverse(query)
-      // eslint-disable-next-line no-console
+
       updateFixture(fixtures, 'reverse', results[0])
       assert.deepStrictEqual(results[0], fixtures.reverse)
     })

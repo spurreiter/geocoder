@@ -1,6 +1,6 @@
 {
   "name": "@spurreiter/geocoder",
-  "version": "2.1.1",
+  "version": "2.2.0-0",
   "description": "Node geocoding library, google maps, bing maps, mapquest, mapbox, here maps, arcgis, nominatim, ...",
   "keywords": [
     "geocoder",
@@ -30,6 +30,11 @@
   "license": "MIT",
   "author": "spurreiter",
   "type": "module",
+  "imports": {
+    "#*": {
+      "default": "./src/*"
+    }
+  },
   "exports": {
     ".": {
       "require": "./lib/index.cjs",
@@ -45,13 +50,18 @@
     "example": "examples",
     "test": "test"
   },
+  "files": [
+    "lib",
+    "src",
+    "types"
+  ],
   "scripts": {
     "all": "npm-run-all clean test build lint types",
     "clean": "rimraf types coverage lib",
-    "lint": "eslint --fix --ext js .",
+    "lint": "eslint --fix .",
     "build": "./scripts/version.cjs && rollup -c",
     "test": "c8 mocha",
-    "types": "rimraf types; tsc && cp src/*.d.ts types"
+    "types": "rimraf types; tsc"
   },
   "mocha": {
     "exit": true,
@@ -59,29 +69,28 @@
     "timeout": 5000
   },
   "dependencies": {
-    "agentkeepalive": "^4.5.0",
-    "got": "^14.4.4",
-    "i18n-iso-countries": "^7.12.0"
+    "agentkeepalive": "^4.6.0",
+    "got": "^14.4.7",
+    "i18n-iso-countries": "^7.14.0"
   },
   "devDependencies": {
-    "@types/node": "^22.8.7",
-    "c8": "^10.1.2",
-    "dotenv": "^16.4.5",
-    "eslint": "^8.57.1",
-    "eslint-config-standard": "^17.1.0",
-    "eslint-plugin-import": "^2.31.0",
-    "eslint-plugin-n": "^16.6.2",
-    "eslint-plugin-promise": "^6.6.0",
-    "mocha": "^10.8.2",
-    "npm-run-all2": "^7.0.1",
+    "@types/node": "^22.15.2",
+    "c8": "^10.1.3",
+    "dotenv": "^16.5.0",
+    "eslint": "^9.22.0",
+    "eslint-config-prettier": "^10.1.1",
+    "eslint-plugin-prettier": "^5.2.3",
+    "globals": "^16.0.0",
+    "mocha": "^11.1.0",
+    "npm-run-all2": "^7.0.2",
     "rimraf": "^6.0.1",
-    "rollup": "^4.24.4",
+    "rollup": "^4.40.0",
     "serialize-to-module": "^1.1.0",
-    "sinon": "^19.0.2",
-    "typescript": "^5.6.3"
+    "sinon": "^19.0.5",
+    "typescript": "^5.8.3"
   },
   "engines": {
-    "node": ">=14"
+    "node": ">=18"
   },
   "publishConfig": {
     "access": "public"

@@ -25,7 +25,8 @@ const hasResult = (result) => {
   return status === 'OK' && Array.isArray(results)
 }
 
-const toCamelCase = (str = '') => str.replace(/_(.)/g, (_, m) => m.toUpperCase())
+const toCamelCase = (str = '') =>
+  str.replace(/_(.)/g, (_, m) => m.toUpperCase())
 
 /**
  * see https://developers.google.com/maps/documentation/geocoding/overview#GeocodingRequests
@@ -56,7 +57,7 @@ export class GoogleGeocoder extends AbstractGeocoder {
    * @param {string} options.apiKey
    * @param {string} [options.language]
    */
-  constructor (adapter, options = { apiKey: '' }) {
+  constructor(adapter, options = { apiKey: '' }) {
     // @ts-ignore
     super(adapter, options)
 
@@ -71,7 +72,7 @@ export class GoogleGeocoder extends AbstractGeocoder {
     this.params = params
   }
 
-  get endpoint () {
+  get endpoint() {
     return 'https://maps.googleapis.com/maps/api/geocode/json'
   }
 
@@ -79,7 +80,7 @@ export class GoogleGeocoder extends AbstractGeocoder {
    * @param {string|GoogleForwardQuery} query
    * @returns {Promise<object>}
    */
-  async _forward (query = '') {
+  async _forward(query = '') {
     let params = { ...this.params, address: query }
 
     if (typeof query !== 'string' && query.address) {
@@ -87,10 +88,7 @@ export class GoogleGeocoder extends AbstractGeocoder {
       params = { ...params, ...other, address }
     }
 
-    const url = this.createUrl(
-      this.endpoint,
-      params
-    )
+    const url = this.createUrl(this.endpoint, params)
 
     const res = await this.adapter(url)
     if (res.status !== 200) {
@@ -110,7 +108,7 @@ export class GoogleGeocoder extends AbstractGeocoder {
    * @param {GoogleReverseQuery} query
    * @returns {Promise<object>}
    */
-  async _reverse (query) {
+  async _reverse(query) {
     const { lat, lng, ...other } = query
     const params = {
       ...this.params,
@@ -118,10 +116,7 @@ export class GoogleGeocoder extends AbstractGeocoder {
       latlng: lat + ',' + lng
     }
 
-    const url = this.createUrl(
-      this.endpoint,
-      params
-    )
+    const url = this.createUrl(this.endpoint, params)
 
     const res = await this.adapter(url)
     if (res.status !== 200) {
@@ -137,7 +132,7 @@ export class GoogleGeocoder extends AbstractGeocoder {
     return this.wrapRaw(results, result)
   }
 
-  _formatResult (result) {
+  _formatResult(result) {
     const {
       address_components = [],
       formatted_address,
@@ -147,7 +142,7 @@ export class GoogleGeocoder extends AbstractGeocoder {
     const components = address_components.reduce((o, item) => {
       const { long_name: long, short_name: short, types } = item
 
-      types.forEach(_type => {
+      types.forEach((_type) => {
         const type = toCamelCase(_type)
         if (o[type] || type === 'political') return
         if (type === 'country') {

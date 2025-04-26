@@ -1,4 +1,4 @@
-/** @typedef {import('../types').GeocoderResult} GeocoderResult */
+/** @typedef {import('#types.js').GeocoderResult} GeocoderResult */
 
 /**
  * @param {any} s
@@ -20,7 +20,7 @@ const escXml = (s) =>
         '>': '&gt;',
         "'": '&#39;',
         '"': '&quot;'
-      }[tag])
+      })[tag]
   )
 
 /**

@@ -10,6 +10,7 @@ const { forward } = argv({ forward: FORWARD_IP })
 const adapter = fetchAdapter()
 const geocoder = new IpStackGeocoder(adapter, { apiKey })
 
-geocoder.forward(forward)
-  .then(res => console.dir(res, { depth: null }))
+geocoder
+  .forward(forward)
+  .then((res) => console.dir(res, { depth: null }))
   .catch(console.error)

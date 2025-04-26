@@ -3,12 +3,12 @@ import sinon from 'sinon'
 import { AbstractGeocoder, Cascade } from '../src/index.js'
 
 class MockGeocoder extends AbstractGeocoder {
-  constructor (tag, errorsAt = [3]) {
+  constructor(tag, errorsAt = [3]) {
     super({})
     Object.assign(this, { errorsAt, tag, count: 0 })
   }
 
-  _forward (query) {
+  _forward(query) {
     const { tag, errorsAt } = this
     if (errorsAt.includes(this.count++)) {
       return Promise.reject(new Error('baam'))
@@ -16,7 +16,7 @@ class MockGeocoder extends AbstractGeocoder {
     return Promise.resolve([{ query, tag }])
   }
 
-  _reverse (query) {
+  _reverse(query) {
     return this._forward(query)
   }
 }
@@ -26,7 +26,7 @@ class Mock1Geocoder extends MockGeocoder {}
 class Mock2Geocoder extends MockGeocoder {}
 
 class EmptyGeocoder extends AbstractGeocoder {
-  async _forward () {
+  async _forward() {
     return []
   }
 }
@@ -104,10 +104,7 @@ describe('Cascade', function () {
   })
 
   it('shall return empty result', async function () {
-    const geocoders = [
-      new MockGeocoder('one', [1]),
-      new EmptyGeocoder({})
-    ]
+    const geocoders = [new MockGeocoder('one', [1]), new EmptyGeocoder({})]
 
     const list = []
     const cascade = new Cascade(geocoders)

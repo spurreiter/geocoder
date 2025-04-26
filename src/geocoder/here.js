@@ -18,7 +18,7 @@ import { HttpError, countryCode, toFixed } from '../utils/index.js'
  * @property {number} [limit=1] Maximum number of results to be returned
  */
 
-function mapParams (params) {
+function mapParams(params) {
   const { language, ...other } = params
   if (language) {
     other.lang = language
@@ -36,7 +36,7 @@ export class HereGeocoder extends AbstractGeocoder {
    * @param {string} [options.language]
    * @param {number} [options.limit]
    */
-  constructor (adapter, options = { apiKey: '' }) {
+  constructor(adapter, options = { apiKey: '' }) {
     // @ts-ignore
     super(adapter, options)
 
@@ -47,11 +47,11 @@ export class HereGeocoder extends AbstractGeocoder {
     this.params = options
   }
 
-  get endpoint () {
+  get endpoint() {
     return 'https://geocode.search.hereapi.com/v1/geocode'
   }
 
-  get revEndpoint () {
+  get revEndpoint() {
     return 'https://revgeocode.search.hereapi.com/v1/revgeocode'
   }
 
@@ -60,7 +60,7 @@ export class HereGeocoder extends AbstractGeocoder {
    * @param {string|HereForwardQuery} query
    * @returns {Promise<object>}
    */
-  async _forward (query) {
+  async _forward(query) {
     let params = { ...this.params, q: query }
 
     if (typeof query !== 'string' && query.address) {
@@ -68,10 +68,7 @@ export class HereGeocoder extends AbstractGeocoder {
       params = { ...params, ...other, q: address }
     }
 
-    const url = this.createUrl(
-      this.endpoint,
-      mapParams(params)
-    )
+    const url = this.createUrl(this.endpoint, mapParams(params))
 
     const res = await this.adapter(url)
     if (res.status !== 200) {
@@ -90,14 +87,11 @@ export class HereGeocoder extends AbstractGeocoder {
    * @param {HereReverseQuery} query
    * @returns {Promise<object>}
    */
-  async _reverse (query) {
+  async _reverse(query) {
     const { lat, lng, ...other } = query
     const params = { ...this.params, ...other, at: `${lat},${lng}` }
 
-    const url = this.createUrl(
-      this.revEndpoint,
-      mapParams(params)
-    )
+    const url = this.createUrl(this.revEndpoint, mapParams(params))
 
     const res = await this.adapter(url)
     if (res.status !== 200) {
@@ -111,7 +105,7 @@ export class HereGeocoder extends AbstractGeocoder {
     return this.wrapRaw(results, result)
   }
 
-  _formatResult (result) {
+  _formatResult(result) {
     const { address = {}, position = {}, scoring = {}, id } = result
 
     const formatted = {

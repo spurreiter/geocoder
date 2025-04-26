@@ -12,7 +12,10 @@ describe('CircuitBreaker', function () {
     clock.restore()
   })
 
-  const testRun = async (mockGeocoder, { method = 'forward', tick = 21000 } = {}) => {
+  const testRun = async (
+    mockGeocoder,
+    { method = 'forward', tick = 21000 } = {}
+  ) => {
     const breaker = new CircuitBreaker(mockGeocoder)
 
     const res = []
@@ -32,8 +35,8 @@ describe('CircuitBreaker', function () {
   it('shall pass', async function () {
     const mockGeocoder = {
       name: 'mock',
-      forward: async (i) => (i),
-      reverse: async (i) => (i)
+      forward: async (i) => i,
+      reverse: async (i) => i
     }
     const exp = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 
@@ -128,18 +131,7 @@ describe('CircuitBreaker', function () {
       reverse: stub
     }
 
-    const exp = [
-      0,
-      'baam',
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9
-    ]
+    const exp = [0, 'baam', 2, 3, 4, 5, 6, 7, 8, 9]
 
     const fwd = await testRun(mockGeocoder)
     assert.deepStrictEqual(fwd, exp)
@@ -163,18 +155,7 @@ describe('CircuitBreaker', function () {
       reverse: stub
     }
 
-    const exp = [
-      0,
-      'baam',
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9
-    ]
+    const exp = [0, 'baam', 2, 3, 4, 5, 6, 7, 8, 9]
 
     const fwd = await testRun(mockGeocoder)
     assert.deepStrictEqual(fwd, exp)
@@ -185,7 +166,7 @@ describe('CircuitBreaker', function () {
 
   it('shall ignore an unsupported ip lookup', async function () {
     class MockGeocoder extends AbstractGeocoder {
-      _forward () {
+      _forward() {
         return [{ ok: 1 }]
       }
     }

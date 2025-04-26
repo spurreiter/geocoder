@@ -42,16 +42,18 @@ describe('GeoLite2Geocoder', function () {
 
       assert.deepStrictEqual(results, [])
 
-      sinon.assert.calledOnceWithExactly(mockedAdapter, 'http://localhost:3000/city/66.249.64.0', undefined)
+      sinon.assert.calledOnceWithExactly(
+        mockedAdapter,
+        'http://localhost:3000/city/66.249.64.0',
+        undefined
+      )
     })
 
     it('should throw on error', async function () {
-      const mockedAdapter = sinon.stub().returns(
-        ({
-          status: 502,
-          json: () => Promise.resolve({})
-        })
-      )
+      const mockedAdapter = sinon.stub().returns({
+        status: 502,
+        json: () => Promise.resolve({})
+      })
 
       const geocoder = new GeoLite2Geocoder(mockedAdapter, options)
       try {
@@ -86,7 +88,8 @@ describe('GeoLite2Geocoder', function () {
       const query = '2001:8004:713f:2f00:f9d2:16e5:38e4:adc3'
       const { body, expResults } = fixtures[query]
 
-      const expUrl = 'https://geolite.info/geoip/v2.1/city/2001:8004:713f:2f00:f9d2:16e5:38e4:adc3'
+      const expUrl =
+        'https://geolite.info/geoip/v2.1/city/2001:8004:713f:2f00:f9d2:16e5:38e4:adc3'
 
       const mockedAdapter = sinon.stub().returns(
         Promise.resolve({
@@ -95,45 +98,55 @@ describe('GeoLite2Geocoder', function () {
         })
       )
 
-      const geocoder = new GeoLite2Geocoder(mockedAdapter, { accountId: '11111', apiKey: 'apikey' })
+      const geocoder = new GeoLite2Geocoder(mockedAdapter, {
+        accountId: '11111',
+        apiKey: 'apikey'
+      })
       const results = await geocoder.forward({ address: query })
 
       assert.deepStrictEqual(results, expResults)
-      sinon.assert.calledOnceWithExactly(mockedAdapter, expUrl, { headers: { authorization: 'Basic MTExMTE6YXBpa2V5' } })
+      sinon.assert.calledOnceWithExactly(mockedAdapter, expUrl, {
+        headers: { authorization: 'Basic MTExMTE6YXBpa2V5' }
+      })
     })
   })
 
   describe('reverse', () => {
     it('should throw', async function () {
-      const mockedAdapter = sinon.stub().returns(
-        ({
-          status: 502,
-          json: () => Promise.resolve({})
-        })
-      )
+      const mockedAdapter = sinon.stub().returns({
+        status: 502,
+        json: () => Promise.resolve({})
+      })
 
       const geocoder = new GeoLite2Geocoder(mockedAdapter, options)
       try {
         await geocoder.reverse({ lat: 40.714232, lon: -73.9612889 })
         assert.ok(false, 'shall not reach here')
       } catch (e) {
-        assert.strictEqual(e.message, 'GeoLite2Geocoder does not support reverse geocoding')
+        assert.strictEqual(
+          e.message,
+          'GeoLite2Geocoder does not support reverse geocoding'
+        )
       }
     })
   })
 
   describe('call api', () => {
-    const { MAXMIND_ACCOUNT_ID: accountId, MAXMIND_APIKEY: apiKey } = process.env
+    const { MAXMIND_ACCOUNT_ID: accountId, MAXMIND_APIKEY: apiKey } =
+      process.env
     let geocoder
 
     before(function () {
-      geocoder = apiKey && accountId && new GeoLite2Geocoder(fetchAdapter(), { apiKey, accountId })
+      geocoder =
+        apiKey &&
+        accountId &&
+        new GeoLite2Geocoder(fetchAdapter(), { apiKey, accountId })
     })
 
     itWithApiKey(apiKey, 'should call forward api', async function () {
       const query = '66.249.64.0'
       const results = await geocoder.forward(query)
-      // eslint-disable-next-line no-console
+
       updateFixture(fixtures, 'forward', results[0])
       assert.deepStrictEqual(results[0], fixtures.forward)
     })
@@ -144,7 +157,10 @@ describe('GeoLite2Geocoder', function () {
         await geocoder.reverse(query)
         throw new Error('bad')
       } catch (err) {
-        assert.strictEqual(err.message, 'GeoLite2Geocoder does not support reverse geocoding')
+        assert.strictEqual(
+          err.message,
+          'GeoLite2Geocoder does not support reverse geocoding'
+        )
       }
     })
   })

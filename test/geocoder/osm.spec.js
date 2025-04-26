@@ -71,7 +71,10 @@ describe('OsmGeocoder', function () {
         })
       )
 
-      const geocoder = new OsmGeocoder(mockedAdapter, { ...options, language: 'de' })
+      const geocoder = new OsmGeocoder(mockedAdapter, {
+        ...options,
+        language: 'de'
+      })
       const results = await geocoder.forward('1 champs élysée Paris')
 
       assert.deepStrictEqual(results, [])
@@ -84,12 +87,10 @@ describe('OsmGeocoder', function () {
     })
 
     it('should throw on error', async function () {
-      const mockedAdapter = sinon.stub().returns(
-        ({
-          status: 502,
-          json: () => Promise.resolve({})
-        })
-      )
+      const mockedAdapter = sinon.stub().returns({
+        status: 502,
+        json: () => Promise.resolve({})
+      })
 
       const geocoder = new OsmGeocoder(mockedAdapter, options)
       try {
@@ -101,9 +102,11 @@ describe('OsmGeocoder', function () {
     })
 
     it('should return address', async function () {
-      const { query, body, expResults } = fixtures['135 pilkington avenue, birmingham']
+      const { query, body, expResults } =
+        fixtures['135 pilkington avenue, birmingham']
 
-      const expUrl = 'https://nominatim.openstreetmap.org/search?format=json&addressdetails=1&q=135+pilkington+avenue%2C+birmingham'
+      const expUrl =
+        'https://nominatim.openstreetmap.org/search?format=json&addressdetails=1&q=135+pilkington+avenue%2C+birmingham'
 
       const mockedAdapter = sinon.stub().returns(
         Promise.resolve({
@@ -122,9 +125,11 @@ describe('OsmGeocoder', function () {
     })
 
     it('should return address when object', async function () {
-      const { query, body, expResults } = fixtures['135 pilkington avenue, birmingham']
+      const { query, body, expResults } =
+        fixtures['135 pilkington avenue, birmingham']
 
-      const expUrl = 'https://nominatim.openstreetmap.org/search?format=json&addressdetails=1&q=135+pilkington+avenue%2C+birmingham'
+      const expUrl =
+        'https://nominatim.openstreetmap.org/search?format=json&addressdetails=1&q=135+pilkington+avenue%2C+birmingham'
 
       const mockedAdapter = sinon.stub().returns(
         Promise.resolve({
@@ -153,7 +158,10 @@ describe('OsmGeocoder', function () {
       )
 
       const geocoder = new OsmGeocoder(mockedAdapter, options)
-      const results = await geocoder.reverse({ lat: 40.714232, lng: -73.9612889 })
+      const results = await geocoder.reverse({
+        lat: 40.714232,
+        lng: -73.9612889
+      })
 
       assert.deepStrictEqual(results, [])
       sinon.assert.calledOnceWithExactly(
@@ -164,12 +172,10 @@ describe('OsmGeocoder', function () {
     })
 
     it('should throw on error', async function () {
-      const mockedAdapter = sinon.stub().returns(
-        ({
-          status: 502,
-          json: () => Promise.resolve({})
-        })
-      )
+      const mockedAdapter = sinon.stub().returns({
+        status: 502,
+        json: () => Promise.resolve({})
+      })
 
       const geocoder = new OsmGeocoder(mockedAdapter, options)
       try {
@@ -182,7 +188,8 @@ describe('OsmGeocoder', function () {
 
     it('should return address', async function () {
       const { query, body, expResults } = fixtures['40.714232,-73.9612889']
-      const expUrl = 'https://nominatim.openstreetmap.org/reverse?format=json&addressdetails=1&lat=40.714232&lon=-73.9612889'
+      const expUrl =
+        'https://nominatim.openstreetmap.org/reverse?format=json&addressdetails=1&lat=40.714232&lon=-73.9612889'
 
       const mockedAdapter = sinon.stub().returns(
         Promise.resolve({
@@ -213,7 +220,7 @@ describe('OsmGeocoder', function () {
     itWithApiKey(apiKey, 'should call forward api', async function () {
       const query = 'Paris Avenue des Champs Elysees 1'
       const results = await geocoder.forward(query)
-      // eslint-disable-next-line no-console
+
       updateFixture(fixtures, 'forward', results[0])
       assert.deepStrictEqual(results[0], fixtures.forward)
     })
@@ -221,7 +228,7 @@ describe('OsmGeocoder', function () {
     itWithApiKey(apiKey, 'should call reverse api', async function () {
       const query = '40.714232,-73.9612889'
       const results = await geocoder.reverse(query)
-      // eslint-disable-next-line no-console
+
       updateFixture(fixtures, 'reverse', results[0])
       assert.deepStrictEqual(results[0], fixtures.reverse)
     })

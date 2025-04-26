@@ -36,7 +36,7 @@ export class PickpointGeocoder extends OsmGeocoder {
    * @param {number} [options.limit=10]
    * @param {string} [options.language]
    */
-  constructor (adapter, options) {
+  constructor(adapter, options) {
     super(adapter, { ...options, needsReferer: false })
     const { apiKey, ...params } = options || {}
 

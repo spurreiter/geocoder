@@ -18,7 +18,7 @@ import { HttpError, toFixed, toUpperCase } from '../utils/index.js'
  * @property {number} [limit=10] Maximum number of results to be returned
  */
 
-function mapParams (params) {
+function mapParams(params) {
   const { language, ...other } = params
   if (language) {
     other['accept-language'] = language
@@ -26,7 +26,7 @@ function mapParams (params) {
   return other
 }
 
-function toBbox (boundingbox) {
+function toBbox(boundingbox) {
   const [ymin, ymax, xmin, xmax] = boundingbox || []
   if (xmin !== undefined) {
     return [xmin, ymin, xmax, ymax]
@@ -44,7 +44,7 @@ export class LocationIqGeocoder extends AbstractGeocoder {
    * @param {string} [options.dcRegion=eu] datacenter region [us1, eu1]
    * @param {number} [options.limit]
    */
-  constructor (adapter, options = { apiKey: '' }) {
+  constructor(adapter, options = { apiKey: '' }) {
     // @ts-ignore
     super(adapter, options)
 
@@ -69,7 +69,7 @@ export class LocationIqGeocoder extends AbstractGeocoder {
    * @param {string|LocationIqForwardQuery} query
    * @returns {Promise<object>}
    */
-  async _forward (query) {
+  async _forward(query) {
     let params = { ...this.params, q: query }
 
     if (typeof query !== 'string' && query.address) {
@@ -77,10 +77,7 @@ export class LocationIqGeocoder extends AbstractGeocoder {
       params = { ...params, ...other, q: address }
     }
 
-    const url = this.createUrl(
-      this.endpoint,
-      mapParams(params)
-    )
+    const url = this.createUrl(this.endpoint, mapParams(params))
 
     const res = await this.adapter(url)
     if (res.status !== 200) {
@@ -98,14 +95,11 @@ export class LocationIqGeocoder extends AbstractGeocoder {
    * @param {LocationIqReverseQuery} query
    * @returns {Promise<object>}
    */
-  async _reverse (query) {
+  async _reverse(query) {
     const { lat, lng, ...other } = query
     const params = { ...this.params, ...other, lat, lon: lng }
 
-    const url = this.createUrl(
-      this.revEndpoint,
-      mapParams(params)
-    )
+    const url = this.createUrl(this.revEndpoint, mapParams(params))
 
     const res = await this.adapter(url)
     if (res.status !== 200) {
@@ -119,7 +113,7 @@ export class LocationIqGeocoder extends AbstractGeocoder {
     return this.wrapRaw(results, result)
   }
 
-  _formatResult (result) {
+  _formatResult(result) {
     const {
       lat,
       lon,

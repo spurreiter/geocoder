@@ -67,7 +67,8 @@ export const fixtures = {
     },
     expResults: [
       {
-        formattedAddress: '135 Pilkington Avenue, Birmingham, England, United Kingdom',
+        formattedAddress:
+          '135 Pilkington Avenue, Birmingham, England, United Kingdom',
         latitude: 52.548794,
         longitude: -1.816439,
         country: 'United Kingdom',

@@ -60,16 +60,17 @@ describe('BingMapsGeocoder', function () {
 
       assert.deepStrictEqual(results, [])
 
-      sinon.assert.calledOnceWithExactly(mockedAdapter, 'http://dev.virtualearth.net/REST/v1/Locations?o=json&include=ciso2&key=apiKey&q=1+champs+%C3%A9lys%C3%A9e+Paris')
+      sinon.assert.calledOnceWithExactly(
+        mockedAdapter,
+        'http://dev.virtualearth.net/REST/v1/Locations?o=json&include=ciso2&key=apiKey&q=1+champs+%C3%A9lys%C3%A9e+Paris'
+      )
     })
 
     it('should throw on error', async function () {
-      const mockedAdapter = sinon.stub().returns(
-        ({
-          status: 502,
-          json: () => Promise.resolve({})
-        })
-      )
+      const mockedAdapter = sinon.stub().returns({
+        status: 502,
+        json: () => Promise.resolve({})
+      })
 
       const geocoder = new BingMapsGeocoder(mockedAdapter, options)
       try {
@@ -84,7 +85,8 @@ describe('BingMapsGeocoder', function () {
       const query = '135 pilkington avenue, birmingham'
       const { body, expResults } = fixtures[query]
 
-      const expUrl = 'http://dev.virtualearth.net/REST/v1/Locations?o=json&include=ciso2&key=apiKey&q=135+pilkington+avenue%2C+birmingham'
+      const expUrl =
+        'http://dev.virtualearth.net/REST/v1/Locations?o=json&include=ciso2&key=apiKey&q=135+pilkington+avenue%2C+birmingham'
 
       const mockedAdapter = sinon.stub().returns(
         Promise.resolve({
@@ -106,7 +108,8 @@ describe('BingMapsGeocoder', function () {
       const query = '135 pilkington avenue, birmingham'
       const { body, expResults } = fixtures[query]
 
-      const expUrl = 'http://dev.virtualearth.net/REST/v1/Locations?o=json&include=ciso2&key=apiKey&q=135+pilkington+avenue%2C+birmingham'
+      const expUrl =
+        'http://dev.virtualearth.net/REST/v1/Locations?o=json&include=ciso2&key=apiKey&q=135+pilkington+avenue%2C+birmingham'
 
       const mockedAdapter = sinon.stub().returns(
         Promise.resolve({
@@ -130,27 +133,32 @@ describe('BingMapsGeocoder', function () {
       const mockedAdapter = sinon.stub().returns(
         Promise.resolve({
           status: 200,
-          json: () => Promise.resolve({
-            statusCode: 200
-          })
+          json: () =>
+            Promise.resolve({
+              statusCode: 200
+            })
         })
       )
 
       const geocoder = new BingMapsGeocoder(mockedAdapter, options)
-      const results = await geocoder.reverse({ lat: 40.714232, lng: -73.9612889 })
+      const results = await geocoder.reverse({
+        lat: 40.714232,
+        lng: -73.9612889
+      })
 
       assert.deepStrictEqual(results, [])
 
-      sinon.assert.calledOnceWithExactly(mockedAdapter, 'http://dev.virtualearth.net/REST/v1/Locations/40.714232,-73.9612889?o=json&include=ciso2&key=apiKey')
+      sinon.assert.calledOnceWithExactly(
+        mockedAdapter,
+        'http://dev.virtualearth.net/REST/v1/Locations/40.714232,-73.9612889?o=json&include=ciso2&key=apiKey'
+      )
     })
 
     it('should throw on error', async function () {
-      const mockedAdapter = sinon.stub().returns(
-        ({
-          status: 502,
-          json: () => Promise.resolve({})
-        })
-      )
+      const mockedAdapter = sinon.stub().returns({
+        status: 502,
+        json: () => Promise.resolve({})
+      })
 
       const geocoder = new BingMapsGeocoder(mockedAdapter, options)
       try {
@@ -164,7 +172,8 @@ describe('BingMapsGeocoder', function () {
     it('should return address', async function () {
       const query = '40.714232,-73.9612889'
       const { body, expResults } = fixtures[query]
-      const expUrl = 'http://dev.virtualearth.net/REST/v1/Locations/40.714232,-73.9612889?o=json&include=ciso2&key=apiKey'
+      const expUrl =
+        'http://dev.virtualearth.net/REST/v1/Locations/40.714232,-73.9612889?o=json&include=ciso2&key=apiKey'
 
       const mockedAdapter = sinon.stub().returns(
         Promise.resolve({
@@ -192,7 +201,7 @@ describe('BingMapsGeocoder', function () {
     itWithApiKey(apiKey, 'should call forward api', async function () {
       const query = '1 champs élysée Paris'
       const results = await geocoder.forward(query)
-      // eslint-disable-next-line no-console
+
       updateFixture(fixtures, 'forward', results[0])
       assert.deepStrictEqual(results[0], fixtures.forward)
     })
@@ -200,7 +209,7 @@ describe('BingMapsGeocoder', function () {
     itWithApiKey(apiKey, 'should call reverse api', async function () {
       const query = '40.714232,-73.9612889'
       const results = await geocoder.reverse(query)
-      // eslint-disable-next-line no-console
+
       updateFixture(fixtures, 'reverse', results[0])
       assert.deepStrictEqual(results[0], fixtures.reverse)
     })

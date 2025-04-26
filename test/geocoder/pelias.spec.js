@@ -21,7 +21,9 @@ describe('PeliasGeocoder', function () {
     })
 
     it('no apiKey for origin', () => {
-      const geocoder = new PeliasGeocoder(mockedAdapter, { origin: 'http://localhost:3000' })
+      const geocoder = new PeliasGeocoder(mockedAdapter, {
+        origin: 'http://localhost:3000'
+      })
       assert.ok(geocoder instanceof PeliasGeocoder)
     })
 
@@ -59,16 +61,17 @@ describe('PeliasGeocoder', function () {
 
       assert.deepStrictEqual(results, [])
 
-      sinon.assert.calledOnceWithExactly(mockedAdapter, 'https://api.geocode.earth/v1/search?api_key=apiKey&text=1+champs+%C3%A9lys%C3%A9e+Paris')
+      sinon.assert.calledOnceWithExactly(
+        mockedAdapter,
+        'https://api.geocode.earth/v1/search?api_key=apiKey&text=1+champs+%C3%A9lys%C3%A9e+Paris'
+      )
     })
 
     it('should throw on error', async function () {
-      const mockedAdapter = sinon.stub().returns(
-        ({
-          status: 502,
-          json: () => Promise.resolve({})
-        })
-      )
+      const mockedAdapter = sinon.stub().returns({
+        status: 502,
+        json: () => Promise.resolve({})
+      })
 
       const geocoder = new PeliasGeocoder(mockedAdapter, options)
       try {
@@ -82,7 +85,8 @@ describe('PeliasGeocoder', function () {
     it('should return address', async function () {
       const query = '135 pilkington avenue, birmingham'
       const { body, expResults } = fixtures[query]
-      const expUrl = 'https://api.geocode.earth/v1/search?api_key=apiKey&text=135+pilkington+avenue%2C+birmingham'
+      const expUrl =
+        'https://api.geocode.earth/v1/search?api_key=apiKey&text=135+pilkington+avenue%2C+birmingham'
 
       const mockedAdapter = sinon.stub().returns(
         Promise.resolve({
@@ -101,7 +105,8 @@ describe('PeliasGeocoder', function () {
     it('should return address when object', async function () {
       const query = '135 pilkington avenue, birmingham'
       const { body, expResults } = fixtures[query]
-      const expUrl = 'https://api.geocode.earth/v1/search?api_key=apiKey&text=135+pilkington+avenue%2C+birmingham'
+      const expUrl =
+        'https://api.geocode.earth/v1/search?api_key=apiKey&text=135+pilkington+avenue%2C+birmingham'
 
       const mockedAdapter = sinon.stub().returns(
         Promise.resolve({
@@ -128,19 +133,23 @@ describe('PeliasGeocoder', function () {
       )
 
       const geocoder = new PeliasGeocoder(mockedAdapter, options)
-      const results = await geocoder.reverse({ lat: 40.714232, lng: -73.9612889 })
+      const results = await geocoder.reverse({
+        lat: 40.714232,
+        lng: -73.9612889
+      })
 
       assert.deepStrictEqual(results, [])
-      sinon.assert.calledOnceWithExactly(mockedAdapter, 'https://api.geocode.earth/v1/reverse?api_key=apiKey&point.lat=40.714232&point.lon=-73.9612889')
+      sinon.assert.calledOnceWithExactly(
+        mockedAdapter,
+        'https://api.geocode.earth/v1/reverse?api_key=apiKey&point.lat=40.714232&point.lon=-73.9612889'
+      )
     })
 
     it('should throw on error', async function () {
-      const mockedAdapter = sinon.stub().returns(
-        ({
-          status: 502,
-          json: () => Promise.resolve({})
-        })
-      )
+      const mockedAdapter = sinon.stub().returns({
+        status: 502,
+        json: () => Promise.resolve({})
+      })
 
       const geocoder = new PeliasGeocoder(mockedAdapter, options)
       try {
@@ -154,7 +163,8 @@ describe('PeliasGeocoder', function () {
     it('should return address', async function () {
       const query = '40.714232,-73.9612889'
       const { body, expResults } = fixtures[query]
-      const expUrl = 'https://api.geocode.earth/v1/reverse?api_key=apiKey&point.lat=40.714232&point.lon=-73.9612889'
+      const expUrl =
+        'https://api.geocode.earth/v1/reverse?api_key=apiKey&point.lat=40.714232&point.lon=-73.9612889'
 
       const mockedAdapter = sinon.stub().returns(
         Promise.resolve({

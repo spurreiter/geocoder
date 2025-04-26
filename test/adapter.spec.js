@@ -71,6 +71,10 @@ describe('fetchAdapter', function () {
     } catch (e) {
       err = e
     }
-    assert.ok(/getaddrinfo (?:EAI_AGAIN|ENOTFOUND) is-there-anybody-out-there/.test(err.message))
+    assert.ok(
+      /getaddrinfo (?:EAI_AGAIN|ENOTFOUND) is-there-anybody-out-there/.test(
+        err.message
+      )
+    )
   })
 })

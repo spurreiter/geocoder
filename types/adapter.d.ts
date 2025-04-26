@@ -2,7 +2,7 @@
  * @param {AdapterOptions} [opts]
  * @returns {fetchAdapterFn}
  */
-export function fetchAdapter(opts?: import("./types").AdapterOptions | undefined): fetchAdapterFn;
+export function fetchAdapter(opts?: AdapterOptions): fetchAdapterFn;
 export class Response {
     /**
      * @param {object} param0
@@ -12,7 +12,7 @@ export class Response {
      * @param {object} param0.headers
      * @param {object} param0.body
      */
-    constructor({ statusCode, statusMessage, redirectUrls, headers, body, ...others }: {
+    constructor({ statusCode, statusMessage, redirectUrls, headers, body, ..._others }: {
         statusCode: number;
         statusMessage: string;
         redirectUrls?: any[] | undefined;
@@ -30,5 +30,5 @@ export class Response {
     json(): Promise<any>;
     formData(): Promise<URLSearchParams>;
 }
-export type AdapterOptions = import("./types").AdapterOptions;
-export type fetchAdapterFn = typeof import("./types").fetchAdapterFn;
+export type AdapterOptions = import("#types.js").AdapterOptions;
+export type fetchAdapterFn = typeof import("#types.js").fetchAdapterFn;

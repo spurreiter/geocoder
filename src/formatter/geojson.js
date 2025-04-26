@@ -1,6 +1,6 @@
-/** @typedef {import('../types').GeocoderResult} GeocoderResult */
-/** @typedef {import('../types').GeoJsonFeature} GeoJsonFeature */
-/** @typedef {import('../types').GeoJsonFeatureCollection} GeoJsonFeatureCollection */
+/** @typedef {import('#types.js').GeocoderResult} GeocoderResult */
+/** @typedef {import('#types.js').GeoJsonFeature} GeoJsonFeature */
+/** @typedef {import('#types.js').GeoJsonFeatureCollection} GeoJsonFeatureCollection */
 /**
  * @see https://github.com/geocoders/geocodejson-spec
  * @see https://datatracker.ietf.org/doc/html/rfc7946
@@ -11,10 +11,7 @@
  * @param {string} [param1.query]
  * @returns {GeoJsonFeatureCollection}
  */
-const featureCollection = (
-  features,
-  { license, attribution, query } = {}
-) => ({
+const featureCollection = (features, { license, attribution, query } = {}) => ({
   type: 'FeatureCollection',
   geocoding: {
     version: '0.1.0',
@@ -33,6 +30,7 @@ const feature = ({
   formattedAddress,
   latitude,
   longitude,
+  // eslint-disable-next-line no-unused-vars
   country,
   countryCode,
   state,
@@ -84,10 +82,7 @@ const feature = ({
  * @param {object} opts
  * @returns
  */
-export function geoJsonFormatter (
-  results,
-  opts
-) {
+export function geoJsonFormatter(results, opts) {
   if (!results) return
   const features = results.map(feature, opts)
   return featureCollection(features)

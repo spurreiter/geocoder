@@ -22,7 +22,7 @@ export class PeliasGeocoder extends AbstractGeocoder {
    * @param {object} options
    * @param {string} [options.origin='https://api.geocode.earth'] protocol + hostname for server
    */
-  constructor (adapter, options = {}) {
+  constructor(adapter, options = {}) {
     // @ts-ignore
     super(adapter, options)
 
@@ -44,11 +44,11 @@ export class PeliasGeocoder extends AbstractGeocoder {
     }
   }
 
-  get endpoint () {
+  get endpoint() {
     return this._endpoint
   }
 
-  get revEndpoint () {
+  get revEndpoint() {
     return this._revEndpoint
   }
 
@@ -56,7 +56,7 @@ export class PeliasGeocoder extends AbstractGeocoder {
    * @param {string|PeliasForwardQuery} query
    * @returns {Promise<object>}
    */
-  async _forward (query) {
+  async _forward(query) {
     let params = { ...this.params, text: query }
 
     if (typeof query !== 'string' && query.address) {
@@ -83,9 +83,14 @@ export class PeliasGeocoder extends AbstractGeocoder {
    * @param {PeliasReverseQuery} query
    * @returns {Promise<object>}
    */
-  async _reverse (query) {
+  async _reverse(query) {
     const { lat, lng, ...other } = query
-    const params = { ...this.params, ...other, 'point.lat': lat, 'point.lon': lng }
+    const params = {
+      ...this.params,
+      ...other,
+      'point.lat': lat,
+      'point.lon': lng
+    }
 
     const url = this.createUrl(this.revEndpoint, params)
 
@@ -102,9 +107,10 @@ export class PeliasGeocoder extends AbstractGeocoder {
     return this.wrapRaw(results, result)
   }
 
-  _formatResult (result = {}) {
+  _formatResult(result = {}) {
     const { geometry = {}, properties = {} } = result
-    const confidence = properties.confidence < 1 ? toFixed(properties.confidence - 0.1) : 1
+    const confidence =
+      properties.confidence < 1 ? toFixed(properties.confidence - 0.1) : 1
 
     const formatted = {
       formattedAddress: properties.label,

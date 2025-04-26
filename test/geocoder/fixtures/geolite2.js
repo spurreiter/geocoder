@@ -81,7 +81,8 @@ export const fixtures = {
       }
     ]
   },
-  '2001:8003:713f:2f00:f9d2:16e5:38e4:adc3': { // local result
+  '2001:8003:713f:2f00:f9d2:16e5:38e4:adc3': {
+    // local result
     body: {
       continent: {
         code: 'OC',
@@ -184,7 +185,8 @@ export const fixtures = {
       }
     ]
   },
-  '2001:8004:713f:2f00:f9d2:16e5:38e4:adc3': { // MaxMind result
+  '2001:8004:713f:2f00:f9d2:16e5:38e4:adc3': {
+    // MaxMind result
     body: {
       continent: {
         code: 'OC',

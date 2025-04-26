@@ -1,4 +1,4 @@
-import { Response } from "./adapter";
+import { Response } from "./adapter.js";
 
 export interface AdapterOptions {
   /**
@@ -12,7 +12,7 @@ export interface AdapterOptions {
   headers?: object;
 }
 
-export function fetchAdapterFn(url: string | object, options?: object | any): Promise<Response>;
+export declare function fetchAdapterFn(url: string | object, options?: object | any): Promise<Response>;
 
 export type ForwardQuery = {
   /**
@@ -155,20 +155,20 @@ export interface GeoJsonFeature {
   },
 }
 
-interface GeoJsonGeocoding {
+export interface GeoJsonGeocoding {
   license?: string;
   attribution?: string;
   query?: string;
 }
 
-export class HttpError extends Error {
+export declare class HttpError extends Error {
   /** HTTP status code */
   status: number;
   /** HTTP Response */
   response: Response;
 }
 
-export class CircuitBreakerError extends Error {
+export declare class CircuitBreakerError extends Error {
   /** HTTP status code */
   status: number;
   /** provider name */

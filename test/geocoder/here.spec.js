@@ -60,7 +60,10 @@ describe('HereGeocoder', function () {
 
       assert.deepStrictEqual(results, [])
 
-      sinon.assert.calledOnceWithExactly(mockedAdapter, 'https://geocode.search.hereapi.com/v1/geocode?apiKey=apiKey&q=1+champs+%C3%A9lys%C3%A9e+Paris')
+      sinon.assert.calledOnceWithExactly(
+        mockedAdapter,
+        'https://geocode.search.hereapi.com/v1/geocode?apiKey=apiKey&q=1+champs+%C3%A9lys%C3%A9e+Paris'
+      )
     })
 
     it('should call api in different language', async function () {
@@ -71,21 +74,25 @@ describe('HereGeocoder', function () {
         })
       )
 
-      const geocoder = new HereGeocoder(mockedAdapter, { ...options, language: 'de' })
+      const geocoder = new HereGeocoder(mockedAdapter, {
+        ...options,
+        language: 'de'
+      })
       const results = await geocoder.forward('1 champs élysée Paris')
 
       assert.deepStrictEqual(results, [])
 
-      sinon.assert.calledOnceWithExactly(mockedAdapter, 'https://geocode.search.hereapi.com/v1/geocode?apiKey=apiKey&q=1+champs+%C3%A9lys%C3%A9e+Paris&lang=de')
+      sinon.assert.calledOnceWithExactly(
+        mockedAdapter,
+        'https://geocode.search.hereapi.com/v1/geocode?apiKey=apiKey&q=1+champs+%C3%A9lys%C3%A9e+Paris&lang=de'
+      )
     })
 
     it('should throw on error', async function () {
-      const mockedAdapter = sinon.stub().returns(
-        ({
-          status: 502,
-          json: () => Promise.resolve({})
-        })
-      )
+      const mockedAdapter = sinon.stub().returns({
+        status: 502,
+        json: () => Promise.resolve({})
+      })
 
       const geocoder = new HereGeocoder(mockedAdapter, options)
       try {
@@ -99,7 +106,8 @@ describe('HereGeocoder', function () {
     it('should return address', async function () {
       const query = '135 pilkington avenue, birmingham'
       const { body, expResults } = fixtures[query]
-      const expUrl = 'https://geocode.search.hereapi.com/v1/geocode?apiKey=apiKey&q=135+pilkington+avenue%2C+birmingham'
+      const expUrl =
+        'https://geocode.search.hereapi.com/v1/geocode?apiKey=apiKey&q=135+pilkington+avenue%2C+birmingham'
 
       const mockedAdapter = sinon.stub().returns(
         Promise.resolve({
@@ -118,7 +126,8 @@ describe('HereGeocoder', function () {
     it('should return address when object', async function () {
       const query = '135 pilkington avenue, birmingham'
       const { body, expResults } = fixtures[query]
-      const expUrl = 'https://geocode.search.hereapi.com/v1/geocode?apiKey=apiKey&q=135+pilkington+avenue%2C+birmingham'
+      const expUrl =
+        'https://geocode.search.hereapi.com/v1/geocode?apiKey=apiKey&q=135+pilkington+avenue%2C+birmingham'
 
       const mockedAdapter = sinon.stub().returns(
         Promise.resolve({
@@ -145,19 +154,23 @@ describe('HereGeocoder', function () {
       )
 
       const geocoder = new HereGeocoder(mockedAdapter, options)
-      const results = await geocoder.reverse({ lat: 40.714232, lng: -73.9612889 })
+      const results = await geocoder.reverse({
+        lat: 40.714232,
+        lng: -73.9612889
+      })
 
       assert.deepStrictEqual(results, [])
-      sinon.assert.calledOnceWithExactly(mockedAdapter, 'https://revgeocode.search.hereapi.com/v1/revgeocode?apiKey=apiKey&at=40.714232%2C-73.9612889')
+      sinon.assert.calledOnceWithExactly(
+        mockedAdapter,
+        'https://revgeocode.search.hereapi.com/v1/revgeocode?apiKey=apiKey&at=40.714232%2C-73.9612889'
+      )
     })
 
     it('should throw on error', async function () {
-      const mockedAdapter = sinon.stub().returns(
-        ({
-          status: 502,
-          json: () => Promise.resolve({})
-        })
-      )
+      const mockedAdapter = sinon.stub().returns({
+        status: 502,
+        json: () => Promise.resolve({})
+      })
 
       const geocoder = new HereGeocoder(mockedAdapter, options)
       try {
@@ -171,7 +184,8 @@ describe('HereGeocoder', function () {
     it('should return address', async function () {
       const query = '40.714232,-73.9612889'
       const { body, expResults } = fixtures[query]
-      const expUrl = 'https://revgeocode.search.hereapi.com/v1/revgeocode?apiKey=apiKey&at=40.714232%2C-73.9612889'
+      const expUrl =
+        'https://revgeocode.search.hereapi.com/v1/revgeocode?apiKey=apiKey&at=40.714232%2C-73.9612889'
 
       const mockedAdapter = sinon.stub().returns(
         Promise.resolve({
@@ -199,7 +213,7 @@ describe('HereGeocoder', function () {
     itWithApiKey(apiKey, 'should call forward api', async function () {
       const query = '1 champs élysée Paris'
       const results = await geocoder.forward(query)
-      // eslint-disable-next-line no-console
+
       updateFixture(fixtures, 'forward', results[0])
       assert.deepStrictEqual(results[0], fixtures.forward)
     })
@@ -207,7 +221,7 @@ describe('HereGeocoder', function () {
     itWithApiKey(apiKey, 'should call reverse api', async function () {
       const query = '40.714232,-73.9612889'
       const results = await geocoder.reverse(query)
-      // eslint-disable-next-line no-console
+
       updateFixture(fixtures, 'reverse', results[0])
       assert.deepStrictEqual(results[0], fixtures.reverse)
     })

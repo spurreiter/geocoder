@@ -37,7 +37,7 @@ export class MapQuestGeocoder extends AbstractGeocoder {
    * @param {string} [options.language]
    * @param {boolean} [options.licensed] Use licensed data instead of open data see https://developer.mapquest.com/documentation/open/
    */
-  constructor (adapter, options = { apiKey: '' }) {
+  constructor(adapter, options = { apiKey: '' }) {
     // @ts-ignore
     super(adapter, options)
 
@@ -63,7 +63,7 @@ export class MapQuestGeocoder extends AbstractGeocoder {
    * @param {string|MapQuestForwardQuery} query
    * @returns {Promise<object>}
    */
-  async _forward (query) {
+  async _forward(query) {
     let params = { ...this.params, location: query }
 
     if (typeof query !== 'string' && query.address) {
@@ -71,10 +71,7 @@ export class MapQuestGeocoder extends AbstractGeocoder {
       params = { ...params, ...other, location: address, maxResults: limit }
     }
 
-    const url = this.createUrl(
-      this.endpoint,
-      params
-    )
+    const url = this.createUrl(this.endpoint, params)
 
     const res = await this.adapter(url)
     if (res.status !== 200) {
@@ -93,7 +90,7 @@ export class MapQuestGeocoder extends AbstractGeocoder {
    * @param {MapQuestReverseQuery} query
    * @returns {Promise<object>}
    */
-  async _reverse (query) {
+  async _reverse(query) {
     const { lat, lng, limit: maxResults, ...other } = query
     const params = {
       ...this.params,
@@ -102,10 +99,7 @@ export class MapQuestGeocoder extends AbstractGeocoder {
       maxResults
     }
 
-    const url = this.createUrl(
-      this.revEndpoint,
-      params
-    )
+    const url = this.createUrl(this.revEndpoint, params)
 
     const res = await this.adapter(url)
     if (res.status !== 200) {
@@ -120,7 +114,7 @@ export class MapQuestGeocoder extends AbstractGeocoder {
     return this.wrapRaw(results, result)
   }
 
-  _formatResult (result = {}) {
+  _formatResult(result = {}) {
     const {
       latLng = {},
       adminArea1,

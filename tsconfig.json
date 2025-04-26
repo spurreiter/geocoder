@@ -6,11 +6,18 @@
     "declaration": true,
     "declarationDir": "types",
     "emitDeclarationOnly": true,
-    "moduleResolution": "node",
-    "noEmitOnError": true,
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "noEmitOnError": false,
     "noImplicitAny": false,
+    "skipLibCheck": true,
     "strict": true,
-    "target": "ES2021"
+    "target": "esnext",
+    "paths": {
+      "#*": [
+        "./src/*"
+      ]
+    },
   },
   "include": [
     "src"

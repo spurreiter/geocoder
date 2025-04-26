@@ -25,7 +25,7 @@ export class OpendataFranceGeocoder extends AbstractGeocoder {
     constructor(adapter: fetchAdapterFn, options?: {
         limit?: number | undefined;
         language?: string | undefined;
-    } | undefined);
+    });
     params: {
         limit?: number | undefined;
     };

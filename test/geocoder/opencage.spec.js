@@ -60,16 +60,17 @@ describe('OpenCageGeocoder', function () {
 
       assert.deepStrictEqual(results, [])
 
-      sinon.assert.calledOnceWithExactly(mockedAdapter, 'https://api.opencagedata.com/geocode/v1/json?key=apiKey&q=1+champs+%C3%A9lys%C3%A9e+Paris')
+      sinon.assert.calledOnceWithExactly(
+        mockedAdapter,
+        'https://api.opencagedata.com/geocode/v1/json?key=apiKey&q=1+champs+%C3%A9lys%C3%A9e+Paris'
+      )
     })
 
     it('should throw on error', async function () {
-      const mockedAdapter = sinon.stub().returns(
-        ({
-          status: 502,
-          json: () => Promise.resolve({})
-        })
-      )
+      const mockedAdapter = sinon.stub().returns({
+        status: 502,
+        json: () => Promise.resolve({})
+      })
 
       const geocoder = new OpenCageGeocoder(mockedAdapter, options)
       try {
@@ -83,7 +84,8 @@ describe('OpenCageGeocoder', function () {
     it('should return address', async function () {
       const query = '135 pilkington avenue, birmingham'
       const { body, expResults } = fixtures[query]
-      const expUrl = 'https://api.opencagedata.com/geocode/v1/json?key=apiKey&q=135+pilkington+avenue%2C+birmingham'
+      const expUrl =
+        'https://api.opencagedata.com/geocode/v1/json?key=apiKey&q=135+pilkington+avenue%2C+birmingham'
 
       const mockedAdapter = sinon.stub().returns(
         Promise.resolve({
@@ -102,7 +104,8 @@ describe('OpenCageGeocoder', function () {
     it('should return address when object', async function () {
       const query = '135 pilkington avenue, birmingham'
       const { body, expResults } = fixtures[query]
-      const expUrl = 'https://api.opencagedata.com/geocode/v1/json?key=apiKey&q=135+pilkington+avenue%2C+birmingham'
+      const expUrl =
+        'https://api.opencagedata.com/geocode/v1/json?key=apiKey&q=135+pilkington+avenue%2C+birmingham'
 
       const mockedAdapter = sinon.stub().returns(
         Promise.resolve({
@@ -129,19 +132,23 @@ describe('OpenCageGeocoder', function () {
       )
 
       const geocoder = new OpenCageGeocoder(mockedAdapter, options)
-      const results = await geocoder.reverse({ lat: 40.714232, lng: -73.9612889 })
+      const results = await geocoder.reverse({
+        lat: 40.714232,
+        lng: -73.9612889
+      })
 
       assert.deepStrictEqual(results, [])
-      sinon.assert.calledOnceWithExactly(mockedAdapter, 'https://api.opencagedata.com/geocode/v1/json?key=apiKey&q=40.714232%2B-73.9612889')
+      sinon.assert.calledOnceWithExactly(
+        mockedAdapter,
+        'https://api.opencagedata.com/geocode/v1/json?key=apiKey&q=40.714232%2B-73.9612889'
+      )
     })
 
     it('should throw on error', async function () {
-      const mockedAdapter = sinon.stub().returns(
-        ({
-          status: 502,
-          json: () => Promise.resolve({})
-        })
-      )
+      const mockedAdapter = sinon.stub().returns({
+        status: 502,
+        json: () => Promise.resolve({})
+      })
 
       const geocoder = new OpenCageGeocoder(mockedAdapter, options)
       try {
@@ -155,7 +162,8 @@ describe('OpenCageGeocoder', function () {
     it('should return address', async function () {
       const query = '40.714232,-73.9612889'
       const { body, expResults } = fixtures[query]
-      const expUrl = 'https://api.opencagedata.com/geocode/v1/json?key=apiKey&q=40.714232%2B-73.9612889'
+      const expUrl =
+        'https://api.opencagedata.com/geocode/v1/json?key=apiKey&q=40.714232%2B-73.9612889'
 
       const mockedAdapter = sinon.stub().returns(
         Promise.resolve({
@@ -183,7 +191,7 @@ describe('OpenCageGeocoder', function () {
     itWithApiKey(apiKey, 'should call forward api', async function () {
       const query = '1 champs élysée Paris'
       const results = await geocoder.forward(query)
-      // eslint-disable-next-line no-console
+
       updateFixture(fixtures, 'forward', results[0])
       assert.deepStrictEqual(results[0], fixtures.forward)
     })
@@ -191,7 +199,7 @@ describe('OpenCageGeocoder', function () {
     itWithApiKey(apiKey, 'should call reverse api', async function () {
       const query = '40.714232,-73.9612889'
       const results = await geocoder.reverse(query)
-      // eslint-disable-next-line no-console
+
       updateFixture(fixtures, 'reverse', results[0])
       assert.deepStrictEqual(results[0], fixtures.reverse)
     })

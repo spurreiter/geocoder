@@ -51,7 +51,7 @@ export class OpenCageGeocoder extends AbstractGeocoder {
    * @param {number} [options.abbrv]
    * @param {number} [options.roadinfo]
    */
-  constructor (adapter, options = { apiKey: '' }) {
+  constructor(adapter, options = { apiKey: '' }) {
     // @ts-ignore
     super(adapter, options)
 
@@ -64,7 +64,7 @@ export class OpenCageGeocoder extends AbstractGeocoder {
     this.params = { key: apiKey, ...params }
   }
 
-  get endpoint () {
+  get endpoint() {
     return 'https://api.opencagedata.com/geocode/v1/json'
   }
 
@@ -72,7 +72,7 @@ export class OpenCageGeocoder extends AbstractGeocoder {
    * @param {string|OpenCageForwardQuery} query
    * @returns {Promise<object>}
    */
-  async _forward (query) {
+  async _forward(query) {
     let params = { ...this.params, q: query }
 
     if (typeof query !== 'string' && query.address) {
@@ -80,10 +80,7 @@ export class OpenCageGeocoder extends AbstractGeocoder {
       params = { ...params, ...other, q: address }
     }
 
-    const url = this.createUrl(
-      this.endpoint,
-      params
-    )
+    const url = this.createUrl(this.endpoint, params)
 
     const res = await this.adapter(url)
     if (res.status !== 200) {
@@ -102,14 +99,11 @@ export class OpenCageGeocoder extends AbstractGeocoder {
    * @param {OpenCageReverseQuery} query
    * @returns {Promise<object>}
    */
-  async _reverse (query) {
+  async _reverse(query) {
     const { lat, lng, ...other } = query
     const params = { ...this.params, ...other, q: `${lat}+${lng}` }
 
-    const url = this.createUrl(
-      this.endpoint,
-      params
-    )
+    const url = this.createUrl(this.endpoint, params)
 
     const res = await this.adapter(url)
     if (res.status !== 200) {
@@ -124,7 +118,7 @@ export class OpenCageGeocoder extends AbstractGeocoder {
     return this.wrapRaw(results, result)
   }
 
-  _formatResult (result) {
+  _formatResult(result) {
     const { geometry = {}, components = {}, confidence = 0 } = result
 
     const formatted = {
@@ -140,7 +134,7 @@ export class OpenCageGeocoder extends AbstractGeocoder {
       streetName: components.road,
       streetNumber: components.house_number,
       extra: {
-        confidence: (confidence / 10),
+        confidence: confidence / 10,
         confidenceKm: CONFIDENCE_KM[confidence] || NaN
       }
     }

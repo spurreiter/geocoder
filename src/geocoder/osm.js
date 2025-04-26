@@ -5,7 +5,7 @@ import { HttpError, toFixed, toUpperCase } from '../utils/index.js'
 
 const ACCEPT_LANGUAGE = 'accept-language'
 
-function mapParams (params) {
+function mapParams(params) {
   const { language, ...other } = params
   if (language) {
     other[ACCEPT_LANGUAGE] = language
@@ -13,18 +13,18 @@ function mapParams (params) {
   return other
 }
 
-function hasResult (result) {
+function hasResult(result) {
   return (
     (Array.isArray(result) && result.length && result[0].osm_type) ||
     (result && result.osm_type)
   )
 }
 
-function mapToNumber (arr) {
+function mapToNumber(arr) {
   return Array.isArray(arr) ? arr.map((n) => +n) : undefined
 }
 
-function toBbox (boundingbox) {
+function toBbox(boundingbox) {
   const [ymin, ymax, xmin, xmax] = mapToNumber(boundingbox) || []
   if (xmin !== undefined) {
     return [xmin, ymin, xmax, ymax]
@@ -76,7 +76,7 @@ export class OsmGeocoder extends AbstractGeocoder {
    * @param {string} [options.revEndpoint] custom reverse endpoint
    * @param {boolean} [options.needsReferer]
    */
-  constructor (adapter, options) {
+  constructor(adapter, options) {
     // @ts-ignore
     super(adapter, options)
 
@@ -84,6 +84,7 @@ export class OsmGeocoder extends AbstractGeocoder {
       endpoint = 'https://nominatim.openstreetmap.org/search',
       revEndpoint = 'https://nominatim.openstreetmap.org/reverse',
       // @ts-ignore
+      // eslint-disable-next-line no-unused-vars
       apiKey,
       referer,
       needsReferer = true,
@@ -112,7 +113,7 @@ export class OsmGeocoder extends AbstractGeocoder {
    * @param {string|OsmForwardQuery} query
    * @returns {Promise<object>}
    */
-  async _forward (query) {
+  async _forward(query) {
     let params = { ...this.params, q: query }
 
     if (typeof query !== 'string' && query.address) {
@@ -139,7 +140,7 @@ export class OsmGeocoder extends AbstractGeocoder {
    * @param {OsmReverseQuery} query
    * @returns {Promise<object>}
    */
-  async _reverse (query) {
+  async _reverse(query) {
     const { lat, lng, ...other } = query
     const params = mapParams({ ...this.params, ...other, lat, lon: lng })
 
@@ -157,7 +158,7 @@ export class OsmGeocoder extends AbstractGeocoder {
     return this.wrapRaw(results, result)
   }
 
-  _formatResult (result = {}) {
+  _formatResult(result = {}) {
     const { address = {} } = result
 
     const formatted = {

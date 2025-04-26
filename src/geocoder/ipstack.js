@@ -3,7 +3,7 @@ import { HttpError } from '../utils/index.js'
 
 /** @typedef {import('../adapter.js').fetchAdapterFn} fetchAdapterFn */
 
-function hasResult (result) {
+function hasResult(result) {
   return result && !!result.type
 }
 
@@ -14,7 +14,7 @@ export class IpStackGeocoder extends AbstractGeocoder {
    * @param {fetchAdapterFn} adapter
    * @param {object} options
    */
-  constructor (adapter, options = {}) {
+  constructor(adapter, options = {}) {
     super(adapter, options)
 
     const { apiKey, ...params } = options
@@ -27,14 +27,14 @@ export class IpStackGeocoder extends AbstractGeocoder {
     this.supportIPv4 = this.supportIPv6 = true
   }
 
-  get endpoint () {
+  get endpoint() {
     return 'http://api.ipstack.com'
   }
 
   /**
    * @param {object|string} query
    */
-  async _forward (query = '') {
+  async _forward(query = '') {
     let params = this.params
     let searchtext = query
 
@@ -44,10 +44,7 @@ export class IpStackGeocoder extends AbstractGeocoder {
       params = { ...params, ...other }
     }
 
-    const url = this.createUrl(
-      `${this.endpoint}/${searchtext}`,
-      params
-    )
+    const url = this.createUrl(`${this.endpoint}/${searchtext}`, params)
 
     const res = await this.adapter(url)
     if (res.status !== 200) {
@@ -62,7 +59,7 @@ export class IpStackGeocoder extends AbstractGeocoder {
     return this.wrapRaw(results, result)
   }
 
-  _formatResult (result = {}) {
+  _formatResult(result = {}) {
     const formatted = {
       ip: result.ip,
       latitude: result.latitude,

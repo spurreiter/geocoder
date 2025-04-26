@@ -36,7 +36,7 @@ export class OpenMapQuestGeocoder extends OsmGeocoder {
    * @param {number} [options.limit=10]
    * @param {string} [options.language]
    */
-  constructor (adapter, options = { apiKey: '' }) {
+  constructor(adapter, options = { apiKey: '' }) {
     super(adapter, { ...options, needsReferer: false })
 
     const { apiKey, ...params } = options

@@ -1,11 +1,11 @@
-/** @typedef {import('../adapter').Response} Response */
-/** @typedef {import('../types').HttpError} HttpErrorType */
+/** @typedef {import('#adapter.js').Response} Response */
+/** @typedef {import('#types.js').HttpError} HttpErrorType */
 
 /**
  * @param {Response} response
  * @returns {HttpErrorType}
  */
-export function HttpError (response) {
+export function HttpError(response) {
   const status = response.status || 500
   /** @type {HttpErrorType} */
   // @ts-ignore

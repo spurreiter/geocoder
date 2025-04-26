@@ -61,16 +61,17 @@ describe('TomTomGeocoder', function () {
 
       assert.deepStrictEqual(results, [])
 
-      sinon.assert.calledOnceWithExactly(mockedAdapter, 'https://api.tomtom.com/search/2/geocode/1%20champs%20%C3%A9lys%C3%A9e%20Paris.json?key=apiKey')
+      sinon.assert.calledOnceWithExactly(
+        mockedAdapter,
+        'https://api.tomtom.com/search/2/geocode/1%20champs%20%C3%A9lys%C3%A9e%20Paris.json?key=apiKey'
+      )
     })
 
     it('should throw on error', async function () {
-      const mockedAdapter = sinon.stub().returns(
-        ({
-          status: 502,
-          json: () => Promise.resolve({})
-        })
-      )
+      const mockedAdapter = sinon.stub().returns({
+        status: 502,
+        json: () => Promise.resolve({})
+      })
 
       const geocoder = new TomTomGeocoder(mockedAdapter, options)
       try {
@@ -85,7 +86,8 @@ describe('TomTomGeocoder', function () {
       const query = '135 pilkington avenue, birmingham'
       const { body, expResults } = fixtures[query]
 
-      const expUrl = 'https://api.tomtom.com/search/2/geocode/135%20pilkington%20avenue%2C%20birmingham.json?key=apiKey'
+      const expUrl =
+        'https://api.tomtom.com/search/2/geocode/135%20pilkington%20avenue%2C%20birmingham.json?key=apiKey'
 
       const mockedAdapter = sinon.stub().returns(
         Promise.resolve({
@@ -105,7 +107,8 @@ describe('TomTomGeocoder', function () {
     it('should return address when object', async function () {
       const query = '135 pilkington avenue, birmingham'
       const { body, expResults } = fixtures[query]
-      const expUrl = 'https://api.tomtom.com/search/2/geocode/135%20pilkington%20avenue%2C%20birmingham.json?key=apiKey'
+      const expUrl =
+        'https://api.tomtom.com/search/2/geocode/135%20pilkington%20avenue%2C%20birmingham.json?key=apiKey'
 
       const mockedAdapter = sinon.stub().returns(
         Promise.resolve({
@@ -133,20 +136,24 @@ describe('TomTomGeocoder', function () {
       )
 
       const geocoder = new TomTomGeocoder(mockedAdapter, options)
-      const results = await geocoder.reverse({ lat: 40.714232, lng: -73.9612889 })
+      const results = await geocoder.reverse({
+        lat: 40.714232,
+        lng: -73.9612889
+      })
 
       assert.deepStrictEqual(results, [])
 
-      sinon.assert.calledOnceWithExactly(mockedAdapter, 'https://api.tomtom.com/search/2/reverseGeocode/40.714232%2C-73.9612889.json?key=apiKey')
+      sinon.assert.calledOnceWithExactly(
+        mockedAdapter,
+        'https://api.tomtom.com/search/2/reverseGeocode/40.714232%2C-73.9612889.json?key=apiKey'
+      )
     })
 
     it('should throw on error', async function () {
-      const mockedAdapter = sinon.stub().returns(
-        ({
-          status: 502,
-          json: () => Promise.resolve({})
-        })
-      )
+      const mockedAdapter = sinon.stub().returns({
+        status: 502,
+        json: () => Promise.resolve({})
+      })
 
       const geocoder = new TomTomGeocoder(mockedAdapter, options)
       try {
@@ -160,7 +167,8 @@ describe('TomTomGeocoder', function () {
     it('should return address', async function () {
       const query = '40.714232,-73.9612889'
       const { body, expResults } = fixtures[query]
-      const expUrl = 'https://api.tomtom.com/search/2/reverseGeocode/40.714232%2C-73.9612889.json?key=apiKey'
+      const expUrl =
+        'https://api.tomtom.com/search/2/reverseGeocode/40.714232%2C-73.9612889.json?key=apiKey'
 
       const mockedAdapter = sinon.stub().returns(
         Promise.resolve({
@@ -188,7 +196,7 @@ describe('TomTomGeocoder', function () {
     itWithApiKey(apiKey, 'should call forward api', async function () {
       const query = '1 champs élysée Paris'
       const results = await geocoder.forward(query)
-      // eslint-disable-next-line no-console
+
       updateFixture(fixtures, 'forward', results[0])
       assert.deepStrictEqual(results[0], fixtures.forward)
     })
@@ -196,7 +204,7 @@ describe('TomTomGeocoder', function () {
     itWithApiKey(apiKey, 'should call reverse api', async function () {
       const query = '40.714232,-73.9612889'
       const results = await geocoder.reverse(query)
-      // eslint-disable-next-line no-console
+
       updateFixture(fixtures, 'reverse', results[0])
       assert.deepStrictEqual(results[0], fixtures.reverse)
     })
