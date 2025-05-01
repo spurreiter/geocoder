@@ -13,6 +13,13 @@
  * @property {number} [limit]
  * @property {string} [language]
  */
+/**
+ * @deprecated
+ * Bing Maps for Enterprise is deprecated and will be retired. Free (Basic)
+ * account customers can continue to use Bing Maps for Enterprise services until
+ * June 30th, 2025. Enterprise account customers can continue to use Bing Maps
+ * for Enterprise services until June 30th, 2028.
+ */
 export class BingMapsGeocoder extends AbstractGeocoder {
     /**
      * available options
