@@ -103,7 +103,6 @@ dist
 .tern-port
 
 coverage
-lib
 
 pnpm-lock.yaml
 package-lock.json
