@@ -1,3 +1,10 @@
+# 2.3.0 (2025-05-04)
+
+- fix: common js and update test fixtures (#d724b2d)
+- feat: azure maps geocoder (#89ff7ae)
+- fix: BingMapsGeocoder is deprecated (#935aac9)
+- chore: commit lib (#b2b9c0a)
+
 # 2.2.0 (2025-04-26)
 
 - chore: move to eslint-prettier (#9f6d238)
