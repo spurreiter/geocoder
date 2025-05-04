@@ -1,6 +1,7 @@
 // @ts-nocheck
 export * from './abstract.js'
 export * from './arcgis.js'
+export * from './azuremaps.js'
 export * from './bingmaps.js'
 export * from './geocodio.js'
 export * from './google.js'
