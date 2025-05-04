@@ -365,7 +365,7 @@ const m = {
     citycode: '75108',
     extra: {
       id: '75108_1733',
-      confidence: 0.5658
+      confidence: 0.5656
     },
     streetName: 'Avenue des Champs Elysées'
   },
@@ -381,7 +381,7 @@ const m = {
     citycode: '57463',
     extra: {
       id: '57463_5920_00012',
-      confidence: 1
+      confidence: 0.9974
     },
     streetName: 'Place Saint-Etienne',
     streetNumber: '12'

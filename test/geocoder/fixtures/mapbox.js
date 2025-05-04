@@ -745,7 +745,7 @@ const m = {
         }
       ],
       attribution:
-        'NOTICE: © 2024 Mapbox and its suppliers. All rights reserved. Use of this data is subject to the Mapbox Terms of Service (https://www.mapbox.com/about/maps/). This response and the information it contains may not be retained.'
+        'NOTICE: © 2024 Mapbox and its suppliers. All rights reserved. Use of this data is subject to the Mapbox Terms of Service (https:\u002F\u002Fwww.mapbox.com\u002Fabout\u002Fmaps\u002F). This response and the information it contains may not be retained.'
     },
     expResults: [
       {
@@ -904,21 +904,20 @@ const m = {
     ]
   },
   forward: {
-    formattedAddress: '1 Rue Des Champs-Élysées, 94250 Gentilly, France',
-    latitude: 48.816295,
-    longitude: 2.33955,
+    formattedAddress: '1 Port Des Champs-Élysées, 75008 Paris, France',
+    latitude: 48.864193,
+    longitude: 2.314339,
     country: 'France',
     countryCode: 'FR',
-    state: 'Paris',
-    city: 'Gentilly',
-    zipcode: '94250',
+    state: 'Île-de-France',
+    city: 'Paris',
+    zipcode: '75008',
     district: undefined,
-    streetName: 'Rue Des Champs-Élysées',
+    streetName: 'Port Des Champs-Élysées',
     streetNumber: '1',
-    neighbourhood: 'Plateau',
+    neighbourhood: 'Champs-Elysées',
     extra: {
-      id: 'address.4094307396599160',
-      category: undefined,
+      id: 'dXJuOm1ieGFkcjo5ZTk3OWU4ZC01MWZhLTQwNGMtOWNmYS01NGQxZDc1YTY4YmY',
       bbox: undefined,
       confidence: 0
     }
@@ -926,8 +925,8 @@ const m = {
   reverse: {
     formattedAddress:
       '277 Bedford Avenue, Brooklyn, New York 11211, United States',
-    latitude: 40.71426,
-    longitude: -73.9613,
+    latitude: 40.714259,
+    longitude: -73.961298,
     country: 'United States',
     countryCode: 'US',
     state: 'New York',
@@ -938,13 +937,12 @@ const m = {
     streetNumber: '277',
     neighbourhood: 'Williamsburg',
     extra: {
-      id: 'address.1326994189738106',
-      category: undefined,
+      id: 'dXJuOm1ieGFkcjo3ODJkZTY1ZS1lZGMxLTRmYTktYjBjOS1kMDg0YjVjM2I0MzI',
       bbox: undefined,
       confidence: 0
     }
   }
 }
-
 export default m
+
 export const fixtures = m

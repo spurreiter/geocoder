@@ -104,9 +104,9 @@ const m = {
   },
   forward: {
     formattedAddress:
-      'Métro 1, Promenade des Champs-Élysées, Quartier des Champs-Élysées, 8th Arrondissement of Paris, Paris, Ile-de-France, Metropolitan France, 75008, France',
-    latitude: '48.8676736',
-    longitude: '2.3136172',
+      'Métro 1, Avenue Dutuit, Quartier des Champs-Élysées, 8th Arrondissement of Paris, Paris, Ile-de-France, Metropolitan France, 75008, France',
+    latitude: '48.8668352',
+    longitude: '2.3160772',
     country: 'France',
     countryCode: 'FR',
     state: 'Ile-de-France',
@@ -114,14 +114,14 @@ const m = {
     county: undefined,
     city: 'Paris',
     zipcode: '75008',
-    streetName: 'Promenade des Champs-Élysées',
+    streetName: 'Avenue Dutuit',
     streetNumber: undefined,
     extra: {
-      id: '238037360',
-      confidence: 0.41,
+      id: '404483462',
+      confidence: 0.4101,
       type: 'subway',
       addrType: 'railway',
-      bbox: ['2.3097952', '48.8672731', '2.3148457', '48.869063']
+      bbox: ['2.3146159', '48.8664405', '2.3179688', '48.8673012']
     }
   },
   reverse: {

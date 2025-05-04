@@ -109,12 +109,12 @@ const m = {
   },
   forward: {
     formattedAddress:
-      'Métro 1, Avenue des Champs-Élysées, Quartier du Faubourg-du-Roule, Paris 8e Arrondissement, Paris, Île-de-France, France métropolitaine, 75008, France',
-    latitude: 48.8676736,
-    longitude: 2.3136172,
+      'Métro 1, Avenue des Champs-Élysées, Quartier des Champs-Élysées, Paris 8e Arrondissement, Paris, France métropolitaine, 75008, France',
+    latitude: 48.8667846,
+    longitude: 2.3162706,
     country: 'France',
     countryCode: 'FR',
-    state: 'Île-de-France',
+    state: undefined,
     county: 'France métropolitaine',
     city: 'Paris',
     zipcode: '75008',
@@ -123,20 +123,20 @@ const m = {
     streetNumber: undefined,
     neighbourhood: undefined,
     extra: {
-      id: 531017871,
+      id: 531017858,
       confidence: 0.0001,
-      bbox: [2.3097952, 48.8672731, 2.3148457, 48.869063]
+      bbox: [2.3146159, 48.8664405, 2.3179688, 48.8673012]
     }
   },
   reverse: {
     formattedAddress:
       '277, Bedford Avenue, Williamsburg, Brooklyn, Kings County, City of New York, New York, 11211, United States',
-    latitude: 40.714254499999996,
-    longitude: -73.96130170969231,
+    latitude: 40.7142545,
+    longitude: -73.9613017,
     country: 'United States',
     countryCode: 'US',
     state: 'New York',
-    county: undefined,
+    county: 'Kings County',
     city: 'City of New York',
     zipcode: '11211',
     district: undefined,
@@ -145,7 +145,7 @@ const m = {
     neighbourhood: undefined,
     extra: {
       id: 1165287931,
-      confidence: 0,
+      confidence: 0.0001,
       bbox: [-73.9613388, 40.7142283, -73.9612646, 40.7142807]
     }
   }

@@ -206,8 +206,8 @@ const m = {
   },
   forward: {
     formattedAddress: '1 Arcades des Champs-Élysées, 75008 Paris',
-    latitude: 48.87173,
-    longitude: 2.30453,
+    latitude: 48.871733,
+    longitude: 2.304529,
     country: 'France',
     countryCode: 'FR',
     state: 'Île-de-France',

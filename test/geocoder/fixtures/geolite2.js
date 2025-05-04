@@ -1,4 +1,4 @@
-export const fixtures = {
+const m = {
   '66.249.64.0': {
     body: {
       continent: {
@@ -55,13 +55,13 @@ export const fixtures = {
         isSatelliteProvider: false,
         isTorExitNode: false,
         ipAddress: '66.249.64.0',
-        network: '66.249.64.0/22'
+        network: '66.249.64.0\u002F22'
       },
       location: {
         accuracyRadius: 1000,
         latitude: 37.751,
         longitude: -97.822,
-        timeZone: 'America/Chicago'
+        timeZone: 'America\u002FChicago'
       }
     },
     expResults: [
@@ -75,14 +75,13 @@ export const fixtures = {
           id: 6252001,
           accuracyRadius: 1000,
           isInEuropeanUnion: false,
-          timeZone: 'America/Chicago',
-          network: '66.249.64.0/22'
+          timeZone: 'America\u002FChicago',
+          network: '66.249.64.0\u002F22'
         }
       }
     ]
   },
   '2001:8003:713f:2f00:f9d2:16e5:38e4:adc3': {
-    // local result
     body: {
       continent: {
         code: 'OC',
@@ -138,7 +137,7 @@ export const fixtures = {
         isSatelliteProvider: false,
         isTorExitNode: false,
         ipAddress: '2001:8003:713f:2f00:f9d2:16e5:38e4:adc3',
-        network: '2001:8003:7100::/40'
+        network: '2001:8003:7100::\u002F40'
       },
       city: {
         geonameId: 2174003,
@@ -157,14 +156,20 @@ export const fixtures = {
         accuracyRadius: 50,
         latitude: -27.4732,
         longitude: 153.0215,
-        timeZone: 'Australia/Brisbane'
+        timeZone: 'Australia\u002FBrisbane'
       },
-      postal: { code: '4000' },
+      postal: {
+        code: '4000'
+      },
       subdivisions: [
         {
           geonameId: 2152274,
           isoCode: 'QLD',
-          names: { en: 'Queensland', 'pt-BR': 'Queensland', ru: 'Квинсленд' }
+          names: {
+            en: 'Queensland',
+            'pt-BR': 'Queensland',
+            ru: 'Квинсленд'
+          }
         }
       ]
     },
@@ -179,14 +184,13 @@ export const fixtures = {
           id: 2077456,
           accuracyRadius: 50,
           isInEuropeanUnion: false,
-          timeZone: 'Australia/Brisbane',
-          network: '2001:8003:7100::/40'
+          timeZone: 'Australia\u002FBrisbane',
+          network: '2001:8003:7100::\u002F40'
         }
       }
     ]
   },
   '2001:8004:713f:2f00:f9d2:16e5:38e4:adc3': {
-    // MaxMind result
     body: {
       continent: {
         code: 'OC',
@@ -220,7 +224,7 @@ export const fixtures = {
         accuracy_radius: 100,
         latitude: -33.494,
         longitude: 143.2104,
-        time_zone: 'Australia/Sydney'
+        time_zone: 'Australia\u002FSydney'
       },
       registered_country: {
         iso_code: 'AU',
@@ -240,7 +244,7 @@ export const fixtures = {
         autonomous_system_number: 1221,
         autonomous_system_organization: 'Telstra Corporation Ltd',
         ip_address: '2001:8004:713f:2f00:f9d2:16e5:38e4:adc3',
-        network: '2001:8004:6000::/35'
+        network: '2001:8004:6000::\u002F35'
       }
     },
     expResults: [
@@ -254,8 +258,8 @@ export const fixtures = {
           id: 2077456,
           accuracyRadius: 100,
           isInEuropeanUnion: undefined,
-          timeZone: 'Australia/Sydney',
-          network: '2001:8004:6000::/35'
+          timeZone: 'Australia\u002FSydney',
+          network: '2001:8004:6000::\u002F35'
         }
       }
     ]
@@ -270,8 +274,11 @@ export const fixtures = {
       id: 6252001,
       accuracyRadius: 1000,
       isInEuropeanUnion: undefined,
-      timeZone: 'America/Chicago',
-      network: '66.249.64.0/22'
+      timeZone: 'America\u002FChicago',
+      network: '66.249.64.0\u002F22'
     }
   }
 }
+export default m
+
+export const fixtures = m

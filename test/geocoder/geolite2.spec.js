@@ -12,7 +12,7 @@ describe('GeoLite2Geocoder', function () {
   const mockedAdapter = sinon.stub()
 
   after(() => {
-    writeFixtures('geocodio.js', fixtures)
+    writeFixtures('geolite2.js', fixtures)
   })
 
   describe('constructor', () => {

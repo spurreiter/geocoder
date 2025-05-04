@@ -567,20 +567,20 @@ const m = {
   },
   forward: {
     formattedAddress:
-      '1 Rond-Point des Champs-Élysées - Marcel Dassault, 75008 Paris, France',
-    latitude: 48.8682435,
-    longitude: 2.3098118,
+      'Champs-Élysées, Promenade des Champs-Élysées, 75008 Paris, France',
+    latitude: 48.8722067,
+    longitude: 2.3006102,
     country: 'France',
     countryCode: 'FR',
     state: 'Ile-de-France',
     county: 'Paris',
     city: 'Paris',
     zipcode: '75008',
-    streetName: 'Rond-Point des Champs-Élysées - Marcel Dassault',
-    streetNumber: '1',
+    streetName: 'Promenade des Champs-Élysées',
+    streetNumber: undefined,
     extra: {
-      confidence: 1,
-      confidenceKm: 0.25
+      confidence: 0.9,
+      confidenceKm: 0.5
     }
   },
   reverse: {

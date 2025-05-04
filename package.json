@@ -1,11 +1,12 @@
 {
   "name": "@spurreiter/geocoder",
-  "version": "2.2.0",
+  "version": "2.3.0-0",
   "description": "Node geocoding library, google maps, bing maps, mapquest, mapbox, here maps, arcgis, nominatim, ...",
   "keywords": [
     "geocoder",
     "geocoding",
     "google-maps-api",
+    "azure-maps-api",
     "bing-maps-api",
     "mapquest-api",
     "mapbox-api",

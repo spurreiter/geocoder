@@ -261,8 +261,8 @@ const m = {
   reverse: {
     formattedAddress:
       'Springbone Kitchen, 277 Bedford Ave, Brooklyn, NY, 11211, USA',
-    latitude: 40.714194,
-    longitude: -73.961277,
+    latitude: 40.714215,
+    longitude: -73.961295,
     country: 'United States of America',
     countryCode: 'US',
     state: 'New York',

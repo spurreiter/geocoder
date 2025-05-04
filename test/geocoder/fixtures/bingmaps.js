@@ -166,40 +166,40 @@ const m = {
     ]
   },
   forward: {
-    formattedAddress: '1 Avenue des Champs-Élysées, 75008 Paris, France',
-    latitude: 48.8666195,
-    longitude: 2.3170832,
+    formattedAddress: '1 Port des Champs-Élysées, 75008 Paris, France',
+    latitude: 48.8642334,
+    longitude: 2.3153574,
     country: 'France',
     countryCode: 'FR',
     state: 'Île-de-France',
     region: 'Ville de Paris',
     city: 'Paris',
     zipcode: '75008',
-    streetName: '1 Avenue des Champs-Élysées',
+    streetName: '1 Port des Champs-Élysées',
     extra: {
       confidence: 1,
       bbox: [
-        2.3092544044119108, 48.86275678242932, 2.324911995588089,
-        48.870482217570675
+        2.307528977635416, 48.86037068242933, 2.3231858223645836,
+        48.86809611757068
       ]
     }
   },
   reverse: {
-    formattedAddress: '279 Bedford Ave, Brooklyn, NY 11211, United States',
-    latitude: 40.714187,
-    longitude: -73.961263,
+    formattedAddress: '277 Bedford Ave, Brooklyn, NY 11211, United States',
+    latitude: 40.714205,
+    longitude: -73.961315,
     country: 'United States',
     countryCode: 'US',
     state: 'NY',
     region: 'Kings Co.',
     city: 'Williamsburg',
     zipcode: '11211',
-    streetName: '279 Bedford Ave',
+    streetName: '277 Bedford Ave',
     extra: {
       confidence: 1,
       bbox: [
-        -73.96805742719883, 40.710324282429326, -73.95446857280118,
-        40.71804971757068
+        -73.9681094290355, 40.71034228242932, -73.9545205709645,
+        40.718067717570676
       ]
     }
   }
