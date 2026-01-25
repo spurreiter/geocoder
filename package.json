@@ -39,6 +39,7 @@
   },
   "exports": {
     ".": {
+      "types": "./types/index.d.ts",
       "require": "./lib/index.cjs",
       "default": "./src/index.js"
     },
