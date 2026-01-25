@@ -55,12 +55,12 @@
   ],
   "scripts": {
     "all": "npm-run-all clean build test lint types",
-    "clean": "rimraf coverage",
-    "lint": "eslint .",
     "build": "npm-run-all build:clean build:version build:do",
     "build:clean": "rimraf lib",
-    "build:version": "./scripts/version.cjs",
     "build:do": "rollup -c",
+    "build:version": "./scripts/version.cjs",
+    "clean": "rimraf coverage",
+    "lint": "eslint .",
     "test": "c8 mocha",
     "types": "npm-run-all types:clean types:do",
     "types:clean": "rimraf types",
@@ -78,24 +78,24 @@
   },
   "dependencies": {
     "agentkeepalive": "^4.6.0",
-    "got": "^14.4.7",
+    "got": "^14.6.6",
     "i18n-iso-countries": "^7.14.0"
   },
   "devDependencies": {
-    "@types/node": "^22.15.2",
+    "@types/node": "^25.0.10",
     "c8": "^10.1.3",
-    "dotenv": "^16.5.0",
-    "eslint": "^9.22.0",
-    "eslint-config-prettier": "^10.1.1",
-    "eslint-plugin-prettier": "^5.2.3",
-    "globals": "^16.0.0",
-    "mocha": "^11.1.0",
-    "npm-run-all2": "^7.0.2",
-    "rimraf": "^6.0.1",
-    "rollup": "^4.40.0",
+    "dotenv": "^17.2.3",
+    "eslint": "^9.39.2",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.5",
+    "globals": "^17.1.0",
+    "mocha": "^11.7.5",
+    "npm-run-all2": "^8.0.4",
+    "rimraf": "^6.1.2",
+    "rollup": "^4.56.0",
     "serialize-to-module": "^1.1.0",
-    "sinon": "^19.0.5",
-    "typescript": "^5.8.3"
+    "sinon": "^21.0.1",
+    "typescript": "^5.9.3"
   },
   "engines": {
     "node": ">=20"
